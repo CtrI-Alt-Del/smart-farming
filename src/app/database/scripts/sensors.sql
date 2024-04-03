@@ -1,6 +1,5 @@
 -- Active: 1712087085985@@127.0.0.1@3306
 
-
 CREATE TABLE sensors (
   id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
   soil_humidity DECIMAL NOT NULL,
