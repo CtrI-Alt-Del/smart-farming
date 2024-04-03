@@ -1,5 +1,5 @@
+-- Active: 1712098149489@@127.0.0.1@3306@smart-farming
 DROP TABLE checklist;
-
 
 CREATE TABLE checklist (
   id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
@@ -18,5 +18,3 @@ CREATE TABLE checklist (
   report TEXT NOT NULL
 );
 
-
-SELECT CURDATE();
