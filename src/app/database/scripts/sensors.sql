@@ -1,4 +1,4 @@
--- Active: 1712144592995@@127.0.0.1@3306@smart-farming
+-- Active: 1712087085985@@127.0.0.1@3306
 
 
 CREATE TABLE sensors (
