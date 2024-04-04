@@ -3,8 +3,9 @@ from datetime import datetime, date
 
 from entities.entity import Entity
 
+
 @dataclass
-class CheckList(Entity):
+class CheckListRecord(Entity):
     soil_ph: int = None
     soil_humidity: int = None
     water_consumption: int = None
@@ -18,4 +19,3 @@ class CheckList(Entity):
     fertiliziation_date: date = None
     harvested_at: datetime = None
     report: str = None
-        
