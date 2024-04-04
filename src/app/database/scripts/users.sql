@@ -3,5 +3,3 @@ CREATE TABLE users(
   email VARCHAR(320) NOT NULL,
   password VARCHAR(40)
 );
-
-#INSERT INTO users (email, password) VALUES ('username', MD5('123'));
