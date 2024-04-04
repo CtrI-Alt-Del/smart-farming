@@ -1,5 +1,5 @@
 -- Active: 1712144592995@@127.0.0.1@3306@smart-farming
-CREATE TABLE users(
+CREATE TABLE user (
   id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
   email VARCHAR(320) NOT NULL,
   password VARCHAR(40)
