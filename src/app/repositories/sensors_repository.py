@@ -11,3 +11,5 @@ class SensorRepository:
         select_query = "SELECT * FROM sensors"
         result = mysql.query(sql=select_query)
         return result
+    
+    
