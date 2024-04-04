@@ -11,6 +11,3 @@ class SensorRepository:
         select_query = "SELECT * FROM sensors"
         result = mysql.query(sql=select_query)
         return result
-
-sensor = SensorRepository()
-print(sensor.get_sensor_data())
