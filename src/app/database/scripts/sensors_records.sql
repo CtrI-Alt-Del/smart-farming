@@ -1,6 +1,6 @@
--- Active: 1712087085985@@127.0.0.1@3306
+-- Active: 1712144592995@@127.0.0.1@3306@smart-farming
 
-CREATE TABLE sensors (
+CREATE TABLE sensors_records (
   id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
   soil_humidity DECIMAL NOT NULL,
   ambient_humidity DECIMAL NOT NULL,

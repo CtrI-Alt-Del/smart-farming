@@ -1,7 +1,7 @@
 -- Active: 1712098149489@@127.0.0.1@3306@smart-farming
-DROP TABLE checklist;
+DROP TABLE checklist_records;
 
-CREATE TABLE checklist (
+CREATE TABLE checklist_records (
   id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
   soil_ph DECIMAL NOT NULL,
   soil_humidity DECIMAL NOT NULL,

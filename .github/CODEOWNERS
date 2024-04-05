@@ -4,5 +4,5 @@
 # reviewers/codeowners for backend
 src/app @JohnPetros
 
-# reviewers/codeowners for backend
-src/app @0thigs
+# reviewers/codeowners for frontend
+src/ui @0thigs
