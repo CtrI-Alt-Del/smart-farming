@@ -9,7 +9,7 @@ CREATE TABLE checklist_records (
   air_humidity DECIMAL NOT NULL,
   temperature DECIMAL NOT NULL,
   illuminance DECIMAL NOT NULL,
-  lai DECIMAL DEFAULT NULL,
+  lai DECIMAL,
   leaf_apperance ENUM('SAUDAVEL', 'MURCHA'),
   leaf_color ENUM('VERDE CLARO DOMINANTE',
    'VERDE ESCURO DOMINATE',
@@ -26,6 +26,6 @@ CREATE TABLE checklist_records (
   plantation_type ENUM('PLANTIO INTERNO(FATEC)', 'PLANTIO EXTERNO(CASA)'),
   fertiliziation_date DATE NOT NULL DEFAULT (CURDATE()),
   harvested_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  report TEXT DEFAULT NULL
+  report TEXT
 );
 
