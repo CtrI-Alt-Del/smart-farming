@@ -3,11 +3,13 @@
 
 {% block body %}
 
-{{header()}}
+{{ header() }}
 
-<h1>ahhhh</h1>
-
-
-
+<form method="post" action="/sensors_records/csv" enctype="multipart/form-data"
+  class="bg-purple-700">
+  {{ csv_form.csrf_token }}
+  {{ csv_form.field }}
+  <button type="submit">Enviar</button>
+</form>
 
 {% endblock body %}
