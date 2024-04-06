@@ -60,3 +60,5 @@
 *Critérios de aceitação:*
 
 - Todos os dados coletados pelos sensores devem estar cadastros no site quando ele chegar na mão do cliente
+
+## Gráfico Burndown 📈

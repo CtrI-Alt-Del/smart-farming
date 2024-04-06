@@ -142,3 +142,5 @@
 - As mensagens deve estar bem destacadas do resto dos elementos da página.
 
 ---
+
+## Gráfico Burndown 📈

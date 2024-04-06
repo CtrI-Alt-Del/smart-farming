@@ -97,3 +97,5 @@
 
 - O usuário deve ser avisado por mensagem de texto ao tentar editar ou deletar qualquer registro do sistema (seja referente aos dados dos sensores ou do check-list).
 - O usuário deve poder confirmar ou cancelar a ação por botões presentes abaixo da mensagem.
+
+## Gráfico Burndown 📈

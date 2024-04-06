@@ -71,3 +71,5 @@
 - Todas a páginas devem se adaptar de acordo com o tamanho do dispositivo do usuário, tanto de forma visual, quanto comportamental.
 
 ---
+
+## Gráfico Burndown 📈
