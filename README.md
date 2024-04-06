@@ -7,19 +7,37 @@ Smart Farming é um **dashboard web** que visa facilitar o trabalho de monitoram
 
 Atualmente a estufa é monitorada de maneira arcaica utilizando-se primariamente de [arquivos do tipo CSV](https://www.freecodecamp.org/portuguese/news/o-que-e-um-arquivo-csv-e-como-abrir-esse-formato-de-arquivo/) para registrar e armazenar informações a partir dos dados coletados pelos sensores da estufa, assim como as informações obtidas de uma Form's para realizar o check-list, isto é, uma lista de itens que servem para validar os dados obtidos por esses sensores.
 
-Os dados colhidos pelos sensores são armazenados em um cartão *microSD*. Para fazer o registro desses dados é preciso retirar o cartão, o que acaba não se tornado prático e até perigoso em virtude da fragilidade dessa peça.
+Os dados colhidos pelos sensores são armazenados em um cartão *microSD*. Para fazer o registro desses dados em um arquivo CSV é preciso retirar o cartão, o que acaba não se tornando prático e até perigoso em virtude da fragilidade dessa peça.
 
+Para fazer a análise de dados a fim de obter *insights* e reduzir potenciais problemas com relação ao andamento da estufa são constrúidos gráficos no *Excel* a partir dos arquivos CSV, porém não são tão interativos e são de difícil manutenção.
 
 ## Objetivo do produto 🎯
 
-Posto o ploblema do cliente analisado, cabe ao dashboard registrar esses dados de forma automatizada e exibí-las tanto em forma de tabela, quanto de gráfico, bem como a funcionalidade de adicionar, editar e deletar esses registros, em que apenas um usuário com permissão (administrador) poderá fazer esse tipo de gerenciamente, bastando apenas que ele acesse o sitema via e-mail e senha. 
+Posto o ploblema do cliente analisado, cabe ao dashboard registrar esses dados de forma automatizada e exibí-las, tanto em forma de tabela, quanto de gráfico, bem como as funcionalidades de adicionar, editar e deletar esses registros, em que apenas um usuário com permissão (administrador) poderá fazer esse tipo de gerenciamento, bastando apenas que ele acesse o sitema via e-mail e senha. O site deve ser aberto a todo público e ressaltar o andamento da estufa com base nos dados que venham a ser cadastrados no sistema. 
 
 ## Metodologia empregada 💡
 
-Para a confecção do produto foi empregado o framework de [Metodologia Ágil Scrum](https://aws.amazon.com/pt/what-is/scrum/#:~:text=O%20Scrum%20%C3%A9%20um%20framework,uma%20entrega%20eficiente%20de%20projetos.), um método ágil adaptativo, iterativo, flexível e eficaz. Entre as ferramentas utilizadas no Scrum, uma é a divisão do projeto em Sprints. Para selecionar quais seriam as entregas das nossas Sprints, primeiro foi definido o [MVP](https://rockcontent.com/br/blog/o-que-e-mvp/), que consiste em uma versão do produto que prioriza as tarefas que teazem maior entrega de valor para o cliente. Então, a partir das Tarefas foi construído o Backlog do Produto, o qual foi aprovado pelo cliente e dividido em 4 Backlog de Sprint.
+Para a confecção do produto foi empregado o framework de [Metodologia Ágil Scrum](https://aws.amazon.com/pt/what-is/scrum/#:~:text=O%20Scrum%20%C3%A9%20um%20framework,uma%20entrega%20eficiente%20de%20projetos.), que consiste sumariamente dividir o desenvolvimento do projeto utilizadas em Sprints, um conjunto de tarefas que devem ser executadas e desenvolvidas em um período pré-definido de tempo. Para selecionar quais seriam as entregas das Sprints do projeto, primeiro foi definido o [MVP](https://rockcontent.com/br/blog/o-que-e-mvp/), que consiste em uma versão do produto que prioriza as tarefas que teazem maior entrega de valor para o cliente. Então, a partir das Tarefas foi construído o Backlog do Produto, o qual foi aprovado pelo cliente e dividido em 4 Backlog de Sprint.
 
+## MVP'S 🏆
 
-## Backlog do produto 🎯
+### Sprint - 1️⃣
+
+`🚧 Em desenvolvimento 🚧`
+
+### Sprint - 2️⃣
+
+`🚧 Em desenvolvimento 🚧`
+
+### Sprint - 3️⃣
+
+`🚧 Em desenvolvimento 🚧`
+
+### Sprint - 4️⃣
+
+`🚧 Em desenvolvimento 🚧`
+
+## Backlog do produto 📖
 
 <table>
  <thead>
@@ -169,13 +187,14 @@ Para a confecção do produto foi empregado o framework de [Metodologia Ágil Sc
       <td>BAIXA</td>
       <td>2</td>
       </tr>
+</table>
 
-## Relatório de cada Sprint 📅
+## Relatório e detalhes de cada Sprint 📅
 
-- Sprint 1: [Acessar]()
+- Sprint 1: [Acessar](https://github.com/CtrI-Alt-Del/smart-farming/blob/main/documentation/reports/sprint-1.md)
 
-- Sprint 2: [Acessar]()
+- Sprint 2: [Acessar](https://github.com/CtrI-Alt-Del/smart-farming/blob/main/documentation/reports/sprint-2.md)
 
-- Sprint 3: [Acessar]()
+- Sprint 3: [Acessar](https://github.com/CtrI-Alt-Del/smart-farming/blob/main/documentation/reports/sprint-3.md)
 
-- Sprint 4: [Acessar]()
+- Sprint 4: [Acessar](https://github.com/CtrI-Alt-Del/smart-farming/blob/main/documentation/reports/sprint-4.md)
