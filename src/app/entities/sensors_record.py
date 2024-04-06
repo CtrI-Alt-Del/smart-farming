@@ -3,8 +3,9 @@ from datetime import datetime
 
 from entities.entity import Entity
 
+
 @dataclass
-class Sensors(Entity):
+class SensorsRecord(Entity):
     soil_humidity: int = None
     ambient_humidity: int = None
     temperature: int = None
