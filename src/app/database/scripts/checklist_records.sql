@@ -1,15 +1,15 @@
--- Active: 1712147539997@@127.0.0.1@3306@smart-farming
+-- Active: 1712262846728@@127.0.0.1@3306
 DROP TABLE checklist_records;
 
 CREATE TABLE checklist_records (
   id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
-  soil_ph DECIMAL NOT NULL,
-  soil_humidity DECIMAL NOT NULL,
-  water_consumption DECIMAL NOT NULL,
-  air_humidity DECIMAL NOT NULL,
-  temperature DECIMAL NOT NULL,
-  illuminance DECIMAL NOT NULL,
-  lai DECIMAL,
+  soil_ph DECIMAL(10, 2) NOT NULL,
+  soil_humidity DECIMAL(10, 2) NOT NULL,
+  water_consumption DECIMAL(10, 2) NOT NULL,
+  air_humidity DECIMAL(10, 2) NOT NULL,
+  temperature DECIMAL(10, 2) NOT NULL,
+  illuminance DECIMAL(10, 2) NOT NULL,
+  lai DECIMAL(10, 2),
   leaf_apperance ENUM('SAUDAVEL', 'MURCHA'),
   leaf_color ENUM('VERDE CLARO DOMINANTE',
    'VERDE ESCURO DOMINATE',
