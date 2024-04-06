@@ -198,3 +198,14 @@ Para a confecção do produto foi empregado o framework de [Metodologia Ágil Sc
 - Sprint 3: [Acessar](https://github.com/CtrI-Alt-Del/smart-farming/blob/main/documentation/reports/sprint-3.md)
 
 - Sprint 4: [Acessar](https://github.com/CtrI-Alt-Del/smart-farming/blob/main/documentation/reports/sprint-4.md)
+
+## Time de Desenvolvimento 👷🏻
+
+| Foto | Nome | Função | Github | Linkedin |
+| :---------: | :---------: | :---------------------: | :-----------------: | :-------: |
+| <img src="https://github.com/JohnPetros.png?size=50" width=50px> | Joao Pedro Carvalho | Product Owner | <a href="https://github.com/JohnPetros"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | <a href="https://www.linkedin.com/in/jo%C3%A3o-pedro-carvalho-dos-santos-42a0ab222/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a> |
+| <img src="https://github.com/kaufon.png?size=50" width=50px> | Kauan Fonseca do Vale | Scrum Master | <a href="https://github.com/kaufon"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | <a href="https://www.linkedin.com/in/kauan-fonseca-b62188300/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a> |
+| <img src="https://github.com/0thigs.png?size=50" width=50px> | Thiago Martins | Scrum Team | <a href="https://github.com/0thigs"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | <a href=""><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a> |
+| <img src="https://github.com/FaelSantoss.png?size=50" width=50px> | Rafael dos Santos | Scrum Team | <a href="https://github.com/FaelSantoss"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | <a href=""><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a> |
+| <img src="https://github.com/Tico1606.png?size=50" width=50px> | Gabriel | Scrum Team | <a href="https://github.com/Tico1606"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | <a href=""><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a> |
+| <img src="https://github.com/JoaoGabrielGarcia.png?size=50" width=50px> | Joao Gabriel Garcia   |  Scrum Team  | <a href="https://github.com/JoaoGabrielGarcia"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | <a href=""><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a> |
