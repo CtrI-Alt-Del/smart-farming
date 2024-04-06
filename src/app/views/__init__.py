@@ -1,6 +1,9 @@
-from .sensors_views import sensors_views
-from .checklist_views import checklist_views
+from flask import Flask
 
-def init_views(app):
-    app.register_blueprint(sensors_views)
-    app.register_blueprint(checklist_views)
+from .sensors_records_views import sensors_records_views
+from .checklist_records_views import checklist_records_views
+
+
+def init_views(app: Flask):
+    app.register_blueprint(sensors_records_views)
+    app.register_blueprint(checklist_records_views)
