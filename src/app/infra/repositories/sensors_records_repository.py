@@ -1,5 +1,5 @@
 from core.entities.sensors_record import SensorsRecord
-
+from typing import List
 from infra.database import mysql
 
 
@@ -20,7 +20,18 @@ class SensorRecordsRepository:
             ],
         )
 
-    def get_sensor_records(self) -> None:
+    def get_sensor_records(self) -> List[SensorsRecord]:
         select_query = "SELECT * FROM sensors_records"
         result = mysql.query(sql=select_query)
-        return result
+        SensorsRecordData = []
+        for rows in result:
+            SensorsRecord(
+                ambient_humidity=rows["ambient_humidity"],
+                soil_humidity=rows["soil_humidty"],
+                temperature=rows["temperature"],
+                water_volume=rows["water_volume"],
+                created_at=rows["created_at"],
+            )
+
+            SensorsRecordData.append(SensorsRecord())
+        return SensorsRecordData

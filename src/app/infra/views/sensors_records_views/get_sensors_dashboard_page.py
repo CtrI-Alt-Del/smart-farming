@@ -1,5 +1,7 @@
 from flask import render_template
-
+from app.core.use_cases.sensors_records import get_sensors_dashboard_page_data
 
 def get_sensors_dashboard_page_view():
-    return render_template("/pages/sensors_dashboard.html")
+    result = get_sensors_dashboard_page_data()
+    return render_template("/pages/sensors_dashboard.html", sensors_record_data = result)
+    
