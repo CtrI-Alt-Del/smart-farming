@@ -2,7 +2,7 @@ from typing import List, Dict, Generator
 from werkzeug.datastructures import FileStorage
 from datetime import datetime
 
-from common.csv_file import CsvFile
+from commons.csv_file import CsvFile
 
 from entities.sensors_record import SensorsRecord
 
