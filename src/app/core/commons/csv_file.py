@@ -1,7 +1,7 @@
 from typing import Dict, List
 from werkzeug.datastructures import FileStorage
 
-from providers.data_analyser_provider import DataAnalyserProvider
+from infra.providers.data_analyser_provider import DataAnalyserProvider
 
 
 class CsvFile:

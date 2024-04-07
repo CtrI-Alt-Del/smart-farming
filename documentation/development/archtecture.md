@@ -15,7 +15,7 @@
 │   │   │   ├── constants/ # global and imutable values  
 │   │   │   ├── entities/ # classes to indentify a record of the business rules
 │   │   │   └── use_cases/ # Features of the business rules
-│   │   ├── infra/ # Related to external technologies to sustain backend
+│   │   ├── infra/ # Related to external technologies, serivices and libs to sustain the backend
 │   │   │   ├── database/ # Related to a database
 │   │   │   ├── repositories/ # Classes to manipulate the database
 │   │   │   ├── auth/ # Related to authentication of users

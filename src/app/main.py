@@ -2,7 +2,7 @@ from os import getenv
 
 from flask import Flask
 
-from views import init_views
+from infra.views import init_views
 
 
 def init_app():

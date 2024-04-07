@@ -1,6 +1,6 @@
-from database import mysql
+from core.entities.sensors_record import SensorsRecord
 
-from entities.sensors_record import SensorsRecord
+from infra.database import mysql
 
 
 class SensorRecordsRepository:

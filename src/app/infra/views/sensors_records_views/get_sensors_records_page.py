@@ -1,6 +1,6 @@
 from flask import render_template
 
-from forms.csv_form import CsvForm
+from infra.forms.csv_form import CsvForm
 
 
 def get_sensors_records_page_view():

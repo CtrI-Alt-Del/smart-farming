@@ -3,7 +3,7 @@ from typing import Union, Dict, List
 
 import mysql.connector
 
-from utils.error import Error
+from infra.utils.error import Error
 
 
 class MySQL:

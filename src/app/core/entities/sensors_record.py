@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from datetime import datetime
 
-from entities.entity import Entity
+from core.entities.entity import Entity
 
 
 @dataclass

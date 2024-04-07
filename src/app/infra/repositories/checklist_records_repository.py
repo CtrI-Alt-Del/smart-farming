@@ -1,5 +1,6 @@
-from database import mysql
-from entities.checklist_record import CheckListRecord
+from core.entities.checklist_record import CheckListRecord
+
+from infra.database import mysql
 
 
 class CheckListRecordsRepository:

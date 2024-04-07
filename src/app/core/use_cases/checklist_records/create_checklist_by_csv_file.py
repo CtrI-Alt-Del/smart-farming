@@ -2,13 +2,12 @@ from typing import List, Dict, Generator
 from werkzeug.datastructures import FileStorage
 from datetime import datetime
 
-from commons.csv_file import CsvFile
+from core.commons.csv_file import CsvFile
+from core.entities.checklist_record import CheckListRecord
 
-from entities.checklist_record import CheckListRecord
+from infra.repositories import checklist_records_repository
+from infra.utils.error import Error
 
-from repositories import checklist_records_repository
-
-from utils.error import Error
 
 class CreateCheckListRecordsByCsvFile:
     def execute(self, file: FileStorage) -> None:
@@ -23,14 +22,14 @@ class CreateCheckListRecordsByCsvFile:
 
         except Error as error:
             raise error
-        
+
     def __convert_csv_records_to_checklist_records(
-            self, records: List[Dict]
+        self, records: List[Dict]
     ) -> Generator:
         for record in records:
             record_date = record["Data"].date()
             record_time = record["Hora"]
-            
+
             yield CheckListRecord(
                 soil_ph=["ph do solo"],
                 soil_humidity=["umidade do solo"],
@@ -53,6 +52,6 @@ class CreateCheckListRecordsByCsvFile:
                     year=record_date.year,
                     hour=record_time.hour,
                     minute=record_time.minute,
-                report=["relatório"],
+                    report=["relatório"],
                 ),
             )

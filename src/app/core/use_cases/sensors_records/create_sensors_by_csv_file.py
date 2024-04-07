@@ -2,13 +2,11 @@ from typing import List, Dict, Generator
 from werkzeug.datastructures import FileStorage
 from datetime import datetime
 
-from commons.csv_file import CsvFile
+from core.commons.csv_file import CsvFile
+from core.entities.sensors_record import SensorsRecord
 
-from entities.sensors_record import SensorsRecord
-
-from repositories import sensors_records_repository
-
-from utils.error import Error
+from infra.repositories import sensors_records_repository
+from infra.utils.error import Error
 
 
 class CreateSensorsRecordsByCsvFile:

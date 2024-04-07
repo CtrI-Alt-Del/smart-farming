@@ -1,9 +1,9 @@
 from flask import request
 
-from forms.csv_form import CsvForm
 from werkzeug.datastructures import ImmutableMultiDict
 
-from use_cases.sensors_records import create_sensors_by_csv_file
+from infra.forms.csv_form import CsvForm
+from core.use_cases.sensors_records import create_sensors_by_csv_file
 
 
 def create_sensors_records_by_csv_view():
