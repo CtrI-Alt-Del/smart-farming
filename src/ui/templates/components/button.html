@@ -1,0 +1,5 @@
+{% macro button(text, color, href) -%}
+    <button class='px-[50px] py-[13px] rounded-full bg-[{{ color }}]'>
+        <a href="{{ href }}">{{text}}</a>
+    </button>
+{%- endmacro %}
