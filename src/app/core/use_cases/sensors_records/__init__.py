@@ -1,0 +1,3 @@
+from .create_sensors_by_csv_file import CreateSensorsRecordsByCsvFile
+
+create_sensors_by_csv_file = CreateSensorsRecordsByCsvFile()
