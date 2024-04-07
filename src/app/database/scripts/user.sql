@@ -2,5 +2,5 @@
 CREATE TABLE user (
   id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
   email VARCHAR(320) NOT NULL,
-  password VARCHAR(40)
+  password VARCHAR(40) NOT NULL
 );
