@@ -5,7 +5,13 @@ module.exports = {
     "./src/ui/static/src/**/*.js",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        green: {
+          default: "##2CA24D",
+        },
+      }
+    },
   },
   plugins: [
     require("flowbite/plugin")
