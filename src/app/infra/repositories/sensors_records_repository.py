@@ -22,16 +22,17 @@ class SensorRecordsRepository:
 
     def get_sensor_records(self) -> List[SensorsRecord]:
         select_query = "SELECT * FROM sensors_records"
-        result = mysql.query(sql=select_query)
-        SensorsRecordData = []
-        for rows in result:
-            SensorsRecord(
-                ambient_humidity=rows["ambient_humidity"],
-                soil_humidity=rows["soil_humidty"],
-                temperature=rows["temperature"],
-                water_volume=rows["water_volume"],
-                created_at=rows["created_at"],
-            )
+        rows = mysql.query(sql=select_query, is_single=False)
+        sensors_records = []
 
-            SensorsRecordData.append(SensorsRecord())
-        return SensorsRecordData
+        for row in rows:
+            sensors_records.append(
+                SensorsRecord(
+                    ambient_humidity=row["ambient_humidity"],
+                    soil_humidity=row["soil_humidity"],
+                    temperature=row["temperature"],
+                    water_volume=row["water_volume"],
+                    created_at=row["created_at"],
+                )
+            )
+        return sensors_records

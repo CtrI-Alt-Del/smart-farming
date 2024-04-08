@@ -12,7 +12,6 @@ def create_sensors_records_by_csv_view():
 
     csv_form = CsvForm(ImmutableMultiDict(form_data))
 
-    print(csv_form.validate_on_submit(), flush=True)
     if csv_form.validate_on_submit():
         create_sensors_by_csv_file.execute(form_data["csv"])
 
