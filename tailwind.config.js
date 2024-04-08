@@ -8,8 +8,12 @@ module.exports = {
     extend: {
       colors: {
         green: {
-          default: "##2CA24D",
+          default: "#2CA24D",
         },
+        yellow: {
+          default: "#F5B10F",
+          dark: "#C7A700"
+        }
       }
     },
   },
