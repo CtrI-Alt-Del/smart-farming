@@ -1,4 +1,4 @@
--- Active: 1712433031802@@127.0.0.1@3306@smart-farming
+-- Active: 1712144580322@@127.0.0.1@3306
 
 DROP TABLE IF EXISTS sensors_records;
 
