@@ -1,9 +1,8 @@
 {% extends "layouts/root.html" %}
-{% from "components/header.html" import header %}
 
 {% block body %}
 
-{{ header() }}
+{% include "/layouts/dashboard/index.html" %}
 
 <form method="post" action="/sensors_records/csv" enctype="multipart/form-data">
   {{ csv_form.csrf_token }}

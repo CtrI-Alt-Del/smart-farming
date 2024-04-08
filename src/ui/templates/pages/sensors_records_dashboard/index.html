@@ -1,0 +1,21 @@
+{% extends "layouts/root.html" %} 
+
+
+{% block body %} 
+
+{% include "/layouts/dashboard/index.html" %}
+
+
+  <div class="grid grid-cols-2 pt-5 pb-5 gap-9 dashboard">
+    {% include "/pages/sensors_records_dashboard/ambient_humidity_chart.html" %}
+    {% include "/pages/sensors_records_dashboard/soil_humidity_chart.html" %}
+    {% include "/pages/sensors_records_dashboard/temperature_chart.html" %}
+    {% include "/pages/sensors_records_dashboard/water_volume_chart.html" %}
+  </div>
+
+  <script src="{{url_for('static', filename='scripts/ambient_humidity_chart.js')}}"></script>
+  <script src="{{url_for('static', filename='scripts/temperature_chart.js')}}"></script>
+  <script src="{{url_for('static', filename='scripts/water_volume_chart.js')}}"></script>
+  <script src="{{url_for('static', filename='scripts/soil_humidity_chart.js')}}"></script>
+  {% endblock body %}
+</div>
