@@ -10,5 +10,11 @@
   "devDependencies": {
     "concurrently": "^8.2.2",
     "tailwindcss": "^3.4.3"
-  }
+  },
+  "name": "smart-farming",
+  "description": "Smart Farming é um **dashboard web** que visa facilitar o trabalho de monitoramento da estufa inteligente de mesmo nome mantida dentro da [FATEC de São José dos Campos](https://fatecsjc-prd.azurewebsites.net/).",
+  "version": "1.0.0",
+  "main": "tailwind.config.js",
+  "author": "",
+  "license": "ISC"
 }
