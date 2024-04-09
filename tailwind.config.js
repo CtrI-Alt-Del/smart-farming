@@ -1,13 +1,22 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/ui/templates/**/*.html",
-    "./src/ui/static/src/**/*.js",
-  ],
+  content: ['./src/ui/templates/**/*.html', './src/ui/static/src/**/*.js'],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        green: {
+          default: '#2CA24D',
+        },
+        yellow: {
+          default: '#da9e13',
+          dark: '#C7A700',
+        },
+      },
+    },
   },
   plugins: [
-    require("flowbite/plugin")
+    require('flowbite/plugin')({
+      charts: true,
+    }),
   ],
 }

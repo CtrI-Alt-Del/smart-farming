@@ -1,4 +1,4 @@
--- Active: 1712574492835@@127.0.0.1@3306@smart-farming
+-- Active: 1712258180714@@127.0.0.1@3306@smart-farming
 
 DROP TABLE IF EXISTS sensors_records;
 
@@ -11,4 +11,6 @@ CREATE TABLE sensors_records (
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-SELECT * FROM sensors_records;
+SELECT *
+FROM sensors_records
+LIMIT 20000;

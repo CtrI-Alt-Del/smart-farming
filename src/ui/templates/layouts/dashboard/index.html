@@ -1,27 +1,17 @@
-{% from "components/button.html" import button %}
+{% extends "layouts/root.html" %}
 
-<header class="w-full h-[100px] bg-[#272727] flex justify-around items-center">
-  <h1 class="text-white text-[35px]">Bem vindo!</h1>
-  {{ button("login", "#F5B10F", "#") }}
-</header>
+{% block body %}
 
-<div class="fixed top-0 left-0 w-72 h-[95%] text-white bg-white bg-opacity-75 sidebar rounded-xl m-[20px] shadow-2xl p-5 flex flex-col justify-around items-center">
-  <h2 class="text-lg">Smart Farming</h2>
-  <ul class="flex flex-col items-center justify-center gap-5">
-    <li>
-      <button class="w-[230px] h-[65px] bg-[#A4A4A4] rounded-full hover:bg-[#C7A700] transition-all duration-200">
-        <a href="#" class="text-sm font-thin">Último Registro</a>
-      </button>
-    </li>
-    <li>
-      <button class="w-[230px] h-[65px] bg-[#A4A4A4] rounded-full hover:bg-[#2CA24D] transition-all duration-200">
-        <a href="#" class="text-sm font-thin">Gráficos dos Sensores</a>
-      </button>
-    </li>
-    <li>
-      <button class="w-[230px] h-[65px] bg-[#A4A4A4] rounded-full hover:bg-[#2CA24D] transition-all duration-200">
-        <a href="#" class="text-sm font-thin">Gráficos do Formulario</a>
-      </button>
-    </li>
-  </ul>
-</div>
+{% include "/layouts/dashboard/header.html" %}
+
+{% include "/layouts/dashboard/sidebar.html" %}
+
+<main class="dashboard"> 
+
+    {% block dashboard_content %}
+    
+    {% endblock dashboard_content %}
+
+</main>
+
+{% endblock body %}

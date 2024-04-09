@@ -1,0 +1,89 @@
+{
+    "$schema": "https://biomejs.dev/schemas/1.5.1/schema.json",
+    "organizeImports": {
+      "enabled": false
+    },
+    "json": {
+      "formatter": {
+        "enabled": true,
+        "indentWidth": 2,
+        "lineEnding": "lf"
+      }
+    },
+    "linter": {
+      "enabled": true,
+      "rules": {
+        "correctness": {
+          "useExhaustiveDependencies": "warn",
+          "noInnerDeclarations": "warn",
+          "noUnnecessaryContinue": "warn",
+          "noConstructorReturn": "warn"
+        },
+        "suspicious": {
+          "noImplicitAnyLet": "warn",
+          "noConfusingVoidType": "warn",
+          "noEmptyInterface": "warn",
+          "noExplicitAny": "warn",
+          "noArrayIndexKey": "warn",
+          "noDoubleEquals": "warn",
+          "noConsoleLog": "off",
+          "noAssignInExpressions": "warn",
+          "noRedeclare": "warn"
+        },
+        "style": {
+          "noParameterAssign": "warn",
+          "noNonNullAssertion": "warn",
+          "noArguments": "warn",
+          "noUnusedTemplateLiteral": "warn",
+          "useDefaultParameterLast": "warn",
+          "useConst": "warn",
+          "useEnumInitializers": "warn",
+          "useTemplate": "warn",
+          "useSelfClosingElements": "warn"
+        },
+        "security": {
+          "noDangerouslySetInnerHtml": "warn",
+          "noDangerouslySetInnerHtmlWithChildren": "warn"
+        },
+        "performance": {
+          "noDelete": "warn",
+          "noAccumulatingSpread": "off"
+        },
+        "complexity": {
+          "noForEach": "warn",
+          "noBannedTypes": "warn",
+          "useLiteralKeys": "warn",
+          "useSimplifiedLogicExpression": "off",
+          "useOptionalChain": "warn"
+        },
+        "a11y": {
+          "noSvgWithoutTitle": "warn",
+          "useMediaCaption": "warn",
+          "noHeaderScope": "warn",
+          "useAltText": "warn",
+          "useButtonType": "warn"
+        }
+      }
+    },
+    "formatter": {
+      "enabled": true,
+      "formatWithErrors": false,
+      "indentStyle": "space",
+      "indentWidth": 2,
+      "lineWidth": 80,
+      "ignore": ["**/*/generated-new.ts", "**/*/generated-v2.ts"],
+      "lineEnding": "lf"
+    },
+    "javascript": {
+      "formatter": {
+        "enabled": true,
+        "semicolons": "asNeeded",
+        "indentWidth": 2,
+        "quoteStyle": "single",
+        "jsxQuoteStyle": "single",
+        "lineWidth": 80,
+        "quoteProperties": "asNeeded",
+        "arrowParentheses": "always"
+      }
+    }
+  }
