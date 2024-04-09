@@ -1,32 +1,27 @@
 {% extends "layouts/dashboard/index.html" %}
 {% from 'components/buttoncsv.html' import buttoncsv %}
 
-
 {% block dashboard_content %}
 
- <form method="post" action="/sensors_records/csv" enctype="multipart/form-data">
-  {{ csv_form.csrf_token }}
-  {{ csv_form.field }}
-  <button type="submit">Enviar</button>
-</form> 
-
-
-
 <div class=" m-5 bg-[#a3a3a3] bg-fixed h-[80vh] rounded-2xl">
+  <div class>
+    <p
+      class="box-border flex flex-col items-center justify-center text-2xl font-bold p-9 dark:text-white">CSV
+      Input</p>
+    <div
+      class="flex flex-col justify-center items-center w-full  pt-[10rem] px-[5rem] ">
 
-  <div class="">
-    <p class="flex flex-col justify-center items-center box-border p-9 font-bold text-2xl dark:text-white">CSV Input</p>
-    <div class="flex flex-col justify-center items-center w-full  pt-[10rem] px-[5rem] ">
-        
-        <label class="block mb-4 text-base font-medium text-red dark:text-white" for="file_input">Upload file</label>
-        <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
+      <label class="block mb-4 text-base font-medium text-red dark:text-white"
+        for="file_input">Upload file</label>
+      <input
+        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+        id="file_input" type="file">
 
-        {{ buttoncsv("Importar", "bg-green-default hover:opacity-50 transition-all", "#") }} 
-
+      {{ buttoncsv("Importar",
+      "bg-green-default hover:opacity-50 transition-all", "#") }}
     </div>
   </div>
 
 </div>
-
 
 {% endblock dashboard_content %}
