@@ -7,7 +7,7 @@
 | Bug fix                    | fix               | 🐛 `:bug:`                       |
 | Code from external libs    | providers         | ➕ `:plus:`                      |
 | Classes for backend utils  | utils             | 🧰 `:tool_box:`                  |
-| Configuration files        | config            | ⚙️ `:wrench:`                     |
+| Configuration files        | config            | ⚙️ `:gear:`                     |
 | Continous Delivery         | cd                | 🚚 `:truck:`                     |
 | Continous Integration      | ci                | 🚋 `:robot_face:`                |
 | Critical change            | break change      | 🚨 `:rotating_light:`            |
