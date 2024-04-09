@@ -1,7 +1,17 @@
-<!-- HEADER -->
+{% extends "layouts/root.html" %}
+
+{% block body %}
 
 {% include "/layouts/dashboard/header.html" %}
 
-<!-- SIDEBAR -->
-
 {% include "/layouts/dashboard/sidebar.html" %}
+
+<main class="dashboard"> 
+
+    {% block dashboard_content %}
+    
+    {% endblock dashboard_content %}
+
+</main>
+
+{% endblock body %}
