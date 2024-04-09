@@ -41,6 +41,9 @@ class AmbientHumidityChartOptions {
         x: {
           show: false,
         },
+        y: {
+          show: true
+        }
       },
       fill: {
         type: 'gradient',
@@ -68,7 +71,7 @@ class AmbientHumidityChartOptions {
       },
       series: [
         {
-          name: 'New users',
+          name: 'Umidade',
           data: data,
           color: '#1A56DB',
         },
@@ -83,9 +86,8 @@ class AmbientHumidityChartOptions {
           '06 February',
           '07 February',
         ],
-
         labels: {
-          show: true,
+          show: false,
         },
         axisBorder: {
           show: false,
@@ -95,10 +97,21 @@ class AmbientHumidityChartOptions {
         },
       },
       yaxis: {
-        show: false,
+        show: true,
+        categories: [
+          '0',
+          '25',
+          '50',
+          '75',
+          '100',
+        ],
+        labels: {
+          show: true,
+        }
       },
-    }
+    };
   }
+
 
   handleSelectChange(event) {
     const selectedValue = event.currentTarget.value
@@ -108,7 +121,7 @@ class AmbientHumidityChartOptions {
     const data = chartDataField.value.split(';').map(Number)
     console.log(data)
 
-    this.chart.updateOptions(this.getChartOptions([8, 5, 4, 6, 2, 1, 3]))
+    this.chart.updateOptions(this.getChartOptions(data))
   }
 }
 

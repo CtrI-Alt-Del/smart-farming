@@ -1,4 +1,4 @@
--- Active: 1712258180714@@127.0.0.1@3306@smart-farming
+-- Active: 1712147539997@@127.0.0.1@3306@smart-farming
 
 DROP TABLE IF EXISTS sensors_records;
 
@@ -12,5 +12,5 @@ CREATE TABLE sensors_records (
 );
 
 SELECT *
-FROM sensors_records
+FROM sensors_records  
 LIMIT 20000;
