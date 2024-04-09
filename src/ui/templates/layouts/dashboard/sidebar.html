@@ -1,24 +1,33 @@
 {% from "components/logo.html" import logo %}
 
-<div class="fixed top-0 left-0 w-72 h-modal text-white bg-white bg-opacity-75 backdrop-filter backdrop-blur-sm sidebar rounded-xl m-[15px] shadow-2xl p-5 pt-[50px] flex flex-col gap-[245px]">
-    <div class="container">
-        {{ logo() }}
-    </div>
-    <ul class="flex flex-col items-center justify-center gap-5">
-      <li>
-        <button class="w-[230px] h-[65px] bg-[#A4A4A4] rounded-full hover:bg-yellow-default transition-all duration-200">
-          <a href="#" class="text-sm font-thin">Último Registro</a>
-        </button>
-      </li>
-      <li>
-        <button class="w-[230px] h-[65px] bg-[#A4A4A4] rounded-full hover:bg-green-default transition-all duration-200">
-          <a href="#" class="text-sm font-thin">Gráficos dos Sensores</a>
-        </button>
-      </li>
-      <li>
-        <button class="w-[230px] h-[65px] bg-[#A4A4A4] rounded-full hover:bg-green-default transition-all duration-200">
-          <a href="#" class="text-sm font-thin">Gráficos do Checklist</a>
-        </button>
-      </li>
-    </ul>
+{% set link_class =
+"w-[230px] h-[65px] bg-[#A4A4A4] rounded-full hover:bg-green-default transition-all duration-200"
+%}
+
+<div
+  class="fixed top-0 left-0 w-72 h-modal text-white bg-white bg-opacity-75 backdrop-filter backdrop-blur-sm sidebar rounded-xl m-[15px] shadow-2xl p-5 pt-[50px] flex flex-col gap-[245px]">
+  <div class="container">
+    {{ logo() }}
+  </div>
+  <ul class="flex flex-col items-center justify-center gap-5">
+    <li>
+      <a
+        href="#"
+        class="{{ link_class }} text-sm font-thin">
+        Último Registro
+      </a>
+    </li>
+    <li>
+      <a
+        href="#"
+        class="{{ link_class }} text-sm font-thin">
+        Gráficos dos Sensores
+      </a>
+    </li>
+    <li>
+      <a href="#" class="{{ link_class }} text-sm font-thin">
+        Gráficos do Checklist
+      </a>
+    </li>
+  </ul>
 </div>

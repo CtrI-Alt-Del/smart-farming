@@ -6,7 +6,8 @@
 {% include "/layouts/dashboard/index.html" %}
 
 
-  <div class="grid grid-cols-2 pt-5 pb-5 gap-9 dashboard">
+<div class="grid grid-cols-2 pt-5 pb-5 gap-9 dashboard">
+  <h1>{{ charts_data }}</h1>
     {% include "/pages/sensors_records_dashboard/ambient_humidity_chart.html" %}
     {% include "/pages/sensors_records_dashboard/soil_humidity_chart.html" %}
     {% include "/pages/sensors_records_dashboard/temperature_chart.html" %}

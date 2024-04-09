@@ -4,7 +4,8 @@
 
 {% include "/layouts/dashboard/index.html" %}
 
-<form method="post" action="/sensors_records/csv" enctype="multipart/form-data">
+<form method="post" action="/sensors_records/csv" enctype="multipart/form-data"
+  class="dashboard">
   {{ csv_form.csrf_token }}
   {{ csv_form.field }}
   <button type="submit">Enviar</button>
