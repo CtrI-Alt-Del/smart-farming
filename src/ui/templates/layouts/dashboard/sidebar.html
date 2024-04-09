@@ -1,7 +1,7 @@
 {% from "components/logo.html" import logo %}
 
 {% set link_class =
-"w-[230px] h-[65px] bg-[#A4A4A4] rounded-full hover:bg-green-default transition-all duration-200"
+"grid place-content-center w-[230px] h-[65px] bg-[#5e5e5e] rounded-full hover:bg-green-default transition-all duration-200 text-lg font-thin"
 %}
 
 <div
@@ -13,19 +13,20 @@
     <li>
       <a
         href="#"
-        class="{{ link_class }} text-sm font-thin">
+        class="{{ link_class }} hover:bg-yellow-default">
         Último Registro
       </a>
     </li>
     <li>
       <a
         href="#"
-        class="{{ link_class }} text-sm font-thin">
+        class="{{ link_class }} hover:bg-green-default">
         Gráficos dos Sensores
       </a>
     </li>
     <li>
-      <a href="#" class="{{ link_class }} text-sm font-thin">
+      <a href="#"
+        class="{{ link_class }} hover:bg-green-default">
         Gráficos do Checklist
       </a>
     </li>

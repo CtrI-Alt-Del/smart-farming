@@ -26,7 +26,7 @@
             </svg>
         </div>
     </div>
-    <div data-ambient-humidity-chart="container" class></div>
+    <div data-ambient-humidity-chart="container"></div>
     <div
         class="grid items-center justify-between grid-cols-1 border-t border-gray-200 dark:border-gray-700">
         <div class="flex items-center justify-between pt-5">
@@ -35,12 +35,12 @@
                     for="days"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Período</label>
                 <select
-                    id="days"
+                    data-ambient-humidity-chart="select"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option selected>Escolha um período</option>
-                    <option value>7 dias</option>
-                    <option value>30 dias</option>
-                    <option value>90 dias</option>
+                    <option value="150 days">150 dias</option>
+                    <option value="300 days">300 dias</option>
+                    <option value="450 days">450 dias</option>
                 </select>
             </form>
         </div>
