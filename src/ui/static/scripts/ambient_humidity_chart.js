@@ -4,13 +4,26 @@ class AmbientHumidityChartOptions {
       '[data-ambient-humidity-chart="container"]',
     )
 
-    if (container && typeof ApexCharts !== 'undefined') {
-      const chart = new ApexCharts(container, this.get_chart_options())
+    const select = document.querySelector(
+      '[data-ambient-humidity-chart="select"]',
+    )
+
+    if (container && select && typeof ApexCharts !== 'undefined') {
+      const chart = new ApexCharts(
+        container,
+        this.getChartOptions([0, 2, 3, 4, 5, 6]),
+      )
       chart.render()
+
+      this.chart = chart
+
+      select.addEventListener('change', (event) =>
+        this.handleSelectChange(event),
+      )
     }
   }
 
-  get_chart_options() {
+  getChartOptions(data) {
     return {
       chart: {
         height: 200,
@@ -56,7 +69,7 @@ class AmbientHumidityChartOptions {
       series: [
         {
           name: 'New users',
-          data: [6500, 6418, 6456, 6526, 6356, 6456],
+          data: data,
           color: '#1A56DB',
         },
       ],
@@ -70,8 +83,9 @@ class AmbientHumidityChartOptions {
           '06 February',
           '07 February',
         ],
+
         labels: {
-          show: false,
+          show: true,
         },
         axisBorder: {
           show: false,
@@ -84,6 +98,17 @@ class AmbientHumidityChartOptions {
         show: false,
       },
     }
+  }
+
+  handleSelectChange(event) {
+    const selectedValue = event.currentTarget.value
+    const chartDataField = document.querySelector(
+      `[data-chart-data="${selectedValue}"]`,
+    )
+    const data = chartDataField.value.split(';').map(Number)
+    console.log(data)
+
+    this.chart.updateOptions(this.getChartOptions([8, 5, 4, 6, 2, 1, 3]))
   }
 }
 
