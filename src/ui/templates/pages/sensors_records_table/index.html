@@ -1,13 +1,21 @@
-{% extends "layouts/root.html" %}
+{% extends "layouts/dashboard/index.html" %}
 
-{% block body %}
+{% block dashboard_content %}
 
-{% include "/layouts/dashboard/index.html" %}
-
-<form method="post" action="/sensors_records/csv" enctype="multipart/form-data">
+<!-- <form method="post" action="/sensors_records/csv" enctype="multipart/form-data">
   {{ csv_form.csrf_token }}
   {{ csv_form.field }}
   <button type="submit">Enviar</button>
-</form>
+</form> -->
 
-{% endblock body %}
+
+
+<div class="m-5">
+  <div class="flex flex-col justify-center items-center w-full h-[80vh] p-20 bg-[#bdbdbd]">
+     <label class="block mb-2 text-sm font-medium text-red dark:text-white" for="file_input">Upload file</label>
+     <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
+  </div>
+ </div>
+
+
+{% endblock dashboard_content %}
