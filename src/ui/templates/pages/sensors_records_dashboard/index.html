@@ -24,10 +24,10 @@
 <input
   type="text"
   data-filtered-data-chart="{{ days }} days"
-  name="{{ attribute }}-average"
+  name="{{ attribute }}_average"
   value="
     {{ 
-      charts_filtered_data['{} days'.format(days)]['average']
+      charts_filtered_data['{} days'.format(days)]['average'][attribute]
     }}"
   hidden>
   
@@ -54,7 +54,7 @@
     {% include "/pages/sensors_records_dashboard/soil_humidity_chart.html" %}
     {% include "/pages/sensors_records_dashboard/temperature_chart.html" %}
     {% include "/pages/sensors_records_dashboard/water_volume_chart.html" %}
-  </div>
+</div>
 
   <script src="{{url_for('static', filename='scripts/ambient_humidity_chart.js')}}"></script>
   <script src="{{url_for('static', filename='scripts/temperature_chart.js')}}"></script>
