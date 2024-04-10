@@ -22,4 +22,4 @@ SELECT
 FROM sensors_records
 GROUP BY DATE(created_at)
 ORDER BY DATE(created_at) ASC
-LIMIT 500;
+LIMIT 7;

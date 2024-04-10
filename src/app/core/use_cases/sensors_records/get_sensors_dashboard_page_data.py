@@ -1,12 +1,10 @@
-
 from datetime import timedelta
 
 from infra.repositories import sensors_records_repository
-from core.commons.chart_filter import ChartFilter
+
 
 class GetSensorDashboardPageData:
     def execute(self):
-      
         sensor_records_average_by_date = (
             sensors_records_repository.get_sensor_records_average_by_date()
         )
@@ -19,10 +17,13 @@ class GetSensorDashboardPageData:
                     "records": self.filter_sensors_records_by_range_of_days(
                         days, sensor_records_average_by_date
                     ),
-                    "average": 50,
+                    "average": self.get_sensors_records_average_by_range_of_days(
+                        days, sensor_records_average_by_date
+                    ),
                 },
             )[0]
 
+        print(charts_filtered_data["7 days"]["average"], flush=True)
         return charts_filtered_data
 
     def filter_sensors_records_by_range_of_days(
@@ -57,20 +58,29 @@ class GetSensorDashboardPageData:
         }
         sensors_records_count = 0
 
-        for day in range(range_days, -1, -1):
+        for day in range(range_days, 0, -1):
             current_date = last_date - timedelta(days=day)
 
             for sensors_record in sensor_records_average_by_date:
                 if sensors_record["date"] == current_date:
+                    print(sensors_record)
+
                     for attribute, value in sensors_record.items():
+                        if attribute == "date":
+                            continue
+
                         total[attribute] += value
 
                     sensors_records_count += 1
 
-        average = {}
+        average = {
+            "soil_humidity": 0,
+            "ambient_humidity": 0,
+            "temperature": 0,
+            "water_volume": 0,
+        }
 
         for attribute, value in total.items():
-            average[attribute] += value / sensors_records_count
+            average[attribute] += round(value / sensors_records_count, 2)
 
         return average
-
