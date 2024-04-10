@@ -8,9 +8,11 @@ class AmbientHumidityChart {
       '[data-ambient-humidity-chart="select"]',
     )
 
-    const averageValue = document.querySelector(
-      '[name="{{ attribute }}-average"]'
+    this.averageValue = document.querySelector(
+      '[name="attribute_humidity-average"]'
     )
+
+    console.log(this.averageValue)
 
     if (container && select && typeof ApexCharts !== 'undefined') {
       const initialData = this.getSelectedData("7 days")
@@ -19,6 +21,7 @@ class AmbientHumidityChart {
       const chart = new ApexCharts(
         container,
         this.getChartOptions(initialData, initialDates),
+        this.averageValue.innerHTML = this.getAverageData(initialData).toFixed(2)
       )
 
       chart.render()
@@ -31,13 +34,12 @@ class AmbientHumidityChart {
     }
   }
 
-  handleAmbientData(data) {
+  getAverageData(data) {
     let mediaArr = 0
     for (let i = 0; i < data.length; i++) {
-      mediaArr += data[i]
-
-      return mediaArr / data.length
+      mediaArr += data[i] 
     }
+    return mediaArr / data.length
   }
 
   getChartOptions(data, dates) {
@@ -123,11 +125,10 @@ class AmbientHumidityChart {
 
   handleSelectChange(event) {
     const selectedValue = event.currentTarget.value
-
     const data = this.getSelectedData(selectedValue)
     const dates = this.getSelectedDates(selectedValue)
-
     this.chart.updateOptions(this.getChartOptions(data, dates))
+    this.averageValue.innerHTML = this.getAverageData(data).toFixed(2);
   }
 
   getSelectedData(selectedDaysRange) {
