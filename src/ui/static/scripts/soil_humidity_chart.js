@@ -23,7 +23,7 @@ window.addEventListener("load", () => {
         opacityFrom: 0.55,
         opacityTo: 0,
         shade: "#1CA576",
-        gradientToColors: ["#1C64F2"],
+        gradientToColors: ["#24D194"],
       },
     },
     dataLabels: {

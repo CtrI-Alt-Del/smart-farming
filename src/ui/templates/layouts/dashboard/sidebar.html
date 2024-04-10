@@ -1,11 +1,11 @@
 {% from "components/logo.html" import logo %}
 
 {% set link_class =
-"grid place-content-center w-[230px] h-[65px] bg-[#5e5e5e] rounded-full hover:bg-green-default transition-all duration-200 text-lg font-thin"
+"flex justify-content gap-2 items-center w-[230px] px-2 py-2 bg-[#F3F3F3] rounded-md text-[#404040] transition-all duration-200 text-lg "
 %}
 
 <div
-  class="fixed top-0 left-0 w-72 h-modal text-white bg-white bg-opacity-75 backdrop-filter backdrop-blur-sm sidebar rounded-xl m-[15px] shadow-2xl p-5 pt-[50px] flex flex-col gap-[245px]">
+  class="fixed top-0 left-2 w-80 h-modal text-white bg-white bg-opacity-75 backdrop-filter backdrop-blur-sm sidebar rounded-xl m-[15px] shadow-2xl p-5 pt-[50px] flex flex-col gap-[20%]">
   <div class="container">
     {{ logo() }}
   </div>
@@ -14,6 +14,7 @@
       <a
         href="#"
         class="{{ link_class }} hover:bg-yellow-default">
+        <i class="ph ph-cash-register"></i>
         Último Registro
       </a>
     </li>
@@ -21,13 +22,22 @@
       <a
         href="#"
         class="{{ link_class }} hover:bg-green-default">
+        <i class="ph ph-cell-signal-high scale-[1.4]"></i>
         Gráficos dos Sensores
       </a>
     </li>
     <li>
       <a href="#"
         class="{{ link_class }} hover:bg-green-default">
+        <i class="ph ph-table scale-[1.3]"></i>
         Gráficos do Checklist
+      </a>
+    </li>
+    <li>
+      <a href="#"
+        class="{{ link_class }} hover:bg-green-default">
+        <i class="ph ph-plant"></i>
+        Plantas
       </a>
     </li>
   </ul>
