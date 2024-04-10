@@ -4,12 +4,15 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        header: {
+          background: "#1F2A37"
+        },
         green: {
-          default: '#2CA24D',
+          default: '#D3F7EB',
         },
         yellow: {
-          default: '#da9e13',
-          dark: '#C7A700',
+          default: '#FDF6B2',
+          dark: '#FDF6B2',
         },
       },
     },
