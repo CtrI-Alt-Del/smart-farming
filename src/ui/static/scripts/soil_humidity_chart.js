@@ -1,7 +1,7 @@
 window.addEventListener("load", () => {
   const soil_humidity_chart_chart_options = {
     chart: {
-         height: 200,
+      height: 200,
       type: "area",
       fontFamily: "Inter, sans-serif",
       dropShadow: {

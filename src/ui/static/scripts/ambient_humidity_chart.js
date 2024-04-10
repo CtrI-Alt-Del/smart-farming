@@ -1,4 +1,4 @@
-class AmbientHumidityChartOptions {
+class AmbientHumidityChart {
   constructor() {
     const container = document.querySelector(
       '[data-ambient-humidity-chart="container"]',
@@ -8,11 +8,19 @@ class AmbientHumidityChartOptions {
       '[data-ambient-humidity-chart="select"]',
     )
 
+    const averageValue = document.querySelector(
+      '[name="{{ attribute }}-average"]'
+    )
+
     if (container && select && typeof ApexCharts !== 'undefined') {
+      const initialData = this.getSelectedData("7 days")
+      const initialDates = this.getSelectedDates("7 days")
+
       const chart = new ApexCharts(
         container,
-        this.getChartOptions([0, 2, 3, 4, 5, 6]),
+        this.getChartOptions(initialData, initialDates),
       )
+
       chart.render()
 
       this.chart = chart
@@ -23,7 +31,7 @@ class AmbientHumidityChartOptions {
     }
   }
 
-  getChartOptions(data) {
+  getChartOptions(data, dates) {
     return {
       chart: {
         height: 200,
@@ -41,6 +49,9 @@ class AmbientHumidityChartOptions {
         x: {
           show: false,
         },
+        y: {
+          show: true
+        }
       },
       fill: {
         type: 'gradient',
@@ -68,24 +79,15 @@ class AmbientHumidityChartOptions {
       },
       series: [
         {
-          name: 'New users',
+          name: 'Umidade',
           data: data,
           color: '#1A56DB',
         },
       ],
       xaxis: {
-        categories: [
-          '01 February',
-          '02 February',
-          '03 February',
-          '04 February',
-          '05 February',
-          '06 February',
-          '07 February',
-        ],
-
+        categories: dates,
         labels: {
-          show: true,
+          show: false,
         },
         axisBorder: {
           show: false,
@@ -95,21 +97,67 @@ class AmbientHumidityChartOptions {
         },
       },
       yaxis: {
-        show: false,
+        show: true,
+        min: 0,
+        max: 100,
+        stepSize: 25,
+        labels: {
+          show: true,
+          offsetX: -12,
+          formatter: (value) => {
+            return `${value}%`
+          },
+        }
       },
-    }
+    };
   }
 
   handleSelectChange(event) {
     const selectedValue = event.currentTarget.value
-    const chartDataField = document.querySelector(
-      `[data-chart-data="${selectedValue}"]`,
-    )
-    const data = chartDataField.value.split(';').map(Number)
-    console.log(data)
 
-    this.chart.updateOptions(this.getChartOptions([8, 5, 4, 6, 2, 1, 3]))
+    const data = this.getSelectedData(selectedValue)
+    const dates = this.getSelectedDates(selectedValue)
+
+    this.chart.updateOptions(this.getChartOptions(data, dates))
+  }
+
+  getSelectedData(selectedDaysRange) {
+    const chartDataField = document.querySelector(
+      `[data-filtered-data-chart="${selectedDaysRange}"][name="ambient_humidity"]`,
+    )
+
+    if (chartDataField) {
+      const data = chartDataField.value.split(';').map(Number)
+      return data
+    }
+
+    return []
+  }
+
+  getSelectedDates(selectedDaysRange) {
+    const chartDatesField = document.querySelector(
+      `[data-filtered-data-chart="${selectedDaysRange}"]`,
+    )
+
+    if (chartDatesField) {
+      const dates = chartDatesField.value.split(';')
+      return dates
+    }
+
+    return []
+  }
+
+  getSelectedDate(selectedDaysRange) {
+    const averageField = document.querySelector(
+      `[data-filtered-data-chart="${selectedDaysRange}"][name="ambient_humidity-average"]`,
+    )
+
+    if (averageField) {
+      return Number(averageField.value)
+    }
+
+    return 0
   }
 }
 
-window.addEventListener('load', () => new AmbientHumidityChartOptions())
+window.addEventListener('load', () => new AmbientHumidityChart())

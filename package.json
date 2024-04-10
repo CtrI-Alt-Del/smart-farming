@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev:app": "flask --app ./src/app/main.py:init_app run --debug -p 5007",
+    "dev:app": "flask --app ./src/app/main.py:init_app run --debug -p 5003",
     "dev:style": "tailwindcss -i ./src/ui/static/styles/global.css -o ./src/ui/static/build/styles/global.css --watch",
     "dev": "concurrently 'npm run dev:app' 'npm run dev:style'"
   },

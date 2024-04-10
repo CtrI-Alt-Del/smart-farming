@@ -4,47 +4,49 @@
 
 {% include "/layouts/dashboard/index.html" %}
 
-{% for days in [150, 300, 450] %}
+{% for days in [7, 30, 90] %}
+
+<div>
+
 <input
   type="text"
-  data-chart-data="{{ days }} days"
+  data-filtered-data-chart="{{ days }} days"
   value="
     {{ 
-      chart_data['{} days'.format(days)]
-      | map(attribute='ambient_humidity') 
+      charts_filtered_data['{} days'.format(days)]['records']
+      | map(attribute='date') 
       | join(';') 
     }}"
   hidden>
+
+{% for attribute in ["ambient_humidity", "soil_humidity", "temperature", "water_volume"] %}
+
 <input
   type="text"
-  data-chart-data="{{ days }} days"
+  data-filtered-data-chart="{{ days }} days"
+  name="{{ attribute }}-average"
   value="
     {{ 
-      chart_data['{} days'.format(days)]
-      | map(attribute='soil_humidity') 
-      | join(';') 
+      charts_filtered_data['{} days'.format(days)]['average']
     }}"
   hidden>
-  <input
+  
+<input
   type="text"
-  data-chart-data="{{ days }} days"
+  data-filtered-data-chart="{{ days }} days"
+  name="{{ attribute }}"
   value="
     {{ 
-      chart_data['{} days'.format(days)]
-      | map(attribute='temperature') 
+      charts_filtered_data['{} days'.format(days)]['records']
+      | map(attribute=attribute) 
       | join(';') 
     }}"
   hidden>
-  <input
-  type="text"
-  data-chart-data="{{ days }} days"
-  value="
-    {{ 
-      chart_data['{} days'.format(days)]
-      | map(attribute='water_volume') 
-      | join(';') 
-    }}"
-  hidden>
+
+{% endfor %}
+  
+</div>
+
 {% endfor %}
 
 <div class="grid grid-cols-2 pt-5 pb-5 gap-9 dashboard">

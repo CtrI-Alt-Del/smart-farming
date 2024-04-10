@@ -1,5 +1,7 @@
+from typing import List, Dict
+
 from core.entities.sensors_record import SensorsRecord
-from typing import List
+
 from infra.database import mysql
 
 
@@ -20,19 +22,28 @@ class SensorRecordsRepository:
             ],
         )
 
-    def get_sensor_records(self) -> List[SensorsRecord]:
-        select_query = "SELECT * FROM sensors_records"
-        rows = mysql.query(sql=select_query, is_single=False)
-        sensors_records = []
+    def get_sensor_records_average_by_date(self) -> List[SensorsRecord]:
+        sql = """
+        SELECT 
+            DATE(created_at) AS date, 
+            ROUND(AVG(soil_humidity), 1) AS soil_humidity,
+            ROUND(AVG(ambient_humidity), 1) AS ambient_humidity,
+            ROUND(AVG(temperature), 1) AS temperature,
+            ROUND(AVG(water_volume), 1) AS water_volume
+        FROM sensors_records
+        GROUP BY DATE(created_at)
+        ORDER BY DATE(created_at) ASC
+        LIMIT 500;
+        """
+        rows = mysql.query(sql=sql, is_single=False)
 
-        for row in rows:
-            sensors_records.append(
-                SensorsRecord(
-                    ambient_humidity=row["ambient_humidity"],
-                    soil_humidity=row["soil_humidity"],
-                    temperature=row["temperature"],
-                    water_volume=row["water_volume"],
-                    created_at=row["created_at"],
-                )
-            )
-        return sensors_records
+        return rows
+
+    def __get_sensors_record(self, row: Dict) -> SensorsRecord:
+        return SensorsRecord(
+            ambient_humidity=row["ambient_humidity"],
+            soil_humidity=row["soil_humidity"],
+            temperature=row["temperature"],
+            water_volume=row["water_volume"],
+            created_at=row["created_at"],
+        )
