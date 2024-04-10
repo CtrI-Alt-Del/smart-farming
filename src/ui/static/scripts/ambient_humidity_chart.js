@@ -16,8 +16,6 @@ class AmbientHumidityChart {
       const chart = new ApexCharts(
         container,
         this.getChartOptions(initialData, initialDates),
-        (this.averageValue.innerHTML =
-          this.getAverageData(initialData).toFixed(2)),
       )
 
       chart.render()
@@ -29,15 +27,6 @@ class AmbientHumidityChart {
       )
 
       this.updateAverageValue(initialAverage)
-    }
-  }
-
-  getAverageData(data) {
-    let mediaArr = 0
-    for (let i = 0; i < data.length; i++) {
-      mediaArr += data[i]
-
-      return mediaArr / data.length
     }
   }
 
@@ -169,6 +158,8 @@ class AmbientHumidityChart {
 
   updateAverageValue(value) {
     const average = document.querySelector('[data-ambient-humidity-chart="average"]')
+
+    console.log({average})
 
     if (average) {
       average.textContent = `${value}%`
