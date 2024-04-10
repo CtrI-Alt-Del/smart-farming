@@ -1,7 +1,7 @@
 {% from "components/logo.html" import logo %}
 
 {% set link_class =
-"flex justify-content gap-2 items-center w-[270px] px-2 py-2 bg-[#F3F3F3] rounded-md text-[#404040] transition-all duration-200 text-lg "
+"flex justify-content gap-2 items-center w-[270px] px-2 py-2 bg-[#F3F3F3] rounded-md text-[#404040] transition-all duration-200 text-md font-semibold"
 %}
 
 <div
@@ -12,29 +12,31 @@
   <ul class="flex flex-col items-center justify-center gap-5">
     <li>
       <a
-        href="#"
-        class="{{ link_class }} hover:bg-yellow-default">
+        href="{{ url_for('sensors_records_views.last_sensors_record_page_view') }}"
+        class="{{ link_class }} bg-green-100 hover:bg-yellow-default">
         <i class="ph ph-cash-register"></i>
         Último Registro
       </a>
     </li>
     <li>
       <a
-        href="#"
+        href="{{ url_for('sensors_records_views.sensors_records_dashboard_page_view') }}"
         class="{{ link_class }} hover:bg-green-default">
         <i class="ph ph-cell-signal-high scale-[1.4]"></i>
-        Gráficos dos Sensores
+        Sensores
       </a>
     </li>
     <li>
-      <a href="#"
+      <a
+        href="{{ url_for('checklist_records_views.checklist_records_dashboard_page_view') }}"
         class="{{ link_class }} hover:bg-green-default">
         <i class="ph ph-table scale-[1.3]"></i>
-        Gráficos do Checklist
+        Checklist
       </a>
     </li>
     <li>
-      <a href="#"
+      <a
+        href="{{ url_for('plants_views.plants_page_view') }}"
         class="{{ link_class }} hover:bg-green-default">
         <i class="ph ph-plant"></i>
         Plantas
