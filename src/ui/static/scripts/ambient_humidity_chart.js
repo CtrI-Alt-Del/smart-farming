@@ -31,6 +31,15 @@ class AmbientHumidityChart {
     }
   }
 
+  handleAmbientData(data) {
+    let mediaArr = 0
+    for (let i = 0; i < data.length; i++) {
+      mediaArr += data[i]
+
+      return mediaArr / data.length
+    }
+  }
+
   getChartOptions(data, dates) {
     return {
       chart: {
