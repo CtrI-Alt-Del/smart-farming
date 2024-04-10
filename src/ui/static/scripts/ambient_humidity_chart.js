@@ -159,7 +159,6 @@ class AmbientHumidityChart {
   updateAverageValue(value) {
     const average = document.querySelector('[data-ambient-humidity-chart="average"]')
 
-
     if (average) {
       average.textContent = `${value}%`
     }
