@@ -166,3 +166,5 @@ class AmbientHumidityChart {
 }
 
 window.addEventListener('load', () => new AmbientHumidityChart())
+
+
