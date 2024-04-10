@@ -159,7 +159,6 @@ class AmbientHumidityChart {
   updateAverageValue(value) {
     const average = document.querySelector('[data-ambient-humidity-chart="average"]')
 
-    console.log({average})
 
     if (average) {
       average.textContent = `${value}%`
@@ -168,3 +167,5 @@ class AmbientHumidityChart {
 }
 
 window.addEventListener('load', () => new AmbientHumidityChart())
+
+
