@@ -31,16 +31,16 @@ class CreateCheckListRecordsByCsvFile:
             record_time = record["Hora"]
 
             yield CheckListRecord(
-                soil_ph=["ph do solo"],
-                soil_humidity=["umidade do solo"],
-                water_consumption=["consumo de água"],
-                air_humidity=["umidade do ar"],
-                temperature=["temperatura"],
-                illuminance=["iluminância"],
-                lai=["lai"],
-                leaf_apperance=["aparência da folha"],
-                leaf_color=["cor da folha"],
-                plantation_type=["tipo da plantação"],
+                soil_ph=record["ph do solo"],
+                soil_humidity=record["umidade do solo"],
+                water_consumption=record["consumo de água"],
+                air_humidity=record["umidade do ar"],
+                temperature=record["temperatura"],
+                illuminance=record["iluminância"],
+                lai=record["lai"],
+                leaf_apperance=record["aparência da folha"],
+                leaf_color=record["cor da folha"],
+                plantation_type=record["tipo da plantação"],
                 fertiliziation_date=datetime(
                     day=record_date.day,
                     month=record_date.month,
@@ -52,6 +52,6 @@ class CreateCheckListRecordsByCsvFile:
                     year=record_date.year,
                     hour=record_time.hour,
                     minute=record_time.minute,
-                    report=["relatório"],
                 ),
+                report=record["relatório"]
             )

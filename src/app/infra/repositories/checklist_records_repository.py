@@ -1,5 +1,5 @@
 from core.entities.checklist_record import CheckListRecord
-
+from typing import List
 from infra.database import mysql
 
 
@@ -28,24 +28,28 @@ class CheckListRecordsRepository:
 
         mysql.mutate(sql, params)
 
-    def get_checklist_records(self):
-        query = "SELECT * FROM checklist_record"
-        result = mysql.query(sql=query)
+    def get_checklist_records(self) -> List[CheckListRecord]:
+        select_query = "SELECT * FROM checklist_records"
+        rows = mysql.query(sql=select_query, is_single=False)
+        checklist_records = []
 
-        checklist_record = CheckListRecord(
-            id=result["id"],
-            soil_ph=["soil_ph"],
-            soil_humidity=["soil_humidity"],
-            water_consumption=["water_consumption"],
-            air_humidity=["air_humidity"],
-            temperature=["temperature"],
-            illuminance=["illuminance"],
-            lai=["lai"],
-            leaf_apperance=["leaf_apperance"],
-            leaf_color=["leaf_color"],
-            plantation_type=["plantation_type"],
-            fertiliziation_date=["fertiliziation_date"],
-            harvested_at=["harvested_at"],
-            report=["report"],
-        )
-        return checklist_record
+        for row in rows:
+            checklist_records.append(
+                CheckListRecord(
+                    id=row["id"],
+                    soil_ph=row["soil_ph"],
+                    soil_humidity=row["soil_humidity"],
+                    water_consumption=row["water_consumption"],
+                    air_humidity=row["air_humidity"],
+                    temperature=row["temperature"],
+                    illuminance=row["illuminance"],
+                    lai=row["lai"],
+                    leaf_apperance=row["leaf_apperance"],
+                    leaf_color=row["leaf_color"],
+                    plantation_type=row["plantation_type"],
+                    fertiliziation_date=row["fertiliziation_date"],
+                    harvested_at=row["harvested_at"],
+                    report=row["report"],
+                )   
+            )
+        return checklist_records

@@ -1,9 +1,12 @@
-from datetime import timedelta
-from infra.repositories import sensors_records_repository
 
+from datetime import timedelta
+
+from infra.repositories import sensors_records_repository
+from core.commons.chart_filter import ChartFilter
 
 class GetSensorDashboardPageData:
     def execute(self):
+      
         sensor_records_average_by_date = (
             sensors_records_repository.get_sensor_records_average_by_date()
         )
@@ -70,3 +73,4 @@ class GetSensorDashboardPageData:
             average[attribute] += value / sensors_records_count
 
         return average
+
