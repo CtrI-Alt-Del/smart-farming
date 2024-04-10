@@ -16,6 +16,8 @@ class AmbientHumidityChart {
       const chart = new ApexCharts(
         container,
         this.getChartOptions(initialData, initialDates),
+        (this.averageValue.innerHTML =
+          this.getAverageData(initialData).toFixed(2)),
       )
 
       chart.render()
@@ -30,7 +32,7 @@ class AmbientHumidityChart {
     }
   }
 
-  handleAmbientData(data) {
+  getAverageData(data) {
     let mediaArr = 0
     for (let i = 0; i < data.length; i++) {
       mediaArr += data[i]
@@ -69,8 +71,8 @@ class AmbientHumidityChart {
           show: false,
         },
         y: {
-          show: true
-        }
+          show: true,
+        },
       },
       fill: {
         type: 'gradient',
@@ -126,9 +128,9 @@ class AmbientHumidityChart {
           formatter: (value) => {
             return `${value}%`
           },
-        }
+        },
       },
-    };
+    }
   }
 
   getSelectedData(selectedDaysRange) {
