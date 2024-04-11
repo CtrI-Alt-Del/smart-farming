@@ -8,26 +8,16 @@
                 Temperatura
             </h5>
         </div>
-        <div
-            class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center">
-            12%
-            <svg
-                class="w-3 h-3 ms-1"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 10 14">
-                <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13V1m0 0L1 5m4-4 4 4" />
-            </svg>
+        <p>
+            Média:
+            <span
+                data-temperature-chart="average"
+                class="font-bold">
+                0%
+            </span>
+        </p>
         </div>
-    </div>
-    <div id="temperature_chart">
-    </div>
+    <div data-temperature-chart="container"></div>
     <div
         class="grid items-center justify-between grid-cols-1 border-t border-gray-200 dark:border-gray-700">
         <div class="flex items-center justify-between pt-5">
@@ -36,12 +26,11 @@
                     for="days"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Período</label>
                 <select
-                    id="days"
+                    data-temperature-chart="select"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option selected>Escolha um período</option>
-                    <option value>7 dias</option>
-                    <option value>30 dias</option>
-                    <option value>90 dias</option>
+                    <option value="7 days">7 dias</option>
+                    <option value="30 days">30 dias</option>
+                    <option value="90 days">90 dias</option>
                 </select>
             </form>
         </div>

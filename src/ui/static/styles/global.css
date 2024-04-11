@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 .dashboard {
-    padding-left: 340px;
+    padding-left: 370px;
     padding-right: 40px;
 }
-
