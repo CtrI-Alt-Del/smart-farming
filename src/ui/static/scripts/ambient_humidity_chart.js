@@ -8,13 +8,10 @@ class AmbientHumidityChart {
       '[data-ambient-humidity-chart="select"]',
     )
 
-    const averageValue = document.querySelector(
-      '[name="{{ attribute }}-average"]'
-    )
-
     if (container && select && typeof ApexCharts !== 'undefined') {
-      const initialData = this.getSelectedData("7 days")
-      const initialDates = this.getSelectedDates("7 days")
+      const initialData = this.getSelectedData('7 days')
+      const initialDates = this.getSelectedDates('7 days')
+      const initialAverage = this.getAverage('7 days')
 
       const chart = new ApexCharts(
         container,
@@ -28,16 +25,20 @@ class AmbientHumidityChart {
       select.addEventListener('change', (event) =>
         this.handleSelectChange(event),
       )
+
+      this.updateAverageValue(initialAverage)
     }
   }
 
-  handleAmbientData(data) {
-    let mediaArr = 0
-    for (let i = 0; i < data.length; i++) {
-      mediaArr += data[i]
+  handleSelectChange(event) {
+    const selectedValue = event.currentTarget.value
 
-      return mediaArr / data.length
-    }
+    const data = this.getSelectedData(selectedValue)
+    const dates = this.getSelectedDates(selectedValue)
+    const average = this.getAverage(selectedValue)
+
+    this.chart.updateOptions(this.getChartOptions(data, dates))
+    this.updateAverageValue(average)
   }
 
   getChartOptions(data, dates) {
@@ -59,8 +60,8 @@ class AmbientHumidityChart {
           show: false,
         },
         y: {
-          show: true
-        }
+          show: true,
+        },
       },
       fill: {
         type: 'gradient',
@@ -116,18 +117,9 @@ class AmbientHumidityChart {
           formatter: (value) => {
             return `${value}%`
           },
-        }
+        },
       },
-    };
-  }
-
-  handleSelectChange(event) {
-    const selectedValue = event.currentTarget.value
-
-    const data = this.getSelectedData(selectedValue)
-    const dates = this.getSelectedDates(selectedValue)
-
-    this.chart.updateOptions(this.getChartOptions(data, dates))
+    }
   }
 
   getSelectedData(selectedDaysRange) {
@@ -156,17 +148,25 @@ class AmbientHumidityChart {
     return []
   }
 
-  getSelectedDate(selectedDaysRange) {
-    const averageField = document.querySelector(
-      `[data-filtered-data-chart="${selectedDaysRange}"][name="ambient_humidity-average"]`,
+  getAverage(selectedDaysRange) {
+    const averageValue = document.querySelector(
+      `[data-filtered-data-chart="${selectedDaysRange}"][name="ambient_humidity_average"]`,
     )
 
-    if (averageField) {
-      return Number(averageField.value)
-    }
+    return averageValue.value
+  }
 
-    return 0
+  updateAverageValue(value) {
+    const average = document.querySelector(
+      '[data-ambient-humidity-chart="average"]',
+    )
+
+    if (average) {
+      average.textContent = `${value}%`
+    }
   }
 }
 
 window.addEventListener('load', () => new AmbientHumidityChart())
+
+

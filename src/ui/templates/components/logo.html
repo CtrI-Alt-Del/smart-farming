@@ -1,5 +1,9 @@
 {% macro logo() %}
 
-<img src="{{url_for('static', filename='/images/logo.svg')}}" alt="smart farming">
+<img
+  src="{{url_for('static', filename='/images/logo.svg')}}"
+  class="h-24"
+  alt="smart farming"
+  loading="eager">
 
 {% endmacro %}

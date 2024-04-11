@@ -1,4 +1,4 @@
--- Active: 1712574492835@@127.0.0.1@3306@smart-farming
+-- Active: 1712258180714@@127.0.0.1@3306@smart-farming
 CREATE TABLE user (
   id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
   email VARCHAR(320) NOT NULL,
