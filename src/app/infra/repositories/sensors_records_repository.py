@@ -22,7 +22,7 @@ class SensorRecordsRepository:
             ],
         )
 
-    def get_sensor_records_average_by_date(self) -> List[SensorsRecord]:
+    def get_sensor_records_grouped_by_date(self) -> List[SensorsRecord]:
         sql = """
         SELECT 
             DATE(created_at) AS date, 

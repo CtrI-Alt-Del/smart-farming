@@ -8,12 +8,12 @@ class WaterVolumeChart {
       '[data-water-volume-chart="select"]',
     )
 
-  
+
 
     if (container && select && typeof ApexCharts !== 'undefined') {
       const initialData = this.getSelectedData("7 days")
       const initialDates = this.getSelectedDates("7 days")
-      const initialAverage=this.getAverage("7 days")
+      const initialAverage = this.getAverage("7 days")
 
       const chart = new ApexCharts(
         container,
@@ -122,7 +122,7 @@ class WaterVolumeChart {
     };
   }
 
-  
+
 
   getSelectedData(selectedDaysRange) {
     const chartDataField = document.querySelector(
@@ -165,7 +165,7 @@ class WaterVolumeChart {
       average.textContent = `${value}mL`
     }
   }
-  
+
 }
 
 window.addEventListener('load', () => new WaterVolumeChart())

@@ -9,9 +9,9 @@ class SoilHumidityChart {
     )
 
     if (container && select && typeof ApexCharts !== 'undefined') {
-      const initialData = this.getSelectedData("7 days")
-      const initialDates = this.getSelectedDates("7 days")
-      const initialAverage = this.getAverage("7 days")
+      const initialData = this.getSelectedData('7 days')
+      const initialDates = this.getSelectedDates('7 days')
+      const initialAverage = this.getAverage('7 days')
 
       const chart = new ApexCharts(
         container,
@@ -40,7 +40,7 @@ class SoilHumidityChart {
     this.chart.updateOptions(this.getChartOptions(data, dates))
     this.updateAverageValue(average)
   }
-  
+
   getChartOptions(data, dates) {
     return {
       chart: {
@@ -68,8 +68,8 @@ class SoilHumidityChart {
         gradient: {
           opacityFrom: 0.55,
           opacityTo: 0,
-          shade: '#1CA576',
-          gradientToColors: ['#1CA576'],
+          shade: '#22C55E',
+          gradientToColors: ['#22C55E'],
         },
       },
       dataLabels: {
@@ -91,7 +91,7 @@ class SoilHumidityChart {
         {
           name: 'Umidade',
           data: data,
-          color: '#1CA576',
+          color: '#22C55E',
         },
       ],
       xaxis: {
@@ -122,13 +122,6 @@ class SoilHumidityChart {
     }
   }
 
-  handleSelectChange(event) {
-    const selectedValue = event.currentTarget.value
-
-    const data = this.getSelectedData(selectedValue)
-    const dates = this.getSelectedDates(selectedValue)
-
-
   getSelectedData(selectedDaysRange) {
     const chartDataField = document.querySelector(
       `[data-filtered-data-chart="${selectedDaysRange}"][name="soil_humidity"]`,
@@ -150,22 +143,23 @@ class SoilHumidityChart {
     if (chartDatesField) {
       const dates = chartDatesField.value.split(';')
       return dates
-    } 
+    }
 
     return []
   }
 
   getAverage(selectedDaysRange) {
     const averageValue = document.querySelector(
-      `[data-filtered-data-chart="${selectedDaysRange}"][name="soil_humidity_average"]`
+      `[data-filtered-data-chart="${selectedDaysRange}"][name="soil_humidity_average"]`,
     )
 
     return averageValue.value
   }
 
   updateAverageValue(value) {
-    const average = document.querySelector('[data-soil-humidity-chart="average"]')
-
+    const average = document.querySelector(
+      '[data-soil-humidity-chart="average"]',
+    )
 
     if (average) {
       average.textContent = `${value}%`
@@ -174,3 +168,5 @@ class SoilHumidityChart {
 }
 
 window.addEventListener('load', () => new SoilHumidityChart())
+
+
