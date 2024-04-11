@@ -1,0 +1,64 @@
+{% extends "layouts/root.html" %} 
+
+{% block body %} 
+
+{% include "/layouts/dashboard/index.html" %}
+
+{% for days in [7, 30, 90] %}
+
+<div>
+
+<input
+  type="text"
+  data-filtered-data-chart="{{ days }} days"
+  value="
+    {{ 
+      charts_filtered_data['{} days'.format(days)]['records']
+      | map(attribute='date') 
+      | join(';') 
+    }}"
+  hidden>
+
+{% for attribute in ["ambient_humidity", "soil_humidity", "temperature", "water_volume"] %}
+
+<input
+  type="text"
+  data-filtered-data-chart="{{ days }} days"
+  name="{{ attribute }}_average"
+  value="
+    {{ 
+      charts_filtered_data['{} days'.format(days)]['average'][attribute]
+    }}"
+  hidden>
+  
+<input
+  type="text"
+  data-filtered-data-chart="{{ days }} days"
+  name="{{ attribute }}"
+  value="
+    {{ 
+      charts_filtered_data['{} days'.format(days)]['records']
+      | map(attribute=attribute) 
+      | join(';') 
+    }}"
+  hidden>
+
+{% endfor %}
+  
+</div>
+
+{% endfor %}
+
+<div class="grid grid-cols-2 pt-5 pb-5 gap-9 dashboard">
+    {% include "/pages/sensors_records_dashboard/ambient_humidity_chart.html" %}
+    {% include "/pages/sensors_records_dashboard/soil_humidity_chart.html" %}
+    {% include "/pages/sensors_records_dashboard/temperature_chart.html" %}
+    {% include "/pages/sensors_records_dashboard/water_volume_chart.html" %}
+</div>
+
+  <script src="{{url_for('static', filename='scripts/ambient_humidity_chart.js')}}"></script>
+  <script src="{{url_for('static', filename='scripts/temperature_chart.js')}}"></script>
+  <script src="{{url_for('static', filename='scripts/water_volume_chart.js')}}"></script>
+  <script src="{{url_for('static', filename='scripts/soil_humidity_chart.js')}}"></script>
+  {% endblock body %}
+</div>
