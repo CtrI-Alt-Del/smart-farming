@@ -12,35 +12,46 @@
   <ul class="flex flex-col items-center justify-center gap-5">
     <li>
       <a
+        data-sidebar-link
+        data-sidebar-slug="index"
         href="{{ url_for('sensors_records_views.last_sensors_record_page_view') }}"
-        class="{{ link_class }} bg-green-100 hover:bg-yellow-default">
+        class="{{ link_class }} hover:bg-yellow-100">
         <i class="ph ph-cash-register"></i>
         Último Registro
       </a>
     </li>
     <li>
       <a
+        data-sidebar-link
+        data-sidebar-slug="sensors_records"
         href="{{ url_for('sensors_records_views.sensors_records_dashboard_page_view') }}"
-        class="{{ link_class }} hover:bg-green-default">
+        class="{{ link_class }} hover:bg-green-100">
         <i class="ph ph-cell-signal-high scale-[1.4]"></i>
         Sensores
       </a>
     </li>
     <li>
       <a
+        data-sidebar-link
+        data-sidebar-slug="checklist_records"
         href="{{ url_for('checklist_records_views.checklist_records_dashboard_page_view') }}"
-        class="{{ link_class }} hover:bg-green-default">
+        class="{{ link_class }} hover:bg-green-100">
         <i class="ph ph-table scale-[1.3]"></i>
         Checklist
       </a>
     </li>
     <li>
       <a
+        data-sidebar-link
+        data-sidebar-slug="plants"
         href="{{ url_for('plants_views.plants_page_view') }}"
-        class="{{ link_class }} hover:bg-green-default">
+        class="{{ link_class }} hover:bg-green-100">
         <i class="ph ph-plant"></i>
         Plantas
       </a>
     </li>
   </ul>
 </div>
+
+<script
+  src="{{url_for('static', filename='scripts/sidebar.js')}}"></script>
