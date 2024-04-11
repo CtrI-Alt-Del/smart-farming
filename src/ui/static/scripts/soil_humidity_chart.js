@@ -4,17 +4,11 @@ class SoilHumidityChart {
       '[data-soil-humidity-chart="container"]',
     )
 
-    const select = document.querySelector(
-      '[data-soil-humidity-chart="select"]',
-    )
-
-    const averageValue = document.querySelector(
-      '[name="{{ attribute }}-average"]'
-    )
+    const select = document.querySelector('[data-soil-humidity-chart="select"]')
 
     if (container && select && typeof ApexCharts !== 'undefined') {
-      const initialData = this.getSelectedData("7 days")
-      const initialDates = this.getSelectedDates("7 days")
+      const initialData = this.getSelectedData('7 days')
+      const initialDates = this.getSelectedDates('7 days')
 
       const chart = new ApexCharts(
         container,
@@ -50,8 +44,8 @@ class SoilHumidityChart {
           show: false,
         },
         y: {
-          show: true
-        }
+          show: true,
+        },
       },
       fill: {
         type: 'gradient',
@@ -107,9 +101,9 @@ class SoilHumidityChart {
           formatter: (value) => {
             return `${value}%`
           },
-        }
+        },
       },
-    };
+    }
   }
 
   handleSelectChange(event) {
