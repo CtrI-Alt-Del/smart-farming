@@ -8,13 +8,10 @@ class TemperatureChart{
       '[data-temperature-chart="select"]',
     )
 
-    const averageValue = document.querySelector(
-      '[name="{{ attribute }}-average"]'
-    )
-
     if (container && select && typeof ApexCharts !== 'undefined') {
       const initialData = this.getSelectedData("7 days")
       const initialDates = this.getSelectedDates("7 days")
+      const initialAverage = this.getAverage("7 days")
 
       const chart = new ApexCharts(
         container,
@@ -28,7 +25,18 @@ class TemperatureChart{
       select.addEventListener('change', (event) =>
         this.handleSelectChange(event),
       )
+      this.updateAverageValue(initialAverage)
     }
+  }
+  handleSelectChange(event) {
+    const selectedValue = event.currentTarget.value
+
+    const data = this.getSelectedData(selectedValue)
+    const dates = this.getSelectedDates(selectedValue)
+    const average = this.getAverage(selectedValue)
+
+    this.chart.updateOptions(this.getChartOptions(data, dates))
+    this.updateAverageValue(average)
   }
 
   getChartOptions(data, dates) {
@@ -112,14 +120,7 @@ class TemperatureChart{
     };
   }
 
-  handleSelectChange(event) {
-    const selectedValue = event.currentTarget.value
-
-    const data = this.getSelectedData(selectedValue)
-    const dates = this.getSelectedDates(selectedValue)
-
-    this.chart.updateOptions(this.getChartOptions(data, dates))
-  }
+  
 
   getSelectedData(selectedDaysRange) {
     const chartDataField = document.querySelector(
@@ -147,16 +148,21 @@ class TemperatureChart{
     return []
   }
 
-  getSelectedDate(selectedDaysRange) {
-    const averageField = document.querySelector(
-      `[data-filtered-data-chart="${selectedDaysRange}"][name="temperature-average"]`,
+  getAverage(selectedDaysRange) {
+    const averageValue = document.querySelector(
+      `[data-filtered-data-chart="${selectedDaysRange}"][name="temperature_average"]`
     )
 
-    if (averageField) {
-      return Number(averageField.value)
-    }
+    return averageValue.value
+  }
 
-    return 0
+  updateAverageValue(value) {
+    const average = document.querySelector('[data-temperature-chart="average"]')
+
+
+    if (average) {
+      average.textContent = `${value}ºC`
+    }
   }
 }
 
