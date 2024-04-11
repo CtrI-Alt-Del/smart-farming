@@ -3,6 +3,68 @@
 
 Smart Farming é um **dashboard web** que visa facilitar o trabalho de monitoramento da estufa inteligente de mesmo nome mantida dentro da [FATEC de São José dos Campos](https://fatecsjc-prd.azurewebsites.net/). 
 
+## Tecnologias 🛠️
+<table>
+  <tr>
+    <td align="center" width="96">
+      <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML">
+        <img src="documentation/images/html5.svg" width="48" height="48" alt="HTML" />
+      </a>
+      <span>HTML</span>
+    </td>
+    <td align="center" width="96">
+      <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS">
+        <img src="documentation/images/css3.svg" width="48" height="48" alt="CSS" />
+      </a>
+      <span>CSS</span>
+    </td>
+    <td align="center" width="96">
+      <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">
+        <img src="documentation/images/javascript.svg" width="48" height="48" alt="JavaScript" />
+      </a>
+      <span>JavaScript</span>
+    </td>
+    <td align="center" width="96">
+      <a target="_blank" href="https://tailwindcss.com/">
+        <img src="documentation/images/tailwindcss.jpg" width="48" height="48" alt="TypeScript" />
+      </a>
+      <span>TailwindCSS</span>
+    </td>
+    </td>
+    <td align="center" width="96">
+      <a target="_blank" href="https://www.mysql.com/">
+        <img src="documentation/images/mysql.png" width="48" height="48" alt="MySQL" />
+      </a>
+      <span>MySQL</span>
+    </td>
+    <td align="center" width="96">
+      <a target="_blank" href="https://www.python.org/">
+        <img src="documentation/images/python.svg" width="48" height="48" alt="Python" />
+      </a>
+      <span>Python</span>
+    </td>
+    <td align="center" width="96">
+      <a target="_blank" href="https://flask.palletsprojects.com/en/3.0.x/">
+        <img src="documentation/images/flask.svg" width="48" height="48" alt="Flask"/>
+      </a>
+      <span>Flask</span>
+    </td>
+    <td align="center" width="96">
+      <a target="_blank" href="https://www.docker.com/">
+        <img src="documentation/images/docker.svg" width="48" height="48" alt="Docker" />
+      </a>
+      <span>Docker</span>
+    </td>
+      <td align="center" width="96">
+      <a href="https://www.figma.com/">
+        <img src="documentation/images/figma.svg" width="48" height="48" alt="Figma" />
+      </a>
+      <span>Figma</span>
+    </td>
+  </tr>
+</table>
+
+
 ## Problema do cliente 👔
 
 Atualmente a estufa é monitorada de maneira arcaica utilizando-se primariamente de [arquivos do tipo CSV](https://www.freecodecamp.org/portuguese/news/o-que-e-um-arquivo-csv-e-como-abrir-esse-formato-de-arquivo/) para registrar e armazenar informações a partir dos dados coletados pelos sensores da estufa, assim como as informações obtidas de uma Form's para realizar o check-list, isto é, uma lista de itens que servem para validar os dados obtidos por esses sensores.
