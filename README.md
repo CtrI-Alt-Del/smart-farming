@@ -101,7 +101,7 @@ Para a confecção do produto foi empregado o framework de [Metodologia Ágil Sc
       <td>Edição de registros.</td>
       <td>Como administrador, quero poder editar as informações de um registro usuário para corrigir eventuais erros de cadastro.</td>
       <td>ALTA</td>
-      <td>8</td>
+      <td>5</td>
     </tr>
     <tr>
       <td>Login.</td>
@@ -109,17 +109,49 @@ Para a confecção do produto foi empregado o framework de [Metodologia Ágil Sc
       <td>ALTA</td>
       <td>8</td>
     </tr>
+     <tr>
+      <td>Listagem de plantas.</td>
+      <td>Como mantenedor da estufa, quero poder ver todas as plantas cadastrados no sistema.</td>
+      <td>ALTA</td>
+      <td>2</td>
+    </tr>
+     <tr>
+      <td>Cadastro de plantas.</td>
+      <td>Como administrador, quero poder cadastrar uma planta para que eu possa associá-la a um registro de checklist ou um registro coletado pelos sensores.</td>
+      <td>ALTA</td>
+      <td>2</td>
+    </tr>
+     <tr>
+      <td>Edição de planta.</td>
+      <td>Como administrador, quero poder editar o nome de uma planta para que eu corrija enventuais erros de digitação.</td>
+      <td>ALTA</td>
+      <td>2</td>
+    </tr>
+     <tr>
+      <td>Filtragem de dados nos gráficos dos dados coletados pelos sensores</td>
+      <td>Como mantenedor da estufa, quero poder filtrar
+os dados dos sensores exibidos pelos gráficos para determinados períodos de dias a fim de que eu possa acompanhar a evolução desses valores em diferentes faixas de tempo.</td>
+      <td>MÉDIA</td>
+      <td>5</td>
+    </tr>
+     <tr>
+      <td>Filtragem de dados nos gráficos dos dados de check-list</td>
+      <td>Como mantenedor da estufa, quero poder filtrar
+os dados de checklist exibidos pelos gráficos para determinados períodos de dias a fim de que eu possa acompanhar a evolução desses valores em diferentes faixas de tempo.</td>
+      <td>MÉDIA</td>
+      <td>5</td>
+    </tr>
     <tr>
-      <td>Filtragem de registros</td>
+      <td>Filtragem de registros nas tabelas</td>
       <td>Como mantenedor da estufa, quero pode filtrar registros exibidos nas tabelas por período compreendido entre duas datas.</td>
       <td>MÉDIA</td>
-      <td>8</td>
+      <td>5</td>
     </tr>
     <tr>
       <td>Paginação de registros.</td>
       <td>Como administrador, quero que as tabelas possuem páginas onde cada página tenha no máximo 20 registros a fim de que nem todos os registros cadastrados nos sistema sejam exibidos para mim.</td>
       <td>MÉDIA</td>
-      <td>13</td>
+      <td>3</td>
     </tr>
     <tr>
       <td>Mensagens de alerta.</td>
@@ -134,12 +166,6 @@ Para a confecção do produto foi empregado o framework de [Metodologia Ágil Sc
       <td>13</td>
     </tr>
     <tr>
-      <td>Criptografia de senha.</td>
-      <td>Como administrador, quero poder filtrar os registros de modo que apenas os registros que atendam um determinado período de dias sejam visualizadas em suas respectivas tabelas.</td>
-      <td>MÉDIA</td>
-      <td>2</td>
-    </tr>
-    <tr>
       <td>Responsividade.</td>
       <td>Como mantenedor da estufa, quero que o site seja responsivo para que eu possa usá-lo por qualquer tipo de dispositivo.</td>
       <td>MÉDIA</td>
@@ -149,13 +175,7 @@ Para a confecção do produto foi empregado o framework de [Metodologia Ágil Sc
       <td>Mensagens de erro.</td>
       <td>Como mantenedor da estufa, quero que o sistema exiba mensagens quando alguma ação minha não for realizada com sucesso para que eu tenha consciência de fato que algo ocorreu de errado.</td>
       <td>MÉDIA</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <td>Pré-cadastro de dados dos sensores.</td>
-      <td>Como mantenedor da estufa, quero que o sistema já contenha os dados que eu já tenho para que eu precise apenas inserir dados novos.</td>
-      <td>MÉDIA</td>
-      <td>5</td>
+      <td>3</td>
     </tr>
     <tr>
       <td>Cadastro de planta.</td>
@@ -164,29 +184,47 @@ Para a confecção do produto foi empregado o framework de [Metodologia Ágil Sc
       <td>5</td>
     </tr>
     <tr>
-      <td>Cálculo de médias.</td>
-      <td>Como administrador quero poder cadastrar uma planta para associá-la a um registro referente aos dados coletados pelos sensores para então o mantenedor da estufa saber quais registros são associados a quais plantas.</td>
+      <td>Cálculo de média dos dados coletados pelos sensores.</td>
+      <td></td>
       <td>MÉDIA</td>
-      <td>8</td>
+      <td>5</td>
+    </tr>
+     <tr>
+      <td>Exportação de dados dos registros para arquivo CSV.</td>
+      <td>Como mantenedor da estufa, quero poder exportar os dados dos registros (check-list ou sensores) para um arquivo CSV para que eu possa utilizar essa base de dados para outros fins como migração de dados para outro sistema, por exemplo.</td>
+      <td>BAIXA</td>
+      <td>2</td>
+    </tr>
+     <tr>
+      <td>Backup dos dados de registros.</td>
+      <td>Como mantenedor da estufa, quero que o sistema faça backup dos registros (check-list ou sensores) para que esses valores sejam recuperados em caso de eventual perda.</td>
+      <td>BAIXA</td>
+      <td>3</td>
     </tr>
     <tr>
-      <td>Destaque do último registro.</td>
-      <td>Como mantenedor da estufa, quero visualizar a média de cada dado referente ao registros relacionados aos sensores para eu ter uma visão geral a respeito dessas informações.</td>
-      <td>MÉDIA</td>
-      <td>3</td>
+      <td>Exibição do último registro coletado pelos sensores.</td>
+      <td>Como mantenedor da estufa, quero poder ver o último registro coletado pelos sensores para que eu tenha noção do estado atual da estufa.</td>
+      <td>BAIXA</td>
+      <td>1</td>
     </tr>
     <tr>
       <td>Cadastro de dados coletados pelos sensores via formulário.</td>
       <td>Como mantenedor da estufa, quero poder fazer o cadastro de dados no sistema por meio de um formulário, com o objetivo de fazer o cadastramento de uma forma mais manual caso eu queira.</td>
       <td>BAIXA</td>
-      <td>5</td>
+      <td>2</td>
+    </tr>
+     <tr>
+      <td>Deleção de planta.</td>
+      <td>Como administrador, quero poder deletar uma planta para que ela não fique mais registrada no sistema.</td>
+      <td>BAIXA</td>
+      <td>1</td>
     </tr>
     <tr>
       <td>Persistência de sessão de login.</td>
       <td>Como administrador, quero que o sistema persista minha sessão uma vez após feito o login mesmo que o meu navegador feche para que no próximo dia eu não tenha que fazer o procedimento de login novamente.</td>
       <td>BAIXA</td>
-      <td>2</td>
-      </tr>
+      <td>1</td>
+    </tr>
 </table>
 
 ## Relatório e detalhes de cada Sprint 📅

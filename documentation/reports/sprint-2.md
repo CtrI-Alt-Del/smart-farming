@@ -1,7 +1,5 @@
 # Sprint - 2️⃣
 
-## Requisitos funcionais ✅
-
 - [ ] **Cadastro de dados de check-list via arquivo CSV**
 
 *Contexto:*
@@ -81,30 +79,53 @@
 
 ---
 
-- [ ] **Destaque do último registro.**
+- [ ] **Cadastro de planta**
 
 *História de usuário:*
 
-> Como mantenedor da estufa, quero visualizar os dados do último registro cadastrado referente ao sensores ao abrir o sistema para saber de imediato como está o estado atual da estufa.
+> Como administrador, quero poder cadastrar uma planta para que eu possa associá-la a um registro de checklist ou um registro coletado pelos sensores.
 
 *Critérios de aceitação:*
 
-- Cada capo do último registro deve ser exibido em um widget separadamente.
-- Os dados do último registro deve ser exibidos na página principal do site.
-
+- O cadastro deve ocorrer via formulário contendo os campos:
+  - Nome da planta
+  - Cor para indentificá-la dentro do sistema
 
 ---
 
-- [ ] **Cálculo de médias**
+- [ ] **Edição de planta**
 
 *História de usuário:*
 
-> Como mantenedor da estufa, quero visualizar a média de cada dado referente ao registros relacionados aos sensores para eu ter uma visão geral a respeito dessas informações.
+> Como administrador, quero poder editar o nome de uma planta para que eu corrija enventuais erros de digitação
 
 *Critérios de aceitação:*
 
-- As médias devem ser visualizadas na página do gráfico referente aos dados coletados pelos sensores.
-- Os médias devem refletir o filtro aplicado ao gráfico, ou seja, a média deve ser calculada considerando apenas os registros que correspondem o período de dias selecionado no gráfico.
+- O fomulário de cadastro deve ser reutilizado para fazer a edição.
+
+---
+
+- [ ] **Listagem de plantas**
+
+*História de usuário:*
+
+> Como mantenedor da estufa, quero poder ver todas as plantas cadastrados no sistema.
+
+*Critérios de aceitação:*
+
+- Cada planta de ser mostrado em forma de card, exibindo nome e cor que a identifica no sistema. 
+
+---
+
+- [ ] **Deleção de planta**
+
+*História de usuário:*
+
+> Como administrador, quero poder deletar uma planta para que ela não fique mais registrada no sistema.
+
+*Critérios de aceitação:*
+
+- Ao deletar uma planta todos os registros, seja de checklist ou dos sensores, devem ser deletados também.
 
 ---
 
@@ -128,8 +149,6 @@
 
 ---
 
-## Requisitos não funcionais ☑️
-
 - [ ] **Mensagens de erro**
 
 *História de usuário:*
@@ -139,7 +158,7 @@
 *Critérios de aceitação:*
 
 - O sistema deve exibir mensagens de error referente à má formatação dos dados inseridos pelo usuário nos formulários em cada campo má formatado, assim como exibir uma mensagem de erro na página caso o erro não esteja relacionado a um campo de formulário mas a algum erro interno do sistema.
-- As mensagens deve estar bem destacadas do resto dos elementos da página.
+- As mensagens devem estar bem destacadas do resto dos elementos da página.
 
 ---
 

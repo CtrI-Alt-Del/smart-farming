@@ -15,6 +15,7 @@
 - O sistema deve validar o formato do e-mail e senha fornecidos.
 - A senha deve conter pelos menos 6 caracteres.
 - E-mail deve serguir o formato de e-mail do g-mail.
+- A senha deve ser criptografa utilizando criptografia [BCrypt](https://medium.com/reprogramabr/uma-breve-introdu%C3%A7%C3%A3o-sobre-bcrypt-f2fad91a7420).
 - O sistema deve redirecionar o usuário para a página de login caso ele tente acessar alguma rota protegida
 - O sistema deve adaptar as páginas quando o administrador estiver logado no sistema, como a exibição de um botão para adicionar um registro, por exemplo.
 
@@ -60,6 +61,8 @@
 - Deve haver um campo chamado "Lembre-se de mim" no formulário de login.
 - O administrador deve poder escolher ou não manter sua sessão mesmo que o navegador feche.
 
+---
+
 - [ ] **Responsividade**
 
 *História de usuário:*
@@ -69,6 +72,33 @@
 *Critérios de aceitação:*
 
 - Todas a páginas devem se adaptar de acordo com o tamanho do dispositivo do usuário, tanto de forma visual, quanto comportamental.
+
+---
+
+- [ ] **Exportação de dados dos registros para arquivo CSV**
+
+*História de usuário:*
+
+> Como mantenedor da estufa, quero poder exportar os dados dos registros (check-list ou sensores) para um arquivo CSV para que eu possa utilizar essa base de dados para outros fins como migração de dados para outro sistema, por exemplo.
+
+*Critérios de aceitação:*
+
+- Os registros referente aos sensores deve vir em um arquivo csv separado dos referente ao checklist
+- As colunas do arquivo CSV devem corresponder a do arquivo csv que é utilizado para inserir dados 
+- O arquivo CSV deve conter todos os dados cadastrados no sistema. 
+
+---
+
+- [ ] **Backup dos dados de registros**
+
+*História de usuário:*
+
+> Como mantenedor da estufa, quero que o sistema faça backup dos registros (check-list ou sensores) para que esses valores sejam recuperados em caso de eventual perda.
+
+*Critérios de aceitação:*
+
+- O backup deve ser realizado uma vez por dia à meia-noite.
+- cada arquivo de backup deve ser substituído pelo anterior
 
 ---
 
