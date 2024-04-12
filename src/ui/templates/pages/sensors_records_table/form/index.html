@@ -1,39 +1,29 @@
 {% from "components/logo.html" import logo %}
 
+{% from "components/csv_input.html" import csv_input %}
+
+
 {% set input =
-"p-[15px] bg-[#ffffff] mt-3 w-52 rounded-lg"%}
+"p-4 bg-[#ffffff] mt-3 w-52 rounded-lg"%}
 
 <div
-  class="my-[5vh] h-[calc(95vh-112px)] p-2 border bg-[#ffffff] rounded-[26px] shadow-2xl">
-  <div class="flex flex-col h-auto pt-6 p-[50px] rounded-2xl">
+  class="mt-6 px-12 py-6 border bg-[#ffffff] rounded-md shadow-2xl">
+  <div class="flex flex-col h-auto rounded-2xl">
     <header class="container pb-5">
       <div class="w-60">
         {{ logo() }}
       </div>
     </header>
 
-    <form
-      class="flex items-center justify-center pb-4"
-      action="{{ url_for('sensors_records_views.create_sensors_records_by_csv_view') }}"
-      method="post"
-      enctype="multipart/form-data">
-      <span>Manualmente ou
-        <label for="file_input"
-          class="p-2 m-1 text-white bg-gray-700 cursor-pointer rounded-xl">
-          <i class="ph-bold ph-upload-simple"></i>
-          <span>Importar CSV</span>
-          <input type="file" name="csv" id="file_input" hidden>
-        </span>
-        <button type="submit">
-          <i class="hidden text-xl ph ph-arrow-fat-line-right "
-            id="submit-icon"></i>
-        </button>
-      </span>
-    </form>
+    <div class="flex justify-center items-center gap-1">
+      <span>Manualmente</span> <span>ou</span>
+      {{ csv_input(url=url_for("sensors_records_views.create_sensors_records_by_csv_file_view"), csv_form=csv_form) }}
+    </div>
+    
 
-    <div class="flex flex-col items-center justify-center p-5">
-      <hr class="bg-black my-7 ml-[75px] w-[86%]">
-      <form class="grid grid-cols-3 grid-rows-2 gap-7">
+    <div class="flex flex-col items-center justify-center">
+      <hr class="bg-black w-[75%] h-[0.5px] mt-6">
+      <form class="grid grid-cols-3 gap-6 mt-6">
         <div class="{{input}}">
           <label for="date"
             class="flex items-center justify-start gap-1 mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -89,7 +79,7 @@
             placeholder="20" required />
         </div>
 
-        <div class="{{input}}">
+        <div class="{{ input }}">
           <label for="planta"
             class="flex items-center justify-start gap-1 mb-2 text-sm font-medium text-gray-900 dark:text-white">
             <i class="ph-bold ph-plant"></i>
@@ -105,23 +95,17 @@
     </div>
   </div>
   <div
-    class="flex justify-center items-center space-x-4 pb-2 mx-2 mb-2 ml-[6px] ">
+    class="flex justify-center items-center gap-4 mt-6">
     <button
       type="button"
-      class="w-[100px] focus:outline-none text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-600 font-medium rounded-2xl text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-gray-950">Enviar</button>
+      class="w-24 focus:outline-none text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-600 font-medium rounded-2xl text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-gray-950">Enviar</button>
 
     <button
       type="button"
-      class="w-[100px] focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-600 font-medium rounded-2xl text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-red-950">Cancelar</button>
+      class="w-24 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-600 font-medium rounded-2xl text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-red-950">Cancelar</button>
   </div>
 </div>
 
-<script>
-  document.getElementById('file_input').addEventListener('change', function () {
-    if (this.value) {
-      document.getElementById('submit-icon').classList.remove('hidden');
-    } else {  
-      document.getElementById('submit-icon').classList.add('hidden');
-    }
-  });
+<script src="{{ url_for('static', filename='scripts/csv_input.js') }}">
+  
 </script>
