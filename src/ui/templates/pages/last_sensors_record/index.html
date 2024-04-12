@@ -7,19 +7,19 @@
 
 {% block dashboard_content %}
 
-<div class="flex items-center gap-3 mt-10 border-b-2 border-gray-900 pb-6">
+<div class="flex items-center gap-3 pb-6 mt-10 border-b-2 border-gray-900">
   <h1 class="text-2xl font-bold">Último Registro -</h1>
   {% include "pages/last_sensors_record/datetime.html" %}
 </div>
 
-<div class="grid grid-cols-2 gap-x-10 gap-y-8 mt-12">
+<div class="grid grid-cols-2 mt-12 gap-x-10 gap-y-8">
   {% call card(
   title="Temperatura",
   value="12ºC",
   class="bg-red-50 animate-delay-100")
   %}
   <div class="{{ icon_class }} bg-red-100">
-    <i class="ph-bold ph-thermometer text-red-600"></i>
+    <i class="text-red-600 ph-bold ph-thermometer"></i>
   </div>
   {% endcall %}
 
@@ -30,7 +30,7 @@
   )
   %}
   <div class="{{ icon_class }} bg-blue-100">
-    <i class="ph-bold ph-drop text-blue-600"></i>
+    <i class="text-blue-600 ph-bold ph-drop"></i>
   </div>
   {% endcall %}
 
@@ -40,7 +40,7 @@
   class="bg-green-50 animate-delay-300")
   %}
   <div class="{{ icon_class }} bg-green-100">
-    <i class="ph-bold ph-drop-half-bottom text-green-600"></i>
+    <i class="text-green-600 ph-bold ph-drop-half-bottom"></i>
   </div>
   {% endcall %}
 
@@ -49,7 +49,7 @@
   class="bg-purple-50 animate-delay-300")
   %}
   <div class="{{ icon_class }} bg-purple-100">
-    <i class="ph-bold ph-waves text-purple-600"></i>
+    <i class="text-purple-600 ph-bold ph-waves"></i>
   </div>
   {% endcall %}
 
