@@ -3,6 +3,68 @@
 
 Smart Farming é um **dashboard web** que visa facilitar o trabalho de monitoramento da estufa inteligente de mesmo nome mantida dentro da [FATEC de São José dos Campos](https://fatecsjc-prd.azurewebsites.net/). 
 
+## Tecnologias 🛠️
+<table>
+  <tr>
+    <td align="center" width="96">
+      <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML">
+        <img src="documentation/images/html5.svg" width="48" height="48" alt="HTML" />
+      </a>
+      <span>HTML</span>
+    </td>
+    <td align="center" width="96">
+      <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS">
+        <img src="documentation/images/css3.svg" width="48" height="48" alt="CSS" />
+      </a>
+      <span>CSS</span>
+    </td>
+    <td align="center" width="96">
+      <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">
+        <img src="documentation/images/javascript.svg" width="48" height="48" alt="JavaScript" />
+      </a>
+      <span>JavaScript</span>
+    </td>
+    <td align="center" width="96">
+      <a target="_blank" href="https://tailwindcss.com/">
+        <img src="documentation/images/tailwindcss.jpg" width="48" height="48" alt="TypeScript" />
+      </a>
+      <span>TailwindCSS</span>
+    </td>
+    </td>
+    <td align="center" width="96">
+      <a target="_blank" href="https://www.mysql.com/">
+        <img src="documentation/images/mysql.png" width="48" height="48" alt="MySQL" />
+      </a>
+      <span>MySQL</span>
+    </td>
+    <td align="center" width="96">
+      <a target="_blank" href="https://www.python.org/">
+        <img src="documentation/images/python.svg" width="48" height="48" alt="Python" />
+      </a>
+      <span>Python</span>
+    </td>
+    <td align="center" width="96">
+      <a target="_blank" href="https://flask.palletsprojects.com/en/3.0.x/">
+        <img src="documentation/images/flask.svg" width="48" height="48" alt="Flask"/>
+      </a>
+      <span>Flask</span>
+    </td>
+    <td align="center" width="96">
+      <a target="_blank" href="https://www.docker.com/">
+        <img src="documentation/images/docker.svg" width="48" height="48" alt="Docker" />
+      </a>
+      <span>Docker</span>
+    </td>
+      <td align="center" width="96">
+      <a href="https://www.figma.com/">
+        <img src="documentation/images/figma.svg" width="48" height="48" alt="Figma" />
+      </a>
+      <span>Figma</span>
+    </td>
+  </tr>
+</table>
+
+
 ## Problema do cliente 👔
 
 Atualmente a estufa é monitorada de maneira arcaica utilizando-se primariamente de [arquivos do tipo CSV](https://www.freecodecamp.org/portuguese/news/o-que-e-um-arquivo-csv-e-como-abrir-esse-formato-de-arquivo/) para registrar e armazenar informações a partir dos dados coletados pelos sensores da estufa, assim como as informações obtidas de uma Form's para realizar o check-list, isto é, uma lista de itens que servem para validar os dados obtidos por esses sensores.
@@ -101,7 +163,7 @@ Para a confecção do produto foi empregado o framework de [Metodologia Ágil Sc
       <td>Edição de registros.</td>
       <td>Como administrador, quero poder editar as informações de um registro usuário para corrigir eventuais erros de cadastro.</td>
       <td>ALTA</td>
-      <td>8</td>
+      <td>5</td>
     </tr>
     <tr>
       <td>Login.</td>
@@ -109,17 +171,49 @@ Para a confecção do produto foi empregado o framework de [Metodologia Ágil Sc
       <td>ALTA</td>
       <td>8</td>
     </tr>
+     <tr>
+      <td>Listagem de plantas.</td>
+      <td>Como mantenedor da estufa, quero poder ver todas as plantas cadastrados no sistema.</td>
+      <td>ALTA</td>
+      <td>2</td>
+    </tr>
+     <tr>
+      <td>Cadastro de plantas.</td>
+      <td>Como administrador, quero poder cadastrar uma planta para que eu possa associá-la a um registro de checklist ou um registro coletado pelos sensores.</td>
+      <td>ALTA</td>
+      <td>2</td>
+    </tr>
+     <tr>
+      <td>Edição de planta.</td>
+      <td>Como administrador, quero poder editar o nome de uma planta para que eu corrija enventuais erros de digitação.</td>
+      <td>ALTA</td>
+      <td>2</td>
+    </tr>
+     <tr>
+      <td>Filtragem de dados nos gráficos dos dados coletados pelos sensores</td>
+      <td>Como mantenedor da estufa, quero poder filtrar
+os dados dos sensores exibidos pelos gráficos para determinados períodos de dias a fim de que eu possa acompanhar a evolução desses valores em diferentes faixas de tempo.</td>
+      <td>MÉDIA</td>
+      <td>5</td>
+    </tr>
+     <tr>
+      <td>Filtragem de dados nos gráficos dos dados de check-list</td>
+      <td>Como mantenedor da estufa, quero poder filtrar
+os dados de checklist exibidos pelos gráficos para determinados períodos de dias a fim de que eu possa acompanhar a evolução desses valores em diferentes faixas de tempo.</td>
+      <td>MÉDIA</td>
+      <td>5</td>
+    </tr>
     <tr>
-      <td>Filtragem de registros</td>
+      <td>Filtragem de registros nas tabelas</td>
       <td>Como mantenedor da estufa, quero pode filtrar registros exibidos nas tabelas por período compreendido entre duas datas.</td>
       <td>MÉDIA</td>
-      <td>8</td>
+      <td>5</td>
     </tr>
     <tr>
       <td>Paginação de registros.</td>
       <td>Como administrador, quero que as tabelas possuem páginas onde cada página tenha no máximo 20 registros a fim de que nem todos os registros cadastrados nos sistema sejam exibidos para mim.</td>
       <td>MÉDIA</td>
-      <td>13</td>
+      <td>3</td>
     </tr>
     <tr>
       <td>Mensagens de alerta.</td>
@@ -134,12 +228,6 @@ Para a confecção do produto foi empregado o framework de [Metodologia Ágil Sc
       <td>13</td>
     </tr>
     <tr>
-      <td>Criptografia de senha.</td>
-      <td>Como administrador, quero poder filtrar os registros de modo que apenas os registros que atendam um determinado período de dias sejam visualizadas em suas respectivas tabelas.</td>
-      <td>MÉDIA</td>
-      <td>2</td>
-    </tr>
-    <tr>
       <td>Responsividade.</td>
       <td>Como mantenedor da estufa, quero que o site seja responsivo para que eu possa usá-lo por qualquer tipo de dispositivo.</td>
       <td>MÉDIA</td>
@@ -149,13 +237,7 @@ Para a confecção do produto foi empregado o framework de [Metodologia Ágil Sc
       <td>Mensagens de erro.</td>
       <td>Como mantenedor da estufa, quero que o sistema exiba mensagens quando alguma ação minha não for realizada com sucesso para que eu tenha consciência de fato que algo ocorreu de errado.</td>
       <td>MÉDIA</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <td>Pré-cadastro de dados dos sensores.</td>
-      <td>Como mantenedor da estufa, quero que o sistema já contenha os dados que eu já tenho para que eu precise apenas inserir dados novos.</td>
-      <td>MÉDIA</td>
-      <td>5</td>
+      <td>3</td>
     </tr>
     <tr>
       <td>Cadastro de planta.</td>
@@ -164,29 +246,47 @@ Para a confecção do produto foi empregado o framework de [Metodologia Ágil Sc
       <td>5</td>
     </tr>
     <tr>
-      <td>Cálculo de médias.</td>
-      <td>Como administrador quero poder cadastrar uma planta para associá-la a um registro referente aos dados coletados pelos sensores para então o mantenedor da estufa saber quais registros são associados a quais plantas.</td>
+      <td>Cálculo de média dos dados coletados pelos sensores.</td>
+      <td></td>
       <td>MÉDIA</td>
-      <td>8</td>
+      <td>5</td>
+    </tr>
+     <tr>
+      <td>Exportação de dados dos registros para arquivo CSV.</td>
+      <td>Como mantenedor da estufa, quero poder exportar os dados dos registros (check-list ou sensores) para um arquivo CSV para que eu possa utilizar essa base de dados para outros fins como migração de dados para outro sistema, por exemplo.</td>
+      <td>BAIXA</td>
+      <td>2</td>
+    </tr>
+     <tr>
+      <td>Backup dos dados de registros.</td>
+      <td>Como mantenedor da estufa, quero que o sistema faça backup dos registros (check-list ou sensores) para que esses valores sejam recuperados em caso de eventual perda.</td>
+      <td>BAIXA</td>
+      <td>3</td>
     </tr>
     <tr>
-      <td>Destaque do último registro.</td>
-      <td>Como mantenedor da estufa, quero visualizar a média de cada dado referente ao registros relacionados aos sensores para eu ter uma visão geral a respeito dessas informações.</td>
-      <td>MÉDIA</td>
-      <td>3</td>
+      <td>Exibição do último registro coletado pelos sensores.</td>
+      <td>Como mantenedor da estufa, quero poder ver o último registro coletado pelos sensores para que eu tenha noção do estado atual da estufa.</td>
+      <td>BAIXA</td>
+      <td>1</td>
     </tr>
     <tr>
       <td>Cadastro de dados coletados pelos sensores via formulário.</td>
       <td>Como mantenedor da estufa, quero poder fazer o cadastro de dados no sistema por meio de um formulário, com o objetivo de fazer o cadastramento de uma forma mais manual caso eu queira.</td>
       <td>BAIXA</td>
-      <td>5</td>
+      <td>2</td>
+    </tr>
+     <tr>
+      <td>Deleção de planta.</td>
+      <td>Como administrador, quero poder deletar uma planta para que ela não fique mais registrada no sistema.</td>
+      <td>BAIXA</td>
+      <td>1</td>
     </tr>
     <tr>
       <td>Persistência de sessão de login.</td>
       <td>Como administrador, quero que o sistema persista minha sessão uma vez após feito o login mesmo que o meu navegador feche para que no próximo dia eu não tenha que fazer o procedimento de login novamente.</td>
       <td>BAIXA</td>
-      <td>2</td>
-      </tr>
+      <td>1</td>
+    </tr>
 </table>
 
 ## Relatório e detalhes de cada Sprint 📅
@@ -198,6 +298,65 @@ Para a confecção do produto foi empregado o framework de [Metodologia Ágil Sc
 - Sprint 3: [Acessar](https://github.com/CtrI-Alt-Del/smart-farming/blob/main/documentation/reports/sprint-3.md)
 
 - Sprint 4: [Acessar](https://github.com/CtrI-Alt-Del/smart-farming/blob/main/documentation/reports/sprint-4.md)
+
+## Como usar a aplicação? 🚀
+
+### 🔧 Pré requisitos
+
+- [Python3](https://www.python.org/downloads/), Ja que é toda fundação do nosso projeto!
+- [npm](https://nodejs.org/en), [yarn](https://nodejs.org/en) ou [pnpm](https://pnpm.io/pt/) (Eu usarei npm) para instalar pacotes necessários.
+- [Docker](https://www.docker.com/) a incrivel tecnologia de gerenciar [containers](https://www.docker.com/resources/what-container/).
+- [Git](https://git-scm.com/book/pt-br/v2/Come%C3%A7ando-Instalando-o-Git) Para você conseguir clonar nosso repositório.
+- [VSCode](https://code.visualstudio.com/), pois as extensões são necessárias para a execução do projeto
+
+> Também é crucial definir as variáveis de ambiente no arquivo .env antes de executar a aplicação. Veja o arquivo [.env.example](https://github.com/CtrI-Alt-Del/smart-farming/blob/main/.env.example) para saber quais variáveis devem ser definidas
+
+### Usando a aplicação 📟
+
+```bash
+
+# Clone esse repositório
+$ git clone https://github.com/CtrI-Alt-Del/smart-farming.git.
+
+# Abra a pasta do arquivo
+$ cd /path/to/my/smart-farming
+
+# Execute o docker
+$ docker compose up
+
+# Abra o arquivo com o VSCode
+$ code .
+```
+- Baixe a extensão [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python) do VSCode 
+- Baixe a extensão [Database Client](https://marketplace.visualstudio.com/items?itemName=cweijan.vscode-database-client2) do Vscode 
+- Abra a extensao Database Client no VSCode e insira os dados da sua rede
+- Abra o arquivo [sensors_records.sql](src/app/infra/database/scripts/sensors_records.sql)
+- Ative a conexão (clique no simbolo do cadeado)
+- Execute a tabela sensors_records
+
+
+```bash
+
+# Crie seu ambiente virtual Flask
+$ python -m venv /path/to/new/virtual/environment
+
+# Execute seu ambiente virtual
+$ c:\>Python35\python -m venv c:\path\to\myenv
+
+# Instale as dependências
+$ pip install -r requirements.txt
+
+# Instale as dependências node
+$ npm install
+
+# Execute a aplicação em um ambiente de desenvolvimento
+$ npm run dev
+```
+
+> Provavelmente a aplicação estará sendo executada em http://127.0.0.1:5000
+
+
+
 
 ## Time de Desenvolvimento 👷🏻
 

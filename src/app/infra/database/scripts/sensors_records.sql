@@ -2,17 +2,8 @@
 
 DROP TABLE IF EXISTS sensors_records;
 
-CREATE TABLE sensors_records (
-  id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
-  soil_humidity INT NOT NULL,
-  ambient_humidity INT NOT NULL,
-  temperature DECIMAL(10, 2) NOT NULL,
-  water_volume DECIMAL(10, 2) NOT NULL,
-  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-
 SELECT * FROM sensors_records ORDER BY created_at ASC
-LIMIT 20000;
+LIMIT 30000;
 
 SELECT 
   DATE(created_at) AS date, 
@@ -23,5 +14,13 @@ SELECT
 FROM sensors_records
 GROUP BY DATE(created_at)
 ORDER BY DATE(created_at) ASC
-LIMIT 7;
 LIMIT 20000;
+
+
+SELECT 
+  soil_humidity, ambient_humidity, temperature, water_volume, created_at
+FROM sensors_records
+ORDER BY created_at DESC
+LIMIT 1;
+
+DELETE FROM sensors_records;
