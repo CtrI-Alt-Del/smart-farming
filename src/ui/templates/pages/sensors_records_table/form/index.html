@@ -1,5 +1,8 @@
 {% from "components/logo.html" import logo %}
 
+{% from "components/csv_input.html" import csv_input %}
+
+
 {% set input =
 "p-4 bg-[#ffffff] mt-3 w-52 rounded-lg"%}
 
@@ -12,30 +15,11 @@
       </div>
     </header>
 
-    <form
-      class="flex items-center justify-center"
-      action="{{ url_for('sensors_records_views.create_sensors_records_by_csv_file_view') }}"
-      method="post"
-      enctype="multipart/form-data">
-      {{ csv_form.csrf_token }}
-
-      <span>Manualmente ou
-        <label for="file_input"
-          class="p-2 m-1 text-white bg-gray-700 cursor-pointer rounded-xl">
-          <i class="ph-bold ph-upload-simple"></i>
-          <span>Importar CSV</span>
-          <input type="file" name="csv" id="file_input" hidden>
-        </span>
-        <button type="submit">
-          <div
-            id="submit-icon"
-            class="hidden items-center animate-fade-right">
-            <i class="text-xl ph ph-arrow-fat-line-right"></i>
-            <span>Enviar arquivo</span>
-          </div>
-        </button>
-      </span>
-    </form>
+    <div class="flex justify-center items-center gap-1">
+      <span>Manualmente</span> <span>ou</span>
+      {{ csv_input(url=url_for("sensors_records_views.create_sensors_records_by_csv_file_view"), csv_form=csv_form) }}
+    </div>
+    
 
     <div class="flex flex-col items-center justify-center">
       <hr class="bg-black w-[75%] h-[0.5px] mt-6">
@@ -122,14 +106,6 @@
   </div>
 </div>
 
-<script>
-  document.getElementById('file_input').addEventListener('change', function () {
-    if (this.value) {
-      document.getElementById('submit-icon').classList.remove('hidden')
-      document.getElementById('submit-icon').classList.add('flex')
-    } else {  
-      document.getElementById('submit-icon').classList.add('hidden')
-      document.getElementById('submit-icon').classList.remove('flex')
-    }
-  });
+<script src="{{ url_for('static', filename='scripts/csv_input.js') }}">
+  
 </script>

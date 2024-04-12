@@ -1,0 +1,28 @@
+{% macro csv_input(url, csv_form) %}
+
+    <form
+      class="flex items-center justify-center"
+      action="{{ url }}"
+      method="post"
+      enctype="multipart/form-data">
+      {{ csv_form.csrf_token }}
+
+      <span>
+        <label for="file_input"
+          class="p-2 m-1 text-white bg-gray-700 cursor-pointer rounded-xl">
+          <i class="ph-bold ph-upload-simple"></i>
+          <span>Importar CSV</span>
+          <input type="file" name="csv" id="file_input" hidden>
+        </span>
+        <button type="submit">
+          <div
+            id="submit-icon"
+            class="hidden items-center animate-fade-right">
+            <i class="text-xl ph ph-arrow-fat-line-right"></i>
+            <span>Enviar arquivo</span>
+          </div>
+        </button>
+      </span>
+    </form>
+
+{%- endmacro %}
