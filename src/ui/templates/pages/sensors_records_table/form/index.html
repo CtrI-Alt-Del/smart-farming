@@ -14,9 +14,11 @@
 
     <form
       class="flex items-center justify-center"
-      action="{{ url_for('sensors_records_views.create_sensors_records_by_csv_view') }}"
+      action="{{ url_for('sensors_records_views.create_sensors_records_by_csv_file_view') }}"
       method="post"
       enctype="multipart/form-data">
+      {{ csv_form.csrf_token }}
+
       <span>Manualmente ou
         <label for="file_input"
           class="p-2 m-1 text-white bg-gray-700 cursor-pointer rounded-xl">
@@ -25,8 +27,12 @@
           <input type="file" name="csv" id="file_input" hidden>
         </span>
         <button type="submit">
-          <i class="hidden text-xl ph ph-arrow-fat-line-right "
-            id="submit-icon"></i>
+          <div
+            id="submit-icon"
+            class="hidden items-center animate-fade-right">
+            <i class="text-xl ph ph-arrow-fat-line-right"></i>
+            <span>Enviar arquivo</span>
+          </div>
         </button>
       </span>
     </form>
@@ -119,9 +125,11 @@
 <script>
   document.getElementById('file_input').addEventListener('change', function () {
     if (this.value) {
-      document.getElementById('submit-icon').classList.remove('hidden');
+      document.getElementById('submit-icon').classList.remove('hidden')
+      document.getElementById('submit-icon').classList.add('flex')
     } else {  
-      document.getElementById('submit-icon').classList.add('hidden');
+      document.getElementById('submit-icon').classList.add('hidden')
+      document.getElementById('submit-icon').classList.remove('flex')
     }
   });
 </script>
