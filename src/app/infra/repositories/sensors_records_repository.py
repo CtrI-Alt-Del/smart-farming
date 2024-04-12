@@ -47,3 +47,24 @@ class SensorRecordsRepository:
             water_volume=row["water_volume"],
             created_at=row["created_at"],
         )
+    def get_last_date(self):
+        sql_last_date = """
+        SELECT MAX(DATE(created_at)) AS last_date FROM sensors_records
+        """
+        row = mysql.query(sql=sql_last_date,is_single=True)
+        last_date = row['last_date'] if row else None
+
+        if last_date:
+            sql_data = """
+            SELECT 
+                soil_humidity, ambient_humidity, temperature, water_volume, created_at
+            FROM sensors_records
+            WHERE DATE(created_at) = %s
+            """
+            rows = mysql.query(sql=sql_data, params=[last_date], is_single=False)
+
+            sensors_records = [self.__get_sensors_record(row) for row in rows]
+
+            return last_date,sensors_records
+        else:
+            return None
