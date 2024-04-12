@@ -1,5 +1,5 @@
 
-Active-- Active: 1712144580322@@127.0.0.1@3306@smart-farming
+-- Active: 1712242301041@@127.0.0.1@3306
 DROP TABLE checklist_records;
 
 CREATE TABLE checklist_records (
