@@ -7,7 +7,7 @@
 
 {% block dashboard_content %}
 
-<div class="flex items-center gap-3 pb-6 mt-10 border-b-2 border-gray-900">
+<div class="flex items-center gap-3 pb-6 mt-10 border-b-2 border-gray-600">
   <h1 class="text-2xl font-bold">Último Registro -</h1>
   {% include "pages/last_sensors_record/datetime.html" %}
 </div>
@@ -15,7 +15,7 @@
 <div class="grid grid-cols-2 mt-12 gap-x-10 gap-y-8">
   {% call card(
   title="Temperatura",
-  value="12ºC",
+  value="{:.1f}ºC".format(last_sensors_records.temperature),
   class="bg-red-50 animate-delay-100")
   %}
   <div class="{{ icon_class }} bg-red-100">
@@ -25,7 +25,7 @@
 
   {% call card(
   title="Umidade do ambiente",
-  value="31%",
+  value="{:.1f}%".format(last_sensors_records.ambient_humidity),
   class="bg-blue-50 animate-delay-200"
   )
   %}
@@ -36,7 +36,7 @@
 
   {% call card(
   title="Umidade do solo",
-  value="31%",
+  value="{:.1f}%".format(last_sensors_records.soil_humidity),
   class="bg-green-50 animate-delay-300")
   %}
   <div class="{{ icon_class }} bg-green-100">
@@ -45,7 +45,8 @@
   {% endcall %}
 
   {% call card(
-  title="Volume", value="27ml",
+  title="Vazão",
+  value="{:.1f}mL".format(last_sensors_records.water_volume),
   class="bg-purple-50 animate-delay-300")
   %}
   <div class="{{ icon_class }} bg-purple-100">
