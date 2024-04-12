@@ -1,0 +1,15 @@
+{% macro card(title, value, class) %}
+
+<div
+  class="grid place-content-center gap-2 h-52 rounded-md shadow-md animate-fade-up animate-delay-100 {{ class }}">
+  <div class="grid place-content-center text-3xl w-full">
+    {{ caller() }}
+  </div>
+  <h2 class="text-center font-medium">{{ title }}</h2>
+  <strong
+    class="text-3xl text-center">
+    {{ value }}
+  </strong>
+</div>
+
+{% endmacro %}

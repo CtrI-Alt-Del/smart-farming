@@ -1,8 +1,6 @@
 # Sprint - 1️⃣ 
 
-## Requisitos funcionais ✅
-
-- [ ] **Cadastro de dados dos sensores via arquivo CSV**
+- [x] **Cadastro de dados dos sensores via arquivo CSV**
 
 *Contexto:*
 
@@ -19,7 +17,7 @@
 
 ---
 
-- [ ] **Geração do gráfico dos dados de sensores**
+- [x] **Geração de gráficos dos dados de sensores**
 
 *Contexto:*
 
@@ -27,38 +25,62 @@
 
 *História de usuário:*
 
-> Como mantenedor da estufa, quero que o sistema gere um gráfico de linha referente os dados coletados pelos sensores com relação a um período de dias a fim de facilitar minha análise acerca do andamento da estufa ao longo do tempo.
+> Como mantenedor da estufa, quero que o sistema geres um gráfico para cada dado de um registro coletado pelos sensores com relação a um período de dias a fim de facilitar minha análise acerca do andamento da estufa ao longo do tempo.
 
 *Critérios de aceitação:*
 
-- O gráfico deve exibir os dados:
-  - Umidade do solo.
-  - Umidade do ambiente.
-  - Temperatura.
-  - Volume de água.
-- O usuário deve poder escolher comparar todos os dados dos sensores ou apenas dois ou mais.
-- O usuário deve poder alterar o períodos de dias utilizado no gráfico para:
-  - 7 dias
-  - 30 dias
-  - 90 dias
-- O período de 7 dias deve ser o campo selecionado por padrão
+- Deve ser exibido um gráfico de linha para cada um desses valors:
+  - Umidade do solo X Dias.
+  - Umidade do ambiente X Dias.
+  - Temperatura X Dias.
+  - Volume de água  X Dias.
+- Cada gráfico deve possuir título.
+- O eixo vertical de cada gráfico deve corresponder a escala de cada dado.
+- Os gráficos de linha devem ser de cores diferentes.
 
 ---
 
-## Requisitos não funcionais ☑️
-
-- [ ] **Pré-cadastro de dados dos sensores**
-
-*Contexto:*
-
-> Atualmente, eu já possuo vários dados coletados pelos sensores desde o começo da estufa
+- [x] **Filtragem de dados dos gráficos de sensores ao longo do tempo.**
 
 *História de usuário:*
 
-> Como mantenedor da estufa, quero que o sistema já contenha os dados que eu já tenho para que eu precise apenas inserir dados novos.
+> Como mantenedor da estufa, quero poder filtrar os dados dos sensores exibidos pelos gráficos para determinados períodos de dias a fim de que eu possa acompanhar a evolução desses valores em diferentes faixas de tempo.
 
 *Critérios de aceitação:*
 
-- Todos os dados coletados pelos sensores devem estar cadastros no site quando ele chegar na mão do cliente
+- Cada valor no gráfico deve corresponder a média registrada por dia.
+- O usuário deve poder selecionar um período de dias para fazer a filtragem, sendo:
+  - 7 dias.
+  - 30 dias.
+  - 90 dias.
+- O padrão deve ser o período que corresponde a 7 dias.
+
+---
+
+- [x] **Cálculo de média dos dados coletados pelos sensores.**
+
+*História de usuário:*
+
+> Como mantenedor da estufa, quero que o sistema calcule a média de cada dado coletado pelo sensores ao longo do tempo para que eu possa identificar padrões ou realizar previsões a respeito desses valores.
+
+*Critérios de aceitação:*
+
+- O cálculo deve ser realizado utilizando cada gráfico de linha dos dados coletados pelos sensores.
+- O cálculo deve corresponder ao período de dias selecionado pelo usuário.
+- O cálculo deve ser refeito assim que o usuário altera o período de dias selecionado.
+
+---
+
+- [x] **Exibição do último registro coletado pelos sensores**
+
+*História de usuário:*
+
+> Como mantenedor da estufa, quero poder ver o último registro coletado pelos sensores para que eu tenha noção do estado atual da estufa.
+
+*Critérios de aceitação:*
+
+- Os dados do último registro coletado pelos sensores deve ser exibida na página principal do site.
+- Cada dado do registro deve ter seu destaque próprio na página.
+- Deve ser exibido a data e horário em que o registro foi coletado.
 
 ## Gráfico Burndown 📈

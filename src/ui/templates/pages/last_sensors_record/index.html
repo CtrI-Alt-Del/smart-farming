@@ -1,3 +1,58 @@
 {% extends "layouts/dashboard/index.html" %}
 
-<h1>Último Registro</h1>
+{% from "pages/last_sensors_record/card.html" import card %}
+
+{% set icon_class = "grid place-content-center rounded-md w-16 h-16"
+%}
+
+{% block dashboard_content %}
+
+<div class="flex items-center gap-3 mt-10 border-b-2 border-gray-900 pb-6">
+  <h1 class="text-2xl font-bold">Último Registro -</h1>
+  {% include "pages/last_sensors_record/datetime.html" %}
+</div>
+
+<div class="grid grid-cols-2 gap-x-10 gap-y-8 mt-12">
+  {% call card(
+  title="Temperatura",
+  value="12ºC",
+  class="bg-red-50 animate-delay-100")
+  %}
+  <div class="{{ icon_class }} bg-red-100">
+    <i class="ph-bold ph-thermometer text-red-600"></i>
+  </div>
+  {% endcall %}
+
+  {% call card(
+  title="Umidade do ambiente",
+  value="31%",
+  class="bg-blue-50 animate-delay-200"
+  )
+  %}
+  <div class="{{ icon_class }} bg-blue-100">
+    <i class="ph-bold ph-drop text-blue-600"></i>
+  </div>
+  {% endcall %}
+
+  {% call card(
+  title="Umidade do solo",
+  value="31%",
+  class="bg-green-50 animate-delay-300")
+  %}
+  <div class="{{ icon_class }} bg-green-100">
+    <i class="ph-bold ph-drop-half-bottom text-green-600"></i>
+  </div>
+  {% endcall %}
+
+  {% call card(
+  title="Volume", value="27ml",
+  class="bg-purple-50 animate-delay-300")
+  %}
+  <div class="{{ icon_class }} bg-purple-100">
+    <i class="ph-bold ph-waves text-purple-600"></i>
+  </div>
+  {% endcall %}
+
+</div>
+
+{% endblock dashboard_content %}

@@ -5,7 +5,8 @@
     "dev": "concurrently 'npm run dev:app' 'npm run dev:style'"
   },
   "dependencies": {
-    "flowbite": "^2.3.0"
+    "flowbite": "^2.3.0",
+    "tailwindcss-animated": "^1.0.1"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",

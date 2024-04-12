@@ -1,63 +1,127 @@
-<form class="grid grid-cols-3 grid-rows-2 ml-[74px] gap-5">
+{% from "components/logo.html" import logo %}
 
-  <div
-    class="p-4 bg-white border border-gray-400/50 mt-3 w-52 rounded-lg">
-    <label for="date"
-      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"><i
-        class="ph-bold ph-calendar-blank"></i>Data</label>
-    <input type="date" id="date"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-400 focus:border-gray-400 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400 dark:focus:border-gray-400"
-      placeholder="12/12/2024" required />
+{% set input =
+"p-[15px] bg-[#ffffff] mt-3 w-52 rounded-lg"%}
+
+<div
+  class="my-[5vh] h-[calc(95vh-112px)] p-2 border bg-[#ffffff] rounded-[26px] shadow-2xl">
+  <div class="flex flex-col h-auto pt-6 p-[50px] rounded-2xl">
+    <header class="container pb-5">
+      <div class="w-60">
+        {{ logo() }}
+      </div>
+    </header>
+
+    <form
+      class="flex items-center justify-center pb-4"
+      action="{{ url_for('sensors_records_views.create_sensors_records_by_csv_view') }}"
+      method="post"
+      enctype="multipart/form-data">
+      <span>Manualmente ou
+        <label for="file_input"
+          class="p-2 m-1 text-white bg-gray-700 cursor-pointer rounded-xl">
+          <i class="ph-bold ph-upload-simple"></i>
+          <span>Importar CSV</span>
+          <input type="file" name="csv" id="file_input" hidden>
+        </span>
+        <button type="submit">
+          <i class="hidden text-xl ph ph-arrow-fat-line-right "
+            id="submit-icon"></i>
+        </button>
+      </span>
+    </form>
+
+    <div class="flex flex-col items-center justify-center p-5">
+      <hr class="bg-black my-7 ml-[75px] w-[86%]">
+      <form class="grid grid-cols-3 grid-rows-2 gap-7">
+        <div class="{{input}}">
+          <label for="date"
+            class="flex items-center justify-start gap-1 mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <i class="ph-bold ph-calendar-blank"></i>
+            <p>Data</p>
+          </label>
+          <input type="date" id="date"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-400 focus:border-gray-400 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400 dark:focus:border-gray-400"
+            placeholder="12/12/2024" required />
+        </div>
+
+        <div class="{{input}}">
+          <label for="umidade_ambiente"
+            class="flex items-center justify-start gap-1 mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <i class="ph-bold ph-drop"></i>
+            <p>Umidade ambiente (%)</p>
+          </label>
+          <input type="number" id="umidade_ambiente"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-400 focus:border-gray-400 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400 dark:focus:border-gray-400"
+            placeholder="%" required />
+        </div>
+
+        <div class="{{input}}">
+          <label for="umidade_solo"
+            class="flex items-center justify-start gap-1 mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <i class="ph-bold ph-drop-half-bottom"></i>
+            <p>Umidade solo (%)</p>
+          </label>
+          <input type="number" id="umidade_solo"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-400 focus:border-gray-400 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400 dark:focus:border-gray-400"
+            placeholder="%" required />
+        </div>
+
+        <div class="{{input}}">
+          <label for="temperatura"
+            class="flex items-center justify-start gap-1 mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <i class="ph-bold ph-thermometer"></i>
+            <p>Temperatura (°C)</p>
+          </label>
+          <input type="number" id="temperatura"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-400 focus:border-gray-400 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400 dark:focus:border-gray-400"
+            placeholder="°C" required />
+        </div>
+
+        <div class="{{input}}">
+          <label for="volume"
+            class="flex items-center justify-start gap-1 mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <i class="ph-bold ph-waves"></i>
+            <p>Volume da água (ml)</p>
+          </label>
+          <input type="number" id="volume"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-400 focus:border-gray-400 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400 dark:focus:border-gray-400"
+            placeholder="20" required />
+        </div>
+
+        <div class="{{input}}">
+          <label for="planta"
+            class="flex items-center justify-start gap-1 mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <i class="ph-bold ph-plant"></i>
+            <p>Planta</p>
+          </label>
+          <select name id="planta"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-400 focus:border-gray-400 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400 dark:focus:border-gray-400">
+            <option value="alface" selected>Alface</option>
+            <option value="cenoura">Cenoura</option>
+          </select>
+        </div>
+      </form>
+    </div>
   </div>
-
   <div
-    class="p-4 bg-white border border-gray-400/50 mt-3 w-52 rounded-lg">
-    <label for="umiddade_solo"
-      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"><i
-        class="ph-bold ph-calendar-blank"></i>Umiddade solo (%)</label>
-    <input type="number" id="umiddade_solo"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-400 focus:border-gray-400 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400 dark:focus:border-gray-400"
-      placeholder="%" required />
-  </div>
+    class="flex justify-center items-center space-x-4 pb-2 mx-2 mb-2 ml-[6px] ">
+    <button
+      type="button"
+      class="w-[100px] focus:outline-none text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-600 font-medium rounded-2xl text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-gray-950">Enviar</button>
 
-  <div
-    class="p-4 bg-white border border-gray-400/50 mt-3 w-52 rounded-lg">
-    <label for="temperatura"
-      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"><i
-        class="ph-bold ph-thermometer"></i>Temperatura (°C)</label>
-    <input type="number" id="temperatura"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-400 focus:border-gray-400 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400 dark:focus:border-gray-400"
-      placeholder="°C" required />
+    <button
+      type="button"
+      class="w-[100px] focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-600 font-medium rounded-2xl text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-red-950">Cancelar</button>
   </div>
+</div>
 
-  <div
-    class="p-4 bg-white border border-gray-400/50 mt-3 w-52 rounded-lg">
-    <label for="umiddade_ambiente"
-      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"><i
-        class="ph-bold ph-drop"></i>Umiddade ambiente (%)</label>
-    <input type="number" id="umiddade_ambiente"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-400 focus:border-gray-400 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400 dark:focus:border-gray-400"
-      placeholder="%" required />
-  </div>
-
-  <div
-    class="p-4 bg-white border border-gray-400/50 mt-3 w-52 rounded-lg">
-    <label for="volume"
-      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"><i
-        class="ph-bold ph-waves"></i>Volume da água (ml)</label>
-    <input type="number" id="volume"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-400 focus:border-gray-400 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400 dark:focus:border-gray-400"
-      placeholder="20" required />
-  </div>
-
-  <div
-    class="p-4 bg-white border border-gray-400/50 mt-3 w-52 rounded-lg">
-    <label for="planta"
-      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"><i
-        class="ph-bold ph-plant"></i>Planta</label>
-    <input type="text" id="planta"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-400 focus:border-gray-400 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400 dark:focus:border-gray-400"
-      placeholder="Alface" required />
-  </div>
-
-</form>
+<script>
+  document.getElementById('file_input').addEventListener('change', function () {
+    if (this.value) {
+      document.getElementById('submit-icon').classList.remove('hidden');
+    } else {  
+      document.getElementById('submit-icon').classList.add('hidden');
+    }
+  });
+</script>
