@@ -1,14 +1,9 @@
 from flask import render_template
 
-from infra.repositories import SensorRecordsRepository
-
-
-
-sensors_records_repo = SensorRecordsRepository()
-
+from infra.repositories import sensors_records_repository
 
 def last_sensors_record_page_view():
-    last_data = sensors_records_repo.get_last_record()
+    last_data = sensors_records_repository.get_last_record()
 
     if last_data:
         last_data = last_data
