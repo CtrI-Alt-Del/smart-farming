@@ -28,7 +28,7 @@ class GetSensorDashboardPageData:
         return charts_filtered_data
 
     def get_sensors_records_average_by_range_of_days(
-        self, range_days, sensor_records_grouped_by_date
+        self, days_range, sensor_records_grouped_by_date
     ):
         last_date = sensor_records_grouped_by_date[-1]["date"]
         total = {
@@ -39,7 +39,7 @@ class GetSensorDashboardPageData:
         }
         sensors_records_count = 0
 
-        for day in range(range_days, -1, -1):
+        for day in range(days_range, -1, -1):
             current_date = last_date - timedelta(days=day)
 
             for sensors_record in sensor_records_grouped_by_date:

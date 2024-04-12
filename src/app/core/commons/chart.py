@@ -1,18 +1,16 @@
 from typing import List, Dict
 from datetime import timedelta
 
-from infra.utils.error import Error
-
 
 class Chart:
     def __init__(self, records: List[Dict]) -> None:
         self.records = records
 
-    def filter_records_by_range_of_days(self, days_ranfge):
+    def filter_records_by_range_of_days(self, days_range):
         last_date = self.records[-1]["date"]
         data = []
 
-        for day in range(days_ranfge, -1, -1):
+        for day in range(days_range, -1, -1):
             current_date = last_date - timedelta(days=day)
 
             for sensors_record in self.records:
