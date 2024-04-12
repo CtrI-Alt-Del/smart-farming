@@ -1,4 +1,4 @@
--- Active: 1712674680306@@127.0.0.1@3306@smart-farming
+-- Active: 1712258180714@@127.0.0.1@3306@smart-farming
 
 DROP TABLE IF EXISTS sensors_records;
 
@@ -23,5 +23,6 @@ SELECT
 FROM sensors_records
 GROUP BY DATE(created_at)
 ORDER BY DATE(created_at) ASC
-LIMIT 7;
 LIMIT 20000;
+
+DELETE FROM sensors_records;
