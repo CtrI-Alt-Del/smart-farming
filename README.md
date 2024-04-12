@@ -299,6 +299,65 @@ os dados de checklist exibidos pelos gráficos para determinados períodos de di
 
 - Sprint 4: [Acessar](https://github.com/CtrI-Alt-Del/smart-farming/blob/main/documentation/reports/sprint-4.md)
 
+## Como usar a aplicação? 🚀
+
+### 🔧 Pré requisitos
+
+- [Python3](https://www.python.org/downloads/), Ja que é toda fundação do nosso projeto!
+- [npm](https://nodejs.org/en), [yarn](https://nodejs.org/en) ou [pnpm](https://pnpm.io/pt/) (Eu usarei npm) para instalar pacotes necessários.
+- [Docker](https://www.docker.com/) a incrivel tecnologia de gerenciar [containers](https://www.docker.com/resources/what-container/).
+- [Git](https://git-scm.com/book/pt-br/v2/Come%C3%A7ando-Instalando-o-Git) Para você conseguir clonar nosso repositório.
+- [VSCode](https://code.visualstudio.com/), pois as extensões são necessárias para a execução do projeto
+
+> Também é crucial definir as variáveis de ambiente no arquivo .env antes de executar a aplicação. Veja o arquivo [.env.example](https://github.com/CtrI-Alt-Del/smart-farming/blob/main/.env.example) para saber quais variáveis devem ser definidas
+
+### Usando a aplicação 📟
+
+```bash
+
+# Clone esse repositório
+$ git clone https://github.com/CtrI-Alt-Del/smart-farming.git.
+
+# Abra a pasta do arquivo
+$ cd /path/to/my/smart-farming
+
+# Execute o docker
+$ docker compose up
+
+# Abra o arquivo com o VSCode
+$ code .
+```
+- Baixe a extensão [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python) do VSCode 
+- Baixe a extensão [Database Client](https://marketplace.visualstudio.com/items?itemName=cweijan.vscode-database-client2) do Vscode 
+- Abra a extensao Database Client no VSCode e insira os dados da sua rede
+- Abra o arquivo [sensors_records.sql](src/app/infra/database/scripts/sensors_records.sql)
+- Ative a conexão (clique no simbolo do cadeado)
+- Execute a tabela sensors_records
+
+
+```bash
+
+# Crie seu ambiente virtual Flask
+$ python -m venv /path/to/new/virtual/environment
+
+# Execute seu ambiente virtual
+$ c:\>Python35\python -m venv c:\path\to\myenv
+
+# Instale as dependências
+$ pip install -r requirements.txt
+
+# Instale as dependências node
+$ npm install
+
+# Execute a aplicação em um ambiente de desenvolvimento
+$ npm run dev
+```
+
+> Provavelmente a aplicação estará sendo executada em http://127.0.0.1:5000
+
+
+
+
 ## Time de Desenvolvimento 👷🏻
 
 | Foto | Nome | Função | Github | Linkedin |
