@@ -1,12 +1,20 @@
 from flask import render_template
 
-from core.use_cases.sensors_records import get_sensors_dashboard_page_data
+from infra.repositories import SensorRecordsRepository
+
+sensors_records_repo = SensorRecordsRepository()
 
 
 def last_sensors_record_page_view():
-    charts_filtered_data = get_sensors_dashboard_page_data.execute()
+    last_data = sensors_records_repo.get_last_record()
 
-    return render_template(
-        "pages/last_sensors_record/index.html",
-        charts_filtered_data=charts_filtered_data,
-    )
+    if last_data:
+        last_data = last_data
+        datetime = last_data.created_at
+        return render_template(
+            "pages/last_sensors_record/index.html",
+            last_sensors_records=last_data,
+            datetime=datetime,
+        )
+    else:
+        return "No data found", 404
