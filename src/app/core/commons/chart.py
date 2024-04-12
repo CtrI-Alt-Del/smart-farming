@@ -12,7 +12,7 @@ class Chart:
         last_date = self.records[-1]["date"]
         data = []
 
-        for day in range(days_ranfge, 0, -1):
+        for day in range(days_ranfge, -1, -1):
             current_date = last_date - timedelta(days=day)
 
             for sensors_record in self.records:
