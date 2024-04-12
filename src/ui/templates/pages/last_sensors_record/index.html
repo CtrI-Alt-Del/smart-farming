@@ -7,14 +7,14 @@
 
 {% block dashboard_content %}
 
-<div class="flex items-center gap-3 pb-6 mt-10 border-b-2 border-gray-600">
+<div class="flex items-center gap-3 pb-6 mt-10 border-b-2 border-gray-300">
   <h1 class="text-2xl font-bold">Último Registro -</h1>
   {% include "pages/last_sensors_record/datetime.html" %}
 </div>
 
 <div class="grid grid-cols-2 mt-12 gap-x-10 gap-y-8">
   {% call card(
-  title="Temperatura",
+  title="temperatura",
   value="{:.1f}ºC".format(last_sensors_records.temperature),
   class="bg-red-50 animate-delay-100")
   %}
