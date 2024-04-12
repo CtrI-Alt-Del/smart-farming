@@ -59,7 +59,7 @@ class SensorRecordsRepository:
         try:
             row = mysql.query(sql=sql_data, is_single=True)
 
-            if row:
+            if row:  
                 return self.__get_sensors_record(row)
 
         except Exception as e:
