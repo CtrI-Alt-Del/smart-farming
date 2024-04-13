@@ -61,6 +61,12 @@ Smart Farming é um **dashboard web** que visa facilitar o trabalho de monitoram
       </a>
       <span>Figma</span>
     </td>
+      <td align="center" width="96">
+      <a href="https://apexcharts.com/">
+      <img src="documentation/images/apexcharts.jpeg" width="48" height="48" alt="ApexChart" />
+      </a>
+      <span>ApexCharts</span>
+      </td>
   </tr>
 </table>
 
