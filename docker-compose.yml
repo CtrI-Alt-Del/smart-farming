@@ -1,31 +1,50 @@
-version: '2'
+version: '3'
 
 services:
  database:
-    image: 'bitnami/mysql:latest' 
+    image: 'bitnami/mysql:latest'
     container_name: 'smart-farming-mysql'
     environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_DATABASE_PASSWORD}
-      - MYSQL_PASSWORD=${MYSQL_DATABASE_PASSWORD}
-      - MYSQL_USER=${MYSQL_DATABASE_USER}
-      - MYSQL_DATABASE=${MYSQL_DATABASE_NAME}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_DATABASE_PASSWORD}
+      MYSQL_PASSWORD: ${MYSQL_DATABASE_PASSWORD}
+      MYSQL_USER: ${MYSQL_DATABASE_USER}
+      MYSQL_DATABASE: ${MYSQL_DATABASE_NAME}
     networks:
-      - app-tier
+      - app-network
     volumes:
       - mysql_data:/bitnami/mysql/data
     ports:
       - 3306:3306
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
-    app:
-      build: .
-      container_name: 'smart-farming'
-      volumes:
-        - .:/home/pn/smart-farming
-      ports:
-        - 5000:5000
+ app:
+    build: .
+    container_name: 'smart-farming'
+    ports:
+      - 5000:5000
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /home/pn/smart-farming
+          ignore:
+            - node_modules
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - app-network
+    volumes:
+      - .:/home/pn/smart-farming
+    environment:
+       - FLASK_ENV=development
 
 networks:
- app-tier:
+ app-network:
     driver: bridge
 
 volumes:

@@ -1,7 +1,9 @@
 
 ## Visão geral do produto 🖥️
 
-Smart Farming é um **dashboard web** que visa facilitar o trabalho de monitoramento da estufa inteligente de mesmo nome mantida dentro da [FATEC de São José dos Campos](https://fatecsjc-prd.azurewebsites.net/). 
+Smart Farming é um site web que visa facilitar o trabalho de monitoramento da estufa inteligente de mesmo nome mantida dentro da [FATEC de São José dos Campos](https://fatecsjc-prd.azurewebsites.net/). 
+
+A aplicação permite fazer o gerenciamento (adição, edição e deleção) dos dados coletados pela estufa, assim como apresenta um dashboard interativo onde é possível verificar a evolução desses valores ao longo do tempo por meio de gráficos.
 
 ## Tecnologias 🛠️
 <table>
@@ -75,9 +77,9 @@ Smart Farming é um **dashboard web** que visa facilitar o trabalho de monitoram
 
 ## Problema do cliente 👔
 
-Atualmente a estufa é monitorada de maneira arcaica utilizando-se primariamente de [arquivos do tipo CSV](https://www.freecodecamp.org/portuguese/news/o-que-e-um-arquivo-csv-e-como-abrir-esse-formato-de-arquivo/) para registrar e armazenar informações a partir dos dados coletados pelos sensores da estufa, assim como as informações obtidas de uma Form's para realizar o check-list, isto é, uma lista de itens que servem para validar os dados obtidos por esses sensores.
+Atualmente a estufa é monitorada de maneira arcaica utilizando-se primariamente de [arquivos do tipo CSV](https://www.freecodecamp.org/portuguese/news/o-que-e-um-arquivo-csv-e-como-abrir-esse-formato-de-arquivo/) para registrar e armazenar informações a partir dos dados coletados pelos sensores da estufa, assim como as informações obtidas de uma [Google Forms](https://workspace.google.com/intl/pt-BR/lp/forms/?utm_source=google&utm_medium=cpc&utm_campaign=latam-BR-all-pt-dr-bkws-all-all-trial-e-dr-1707806-LUAC0011908&utm_content=text-ad-none-any-DEV_c-CRE_666246535618-ADGP_Hybrid%20%7C%20BKWS%20-%20EXA%20%7C%20Txt-Forms-KWID_43700057676889044-kwd-10647024857&utm_term=KW_google%20forms-ST_google%20forms&gad_source=1&gclid=Cj0KCQjw2uiwBhCXARIsACMvIU0RToV-UJaKbeTi82kzMxsMZeYaZnjOi5IE7GjyBO431c9fjzVq1v8aAtrFEALw_wcB&gclsrc=aw.ds) para realizar o check-list, isto é, uma lista de itens que servem para validar os dados obtidos por esses sensores.
 
-Os dados colhidos pelos sensores são armazenados em um cartão *microSD*. Para fazer o registro desses dados em um arquivo CSV é preciso retirar o cartão, o que acaba não se tornando prático e até perigoso em virtude da fragilidade dessa peça.
+Os dados colhidos pelos sensores são armazenados em um cartão *microSD*. Para fazer o registro desses dados em um arquivo CSV é preciso retirar o cartão, o que acaba não se tornando prático e até perigoso em virtude da fragilidade dessa peça. Para evitar isso, atualmente o cliente converte os dados contidos nesse cartão em um único arquivo CSV de forma automatizada, porém o backup desse arquivo acaba utilizando espaço de armazenamento desnecessário. Além disso, para verificar que esses dados estão de fato sendo registrados, o cliente necessita ficar fisicamente presente dentro da Fatec, o que nem sempre é possível.
 
 Para fazer a análise de dados a fim de obter *insights* e reduzir potenciais problemas com relação ao andamento da estufa são constrúidos gráficos no *Excel* a partir dos arquivos CSV, porém não são tão interativos e são de difícil manutenção.
 
@@ -121,7 +123,7 @@ Para a confecção do produto foi empregado o framework de [Metodologia Ágil Sc
  <tbody>
     <tr>
       <td>Cadastro de dados dos sensores via arquivo CSV.</td>
-      <td>Como mantenedor da estufa, quero fazer o upload de dados coletados pelos sensores contidos em um arquivo CSV para armazená-los no sistema.</td>
+      <td>Como administrador, quero fazer o upload de dados coletados pelos sensores contidos em um arquivo CSV para armazená-los no sistema.</td>
       <td>ALTA</td>
       <td>3</td>
     </tr>
@@ -139,7 +141,7 @@ Para a confecção do produto foi empregado o framework de [Metodologia Ágil Sc
     </tr>
     <tr>
       <td>Cadastro de dados de check-list via arquivo CSV.</td>
-      <td>Como mantenedor da estufa, quero fazer o upload de dados de check-list contidos em um arquivo CSV no sistema para armazená-los de forma mais segura.</td>
+      <td>Como administrador, quero fazer o upload de dados de check-list contidos em um arquivo CSV no sistema para armazená-los de forma mais segura.</td>
       <td>ALTA</td>
       <td>3</td>
     </tr>
@@ -151,7 +153,7 @@ Para a confecção do produto foi empregado o framework de [Metodologia Ágil Sc
     </tr>
     <tr>
       <td>Cadastro de dados de check-list via formulário.</td>
-      <td>Como mantenedor da estufa, quero poder fazer o cadastro de dados de check-list via formulário para mantê-los salvo dentro do sistema.</td>
+      <td>Como administrador, quero poder fazer o cadastro de dados de check-list via formulário para mantê-los salvos dentro do sistema.</td>
       <td>ALTA</td>
       <td>5</td>
     </tr>
@@ -163,19 +165,19 @@ Para a confecção do produto foi empregado o framework de [Metodologia Ágil Sc
     </tr>
     <tr>
       <td>Usuário administrador.</td>
-      <td>Como mantenedor da estufa, quero que haja um usuário administrador para gerenciar o sistema para que nem todos os usuários que venham a acessar o site possam adicionar, editar ou deletar os dados cadastrados no sistema.</td>
+      <td>Como mantenedor da estufa, quero que haja um usuário administrador pré-cadastrado para gerenciar o sistema para que nem todos os usuários que venham a acessar o site possam adicionar, editar ou deletar os dados cadastrados.</td>
       <td>ALTA</td>
       <td>2</td>
     </tr>
     <tr>
       <td>Edição de registros.</td>
-      <td>Como administrador, quero poder editar as informações de um registro usuário para corrigir eventuais erros de cadastro.</td>
+      <td>Como administrador, quero poder editar as informações de um registro para corrigir eventuais erros de cadastro.</td>
       <td>ALTA</td>
       <td>5</td>
     </tr>
     <tr>
       <td>Login.</td>
-      <td>Como administrador, quero que haja a funcionalidade de login de e-mail e senha para que apenas eu possa acessar os recursos do sistema que estão disponíveis para o usuário administrador.</td>
+      <td>Como administrador, quero que haja a funcionalidade de login via e-mail e senha para que apenas eu possa acessar os recursos do sistema que estão disponíveis para o usuário administrador.</td>
       <td>ALTA</td>
       <td>8</td>
     </tr>
@@ -187,7 +189,7 @@ Para a confecção do produto foi empregado o framework de [Metodologia Ágil Sc
     </tr>
      <tr>
       <td>Cadastro de plantas.</td>
-      <td>Como administrador, quero poder cadastrar uma planta para que eu possa associá-la a um registro de checklist ou um registro coletado pelos sensores.</td>
+      <td>Como administrador, quero poder cadastrar uma planta para que eu possa associá-la a um registro de check-list ou um registro (dos sensores ou check-list).</td>
       <td>ALTA</td>
       <td>2</td>
     </tr>
@@ -198,28 +200,30 @@ Para a confecção do produto foi empregado o framework de [Metodologia Ágil Sc
       <td>2</td>
     </tr>
      <tr>
-      <td>Filtragem de dados nos gráficos dos dados coletados pelos sensores</td>
+      <td>Filtragem de dados nos gráficos dos dados coletados pelos sensores por período de dias.</td>
       <td>Como mantenedor da estufa, quero poder filtrar
 os dados dos sensores exibidos pelos gráficos para determinados períodos de dias a fim de que eu possa acompanhar a evolução desses valores em diferentes faixas de tempo.</td>
       <td>MÉDIA</td>
       <td>5</td>
     </tr>
      <tr>
-      <td>Filtragem de dados nos gráficos dos dados de check-list</td>
+      <td>Filtragem de dados nos gráficos dos dados de check-list por período de dias.</td>
       <td>Como mantenedor da estufa, quero poder filtrar
 os dados de checklist exibidos pelos gráficos para determinados períodos de dias a fim de que eu possa acompanhar a evolução desses valores em diferentes faixas de tempo.</td>
       <td>MÉDIA</td>
       <td>5</td>
     </tr>
     <tr>
-      <td>Filtragem de registros nas tabelas</td>
+      <td>Filtragem de registros nas tabelas por datas.</td>
       <td>Como mantenedor da estufa, quero pode filtrar registros exibidos nas tabelas por período compreendido entre duas datas.</td>
       <td>MÉDIA</td>
       <td>5</td>
     </tr>
     <tr>
       <td>Paginação de registros.</td>
-      <td>Como administrador, quero que as tabelas possuem páginas onde cada página tenha no máximo 20 registros a fim de que nem todos os registros cadastrados nos sistema sejam exibidos para mim.</td>
+      <td>
+      Como administrador, quero que as tabelas possuem páginas onde cada página tenha no máximo 20 registros a fim de que nem todos os registros cadastrados nos sistema sejam exibidos para mim.
+      </td>
       <td>MÉDIA</td>
       <td>3</td>
     </tr>
@@ -231,9 +235,9 @@ os dados de checklist exibidos pelos gráficos para determinados períodos de di
     </tr>
     <tr>
       <td>Redefinição de senha.</td>
-      <td>Como administrador, quero que minha senha sempre esteja criptografada para aumentar a segurança de acesso ao sistema.</td>
+      <td>Como administrador, quero poder recuperar minha senha caso eu a esqueça para que eu não perca acesso total ao sistema.</td>
       <td>MÉDIA</td>
-      <td>13</td>
+      <td>8</td>
     </tr>
     <tr>
       <td>Responsividade.</td>
@@ -255,19 +259,19 @@ os dados de checklist exibidos pelos gráficos para determinados períodos de di
     </tr>
     <tr>
       <td>Cálculo de média dos dados coletados pelos sensores.</td>
-      <td></td>
+      <td>Como mantenedor da estufa, quero que o sistema calcule a média de cada dado coletado pelo sensores ao longo do tempo para que eu possa identificar padrões ou realizar previsões a respeito desses valores.</td>
       <td>MÉDIA</td>
       <td>5</td>
     </tr>
      <tr>
       <td>Exportação de dados dos registros para arquivo CSV.</td>
-      <td>Como mantenedor da estufa, quero poder exportar os dados dos registros (check-list ou sensores) para um arquivo CSV para que eu possa utilizar essa base de dados para outros fins como migração de dados para outro sistema, por exemplo.</td>
+      <td>Como administrador, quero poder exportar os dados dos registros (dos sensores ou check-list) para um arquivo CSV para que eu possa utilizar essa base de dados para outros fins como migração de dados para outro sistema, por exemplo.</td>
       <td>BAIXA</td>
       <td>2</td>
     </tr>
      <tr>
-      <td>Backup dos dados de registros.</td>
-      <td>Como mantenedor da estufa, quero que o sistema faça backup dos registros (check-list ou sensores) para que esses valores sejam recuperados em caso de eventual perda.</td>
+      <td>Backup automatizado dos dados de registros.</td>
+      <td>Como mantenedor da estufa, quero que o sistema faça backup dos registros (do sensores ou check-list) para que esses valores sejam recuperados em caso de eventual perda.</td>
       <td>BAIXA</td>
       <td>3</td>
     </tr>
@@ -279,7 +283,7 @@ os dados de checklist exibidos pelos gráficos para determinados períodos de di
     </tr>
     <tr>
       <td>Cadastro de dados coletados pelos sensores via formulário.</td>
-      <td>Como mantenedor da estufa, quero poder fazer o cadastro de dados no sistema por meio de um formulário, com o objetivo de fazer o cadastramento de uma forma mais manual caso eu queira.</td>
+      <td>Como administrador, quero poder fazer o cadastro de dados no sistema por meio de um formulário, com o objetivo de fazer o cadastramento de uma forma mais manual caso eu queira.</td>
       <td>BAIXA</td>
       <td>2</td>
     </tr>
