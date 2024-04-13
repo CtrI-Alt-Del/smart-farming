@@ -19,10 +19,10 @@ Smart Farming é um **dashboard web** que visa facilitar o trabalho de monitoram
       <span>CSS</span>
     </td>
     <td align="center" width="96">
-      <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">
-        <img src="documentation/images/javascript.svg" width="48" height="48" alt="JavaScript" />
+      <a target="_blank" href="https://www.figma.com/">
+        <img src="documentation/images/figma.svg" width="48" height="48" alt="Figma" />
       </a>
-      <span>JavaScript</span>
+      <span>Figma</span>
     </td>
     <td align="center" width="96">
       <a target="_blank" href="https://tailwindcss.com/">
@@ -32,17 +32,31 @@ Smart Farming é um **dashboard web** que visa facilitar o trabalho de monitoram
     </td>
     </td>
     <td align="center" width="96">
-      <a target="_blank" href="https://www.mysql.com/">
-        <img src="documentation/images/mysql.png" width="48" height="48" alt="MySQL" />
+      <a target="_blank" href="https://apexcharts.com/">
+        <img src="documentation/images/apexcharts.jpeg" width="48" height="48" alt="ApexCharts" />
       </a>
-      <span>MySQL</span>
+      <span>ApexCharts</span>
+    <tr/>
+    <tr>
     </td>
     <td align="center" width="96">
       <a target="_blank" href="https://www.python.org/">
         <img src="documentation/images/python.svg" width="48" height="48" alt="Python" />
       </a>
       <span>Python</span>
+     </td>
+    <td align="center" width="96">
+      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">
+        <img src="documentation/images/javascript.svg" width="48" height="48" alt="JavaScript" />
+      </a>
+      <span>JavaScript</span>
     </td>
+      <td align="center" width="96">
+      <a href="https://www.mysql.com/">
+      <img src="documentation/images/mysql.png" width="48" height="48" alt="MySQL" />
+      </a>
+      <span>MySQL</span>
+      </td>
     <td align="center" width="96">
       <a target="_blank" href="https://flask.palletsprojects.com/en/3.0.x/">
         <img src="documentation/images/flask.svg" width="48" height="48" alt="Flask"/>
@@ -54,12 +68,6 @@ Smart Farming é um **dashboard web** que visa facilitar o trabalho de monitoram
         <img src="documentation/images/docker.svg" width="48" height="48" alt="Docker" />
       </a>
       <span>Docker</span>
-    </td>
-      <td align="center" width="96">
-      <a href="https://www.figma.com/">
-        <img src="documentation/images/figma.svg" width="48" height="48" alt="Figma" />
-      </a>
-      <span>Figma</span>
     </td>
   </tr>
 </table>
