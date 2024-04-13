@@ -2,13 +2,13 @@ version: '2'
 
 services:
  database:
-    image: 'bitnami/mysql:latest' 
+    image: 'bitnami/mysql:latest'
     container_name: 'smart-farming-mysql'
     environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_DATABASE_PASSWORD}
-      - MYSQL_PASSWORD=${MYSQL_DATABASE_PASSWORD}
-      - MYSQL_USER=${MYSQL_DATABASE_USER}
-      - MYSQL_DATABASE=${MYSQL_DATABASE_NAME}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_DATABASE_PASSWORD}
+      MYSQL_PASSWORD: ${MYSQL_DATABASE_PASSWORD}
+      MYSQL_USER: ${MYSQL_DATABASE_USER}
+      MYSQL_DATABASE: ${MYSQL_DATABASE_NAME}
     networks:
       - app-tier
     volumes:
@@ -16,13 +16,13 @@ services:
     ports:
       - 3306:3306
 
-    app:
-      build: .
-      container_name: 'smart-farming'
-      volumes:
-        - .:/home/pn/smart-farming
-      ports:
-        - 5000:5000
+ app:
+    build: .
+    container_name: 'smart-farming'
+    volumes:
+      - .:/home/pn/smart-farming
+    ports:
+      - 5000:5000
 
 networks:
  app-tier:
