@@ -7,10 +7,16 @@
 
 {% block dashboard_content %}
 
+{%if datetime is not none%}
 <div class="flex items-center gap-3 pb-6 mt-10 border-b-2 border-gray-300">
   <h1 class="text-2xl font-bold">Último Registro -</h1>
   {% include "pages/last_sensors_record/datetime.html" %}
 </div>
+{% else %}
+<div class="flex items-center gap-3 pb-6 mt-10 border-b-2 border-gray-300">
+  <h1 class="text-2xl font-bold">Nenhum registro encontrado</h1>
+</div>
+{%endif%}
 
 <div class="grid grid-cols-2 mt-12 gap-x-10 gap-y-8">
   {% call card(
