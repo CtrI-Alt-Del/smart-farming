@@ -6,10 +6,8 @@ COPY . .
 
 RUN pip install -r requirements.txt && npm install
 
-RUN npm run style
-
 EXPOSE 5000
 
 USER pn
 
-CMD npm run app
+CMD npm run dev

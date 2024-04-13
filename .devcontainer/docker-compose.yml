@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+ database:
+    image: 'bitnami/mysql:latest'
+    container_name: 'smart-farming-mysql'
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_DATABASE_PASSWORD}
+      MYSQL_PASSWORD: ${MYSQL_DATABASE_PASSWORD}
+      MYSQL_USER: ${MYSQL_DATABASE_USER}
+      MYSQL_DATABASE: ${MYSQL_DATABASE_NAME}
+    networks:
+      - app-network
+    volumes:
+      - mysql_data:/bitnami/mysql/data
+    ports:
+      - 3306:3306
+
+networks:
+ app-network:
+    driver: bridge
+
+volumes:
+ mysql_data:
+    driver: local
