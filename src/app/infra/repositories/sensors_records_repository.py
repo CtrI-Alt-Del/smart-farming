@@ -61,6 +61,15 @@ class SensorRecordsRepository:
 
             if row:  
                 return self.__get_sensors_record(row)
+            
+            else:
+                return {
+                    'soil_humidity': 0,
+                    'ambient_humidity': 0,
+                    'temperature': 0,
+                    'water_volume': 0,
+                    'created_at': None 
+                }
 
         except Exception as e:
             print(f"Error retrieving last sensor record: {e}")
