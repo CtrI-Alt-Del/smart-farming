@@ -1,10 +1,12 @@
--- Active: 1712258180714@@127.0.0.1@3306@smart-farming
+-- Active: 1712602370861@@localhost@3306@smart-farming
 
 CREATE DATABASE IF NOT EXISTS `smart-farming`;
 
 USE `smart-farming`;
 
-CREATE TABLE sensors_records (
+DROP TABLE IF EXISTS sensors_records;
+
+CREATE TABLE IF NOT EXISTS sensors_records (
   id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
   soil_humidity INT NOT NULL,
   ambient_humidity INT NOT NULL,
@@ -13,7 +15,9 @@ CREATE TABLE sensors_records (
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE checklist_records (
+DROP TABLE IF EXISTS checklist_records;
+
+CREATE TABLE IF NOT EXISTS checklist_records (
   id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
   soil_ph DECIMAL(10, 2) NOT NULL,
   soil_humidity DECIMAL(10, 2) NOT NULL,
@@ -41,10 +45,10 @@ CREATE TABLE checklist_records (
   report TEXT
 );
 
-CREATE TABLE user (
+DROP TABLE IF EXISTS user;
+
+CREATE TABLE IF NOT EXISTS user (
   id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
-  email VARCHAR(320) NOT NULL,
-  password VARCHAR(40) NOT NULL
+  email VARCHAR(255) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL
 );
-
-
