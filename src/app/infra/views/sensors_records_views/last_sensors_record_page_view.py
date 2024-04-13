@@ -1,9 +1,9 @@
 from flask import render_template
 
-from infra.repositories import sensors_records_repository
+from core.use_cases.sensors_records import get_last_record
 
 def last_sensors_record_page_view():
-    last_data = sensors_records_repository.get_last_record()
+    last_data = get_last_record.execute()
 
     if last_data:
         last_data = last_data
