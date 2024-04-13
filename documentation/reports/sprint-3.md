@@ -1,8 +1,4 @@
-
-
 # Sprint - 3️⃣
-
-## Requisitos funcionais ✅
 
 - [ ] **Cadastro automatizado dos dados coletados pelos sensores**
 
@@ -84,8 +80,6 @@
 - Deverá haver uma navegação composta por botões embaixo de cada tabela para que o usuário possa nagevar entre as páginas.
 - Deve haver um indicativo de qual página o usuário está.
 - A nevegação deve exibir no máximo 5 botões, ou seja, a numeração dos botões deve ser dinâmica com base na quantidade.
-
-## Requisitos não funcionais ☑️
 
 - [ ] **Mensagens de alerta**
 
