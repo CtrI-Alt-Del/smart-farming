@@ -38,7 +38,7 @@ class MySQL:
             self.__close_connection()
 
             raise Error(
-                f"Failed to execute a query on the database. Error: {error}",
+                internal_message=f"Failed to execute a query on the database. Error: {error}",
             ) from error
 
     def mutate(self, sql: str, params) -> Dict:
@@ -51,7 +51,7 @@ class MySQL:
             self.__close_connection()
 
             raise Error(
-                f"Failed to execute a mutation on the database. Error: {error}",
+                internal_message=f"Failed to execute a mutation on the database. Error: {error}",
             ) from error
 
     def __close_connection(self):
