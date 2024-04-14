@@ -1,29 +1,31 @@
+{% from "components/loading.html" import loading %}
+
 {% macro csv_input(url, csv_form) %}
 
-<form
-  class="flex items-center justify-center"
-  action="{{ url }}"
-  method="post"
-  enctype="multipart/form-data">
-  {{ csv_form.csrf_token }}
-
-  <span>
-    <label for="file_input"
-      class="p-2 m-1 text-white bg-gray-700 cursor-pointer rounded-xl">
-      <i class="ph-bold ph-upload-simple"></i>
-      <span>Importar CSV</span>
-      <input type="file" name="csv" id="file_input" hidden>
-    </span>
-    <button type="submit">
-      <div
-        id="submit-icon"
-        class="items-center bg-gray-700 text-gray-100 text-sm px-2 py-1 rounded-xl hidden animate-fade-right">
-        Enviar arquivo
-        <i
-          class="p-[0.30rem] text-lg text-white rounded-full  ph ph-arrow-fat-line-right"></i>
-      </div>
-    </button>
+<span>
+  <label for="input"
+    class="p-2 m-1 text-white bg-gray-700 cursor-pointer rounded-xl">
+    <i class="ph-bold ph-upload-simple"></i>
+    <span class="text-sm">Importar CSV</span>
+    <input data-csv-input="input" id="input" type="file" name="csv" hidden>
   </span>
-</form>
+  <button data-csv-input="submit-button" type="submit">
+    <div data-csv-input="loading"
+      class="hidden place-content-center bg-gray-700 p-2 rounded-xl w-32">
+      {{
+      loading(
+      class="w-[16px] h-[16px]",
+      )
+      }}
+    </div>
+    <div
+      data-csv-input="submit-icon"
+      class="hidden items-center gap-1 text-gray-100 bg-gray-700 w-32 p-2 text-xs rounded-xl animate-fade-right">
+      Enviar arquivo
+      <i
+        class="ph ph-arrow-fat-line-right text-sm text-gray-100"></i>
+    </div>
+  </button>
+</span>
 
 {%- endmacro %}
