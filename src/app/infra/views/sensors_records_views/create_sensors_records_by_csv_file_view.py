@@ -19,7 +19,9 @@ def create_sensors_records_by_csv_file_view():
             create_sensors_records_by_csv_file.execute(request.files["csv"])
     except Error as error:
         print("ui_message", error.ui_message)
-        return redirect("/")
+        return redirect(
+            url_for("sensors_records_views.sensors_records_table_page_view")
+        )
 
     return redirect(
         url_for("sensors_records_views.sensors_records_dashboard_page_view")

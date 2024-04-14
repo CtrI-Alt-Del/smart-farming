@@ -1,6 +1,7 @@
 from datetime import timedelta
 
 from core.commons.chart import Chart
+from core.commons.error import Error
 
 from infra.repositories import sensors_records_repository
 
@@ -10,6 +11,9 @@ class GetSensorDashboardPageData:
         sensor_records_grouped_by_date = (
             sensors_records_repository.get_sensor_records_grouped_by_date()
         )
+
+        if len(sensor_records_grouped_by_date) == 0:
+            raise Error("Sem nenhum registro cadastrado no sistema")
 
         chart = Chart(sensor_records_grouped_by_date)
 

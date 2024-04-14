@@ -20,6 +20,9 @@ class DataAnalyserProvider:
         if self.__has_dataframe():
             self.dataframe = read_excel(self.dataframe).dropna()
 
+    def get_columns(self) -> List[str]:
+        return list(self.dataframe.columns)
+
     def convert_to_list_of_records(self) -> List[Dict] | None:
         if self.__has_dataframe():
             return self.dataframe.to_dict("records")

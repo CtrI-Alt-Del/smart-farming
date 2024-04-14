@@ -5,6 +5,7 @@ from datetime import datetime
 from core.commons.csv_file import CsvFile
 from core.commons.error import Error
 from core.entities.sensors_record import SensorsRecord
+from core.constants.csv_file_columns import CSV_FILE_COLUMNS
 
 from infra.repositories import sensors_records_repository
 
@@ -13,6 +14,15 @@ class CreateSensorsRecordsByCsvFile:
     def execute(self, file: FileStorage) -> None:
         try:
             csv_file = CsvFile(file)
+            csv_file.read()
+
+            has_valid_columns = csv_file.validate_columns(
+                CSV_FILE_COLUMNS["sensors_records"]
+            )
+
+            if not has_valid_columns:
+                raise Error("As colunas não estão corretas")
+
             records = csv_file.get_records()
 
             converted_records = self.__convert_csv_records_to_sensors_records(records)
@@ -21,7 +31,7 @@ class CreateSensorsRecordsByCsvFile:
                 sensors_records_repository.create_sensors_record(sensors_record)
 
         except Error as error:
-            raise Error(error)
+            raise error
 
     def __convert_csv_records_to_sensors_records(
         self, records: List[Dict]
