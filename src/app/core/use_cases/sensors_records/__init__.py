@@ -1,7 +1,7 @@
 from .create_sensors_records_by_csv_file import CreateSensorsRecordsByCsvFile
 from .get_sensors_dashboard_page_data import GetSensorDashboardPageData
-from .get_last_record import GetLastSensorsRecord
+from .get_last_sensors_record import GetLastSensorsRecord
 
 create_sensors_records_by_csv_file = CreateSensorsRecordsByCsvFile()
 get_sensors_dashboard_page_data = GetSensorDashboardPageData()
-get_last_record = GetLastSensorsRecord()
+get_last_sensors_record = GetLastSensorsRecord()
