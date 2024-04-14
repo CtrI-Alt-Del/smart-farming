@@ -2,6 +2,15 @@
 
 DROP TABLE IF EXISTS sensors_records;
 
+CREATE TABLE IF NOT EXISTS sensors_records (
+  id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
+  soil_humidity INT NOT NULL,
+  ambient_humidity INT NOT NULL,
+  temperature DECIMAL(10, 2) NOT NULL,
+  water_volume DECIMAL(10, 2) NOT NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
 SELECT * FROM sensors_records ORDER BY created_at ASC
 LIMIT 30000;
 
