@@ -39,7 +39,21 @@ class SensorRecordsRepository:
 
         return rows
 
-    def _get_sensors_record(self, row: Dict) -> SensorsRecord:
+    def get_last_sensors_record(self):
+        sql_data = """
+            SELECT 
+                soil_humidity, ambient_humidity, temperature, water_volume, created_at
+            FROM sensors_records
+            ORDER BY created_at DESC
+            LIMIT 1;
+        """
+
+        row = mysql.query(sql=sql_data, is_single=True)
+
+        if row:
+            return self.__get_sensors_record(row)
+
+    def __get_sensors_record(self, row: Dict) -> SensorsRecord:
         if row:
             return SensorsRecord(
                 ambient_humidity=row["ambient_humidity"],

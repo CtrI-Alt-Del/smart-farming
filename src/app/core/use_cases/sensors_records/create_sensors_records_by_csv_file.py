@@ -3,10 +3,10 @@ from werkzeug.datastructures import FileStorage
 from datetime import datetime
 
 from core.commons.csv_file import CsvFile
+from core.commons.error import Error
 from core.entities.sensors_record import SensorsRecord
 
 from infra.repositories import sensors_records_repository
-from infra.utils.error import Error
 
 
 class CreateSensorsRecordsByCsvFile:
@@ -21,7 +21,7 @@ class CreateSensorsRecordsByCsvFile:
                 sensors_records_repository.create_sensors_record(sensors_record)
 
         except Error as error:
-            raise error
+            raise Error(error)
 
     def __convert_csv_records_to_sensors_records(
         self, records: List[Dict]

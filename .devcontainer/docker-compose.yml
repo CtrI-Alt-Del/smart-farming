@@ -4,6 +4,8 @@ services:
  database:
     image: 'bitnami/mysql:latest'
     container_name: 'smart-farming-mysql'
+    env_file:
+      - ../.env
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_DATABASE_PASSWORD}
       MYSQL_PASSWORD: ${MYSQL_DATABASE_PASSWORD}
