@@ -2,13 +2,13 @@
   <img src="./src/ui/static/images/logo.svg" alt="Smart Farming" width="500" height="200" />
 </div>
 
+---
+
 ## Visão geral do produto 🖥️
 
 Smart Farming é um site web que visa facilitar o trabalho de monitoramento da estufa inteligente de mesmo nome mantida dentro da [FATEC de São José dos Campos](https://fatecsjc-prd.azurewebsites.net/). 
 
 A aplicação permite fazer o gerenciamento (adição, edição e deleção) dos dados coletados pela estufa, assim como apresenta um dashboard interativo, onde é possível verificar a evolução desses valores ao longo do tempo por meio de gráficos.
-
----
 
 ---
 
@@ -86,8 +86,6 @@ A aplicação permite fazer o gerenciamento (adição, edição e deleção) dos
 
 ---
 
----
-
 ## Problema do cliente 👔
 
 Atualmente a estufa é monitorada de maneira arcaica utilizando-se primariamente de [arquivos do tipo CSV](https://www.freecodecamp.org/portuguese/news/o-que-e-um-arquivo-csv-e-como-abrir-esse-formato-de-arquivo/) para registrar e armazenar informações a partir dos dados coletados pelos sensores da estufa, assim como as informações obtidas de um [Google Forms](https://workspace.google.com/intl/pt-BR/lp/forms/?utm_source=google&utm_medium=cpc&utm_campaign=latam-BR-all-pt-dr-bkws-all-all-trial-e-dr-1707806-LUAC0011908&utm_content=text-ad-none-any-DEV_c-CRE_666246535618-ADGP_Hybrid%20%7C%20BKWS%20-%20EXA%20%7C%20Txt-Forms-KWID_43700057676889044-kwd-10647024857&utm_term=KW_google%20forms-ST_google%20forms&gad_source=1&gclid=Cj0KCQjw2uiwBhCXARIsACMvIU0RToV-UJaKbeTi82kzMxsMZeYaZnjOi5IE7GjyBO431c9fjzVq1v8aAtrFEALw_wcB&gclsrc=aw.ds) para realizar o check-list, isto é, uma lista de itens que servem para validar os dados obtidos por esses sensores.
@@ -109,8 +107,6 @@ Posto o problema do cliente analisado, cabe a aplicação registrar esses dados 
 ## Metodologia empregada 💡
 
 Para a confecção do produto foi empregado o framework de [metodologia ágil Scrum](https://aws.amazon.com/pt/what-is/scrum/#:~:text=O%20Scrum%20%C3%A9%20um%20framework,uma%20entrega%20eficiente%20de%20projetos.), que consiste sumariamente dividir o desenvolvimento do projeto em Sprints, um conjunto de tarefas que devem ser executadas e desenvolvidas em um período pré-definido de tempo. Além disso, foi definido o Backlog do Produto, que são todas as funcionalidades que o software deverá ter com base nos requisitos levantados com o cliente. Uma vez aprovado por ele, para selecionar quais seriam as entregas das Sprints do projeto, primeiro foi definido o [MVP](https://rockcontent.com/br/blog/o-que-e-mvp/) de cada Sprint, que é uma versão do produto que prioriza as tarefas que trazem maior entrega de valor para o cliente. Então, a partir disso o Backlog do Produto foi dividido em 4 Backlog de Sprint.
-
----
 
 ---
 
@@ -328,8 +324,6 @@ os dados de checklist exibidos pelos gráficos para determinados períodos de di
 
 ---
 
----
-
 ## Relatório e detalhes de cada Sprint 📅
 
 - Sprint 1: [Acessar](https://github.com/CtrI-Alt-Del/smart-farming/blob/main/documentation/reports/sprint-1.md)
@@ -379,7 +373,6 @@ $ docker compose up
 > Provavelmente a aplicação estará sendo executada em http://127.0.0.1:5000
 > Provavelmente a aplicação estará sendo executada em http://127.0.0.1:5000
 
----
 ---
 
 ## Time de Desenvolvimento 👷🏻
