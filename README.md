@@ -95,7 +95,9 @@ Para a confecção do produto foi empregado o framework de [Metodologia Ágil Sc
 
 ### Sprint - 1️⃣
 
-`🚧 Em desenvolvimento 🚧`
+<video width="700" height="500" controls>
+  <source src="./documentation/videos/mvp-1.mp4" type="video/mp4">
+</video>
 
 ### Sprint - 2️⃣
 
