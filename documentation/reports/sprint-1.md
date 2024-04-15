@@ -29,7 +29,7 @@
 
 *Critérios de aceitação:*
 
-- Deve ser exibido um gráfico de linha para cada um desses valors:
+- Deve ser exibido um gráfico de linha para cada um desses valores:
   - Umidade do solo X Dias.
   - Umidade do ambiente X Dias.
   - Temperatura X Dias.

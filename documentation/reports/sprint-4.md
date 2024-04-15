@@ -1,8 +1,6 @@
 
 ### Sprint - 4️⃣
 
-#### Requisitos funcionais ✅
-
 - [ ] **Login**
 
 *História de usuário*
@@ -36,17 +34,17 @@
 - Nenhum campo pode ser nulo e devem ser exatamente iguais.
 - O usuário deve ser redirecionado para a página de login uma vez concluído a redefinição de senha.
 
-#### Requisitos não funcionais ☑️
+---
 
-- [ ] **Criptografia de senha**
+- [ ] **Deleção de planta**
 
-*História de usuário*
+*História de usuário:*
 
-> Como administrador, quero que minha senha sempre esteja criptografada para aumentar a segurança de acesso ao sistema.
+> Como administrador, quero poder deletar uma planta para que ela não fique mais registrada no sistema.
 
 *Critérios de aceitação:*
 
-- A senha deve ser criptografada utilizando o método bcrypt.
+- Ao deletar uma planta todos os registros, seja de checklist ou dos sensores, devem ter o campo planta como nulo.
 
 ---
 

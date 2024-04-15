@@ -117,18 +117,6 @@
 
 ---
 
-- [ ] **Deleção de planta**
-
-*História de usuário:*
-
-> Como administrador, quero poder deletar uma planta para que ela não fique mais registrada no sistema.
-
-*Critérios de aceitação:*
-
-- Ao deletar uma planta todos os registros, seja de checklist ou dos sensores, devem ser deletados também.
-
----
-
 - [ ] **Cadastro de dados dos sensores via formulário**
 
 *História de usuário:*
