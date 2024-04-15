@@ -3,7 +3,7 @@
 
 Smart Farming é um site web que visa facilitar o trabalho de monitoramento da estufa inteligente de mesmo nome mantida dentro da [FATEC de São José dos Campos](https://fatecsjc-prd.azurewebsites.net/). 
 
-A aplicação permite fazer o gerenciamento (adição, edição e deleção) dos dados coletados pela estufa, assim como apresenta um dashboard interativo onde é possível verificar a evolução desses valores ao longo do tempo por meio de gráficos.
+A aplicação permite fazer o gerenciamento (adição, edição e deleção) dos dados coletados pela estufa, assim como apresenta um dashboard interativo, onde é possível verificar a evolução desses valores ao longo do tempo por meio de gráficos.
 
 ## Tecnologias 🛠️
 <table>
@@ -77,25 +77,30 @@ A aplicação permite fazer o gerenciamento (adição, edição e deleção) dos
 
 ## Problema do cliente 👔
 
-Atualmente a estufa é monitorada de maneira arcaica utilizando-se primariamente de [arquivos do tipo CSV](https://www.freecodecamp.org/portuguese/news/o-que-e-um-arquivo-csv-e-como-abrir-esse-formato-de-arquivo/) para registrar e armazenar informações a partir dos dados coletados pelos sensores da estufa, assim como as informações obtidas de uma [Google Forms](https://workspace.google.com/intl/pt-BR/lp/forms/?utm_source=google&utm_medium=cpc&utm_campaign=latam-BR-all-pt-dr-bkws-all-all-trial-e-dr-1707806-LUAC0011908&utm_content=text-ad-none-any-DEV_c-CRE_666246535618-ADGP_Hybrid%20%7C%20BKWS%20-%20EXA%20%7C%20Txt-Forms-KWID_43700057676889044-kwd-10647024857&utm_term=KW_google%20forms-ST_google%20forms&gad_source=1&gclid=Cj0KCQjw2uiwBhCXARIsACMvIU0RToV-UJaKbeTi82kzMxsMZeYaZnjOi5IE7GjyBO431c9fjzVq1v8aAtrFEALw_wcB&gclsrc=aw.ds) para realizar o check-list, isto é, uma lista de itens que servem para validar os dados obtidos por esses sensores.
+Atualmente a estufa é monitorada de maneira arcaica utilizando-se primariamente de [arquivos do tipo CSV](https://www.freecodecamp.org/portuguese/news/o-que-e-um-arquivo-csv-e-como-abrir-esse-formato-de-arquivo/) para registrar e armazenar informações a partir dos dados coletados pelos sensores da estufa, assim como as informações obtidas de um [Google Forms](https://workspace.google.com/intl/pt-BR/lp/forms/?utm_source=google&utm_medium=cpc&utm_campaign=latam-BR-all-pt-dr-bkws-all-all-trial-e-dr-1707806-LUAC0011908&utm_content=text-ad-none-any-DEV_c-CRE_666246535618-ADGP_Hybrid%20%7C%20BKWS%20-%20EXA%20%7C%20Txt-Forms-KWID_43700057676889044-kwd-10647024857&utm_term=KW_google%20forms-ST_google%20forms&gad_source=1&gclid=Cj0KCQjw2uiwBhCXARIsACMvIU0RToV-UJaKbeTi82kzMxsMZeYaZnjOi5IE7GjyBO431c9fjzVq1v8aAtrFEALw_wcB&gclsrc=aw.ds) para realizar o check-list, isto é, uma lista de itens que servem para validar os dados obtidos por esses sensores.
 
-Os dados colhidos pelos sensores são armazenados em um cartão *microSD*. Para fazer o registro desses dados em um arquivo CSV é preciso retirar o cartão, o que acaba não se tornando prático e até perigoso em virtude da fragilidade dessa peça. Para evitar isso, atualmente o cliente converte os dados contidos nesse cartão em um único arquivo CSV de forma automatizada, porém o backup desse arquivo acaba utilizando espaço de armazenamento desnecessário. Além disso, para verificar que esses dados estão de fato sendo registrados, o cliente necessita ficar fisicamente presente dentro da Fatec, o que nem sempre é possível.
+Os dados colhidos pelos sensores são armazenados em um cartão *microSD*. Para fazer o registro desses dados em um arquivo CSV é preciso retirar o cartão, o que acaba não se tornando prático e até perigoso em virtude da fragilidade dessa peça. Para evitar isso, atualmente o cliente converte os dados contidos nesse cartão em um único arquivo CSV de forma automatizada, porém o backup desse arquivo acaba utilizando espaço de armazenamento desnecessário. Além disso, para verificar que esses dados estão de fato sendo registrados, o cliente necessita ficar fisicamente presente dentro da FATEC, o que nem sempre é possível.
 
 Para fazer a análise de dados a fim de obter *insights* e reduzir potenciais problemas com relação ao andamento da estufa são constrúidos gráficos no *Excel* a partir dos arquivos CSV, porém não são tão interativos e são de difícil manutenção.
 
 ## Objetivo do produto 🎯
 
-Posto o ploblema do cliente analisado, cabe ao dashboard registrar esses dados de forma automatizada e exibí-las, tanto em forma de tabela, quanto de gráfico, bem como as funcionalidades de adicionar, editar e deletar esses registros, em que apenas um usuário com permissão (administrador) poderá fazer esse tipo de gerenciamento, bastando apenas que ele acesse o sitema via e-mail e senha. O site deve ser aberto a todo público e ressaltar o andamento da estufa com base nos dados que venham a ser cadastrados no sistema. 
+Posto o problema do cliente analisado, cabe a aplicação registrar esses dados de forma automatizada e exibi-las, tanto em forma de tabela, quanto de gráfico, bem como ter as funcionalidades de adicionar, editar e deletar esses registros, em que apenas um usuário com permissão (administrador) poderá fazer esse tipo de gerenciamento, bastando apenas que ele acesse o sitema via e-mail e senha. Além disso, o site em questão deve ser acessível em qualquer lugar e aberto a todo público, como também ressaltar o andamento da estufa com base nos dados que venham a ser cadastrados no sistema. 
 
 ## Metodologia empregada 💡
 
-Para a confecção do produto foi empregado o framework de [Metodologia Ágil Scrum](https://aws.amazon.com/pt/what-is/scrum/#:~:text=O%20Scrum%20%C3%A9%20um%20framework,uma%20entrega%20eficiente%20de%20projetos.), que consiste sumariamente dividir o desenvolvimento do projeto utilizadas em Sprints, um conjunto de tarefas que devem ser executadas e desenvolvidas em um período pré-definido de tempo. Para selecionar quais seriam as entregas das Sprints do projeto, primeiro foi definido o [MVP](https://rockcontent.com/br/blog/o-que-e-mvp/), que consiste em uma versão do produto que prioriza as tarefas que teazem maior entrega de valor para o cliente. Então, a partir das Tarefas foi construído o Backlog do Produto, o qual foi aprovado pelo cliente e dividido em 4 Backlog de Sprint.
+Para a confecção do produto foi empregado o framework de [metodologia ágil Scrum](https://aws.amazon.com/pt/what-is/scrum/#:~:text=O%20Scrum%20%C3%A9%20um%20framework,uma%20entrega%20eficiente%20de%20projetos.), que consiste sumariamente dividir o desenvolvimento do projeto em Sprints, um conjunto de tarefas que devem ser executadas e desenvolvidas em um período pré-definido de tempo. Além disso, foi definido o Backlog do Produto, que são todas as funcionalidades que o software deverá ter com base nos requisitos levantados com o cliente. Uma vez aprovado por ele, para selecionar quais seriam as entregas das Sprints do projeto, primeiro foi definido o [MVP](https://rockcontent.com/br/blog/o-que-e-mvp/) de cada Sprint, que é uma versão do produto que prioriza as tarefas que trazem maior entrega de valor para o cliente. Então, a partir disso o Backlog do Produto foi dividido em 4 Backlog de Sprint.
 
 ## MVP'S 🏆
 
 ### Sprint - 1️⃣
 
-https://github.com/CtrI-Alt-Del/smart-farming/assets/64440486/a07de2cb-a75b-4ed2-86f6-122a39492bcd
+<video width="700" height="500" controls>
+  <source src="./documentation/videos/mvp-1.mp4" type="video/mp4">
+</video>
+
+[![Video](http://img.youtube.com/vi/YOUR_VIDEO_ID_HERE/0.jpg)](path/to/your/video.mp4)
+
 
 ### Sprint - 2️⃣
 
@@ -271,7 +276,7 @@ os dados de checklist exibidos pelos gráficos para determinados períodos de di
     </tr>
      <tr>
       <td>Backup automatizado dos dados de registros.</td>
-      <td>Como mantenedor da estufa, quero que o sistema faça backup dos registros (do sensores ou check-list) para que esses valores sejam recuperados em caso de eventual perda.</td>
+      <td>Como mantenedor da estufa, quero que o sistema faça backup dos registros (dos sensores ou check-list) para que esses valores sejam recuperados em caso de eventual perda.</td>
       <td>BAIXA</td>
       <td>3</td>
     </tr>
