@@ -346,10 +346,7 @@ $ code .
 - Abra a aba de extensões no VSCode
 - Baixe a extensão [Database Client](https://marketplace.visualstudio.com/items?itemName=cweijan.vscode-database-client2) do Vscode 
 - Abra a extensao Database Client no VSCode e insira os dados da sua rede
-- Abra o arquivo [schema.sql](src/app/infra/database/scripts/schema.sql)
-- Ative a conexão (clique no simbolo do cadeado)
-- Execute a tabela 
-
+- Abra o terminal
 ```bash
 # Execute o container
 $ docker compose up
