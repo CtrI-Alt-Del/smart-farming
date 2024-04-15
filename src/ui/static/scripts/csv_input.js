@@ -31,11 +31,10 @@ class CsvInput {
   }
 
   handleSubmitButtonClick(submitButton, submitIcon, loading) {
-    submitButton.setAttribute("disabled", "true")
-    submitIcon.remove()
-
-    loading.classList.remove("hidden")
-    loading.classList.add("grid")
+    // submitButton.setAttribute("disabled", "true")
+    // submitIcon.remove()
+    // loading.classList.remove("hidden")
+    // loading.classList.add("grid")
   }
 }
 
