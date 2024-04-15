@@ -1,3 +1,4 @@
+-- Active: 1712602370861@@localhost@3306
 CREATE DATABASE IF NOT EXISTS `smart-farming`;
 
 USE DATABASE `smart-farming`;
