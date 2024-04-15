@@ -95,10 +95,7 @@ Para a confecção do produto foi empregado o framework de [Metodologia Ágil Sc
 
 ### Sprint - 1️⃣
 
-<!-- ./documentation/videos/mvp-1.mp4 -->
-
-<iframe width="560" height="315" src="./documentation/videos/mvp-1.mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
+https://github.com/CtrI-Alt-Del/smart-farming/assets/64440486/a07de2cb-a75b-4ed2-86f6-122a39492bcd
 
 ### Sprint - 2️⃣
 
