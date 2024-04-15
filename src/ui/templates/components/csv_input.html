@@ -1,3 +1,5 @@
+{% from "components/loading.html" import loading %}
+
 {% macro csv_input(url, csv_form) %}
 
 <form
@@ -6,20 +8,27 @@
   method="post"
   enctype="multipart/form-data">
   {{ csv_form.csrf_token }}
-
   <span>
-    <label for="file_input"
+    <label for="input"
       class="p-2 m-1 text-white bg-gray-700 cursor-pointer rounded-xl">
       <i class="ph-bold ph-upload-simple"></i>
-      <span>Importar CSV</span>
-      <input type="file" name="csv" id="file_input" hidden>
+      <span class="text-sm">Importar CSV</span>
+      <input data-csv-input="input" id="input" type="file" name="csv" hidden>
     </span>
-    <button type="submit">
+    <button data-csv-input="submit-button" type="submit">
+      <div data-csv-input="loading"
+        class="hidden w-32 p-2 bg-gray-700 place-content-center rounded-xl">
+        {{
+        loading(
+        class="w-[16px] h-[16px]",
+        )
+        }}
+      </div>
       <div
-        id="submit-icon"
-        class="items-center hidden animate-fade-right">
+        data-csv-input="submit-icon"
+        class="items-center hidden gap-1 p-2 text-xs text-gray-100 bg-gray-700 rounded-xl animate-fade-right">
         <i
-          class="p-[0.30rem] text-xl text-white rounded-full bg-[#374151] ph ph-arrow-fat-line-right"></i>
+          class="text-base text-gray-100 ph ph-arrow-fat-line-right"></i>
       </div>
     </button>
   </span>

@@ -18,8 +18,10 @@ def create_sensors_records_by_csv_file_view():
         if csv_form.validate_on_submit():
             create_sensors_records_by_csv_file.execute(request.files["csv"])
     except Error as error:
-        print("ui_message", error.ui_message)
-        return redirect("/")
+        print("ui_message", error.ui_message, flush=True)
+        return redirect(
+            url_for("sensors_records_views.sensors_records_table_page_view")
+        )
 
     return redirect(
         url_for("sensors_records_views.sensors_records_dashboard_page_view")

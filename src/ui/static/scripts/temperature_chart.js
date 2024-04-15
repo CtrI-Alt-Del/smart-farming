@@ -1,14 +1,12 @@
-class TemperatureChart{
+class TemperatureChart {
   constructor() {
     const container = document.querySelector(
       '[data-temperature-chart="container"]',
     )
 
-    const select = document.querySelector(
-      '[data-temperature-chart="select"]',
-    )
+    const select = document.querySelector('[data-temperature-chart="select"]')
 
-    if (container && select && typeof ApexCharts !== 'undefined') {
+    if (container && select && typeof ApexCharts !== "undefined") {
       const initialData = this.getSelectedData("7 days")
       const initialDates = this.getSelectedDates("7 days")
       const initialAverage = this.getAverage("7 days")
@@ -22,7 +20,7 @@ class TemperatureChart{
 
       this.chart = chart
 
-      select.addEventListener('change', (event) =>
+      select.addEventListener("change", (event) =>
         this.handleSelectChange(event),
       )
       this.updateAverageValue(initialAverage)
@@ -43,8 +41,8 @@ class TemperatureChart{
     return {
       chart: {
         height: 200,
-        type: 'area',
-        fontFamily: 'Inter, sans-serif',
+        type: "area",
+        fontFamily: "Inter, sans-serif",
         dropShadow: {
           enabled: false,
         },
@@ -58,16 +56,16 @@ class TemperatureChart{
           show: false,
         },
         y: {
-          show: true
-        }
+          show: true,
+        },
       },
       fill: {
-        type: 'gradient',
+        type: "gradient",
         gradient: {
           opacityFrom: 0.55,
           opacityTo: 0,
-          shade: '#F05353',
-          gradientToColors: ['#F05353'],
+          shade: "#F05353",
+          gradientToColors: ["#F05353"],
         },
       },
       dataLabels: {
@@ -87,9 +85,9 @@ class TemperatureChart{
       },
       series: [
         {
-          name: 'Temperatura',
+          name: "Temperatura",
           data: data,
-          color: '#F05353',
+          color: "#F05353",
         },
       ],
       xaxis: {
@@ -115,12 +113,10 @@ class TemperatureChart{
           formatter: (value) => {
             return `${value}ºC`
           },
-        }
+        },
       },
-    };
+    }
   }
-
-  
 
   getSelectedData(selectedDaysRange) {
     const chartDataField = document.querySelector(
@@ -128,7 +124,7 @@ class TemperatureChart{
     )
 
     if (chartDataField) {
-      const data = chartDataField.value.split(';').map(Number)
+      const data = chartDataField.value.split(";").map(Number)
       return data
     }
 
@@ -141,7 +137,7 @@ class TemperatureChart{
     )
 
     if (chartDatesField) {
-      const dates = chartDatesField.value.split(';')
+      const dates = chartDatesField.value.split(";")
       return dates
     }
 
@@ -150,7 +146,7 @@ class TemperatureChart{
 
   getAverage(selectedDaysRange) {
     const averageValue = document.querySelector(
-      `[data-filtered-data-chart="${selectedDaysRange}"][name="temperature_average"]`
+      `[data-filtered-data-chart="${selectedDaysRange}"][name="temperature_average"]`,
     )
 
     return averageValue.value
@@ -159,16 +155,10 @@ class TemperatureChart{
   updateAverageValue(value) {
     const average = document.querySelector('[data-temperature-chart="average"]')
 
-
     if (average) {
       average.textContent = `${value}ºC`
     }
   }
 }
 
-window.addEventListener('load', () => new TemperatureChart())
-
-
-
-
-
+window.addEventListener("load", () => new TemperatureChart())

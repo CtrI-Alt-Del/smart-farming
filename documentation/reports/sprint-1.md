@@ -29,7 +29,7 @@
 
 *Critérios de aceitação:*
 
-- Deve ser exibido um gráfico de linha para cada um desses valors:
+- Deve ser exibido um gráfico de linha para cada um desses valores:
   - Umidade do solo X Dias.
   - Umidade do ambiente X Dias.
   - Temperatura X Dias.
@@ -87,6 +87,11 @@
 
 <img src="../images/sprint-1-burndown-chart.png" width="1000" height="500" alt="Grágico Burndown da primeira Sprint" />
 
+## Video 🎥
+
+[Click here to see the video](https://drive.google.com/file/d/1GZMoa42KLpK_B5ISBeGnKVZxhy86gHnh/view?usp=sharing)
+
 ## Slides for presentation 🎞️
 
-**<a href="../ppt/sprint-1-.ppt" download="sprint-1-apresentacao">Click to download the ppt</a>**
+**<a href="../ppt/sprint-1.pptx" _target="black" download="sprint-1-apresentacao">Click to download the ppt</a>**
+

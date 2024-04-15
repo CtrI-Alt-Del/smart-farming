@@ -1,7 +1,7 @@
 from core.entities.sensors_record import SensorsRecord
 
-from infra.repositories import sensors_records_repository
 from core.commons.error import Error
+from infra.repositories import sensors_records_repository
 
 
 class GetLastSensorsRecord:
