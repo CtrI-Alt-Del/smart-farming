@@ -89,4 +89,4 @@
 
 ## Slides for presentation 🎞️
 
-**<a href="../ppt/sprint-1-.ppt" download="sprint-1-apresentacao">Click to download the ppt</a>**
+**<a href="../ppt/sprint-1.pptx" _target="black" download="sprint-1-apresentacao">Click to download the ppt</a>**
