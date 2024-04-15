@@ -10,6 +10,8 @@ A aplicação permite fazer o gerenciamento (adição, edição e deleção) dos
 
 ---
 
+---
+
 ## Tecnologias 🛠️
 
 <div align="center">
@@ -82,6 +84,7 @@ A aplicação permite fazer o gerenciamento (adição, edição e deleção) dos
 </table>
 </div>
 
+---
 
 ---
 
@@ -101,9 +104,13 @@ Posto o problema do cliente analisado, cabe a aplicação registrar esses dados 
 
 ---
 
+---
+
 ## Metodologia empregada 💡
 
 Para a confecção do produto foi empregado o framework de [metodologia ágil Scrum](https://aws.amazon.com/pt/what-is/scrum/#:~:text=O%20Scrum%20%C3%A9%20um%20framework,uma%20entrega%20eficiente%20de%20projetos.), que consiste sumariamente dividir o desenvolvimento do projeto em Sprints, um conjunto de tarefas que devem ser executadas e desenvolvidas em um período pré-definido de tempo. Além disso, foi definido o Backlog do Produto, que são todas as funcionalidades que o software deverá ter com base nos requisitos levantados com o cliente. Uma vez aprovado por ele, para selecionar quais seriam as entregas das Sprints do projeto, primeiro foi definido o [MVP](https://rockcontent.com/br/blog/o-que-e-mvp/) de cada Sprint, que é uma versão do produto que prioriza as tarefas que trazem maior entrega de valor para o cliente. Então, a partir disso o Backlog do Produto foi dividido em 4 Backlog de Sprint.
+
+---
 
 ---
 
@@ -321,6 +328,8 @@ os dados de checklist exibidos pelos gráficos para determinados períodos de di
 
 ---
 
+---
+
 ## Relatório e detalhes de cada Sprint 📅
 
 - Sprint 1: [Acessar](https://github.com/CtrI-Alt-Del/smart-farming/blob/main/documentation/reports/sprint-1.md)
@@ -368,7 +377,9 @@ $ docker compose up
 
 ```
 > Provavelmente a aplicação estará sendo executada em http://127.0.0.1:5000
+> Provavelmente a aplicação estará sendo executada em http://127.0.0.1:5000
 
+---
 ---
 
 ## Time de Desenvolvimento 👷🏻
