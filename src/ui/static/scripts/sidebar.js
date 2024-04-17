@@ -1,6 +1,6 @@
 class Sidebar {
   constructor() {
-    this.links = document.querySelectorAll('[data-sidebar-link]')
+    this.links = document.querySelectorAll("[data-sidebar-link]")
 
     if (!this.links.length) return
 
@@ -13,13 +13,11 @@ class Sidebar {
         return
       }
 
-      if (slug == 'index' && currentUrl.at(-1) == '/') {
+      if (slug === "index" && currentUrl.at(-1) === "/") {
         link.style.backgroundColor = "#FDF6B2"
       }
     }
-
   }
 }
-
 
 window.addEventListener("load", () => new Sidebar())
