@@ -8,7 +8,6 @@ disable=
       R0903, # too-few-public-methods
       W0719, # broad-exception-raised
       W0622, # redefining built-in id
-      E0401, # import-error
       E1123, # unexpected-keyword-arg
       E0611, # no-name-in-module
 
