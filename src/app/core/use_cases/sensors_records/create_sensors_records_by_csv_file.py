@@ -16,12 +16,7 @@ class CreateSensorsRecordsByCsvFile:
             csv_file = CsvFile(file)
             csv_file.read()
 
-            has_valid_columns = csv_file.validate_columns(
-                CSV_FILE_COLUMNS["sensors_records"]
-            )
-
-            if not has_valid_columns:
-                raise Error("As colunas não estão corretas")
+            csv_file.validate_columns(CSV_FILE_COLUMNS["sensors_records"])
 
             records = csv_file.get_records()
 

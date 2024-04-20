@@ -7,5 +7,6 @@ CSV_FILE_COLUMNS = {
         "Umidade solo",
         "Temperatura",
         "Volume Água (L)",
-    ]
+    ],
+    "checklist_records": [],
 }
