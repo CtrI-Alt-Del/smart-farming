@@ -1,4 +1,4 @@
--- Active: 1712242301041@@127.0.0.1@3306
+-- Active: 1713806216316@@127.0.0.1@3306@smart-farming
 DROP TABLE IF EXISTS checklist_records;
 
 CREATE TABLE IF NOT EXISTS checklist_records (
@@ -26,5 +26,7 @@ CREATE TABLE IF NOT EXISTS checklist_records (
   plantation_type ENUM('PLANTIO INTERNO(FATEC)', 'PLANTIO EXTERNO(CASA)'),
   fertiliziation_date DATE NOT NULL DEFAULT (CURDATE()),
   harvested_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  report TEXT
+  report TEXT,
+  plant_id CHAR(36) DEFAULT '8fc5808a-00de-11ef-8cc2-0242ac150002',
+  FOREIGN KEY (plant_id) REFERENCES plants(id)
 );
