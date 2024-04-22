@@ -12,8 +12,6 @@ CREATE TABLE IF NOT EXISTS sensors_records (
   plant_id CHAR(36) DEFAULT '8fc5808a-00de-11ef-8cc2-0242ac150002',
   FOREIGN KEY (plant_id) REFERENCES plants(id)
 );
-INSERT INTO sensors_records (soil_humidity, ambient_humidity, temperature, water_volume, created_at) 
-VALUES (1, 1, 5, 5, '2005-09-30 00:00:00');
 
 SELECT * FROM sensors_records ORDER BY created_at ASC
 LIMIT 30000;

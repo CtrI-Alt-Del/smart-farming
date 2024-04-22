@@ -1,0 +1,3 @@
+from .create_plants_records_by_csv_file import CreatePlantsRecordsByCsvFile
+
+create_plants_records_by_csv_file = CreatePlantsRecordsByCsvFile()
