@@ -3,8 +3,8 @@ from typing import List
 from infra.database import mysql
 
 
-class CheckListRecordsRepository:
-    def create_checklist_record(self, plants_record: PlantsRecord):
+class PlantsRecordsRepository:
+    def create_plants_record(self, plants_record: PlantsRecord):
         sql = """
         INSERT INTO plants
         (name, hex_color)
