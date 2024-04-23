@@ -9,12 +9,12 @@ from core.commons.date import Date
 @dataclass
 class CheckListRecord(Entity):
     soil_ph: int = None
-    soil_humidity: int = None
     water_consumption: int = None
-    air_humidity: int = None
-    temperature: int = None
-    illuminance: int = None
-    lai: int = None
+    air_humidity: float = None
+    soil_humidity: float = None
+    temperature: float = None
+    illuminance: float = None
+    lai: float = None
     leaf_apperance: str = None
     leaf_color: str = None
     plantation_type: str = None
