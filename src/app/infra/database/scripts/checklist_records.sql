@@ -1,4 +1,4 @@
--- Active: 1713806216316@@127.0.0.1@3306@smart-farming
+-- Active: 1713899386704@@127.0.0.1@3306@smart-farming
 DROP TABLE IF EXISTS checklist_records;
 
 CREATE TABLE IF NOT EXISTS checklist_records (
@@ -24,9 +24,11 @@ CREATE TABLE IF NOT EXISTS checklist_records (
    'OPACO PREDOMINANTE',
    'AVERMELHADO PREDOMINANTE'),
   plantation_type ENUM('PLANTIO INTERNO(FATEC)', 'PLANTIO EXTERNO(CASA)'),
-  fertiliziation_date DATE NOT NULL DEFAULT (CURDATE()),
-  harvested_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  fertilizer_expiration_date DATE NOT NULL DEFAULT (CURDATE()),
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   report TEXT,
   plant_id CHAR(36) DEFAULT '8fc5808a-00de-11ef-8cc2-0242ac150002',
   FOREIGN KEY (plant_id) REFERENCES plants(id)
 );
+
+SELECT * FROM checklist_records ORDER BY created_at
