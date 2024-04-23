@@ -6,8 +6,7 @@ from core.commons.csv_file import CsvFile
 from core.entities.checklist_record import CheckListRecord
 
 from infra.repositories import checklist_records_repository
-from infra.utils.error import Error
-
+from core.commons.error import Error
 
 class CreateCheckListRecordsByCsvFile:
     def execute(self, file: FileStorage) -> None:

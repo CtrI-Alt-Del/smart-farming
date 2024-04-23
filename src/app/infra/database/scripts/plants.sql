@@ -1,1 +1,10 @@
 DROP TABLE IF EXISTS plants;
+
+CREATE TABLE IF NOT EXISTS plants (
+  id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
+  name VARCHAR(36) NOT NULL,
+  hex_color VARCHAR(7) NOT NULL UNIQUE
+);
+
+INSERT INTO plants
+    (name, hex_color) VALUES ('alface','#D3F7EB');

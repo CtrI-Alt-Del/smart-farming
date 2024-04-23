@@ -1,4 +1,4 @@
--- Active: 1712602370861@@localhost@3306@smart-farming
+-- Active: 1713806216316@@127.0.0.1@3306@smart-farming
 
 DROP TABLE IF EXISTS sensors_records;
 
@@ -8,7 +8,9 @@ CREATE TABLE IF NOT EXISTS sensors_records (
   ambient_humidity INT NOT NULL,
   temperature DECIMAL(10, 2) NOT NULL,
   water_volume DECIMAL(10, 2) NOT NULL,
-  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  plant_id CHAR(36) DEFAULT '8fc5808a-00de-11ef-8cc2-0242ac150002',
+  FOREIGN KEY (plant_id) REFERENCES plants(id)
 );
 
 SELECT * FROM sensors_records ORDER BY created_at ASC
@@ -24,6 +26,7 @@ FROM sensors_records
 GROUP BY DATE(created_at)
 ORDER BY DATE(created_at) ASC
 LIMIT 20000;
+
 
 
 SELECT 
