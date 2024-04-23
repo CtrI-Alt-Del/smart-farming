@@ -15,29 +15,6 @@
       <option data-content="<i class='ph-bold ph-plant'></i>"></option>
     </select>
   </div>
-  <form
-    action="{{ url_for('checklist_records_views.create_checklist_record_by_form_view') }}"
-    method="post">
-    {{ checklist_record_form.csrf_token }}
-
-    {{ checklist_record_form.lai }}
-    {{ checklist_record_form.date }}
-    {{ checklist_record_form.fertilizer_expiration_date }}
-    {{ checklist_record_form.illuminance }}
-    {{ checklist_record_form.hour }}
-    {{ checklist_record_form.plantation_type }}
-    {{ checklist_record_form.leaf_apperance }}
-    {{ checklist_record_form.leaf_color }}
-    {{ checklist_record_form.air_humidity }}
-    {{ checklist_record_form.created_at }}
-    {{ checklist_record_form.report }}
-    {{ checklist_record_form.soil_humidity }}
-    {{ checklist_record_form.soil_ph }}
-    {{ checklist_record_form.water_consumption }}
-    {{ checklist_record_form.temperature }}
-    {{ checklist_record_form.plant_id }}
-    {{ checklist_record_form.submit_button }}
-  </form>
 </div>
 
 {% endblock dashboard_content %}
