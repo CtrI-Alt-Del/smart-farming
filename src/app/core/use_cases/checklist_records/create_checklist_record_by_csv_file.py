@@ -3,13 +3,13 @@ from werkzeug.datastructures import FileStorage
 from datetime import datetime
 
 from core.commons.csv_file import CsvFile
+from core.commons.error import Error
 from core.entities.checklist_record import CheckListRecord
 
 from infra.repositories import checklist_records_repository
-from infra.utils.error import Error
 
 
-class CreateCheckListRecordsByCsvFile:
+class CreateChecklistRecordsByCsvFile:
     def execute(self, file: FileStorage) -> None:
         try:
             csv_file = CsvFile(file)
@@ -53,5 +53,5 @@ class CreateCheckListRecordsByCsvFile:
                     hour=record_time.hour,
                     minute=record_time.minute,
                 ),
-                report=record["relatório"]
+                report=record["relatório"],
             )
