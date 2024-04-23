@@ -4,17 +4,29 @@ from flask_wtf import FlaskForm
 from wtforms import SelectField, DateField, SubmitField, IntegerField, TextAreaField
 from wtforms.validators import NumberRange
 
+from infra.repositories import plants_repository
+
 
 class ChecklistRecordForm(FlaskForm):
+    def __init__(self, formdata=None, **kwargs):
+        super().__init__(formdata, **kwargs)
+
+        plants = plants_repository.get_plants()
+
+        self.plant_id.choices = [(plant.id, plant.name) for plant in plants]
+
     plantation_type = SelectField(
         "Local de plantio",
-        choices=[("internal", "Plantio interno"), ("external", "Plantion externo")],
+        choices=[
+            ("PLANTIO INTERNO(FATEC)", "Interno"),
+            ("PLANTIO EXTERNO(CASA)", "Externo"),
+        ],
     )
     leaf_apperance = SelectField(
         "Aspecto das folhas",
         choices=[
-            ("PLANTIO INTERNO(FATEC)", "PLANTIO EXTERNO(CASA)"),
-            ("external", "Plantion externo"),
+            ("SAUDAVEL", "Saudável"),
+            ("MURCHA", "Murcha"),
         ],
     )
     leaf_color = SelectField(
@@ -59,7 +71,10 @@ class ChecklistRecordForm(FlaskForm):
     )
     date = DateField(
         "Data de coleta",
-        format="%d/%m/%Y",
+        render_kw={"max": datetime.now().strftime("%Y-%m-%d")},
+    )
+    fertilizer_expiration_date = DateField(
+        "Validade de adubação",
         render_kw={"max": datetime.now().strftime("%Y-%m-%d")},
     )
     hour = IntegerField("Hora de coleta", validators=[NumberRange(min=0, max=23)])
@@ -78,11 +93,6 @@ class ChecklistRecordForm(FlaskForm):
     )
     illuminance = IntegerField("Luminosidade (Lux)", validators=[NumberRange(min=0)])
     soil_ph = IntegerField("PH do solo", validators=[NumberRange(min=0, max=7)])
-    fertilizer_expiration_date = DateField(
-        "Validade de adubação",
-        format="%d/%m/%Y",
-        render_kw={"max": datetime.now().strftime("%Y-%m-%d")},
-    )
     report = TextAreaField("Algum desvio detectado?")
     plant_id = SelectField("Planta")
     submit_button = SubmitField("Enviar")

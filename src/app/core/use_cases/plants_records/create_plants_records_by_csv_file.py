@@ -3,7 +3,7 @@ from werkzeug.datastructures import FileStorage
 
 from core.commons.csv_file import CsvFile
 from core.commons.error import Error
-from app.core.entities.plant import PlantsRecord
+from core.entities.plant import PlantsRecord
 from core.constants.csv_file_columns import CSV_FILE_COLUMNS
 
 from infra.repositories import plants_records_repository

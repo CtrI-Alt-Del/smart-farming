@@ -18,11 +18,12 @@ class CheckListRecordsRepository:
             leaf_apperance,
             leaf_color,
             plantation_type,
-            fertiliziation_date,
-            harvested_at,
-            report
+            fertilizer_expiration_date,
+            created_at,
+            report,
+            plant_id
         )
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         """
         params = [
             checklist_record.soil_ph,
@@ -35,11 +36,13 @@ class CheckListRecordsRepository:
             checklist_record.leaf_apperance,
             checklist_record.leaf_color,
             checklist_record.plantation_type,
-            checklist_record.fertiliziation_date,
-            checklist_record.harvested_at,
+            checklist_record.fertilizer_expiration_date.get_value(),
+            checklist_record.created_at.get_value(),
             checklist_record.report,
+            checklist_record.plant.id,
         ]
 
+        print("EITA")
         mysql.mutate(sql, params)
 
     def update_checklist_record_by_id(self, checklist_record: CheckListRecord) -> None:
@@ -58,7 +61,8 @@ class CheckListRecordsRepository:
                 plantation_type = %s,
                 fertiliziation_date = %s,
                 harvested_at = %s,
-                report = %s
+                report = %s,
+                plant_id = %s
             WHERE id = %s
             """,
             params=[
@@ -75,6 +79,7 @@ class CheckListRecordsRepository:
                 checklist_record.fertiliziation_date,
                 checklist_record.harvested_at,
                 checklist_record.report,
+                checklist_record.plant.id,
                 checklist_record.id,
             ],
         )

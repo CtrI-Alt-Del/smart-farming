@@ -4,7 +4,7 @@ from core.use_cases.checklist_records import delete_checklist_records
 from core.commons.error import Error
 
 
-def create_checklist_records_view():
+def delete_checklist_records_view():
     try:
         delete_checklist_records.execute(request["checklist_records_ids"])
 
