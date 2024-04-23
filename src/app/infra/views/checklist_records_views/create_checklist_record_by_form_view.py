@@ -14,10 +14,6 @@ def create_checklist_record_by_form_view():
         redirect(url_for("checklist_records_views.checklist_records_table_page_view"))
     )
 
-    print(checklist_record_form.validate_on_submit())
-    print(checklist_record_form.data)
-    print(checklist_record_form.errors)
-
     if checklist_record_form.validate_on_submit():
         try:
             create_checklist_record_by_form.execute(

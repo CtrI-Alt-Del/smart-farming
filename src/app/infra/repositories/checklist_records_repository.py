@@ -1,5 +1,7 @@
 from core.entities.checklist_record import CheckListRecord
-from typing import List
+from core.commons.date import Date
+from core.commons.datetime import Datetime
+
 from infra.database import mysql
 
 
@@ -42,13 +44,13 @@ class CheckListRecordsRepository:
             checklist_record.plant.id,
         ]
 
-        print("EITA")
         mysql.mutate(sql, params)
 
     def update_checklist_record_by_id(self, checklist_record: CheckListRecord) -> None:
-        mysql.query(
+        mysql.mutate(
             """
-            UPDATE checklist_records
+            UPDATE checklist_records 
+            SET
                 soil_ph = %s, 
                 soil_humidity = %s,
                 water_consumption = %s,
@@ -59,8 +61,8 @@ class CheckListRecordsRepository:
                 leaf_apperance = %s,
                 leaf_color = %s,
                 plantation_type = %s,
-                fertiliziation_date = %s,
-                harvested_at = %s,
+                fertilizer_expiration_date = %s,
+                created_at = %s,
                 report = %s,
                 plant_id = %s
             WHERE id = %s
@@ -76,44 +78,59 @@ class CheckListRecordsRepository:
                 checklist_record.leaf_apperance,
                 checklist_record.leaf_color,
                 checklist_record.plantation_type,
-                checklist_record.fertiliziation_date,
-                checklist_record.harvested_at,
+                checklist_record.fertilizer_expiration_date.get_value(),
+                checklist_record.created_at.get_value(),
                 checklist_record.report,
                 checklist_record.plant.id,
                 checklist_record.id,
             ],
         )
 
-    def delete_checklist_record_by_id(self, checklist_record_id):
-        mysql.query(
+    def delete_checklist_record_by_id(self, checklist_record_id: str):
+        mysql.mutate(
             "DELETE FROM checklist_records WHERE id = %s",
             params=[
                 checklist_record_id,
             ],
         )
 
-    def get_checklist_records(self) -> List[CheckListRecord]:
+    def get_checklist_record_by_id(self, id: str) -> CheckListRecord | None:
+        print(id)
+        row = mysql.query(
+            sql="SELECT * FROM checklist_records WHERE id = %s",
+            is_single=True,
+            params=[id],
+        )
+
+        if row:
+            return self.__get_checklist_record_entity(row)
+
+        return None
+
+    def get_checklist_records(self) -> list[CheckListRecord]:
         select_query = "SELECT * FROM checklist_records"
         rows = mysql.query(sql=select_query, is_single=False)
         checklist_records = []
 
         for row in rows:
-            checklist_records.append(
-                CheckListRecord(
-                    id=row["id"],
-                    soil_ph=row["soil_ph"],
-                    soil_humidity=row["soil_humidity"],
-                    water_consumption=row["water_consumption"],
-                    air_humidity=row["air_humidity"],
-                    temperature=row["temperature"],
-                    illuminance=row["illuminance"],
-                    lai=row["lai"],
-                    leaf_apperance=row["leaf_apperance"],
-                    leaf_color=row["leaf_color"],
-                    plantation_type=row["plantation_type"],
-                    fertiliziation_date=row["fertiliziation_date"],
-                    harvested_at=row["harvested_at"],
-                    report=row["report"],
-                )
-            )
+            checklist_records.append(self.__get_checklist_record_entity(row))
+
         return checklist_records
+
+    def __get_checklist_record_entity(self, row: dict):
+        return CheckListRecord(
+            id=row["id"],
+            soil_ph=row["soil_ph"],
+            soil_humidity=row["soil_humidity"],
+            water_consumption=row["water_consumption"],
+            air_humidity=row["air_humidity"],
+            temperature=row["temperature"],
+            illuminance=row["illuminance"],
+            lai=row["lai"],
+            leaf_apperance=row["leaf_apperance"],
+            leaf_color=row["leaf_color"],
+            plantation_type=row["plantation_type"],
+            fertilizer_expiration_date=Date(row["fertilizer_expiration_date"]),
+            created_at=Datetime(row["created_at"]),
+            report=row["report"],
+        )

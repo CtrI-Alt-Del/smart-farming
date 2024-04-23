@@ -1,7 +1,9 @@
 from .create_checklist_record_by_csv_file import CreateChecklistRecordsByCsvFile
 from .create_checklist_record_by_form import CreateChecklistRecordByForm
+from .update_checklist_record import UpdateChecklistRecord
 from .delete_checklist_records import DeleteChecklistRecords
 
 create_checklist_records_by_csv_file = CreateChecklistRecordsByCsvFile()
 create_checklist_record_by_form = CreateChecklistRecordByForm()
+update_checklist_record = UpdateChecklistRecord()
 delete_checklist_records = DeleteChecklistRecords()

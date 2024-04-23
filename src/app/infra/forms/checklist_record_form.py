@@ -1,7 +1,14 @@
 from datetime import datetime
 
 from flask_wtf import FlaskForm
-from wtforms import SelectField, DateField, SubmitField, IntegerField, TextAreaField
+from wtforms import (
+    SelectField,
+    DateField,
+    SubmitField,
+    IntegerField,
+    TextAreaField,
+    StringField,
+)
 from wtforms.validators import NumberRange
 
 from infra.repositories import plants_repository
@@ -95,4 +102,8 @@ class ChecklistRecordForm(FlaskForm):
     soil_ph = IntegerField("PH do solo", validators=[NumberRange(min=0, max=7)])
     report = TextAreaField("Algum desvio detectado?")
     plant_id = SelectField("Planta")
+    id = StringField()
     submit_button = SubmitField("Enviar")
+
+
+# 6979a7cc-01b0-11ef-88a9-0242ac1b0002
