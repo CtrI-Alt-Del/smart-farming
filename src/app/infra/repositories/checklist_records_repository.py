@@ -4,10 +4,24 @@ from infra.database import mysql
 
 
 class CheckListRecordsRepository:
-    def create_checklist_record(self, checklist_record: CheckListRecord):
+    def create_checklist_record(self, checklist_record: CheckListRecord) -> None:
         sql = """
         INSERT INTO checklist_records
-        (soil_ph, soil_humidity, water_consumption, air_humidity, temperature, illuminance, lai, leaf_apperance, leaf_color, plantation_type, fertiliziation_date, harvested_at, report)
+        (
+            soil_ph,
+            soil_humidity,
+            water_consumption,
+            air_humidity,
+            temperature,
+            illuminance,
+            lai,
+            leaf_apperance,
+            leaf_color,
+            plantation_type,
+            fertiliziation_date,
+            harvested_at,
+            report
+        )
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         """
         params = [
@@ -27,6 +41,51 @@ class CheckListRecordsRepository:
         ]
 
         mysql.mutate(sql, params)
+
+    def update_checklist_record_by_id(self, checklist_record: CheckListRecord) -> None:
+        mysql.query(
+            """
+            UPDATE checklist_records
+                soil_ph = %s, 
+                soil_humidity = %s,
+                water_consumption = %s,
+                air_humidity = %s,
+                temperature = %s,
+                illuminance = %s,
+                lai = %s,
+                leaf_apperance = %s,
+                leaf_color = %s,
+                plantation_type = %s,
+                fertiliziation_date = %s,
+                harvested_at = %s,
+                report = %s
+            WHERE id = %s
+            """,
+            params=[
+                checklist_record.soil_ph,
+                checklist_record.soil_humidity,
+                checklist_record.water_consumption,
+                checklist_record.air_humidity,
+                checklist_record.temperature,
+                checklist_record.illuminance,
+                checklist_record.lai,
+                checklist_record.leaf_apperance,
+                checklist_record.leaf_color,
+                checklist_record.plantation_type,
+                checklist_record.fertiliziation_date,
+                checklist_record.harvested_at,
+                checklist_record.report,
+                checklist_record.id,
+            ],
+        )
+
+    def delete_checklist_record_by_id(self, checklist_record_id):
+        mysql.query(
+            "DELETE FROM checklist_records WHERE id = %s",
+            params=[
+                checklist_record_id,
+            ],
+        )
 
     def get_checklist_records(self) -> List[CheckListRecord]:
         select_query = "SELECT * FROM checklist_records"
@@ -50,6 +109,6 @@ class CheckListRecordsRepository:
                     fertiliziation_date=row["fertiliziation_date"],
                     harvested_at=row["harvested_at"],
                     report=row["report"],
-                )   
+                )
             )
         return checklist_records
