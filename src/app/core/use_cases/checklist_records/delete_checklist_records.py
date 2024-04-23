@@ -8,6 +8,16 @@ class DeleteChecklistRecords:
         try:
             for id in checklist_records_ids:
                 if id and isinstance(id, str):
+                    has_checklist_record = bool(
+                        checklist_records_repository.get_checklist_record_by_id(id)
+                    )
+
+                    if not has_checklist_record:
+                        raise Error(
+                            ui_message="Registro check-list não encontrado",
+                            internal_message="Checklist record not found",
+                        )
+
                     checklist_records_repository.delete_checklist_record_by_id(id)
 
         except Error as error:
