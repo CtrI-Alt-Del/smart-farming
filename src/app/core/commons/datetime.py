@@ -9,5 +9,5 @@ class Datetime:
         self.value = self.value.strftime("%d/%m/%Y %H:%M:%S")
         return self
 
-    def get_value(self) -> datetime | str:
-        return self.value
+    def get_value(self) -> str:
+        return self.value.__str__()
