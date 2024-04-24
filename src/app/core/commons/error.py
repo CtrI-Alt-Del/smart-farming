@@ -12,4 +12,6 @@ class Error(Exception):
         self.internal_message = internal_message
         self.status_code = status_code
 
+        print(self.internal_message, flush=True)
+
         cow_say(internal_message)

@@ -1,11 +1,11 @@
-from typing import List, Dict, Generator
-from werkzeug.datastructures import FileStorage
 from datetime import datetime
 
-from core.commons.csv_file import CsvFile
-from core.commons.error import Error
+from typing import List, Dict, Generator
+from werkzeug.datastructures import FileStorage
+
+from core.commons import CsvFile, Error
 from core.entities.sensors_record import SensorsRecord
-from core.constants.csv_file_columns import CSV_FILE_COLUMNS
+from core.constants import CSV_FILE_COLUMNS
 
 from infra.repositories import sensors_records_repository
 

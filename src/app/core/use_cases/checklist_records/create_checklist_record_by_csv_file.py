@@ -2,9 +2,8 @@ from typing import List, Dict, Generator
 from werkzeug.datastructures import FileStorage
 from datetime import datetime
 
-from core.commons.csv_file import CsvFile
-from core.commons.error import Error
-from core.entities.checklist_record import CheckListRecord
+from core.commons import CsvFile, Error
+from core.entities import CheckListRecord
 
 from infra.repositories import checklist_records_repository
 

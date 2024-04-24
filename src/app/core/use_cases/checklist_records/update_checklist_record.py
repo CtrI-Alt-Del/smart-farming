@@ -1,10 +1,7 @@
 from datetime import datetime, date
 
-from core.entities.checklist_record import CheckListRecord
-from core.entities.plant import Plant
-from core.commons.datetime import Datetime
-from core.commons.date import Date
-from core.commons.error import Error
+from core.entities import Plant, CheckListRecord
+from core.commons import Error, Date, Datetime
 
 from infra.repositories import checklist_records_repository
 

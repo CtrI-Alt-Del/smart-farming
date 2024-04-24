@@ -1,4 +1,4 @@
-from core.commons.error import Error
+from core.commons import Error
 
 from infra.repositories import checklist_records_repository
 

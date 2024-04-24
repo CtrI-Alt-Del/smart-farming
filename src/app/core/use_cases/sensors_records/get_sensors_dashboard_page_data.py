@@ -1,7 +1,6 @@
 from datetime import timedelta
 
-from core.commons.chart import Chart
-from core.commons.error import Error
+from core.commons import Chart, Error
 
 from infra.repositories import sensors_records_repository
 

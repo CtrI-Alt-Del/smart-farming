@@ -1,5 +1,5 @@
 from infra.repositories import checklist_records_repository
-from core.commons.chart import ChartFilter
+from core.commons import ChartFilter
 
 
 class GetChecklistDashboardPageData:
