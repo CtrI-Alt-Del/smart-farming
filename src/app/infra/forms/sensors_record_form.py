@@ -1,7 +1,13 @@
 from datetime import datetime
 
 from flask_wtf import FlaskForm
-from wtforms import DateField, SubmitField, IntegerField, SelectField, StringField
+from wtforms import (
+    DateField,
+    SubmitField,
+    IntegerField,
+    SelectField,
+    StringField,
+)
 from wtforms.validators import NumberRange
 
 from infra.repositories import plants_repository
@@ -36,7 +42,7 @@ class SensorsRecordsForm(FlaskForm):
     )
 
     plant_id = SelectField("Planta")
-    
+
     id = StringField()
 
     submit_button = SubmitField("Enviar")
