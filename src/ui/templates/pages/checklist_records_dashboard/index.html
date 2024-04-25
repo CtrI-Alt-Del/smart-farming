@@ -2,6 +2,25 @@
 
 {% block dashboard_content %}
 
-<h1>Checklist Dashboard</h1>
+<div class="mt-6 px-12 py-6 bg-[#ffffff] rounded-md shadow-2xl border">
+    <div class="mt-10 mb-4 text-[25px]  ">
+        <h1>Registros Checklist</h1>
+    </div>
+    <hr class="bg-black h-[0.5px] mb-10">
+
+    <div class="">
+        <div class="flex items-center justify-between">
+            
+            {% include 'components/datepicker.html' %}
+
+            <div class="flex justify-end">
+                <button type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-16 my-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Adicionar registro</button>
+            </div>
+        </div>
+    </div>
+    
+</div>   
+
+<script src="{{ url_for('static', filename='scripts/datepicker.js') }}"></script>
 
 {% endblock dashboard_content %}
