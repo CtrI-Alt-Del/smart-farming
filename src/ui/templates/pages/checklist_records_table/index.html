@@ -4,7 +4,7 @@
 {% block dashboard_content %}
 
 <div class="flex items-center gap-3 pb-6 mt-10 mb-10 border-b-2 border-gray-300">
-  <h1 class="text-2xl font-bold">Registro dos sensores</h1>
+  <h1 class="text-2xl font-bold">Registro do checklist</h1>
 </div>
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -23,31 +23,41 @@
     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
       <tr>
         <th scope="col" class="p-4">
-          <!-- <div class="flex items-center">
-            <input id="checkbox-all" type="checkbox"
-              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-            <label for="checkbox-all" class="sr-only">checkbox</label>
-          </div> -->
         </th>
         <th scope="col" class="px-6 py-3">
-          DATA E HORA
+          DATA E HORA DE COLETA
         </th>
         <th scope="col" class="px-6 py-3">
-          HUMIDADE DO SOLO (%)
+          LOCAL DE PLATIO
         </th>
         <th scope="col" class="px-6 py-3">
-          HUMIDADE DO AMBIENTE (%)
+          UMIDADE DO SOLO
         </th>
         <th scope="col" class="px-6 py-3">
-          TEMPERATURA
+          PH DO SOLO
         </th>
         <th scope="col" class="px-6 py-3">
-          PLANTA
+          VALIDAÇÃO DE ADUBAÇÃO
+        </th>
+        <th scope="col" class="px-6 py-3">
+          CONSUMO DE ÁGUA (mL)
+        </th>
+        <th scope="col" class="px-6 py-3">
+          TEMPERATURA AMBIENTE
+        </th>
+        <th scope="col" class="px-6 py-3">
+          UMIDADE AMBIENTE
+        </th>
+        <th scope="col" class="px-6 py-3">
+          LUMINOSIDADE
+        </th>
+        <th scope="col" class="px-6 py-3">
+          
         </th>
       </tr>
     </thead>
     <tbody>
-      {{ checklist_item("2021-10-10", "10:25", "10", "10", "10", "Beterraba", "bg-[#EDEBFE]")}}
+      {{ checklist_item("2021-10-10", "10:25", "PLANTIO INTERNO", "10", "10", "Beterraba", "bg-[#EDEBFE]")}}
       <!-- {% for i in checklist_records %}
       {% endfor %} -->
     </tbody>
