@@ -12,6 +12,7 @@ def sensors_records_table_page_view():
     page_number = request.args.get("page", 0)
 
     create_sensors_records_form = SensorsRecordsForm()
+    update_sensors_records_form = SensorsRecordsForm()
 
     csv_form = CsvForm()
     try:
@@ -19,11 +20,11 @@ def sensors_records_table_page_view():
             page_number=page_number
         )
 
-        print(plants, flush=True)
         return render_template(
             "pages/sensors_records_table/index.html",
             csv_form=csv_form,
-            sensors_records_form=create_sensors_records_form,
+            create_sensors_records_form=create_sensors_records_form,
+            update_sensors_records_form=update_sensors_records_form,
             sensors_records=sensors_records,
             plants=plants,
         )
