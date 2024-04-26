@@ -1,3 +1,5 @@
+{% macro checklist_item(date, hour, soil_humidity, ambient_humidity, temperature, plant_name, plant_tag_color)%}
+
 <tr
     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
     <td class="w-4 p-4">
@@ -7,21 +9,25 @@
             <label for="checkbox-table-1" class="sr-only">checkbox</label>
         </div>
     </td>
-    <th scope="row"
-        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-        Apple MacBook Pro 17"
+    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+        <b>{{date}} {{hour}}</b>
     </th>
     <td class="px-6 py-4">
-        Silver
+        {{soil_humidity}}
     </td>
     <td class="px-6 py-4">
-        Laptop
+        {{ambient_humidity}}
     </td>
     <td class="px-6 py-4">
-        $2999
+        {{temperature}}
     </td>
     <td class="px-6 py-4">
-        <a href="#"
-            class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+        <p class="rounded-md w-max {{plant_tag_color}} text-black font-semibold py-1 px-2">{{plant_name}}</p>
     </td>
 </tr>
+
+<script>
+    
+</script>
+
+{% endmacro %}
