@@ -5,7 +5,7 @@
 {% set input_class =
 "p-4 bg-[#ffffff] mt-3 w-52 rounded-lg"%}
 
-<div class="mt-6 px-12 py-6 border bg-[#ffffff] rounded-md shadow-2xl">
+<div class="mt-6 px-12 py-6 border bg-[#ffffff] rounded-md shadow-2xl animate-fade-up animate-delay-100">
   <div class="flex flex-col h-auto rounded-2xl">
     <header class="container pb-5">
       <div class="w-60">
@@ -13,7 +13,7 @@
       </div>
     </header>
 
-    <div class="flex justify-center items-center gap-1">
+    <div class="flex items-center justify-center gap-1">
       <span>Manualmente</span> <span>ou</span>
       {{
       csv_input(url=url_for("sensors_records_views.create_sensors_records_by_csv_file_view"),
@@ -116,7 +116,7 @@
 
     </div>
   </div>
-  <div class="flex justify-center items-center gap-4 mt-6">
+  <div class="flex items-center justify-center gap-4 mt-6">
     {{ sensors_records_form.submit_button(class='w-24 focus:outline-none text-white bg-gray-700 hover:bg-gray-800
     focus:ring-4 focus:ring-gray-600 font-medium rounded-2xl text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-gray-950') }}
     </button>
