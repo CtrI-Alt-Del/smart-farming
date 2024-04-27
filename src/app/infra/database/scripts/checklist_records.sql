@@ -27,8 +27,38 @@ CREATE TABLE IF NOT EXISTS checklist_records (
   fertilizer_expiration_date DATE NOT NULL DEFAULT (CURDATE()),
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   report TEXT,
-  plant_id CHAR(36) DEFAULT '8fc5808a-00de-11ef-8cc2-0242ac150002',
+  plant_id CHAR(36) DEFAULT 'd196b612-034c-11ef-bd0e-0242ac140002',
   FOREIGN KEY (plant_id) REFERENCES plants(id)
+);
+
+INSERT INTO checklist_records (
+  soil_ph,
+  soil_humidity,
+  water_consumption,
+  air_humidity,
+  temperature,
+  illuminance,
+  lai,
+  leaf_apperance,
+  leaf_color,
+  plantation_type,
+  fertilizer_expiration_date,
+  report,
+  plant_id
+) VALUES (
+  6.5, -- soil_ph
+  50.0, -- soil_humidity
+  1000.0, -- water_consumption
+  70.0, -- air_humidity
+  25.0, -- temperature
+  50000.0, -- illuminance
+  3.5, -- lai
+  'SAUDAVEL', -- leaf_apperance
+  'VERDE CLARO DOMINANTE', -- leaf_color
+  'PLANTIO INTERNO(FATEC)', -- plantation_type
+  CURDATE(), -- fertilizer_expiration_date
+  'Relatório de checagem', -- report
+  'd196b612-034c-11ef-bd0e-0242ac140002' -- plant_id
 );
 
 SELECT * FROM checklist_records ORDER BY created_at
