@@ -11,14 +11,14 @@ from wtforms import (
 )
 from wtforms.validators import NumberRange
 
-from infra.repositories import plants_repository
+from infra.repositories import plant_repository
 
 
 class ChecklistRecordForm(FlaskForm):
     def __init__(self, formdata=None, **kwargs):
         super().__init__(formdata, **kwargs)
 
-        plants = plants_repository.get_plants()
+        plants = plant_repository.get_plants()
 
         self.plant_id.choices = [(plant.id, plant.name) for plant in plants]
 
