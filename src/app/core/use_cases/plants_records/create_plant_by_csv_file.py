@@ -6,7 +6,7 @@ from core.commons.error import Error
 from core.entities.plant import Plant
 from core.constants.csv_file_columns import CSV_FILE_COLUMNS
 
-from infra.repositories import plants_repository
+from infra.repositories import plant_repository
 
 
 class CreatePlantByCsvFile:
@@ -22,7 +22,7 @@ class CreatePlantByCsvFile:
             converted_records = self.__convert_csv_records_to_plants_records(records)
 
             for plants_record in converted_records:
-                plants_repository.create_plants_record(plants_record)
+                plant_repository.create_plants_record(plants_record)
 
         except Error as error:
             raise error
