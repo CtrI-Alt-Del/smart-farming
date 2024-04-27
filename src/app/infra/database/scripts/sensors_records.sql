@@ -1,4 +1,4 @@
--- Active: 1713806216316@@127.0.0.1@3306@smart-farming
+-- Active: 1713899386704@@127.0.0.1@3306@smart-farming
 
 DROP TABLE IF EXISTS sensors_records;
 
@@ -26,8 +26,6 @@ FROM sensors_records
 GROUP BY DATE(created_at)
 ORDER BY DATE(created_at) ASC
 LIMIT 20000;
-
-
 
 SELECT 
   soil_humidity, ambient_humidity, temperature, water_volume, created_at
