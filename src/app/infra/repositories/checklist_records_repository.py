@@ -1,6 +1,7 @@
 from core.entities.checklist_record import CheckListRecord
 from core.commons.date import Date
 from core.commons.datetime import Datetime
+from core.constants import PAGINATION_LIMIT
 
 from infra.database import mysql
 
@@ -107,9 +108,14 @@ class CheckListRecordsRepository:
 
         return None
 
-    def get_checklist_records(self) -> list[CheckListRecord]:
-        select_query = "SELECT * FROM checklist_records"
-        rows = mysql.query(sql=select_query, is_single=False)
+    def get_filtered_checklist_records(self, page_number) -> list[CheckListRecord]:
+        rows = mysql.query(
+            sql=f"""
+            SELECT * FROM checklist_records 
+            ORDER BY created_at LIMIT {PAGINATION_LIMIT} OFFSET {page_number}
+            """,
+            is_single=False,
+        )
         checklist_records = []
 
         for row in rows:

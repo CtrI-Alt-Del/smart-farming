@@ -1,9 +1,9 @@
 from flask import redirect, make_response, url_for, flash, request
 
 from core.use_cases.checklist_records import update_checklist_record
-from core.commons.error import Error
+from core.commons import Error
 
-from infra.forms.checklist_record_form import ChecklistRecordForm
+from infra.forms import ChecklistRecordForm
 
 
 def update_checklist_record_view():

@@ -4,6 +4,8 @@ from core.entities.sensors_record import SensorsRecord
 
 from infra.database import mysql
 
+from core.constants import PAGINATION_LIMIT
+
 
 class SensorRecordsRepository:
     def create_sensors_record(self, sensors_record: SensorsRecord) -> None:
@@ -18,7 +20,7 @@ class SensorRecordsRepository:
                 sensors_record.ambient_humidity,
                 sensors_record.temperature,
                 sensors_record.water_volume,
-                sensors_record.created_at,
+                sensors_record.created_at.get_value(),
             ],
         )
 
@@ -64,3 +66,17 @@ class SensorRecordsRepository:
             )
         else:
             return None
+
+    def get_filtered_sensors_records(self, page_number) -> list[SensorsRecord]:
+        rows = mysql.query(
+            sql=f"""
+            SELECT *  FROM sensors_records
+            ORDER BY created_at LIMIT {PAGINATION_LIMIT} OFFSET {page_number}            
+            """,
+            is_single=False,
+        )
+        sensors_records = []
+        for row in rows:
+            sensors_records.append(self.__get_sensors_record_entity(row))
+
+        return sensors_records

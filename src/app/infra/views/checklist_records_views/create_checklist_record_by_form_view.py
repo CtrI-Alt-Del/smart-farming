@@ -1,10 +1,11 @@
-from flask import redirect, url_for, flash, make_response, request
 from json import dumps
 
-from core.use_cases.checklist_records import create_checklist_record_by_form
-from core.commons.error import Error
+from flask import redirect, url_for, flash, make_response, request
 
-from infra.forms.checklist_record_form import ChecklistRecordForm
+from core.use_cases.checklist_records import create_checklist_record_by_form
+from core.commons import Error
+
+from infra.forms import ChecklistRecordForm
 
 
 def create_checklist_record_by_form_view():

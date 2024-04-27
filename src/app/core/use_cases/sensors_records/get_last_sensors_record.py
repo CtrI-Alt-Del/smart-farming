@@ -1,6 +1,6 @@
 from core.entities.sensors_record import SensorsRecord
 
-from core.commons.error import Error
+from core.commons import Error
 from infra.repositories import sensors_records_repository
 
 

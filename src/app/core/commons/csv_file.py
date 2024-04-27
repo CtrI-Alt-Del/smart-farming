@@ -2,7 +2,7 @@ from typing import Dict, List
 from werkzeug.datastructures import FileStorage
 
 
-from core.commons.error import Error
+from core.commons import Error
 
 from infra.providers.data_analyser_provider import DataAnalyserProvider
 

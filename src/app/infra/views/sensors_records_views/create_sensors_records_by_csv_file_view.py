@@ -3,7 +3,7 @@ from flask import request, redirect, url_for
 from werkzeug.datastructures import ImmutableMultiDict
 
 from core.use_cases.sensors_records import create_sensors_records_by_csv_file
-from core.commons.error import Error
+from core.commons import Error
 
 from infra.forms.csv_form import CsvForm
 

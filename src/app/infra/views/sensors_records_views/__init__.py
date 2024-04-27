@@ -7,6 +7,7 @@ from .create_sensors_records_by_csv_file_view import (
 )
 from .sensors_records_table_page_view import sensors_records_table_page_view
 
+from .create_sensors_records_by_form_view import create_sensors_record_by_form_view
 
 sensors_records_views = Blueprint("sensors_records_views", __name__)
 
@@ -23,11 +24,16 @@ route(
 route(
     rule="/sensors_records/table",
     view_func=sensors_records_table_page_view,
-    methods=["GET"],
 )
 
 route(
     rule="/sensors_records/csv",
     view_func=create_sensors_records_by_csv_file_view,
     methods=["POST"],
+)
+
+route(
+    rule="/sensors_records/form",
+    view_func=create_sensors_record_by_form_view,
+    methods = ["POST"]
 )
