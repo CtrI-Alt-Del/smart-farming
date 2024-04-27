@@ -1,11 +1,11 @@
-from typing import List, Dict, Generator
-from werkzeug.datastructures import FileStorage
 from datetime import datetime
 
-from core.commons.csv_file import CsvFile
-from core.commons.error import Error
+from typing import List, Dict, Generator
+from werkzeug.datastructures import FileStorage
+
+from core.commons import CsvFile, Error, Datetime
 from core.entities.sensors_record import SensorsRecord
-from core.constants.csv_file_columns import CSV_FILE_COLUMNS
+from core.constants import CSV_FILE_COLUMNS
 
 from infra.repositories import sensors_records_repository
 
@@ -35,16 +35,20 @@ class CreateSensorsRecordsByCsvFile:
             record_date = record["Data"].date()
             record_time = record["Hora"]
 
-            yield SensorsRecord(
-                ambient_humidity=record["Umidade Ambiente"],
-                soil_humidity=record["Umidade solo"],
-                temperature=record["Temperatura"],
-                water_volume=record["Volume Água (L)"],
-                created_at=datetime(
+            created_at = Datetime(
+                value=datetime(
                     day=record_date.day,
                     month=record_date.month,
                     year=record_date.year,
                     hour=record_time.hour,
                     minute=record_time.minute,
-                ),
+                )
+            )
+
+            yield SensorsRecord(
+                ambient_humidity=record["Umidade Ambiente"],
+                soil_humidity=record["Umidade solo"],
+                temperature=record["Temperatura"],
+                water_volume=record["Volume Água (L)"],
+                created_at=created_at,
             )

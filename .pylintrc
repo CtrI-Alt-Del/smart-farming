@@ -10,6 +10,7 @@ disable=
       W0622, # redefining built-in id
       E1123, # unexpected-keyword-arg
       E0611, # no-name-in-module
+      E0401, # import-error
 
 # Analyse import fallback blocks. This can be used to support both Python 2 and
 # 3 compatible code, which means that the block might have code that exists

@@ -36,7 +36,7 @@
 
 ---
 
-- [ ] **Cadastro de dados de check-list via formulário**
+- [x] **Cadastro de dados de check-list via formulário**
 
 *Contexto:*
 

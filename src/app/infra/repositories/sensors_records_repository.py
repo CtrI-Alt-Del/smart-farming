@@ -4,12 +4,13 @@ from core.entities.sensors_record import SensorsRecord
 
 from infra.database import mysql
 
+from core.constants import PAGINATION_LIMIT
 
 class SensorRecordsRepository:
     def create_sensors_record(self, sensors_record: SensorsRecord) -> None:
         sql = """
-        INSERT INTO sensors_records (soil_humidity, ambient_humidity, temperature, water_volume, created_at) 
-        VALUES (%s, %s, %s, %s, %s)
+        INSERT INTO sensors_records (soil_humidity, ambient_humidity, temperature, water_volume, created_at,plant_id) 
+        VALUES (%s, %s, %s, %s, %s , %s)
         """
         mysql.mutate(
             sql=sql,
@@ -18,7 +19,8 @@ class SensorRecordsRepository:
                 sensors_record.ambient_humidity,
                 sensors_record.temperature,
                 sensors_record.water_volume,
-                sensors_record.created_at,
+                sensors_record.created_at.get_value(),
+                sensors_record.plant.id
             ],
         )
 
@@ -64,3 +66,60 @@ class SensorRecordsRepository:
             )
         else:
             return None
+
+    def get_filtered_sensors_records(self, page_number) -> list[SensorsRecord]:
+        rows = mysql.query(
+            sql=f"""
+            SELECT *  FROM sensors_records
+            ORDER BY created_at LIMIT {PAGINATION_LIMIT} OFFSET {page_number}            
+            """,
+            is_single=False,
+        )
+        sensors_records = []
+        for row in rows:
+            sensors_records.append(self.__get_sensors_record_entity(row))
+
+        return sensors_records
+
+    def delete_sensors_record_by_id(self, sensors_record_id: str):
+        mysql.mutate(
+            "DELETE FROM sensors_records WHERE id = %s",
+            params=[sensors_record_id],
+        )
+
+    def get_sensors_record_by_id(self, id: str) ->    SensorsRecord | None:
+        print(id)
+        row = mysql.query(
+            sql="SELECT * FROM sensors_records WHERE id = %s",
+            is_single=True,
+            params=[id]
+        )
+        
+        if row:
+            return self.__get_sensors_record_entity(row)
+        
+        return None
+    
+    def update_sensors_record_by_id(self,sensors_record:SensorsRecord) -> None:
+        mysql.mutate(
+            """
+            UPDATE sensors_records
+            SET
+                soil_humidity = %s,
+                ambient_humidity = %s,
+                temperature = %s,
+                water_volume = %s,
+                created_at = %s,
+                plant_id = %s
+            WHERE id = %s
+            """,
+            params=[
+                sensors_record.soil_humidity,
+                sensors_record.ambient_humidity,
+                sensors_record.temperature,
+                sensors_record.water_volume,
+                sensors_record.created_at.get_value(),
+                sensors_record.plant.id,
+                sensors_record.id
+            ],
+        )

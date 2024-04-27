@@ -19,7 +19,7 @@ MYSQL_TABLES = {
       temperature DECIMAL(10, 2) NOT NULL,
       illuminance DECIMAL(10, 2) NOT NULL,
       lai DECIMAL(10, 2),
-      leaf_apperance ENUM('SAUDAVEL', 'MURCHA'),
+      leaf_appearance ENUM('SAUDAVEL', 'MURCHA'),
       leaf_color ENUM('VERDE CLARO DOMINANTE',
       'VERDE ESCURO DOMINATE',
       'VERDE CLARO COM ALGUMAS MANCHAS CLARAS',
