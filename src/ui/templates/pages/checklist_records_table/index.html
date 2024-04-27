@@ -1,9 +1,11 @@
 {% extends "layouts/dashboard/index.html" %}
-{% from '/pages/checklist_records_table/checklist_item.html' import checklist_item %}
+
+{% from '/pages/checklist_records_table/row.html' import row %}
 
 {% block dashboard_content %}
 
-<div class="flex items-center gap-3 pb-6 mt-10 mb-10 border-b-2 border-gray-300">
+<div
+  class="flex items-center gap-3 pb-6 mt-10 mb-10 border-b-2 border-gray-300">
   <h1 class="text-2xl font-bold">Registro do checklist</h1>
 </div>
 
@@ -11,7 +13,10 @@
 
   {% include 'components/datepicker.html' %}
 
-  <button type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 my-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Adicionar registro</button>
+  <button type="button"
+    class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 my-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Adicionar
+    registro
+  </button>
 </div>
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -25,13 +30,16 @@
       <option data-content="<i class='ph-bold ph-plant'></i>"></option>
     </select>
   </div>
-  <table class="text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
-    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-      {% include 'pages/checklist_records_table/checklist_item_head.html'%}
+  <table
+    class="text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
+    <thead
+      class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      {% include 'pages/checklist_records_table/head.html'%}
     </thead>
     <tbody>
-      {{checklist_records}}
-      {{ checklist_item("2021-10-10", "10:00:00", "Canteiro 1", "20%", "6.5", "Sim", "100", "25°C", "50%", "50%", "50%", "50%", "verde","DESC", "ABACATE", "bg-[#400]")}}
+      {% for checklist_record in checklist_records %}
+      {{ row(checklist_record=checklist_record) }}
+      {% endfor %}
     </tbody>
   </table>
 </div>
