@@ -2,7 +2,7 @@ from core.entities.plant import Plant
 from infra.database import mysql
 
 
-class PlantsRepository:
+class PlantRepository:
     def create_plants_record(self, plants_record: Plant):
         sql = """
         INSERT INTO plants
