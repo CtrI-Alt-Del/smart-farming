@@ -1,6 +1,5 @@
-from core.entities.checklist_record import CheckListRecord
-from core.commons.date import Date
-from core.commons.datetime import Datetime
+from core.entities.checklist_record import CheckListRecord, Plant
+from core.commons import Datetime, Date
 from core.constants import PAGINATION_LIMIT
 
 from infra.database import mysql
@@ -18,7 +17,7 @@ class CheckListRecordsRepository:
             temperature,
             illuminance,
             lai,
-            leaf_apperance,
+            leaf_appearance,
             leaf_color,
             plantation_type,
             fertilizer_expiration_date,
@@ -36,7 +35,7 @@ class CheckListRecordsRepository:
             checklist_record.temperature,
             checklist_record.illuminance,
             checklist_record.lai,
-            checklist_record.leaf_apperance,
+            checklist_record.leaf_appearance,
             checklist_record.leaf_color,
             checklist_record.plantation_type,
             checklist_record.fertilizer_expiration_date.get_value(),
@@ -59,7 +58,7 @@ class CheckListRecordsRepository:
                 temperature = %s,
                 illuminance = %s,
                 lai = %s,
-                leaf_apperance = %s,
+                leaf_appearance = %s,
                 leaf_color = %s,
                 plantation_type = %s,
                 fertilizer_expiration_date = %s,
@@ -76,7 +75,7 @@ class CheckListRecordsRepository:
                 checklist_record.temperature,
                 checklist_record.illuminance,
                 checklist_record.lai,
-                checklist_record.leaf_apperance,
+                checklist_record.leaf_appearance,
                 checklist_record.leaf_color,
                 checklist_record.plantation_type,
                 checklist_record.fertilizer_expiration_date.get_value(),
@@ -111,8 +110,11 @@ class CheckListRecordsRepository:
     def get_filtered_checklist_records(self, page_number) -> list[CheckListRecord]:
         rows = mysql.query(
             sql=f"""
-            SELECT * FROM checklist_records 
-            ORDER BY created_at LIMIT {PAGINATION_LIMIT} OFFSET {page_number}
+            SELECT *, P.id AS plant_id, P.name AS plant_name
+            FROM checklist_records AS CR 
+            JOIN plants AS P ON P.id = CR.plant_id
+            ORDER BY created_at
+            LIMIT {PAGINATION_LIMIT} OFFSET {page_number};
             """,
             is_single=False,
         )
@@ -133,10 +135,11 @@ class CheckListRecordsRepository:
             temperature=row["temperature"],
             illuminance=row["illuminance"],
             lai=row["lai"],
-            leaf_apperance=row["leaf_apperance"],
+            leaf_appearance=row["leaf_appearance"],
             leaf_color=row["leaf_color"],
             plantation_type=row["plantation_type"],
             fertilizer_expiration_date=Date(row["fertilizer_expiration_date"]),
             created_at=Datetime(row["created_at"]),
             report=row["report"],
+            plant=Plant(id=row["id"], name=row["name"]),
         )

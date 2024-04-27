@@ -1,4 +1,4 @@
--- Active: 1712258180714@@127.0.0.1@3306@smart-farming
+-- Active: 1713899386704@@127.0.0.1@3306@smart-farming
 DROP TABLE IF EXISTS checklist_records;
 
 CREATE TABLE IF NOT EXISTS checklist_records (
@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS checklist_records (
   temperature DECIMAL(10, 2) NOT NULL,
   illuminance DECIMAL(10, 2) NOT NULL,
   lai DECIMAL(10, 2),
-  leaf_apperance ENUM('SAUDAVEL', 'MURCHA'),
+  leaf_appearance ENUM('SAUDAVEL', 'MURCHA'),
   leaf_color ENUM('VERDE CLARO DOMINANTE',
    'VERDE ESCURO DOMINATE',
    'VERDE CLARO COM ALGUMAS MANCHAS CLARAS',
@@ -39,7 +39,7 @@ INSERT INTO checklist_records (
   temperature,
   illuminance,
   lai,
-  leaf_apperance,
+  leaf_appearance,
   leaf_color,
   plantation_type,
   fertilizer_expiration_date,
@@ -53,15 +53,18 @@ INSERT INTO checklist_records (
   25.0, -- temperature
   50000.0, -- illuminance
   3.5, -- lai
-  'SAUDAVEL', -- leaf_apperance
+  'SAUDAVEL', -- leaf_appearance
   'VERDE CLARO DOMINANTE', -- leaf_color
   'PLANTIO INTERNO(FATEC)', -- plantation_type
   CURDATE(), -- fertilizer_expiration_date
   'Relatório de checagem', -- report
-  'd196b612-034c-11ef-bd0e-0242ac140002' -- plant_id
+  '1ded0f79-01a5-11ef-9b63-0242ac1b0002' -- plant_id
 );
 
-SELECT * FROM checklist_records ORDER BY created_at
+SELECT *, P.id AS plant_id, P.name AS plant_name
+FROM checklist_records AS CR 
+JOIN plants AS P ON P.id = CR.plant_id
+ORDER BY created_at;
 
 INSERT INTO checklist_records (
   soil_ph,
@@ -71,7 +74,7 @@ INSERT INTO checklist_records (
   temperature,
   illuminance,
   lai,
-  leaf_apperance,
+  leaf_appearance,
   leaf_color,
   plantation_type,
   fertilizer_expiration_date,
@@ -85,10 +88,12 @@ INSERT INTO checklist_records (
   25.0, -- temperature
   50000.0, -- illuminance
   3.5, -- lai
-  'SAUDAVEL', -- leaf_apperance
+  'SAUDAVEL', -- leaf_appearance
   'VERDE CLARO DOMINANTE', -- leaf_color
   'PLANTIO INTERNO(FATEC)', -- plantation_type
   '2024-03-03', -- fertilizer_expiration_date
   'Relatório de checagem', -- report
   '1ded0f79-01a5-11ef-9b63-0242ac1b0002' -- plant_id
 );
+
+DELETE FROM checklist_records;

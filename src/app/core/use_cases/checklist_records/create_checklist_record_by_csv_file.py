@@ -55,7 +55,7 @@ class CreateChecklistRecordsByCsvFile:
                 temperature=record["temperatura"],
                 illuminance=record["iluminância"],
                 lai=record["lai"],
-                leaf_apperance=record["aparência da folha"],
+                leaf_appearance=record["aparência da folha"],
                 leaf_color=record["cor da folha"],
                 plantation_type=record["tipo da plantação"],
                 report=record["relatório"],

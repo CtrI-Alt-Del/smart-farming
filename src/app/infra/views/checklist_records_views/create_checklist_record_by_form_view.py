@@ -23,7 +23,7 @@ def create_checklist_record_by_form_view():
                     "illuminance": checklist_record_form.illuminance.data,
                     "plantation_type": checklist_record_form.plantation_type.data,
                     "hour": checklist_record_form.hour.data,
-                    "leaf_apperance": checklist_record_form.leaf_apperance.data,
+                    "leaf_appearance": checklist_record_form.leaf_appearance.data,
                     "leaf_color": checklist_record_form.leaf_color.data,
                     "air_humidity": checklist_record_form.air_humidity.data,
                     "lai": checklist_record_form.lai.data,

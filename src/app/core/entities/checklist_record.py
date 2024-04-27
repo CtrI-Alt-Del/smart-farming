@@ -15,7 +15,7 @@ class CheckListRecord(Entity):
     temperature: float = None
     illuminance: float = None
     lai: float = None
-    leaf_apperance: str = None
+    leaf_appearance: str = None
     leaf_color: str = None
     plantation_type: str = None
     fertilizer_expiration_date: Date = None

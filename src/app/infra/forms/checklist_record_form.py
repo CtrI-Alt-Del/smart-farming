@@ -29,7 +29,7 @@ class ChecklistRecordForm(FlaskForm):
             ("PLANTIO EXTERNO(CASA)", "Externo"),
         ],
     )
-    leaf_apperance = SelectField(
+    leaf_appearance = SelectField(
         "Aspecto das folhas",
         choices=[
             ("SAUDAVEL", "Saudável"),

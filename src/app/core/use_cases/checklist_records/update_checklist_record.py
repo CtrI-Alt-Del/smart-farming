@@ -57,7 +57,7 @@ class UpdateChecklistRecord:
                 report=request["report"],
                 air_humidity=request["air_humidity"],
                 leaf_color=request["leaf_color"],
-                leaf_apperance=request["leaf_apperance"],
+                leaf_appearance=request["leaf_appearance"],
                 fertilizer_expiration_date=fertilizer_expiration_date,
                 created_at=created_at,
                 plant=plant,

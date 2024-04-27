@@ -9,4 +9,4 @@ CREATE TABLE IF NOT EXISTS plants (
 
 INSERT INTO plants (name, hex_color) VALUES ('alface','#D4F7EB');
 
-SELECT * FROM plants
+SELECT * FROM plants;
