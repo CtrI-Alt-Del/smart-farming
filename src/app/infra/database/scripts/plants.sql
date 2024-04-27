@@ -7,6 +7,6 @@ CREATE TABLE IF NOT EXISTS plants (
   hex_color VARCHAR(7) NOT NULL UNIQUE
 );
 
-INSERT INTO plants (name, hex_color) VALUES ('alface','#D3F7EB');
+INSERT INTO plants (name, hex_color) VALUES ('alface','#D4F7EB');
 
 SELECT * FROM plants;
