@@ -17,8 +17,6 @@ def checklist_records_table_page_view():
             page_number=page_number
         )
 
-        print(create_checklist_record_form, flush=True)
-
         return render_template(
             "pages/checklist_records_table/index.html",
             create_checklist_record_form=create_checklist_record_form,

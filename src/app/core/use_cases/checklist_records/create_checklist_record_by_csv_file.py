@@ -2,7 +2,7 @@ from typing import List, Dict, Generator
 from werkzeug.datastructures import FileStorage
 from datetime import datetime
 
-from core.commons import CsvFile, Error
+from core.commons import CsvFile, Error, Datetime
 from core.entities import CheckListRecord
 
 from infra.repositories import checklist_records_repository
@@ -29,6 +29,24 @@ class CreateChecklistRecordsByCsvFile:
             record_date = record["Data"].date()
             record_time = record["Hora"]
 
+            fertilizer_expiration_date = Datetime(
+                value=datetime(
+                    day=record_date.day,
+                    month=record_date.month,
+                    year=record_date.year,
+                )
+            )
+
+            created_at = Datetime(
+                value=datetime(
+                    day=record_date.day,
+                    month=record_date.month,
+                    year=record_date.year,
+                    hour=record_time.hour,
+                    minute=record_time.minute,
+                )
+            )
+
             yield CheckListRecord(
                 soil_ph=record["ph do solo"],
                 soil_humidity=record["umidade do solo"],
@@ -40,17 +58,7 @@ class CreateChecklistRecordsByCsvFile:
                 leaf_apperance=record["aparência da folha"],
                 leaf_color=record["cor da folha"],
                 plantation_type=record["tipo da plantação"],
-                fertiliziation_date=datetime(
-                    day=record_date.day,
-                    month=record_date.month,
-                    year=record_date.year,
-                ),
-                harvested_at=datetime(
-                    day=record_date.day,
-                    month=record_date.month,
-                    year=record_date.year,
-                    hour=record_time.hour,
-                    minute=record_time.minute,
-                ),
                 report=record["relatório"],
+                fertilizer_expiration_date=fertilizer_expiration_date,
+                created_at=created_at,
             )
