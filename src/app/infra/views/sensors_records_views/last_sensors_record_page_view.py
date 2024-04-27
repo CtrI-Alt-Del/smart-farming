@@ -12,6 +12,5 @@ def last_sensors_record_page_view():
     return render_template(
         "pages/last_sensors_record/index.html",
         last_sensors_record=last_sensors_record,
-        datetime=last_sensors_record.created_at.strftime("%d-%m-%Y %H:%M:%S"),
-        #datetime=last_sensors_record.created_at,
+        datetime=last_sensors_record.created_at,
     )
