@@ -1,4 +1,4 @@
--- Active: 1712258180714@@127.0.0.1@3306@smart-farming
+-- Active: 1713899386704@@127.0.0.1@3306@smart-farming
 DROP TABLE IF EXISTS plants;
 
 CREATE TABLE IF NOT EXISTS plants (
@@ -9,4 +9,4 @@ CREATE TABLE IF NOT EXISTS plants (
 
 INSERT INTO plants (name, hex_color) VALUES ('alface','#D3F7EB');
 
-SELECT * FROM plants;
+SELECT * FROM plants
