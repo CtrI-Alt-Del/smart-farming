@@ -1,4 +1,6 @@
-{% macro checklist_item(date, hour, soil_humidity, ambient_humidity, temperature, plant_name, plant_tag_color)%}
+{% macro checklist_item(date, hour, plantation_type, soil_humidity, soil_ph, fertilizer_expiration_date, water_consumption, ambient_humidity, temperature, illuminance, leaf_area_index, leaf_appearence, leaf_color, report, plant_name, plant_tag_color)%}
+<!-- 15 props -->
+
 
 <tr
     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -13,13 +15,40 @@
         <b>{{date}} {{hour}}</b>
     </th>
     <td class="px-6 py-4">
+        {{plantation_type}}
+    </td>
+    <td class="px-6 py-4">
         {{soil_humidity}}
+    </td>
+    <td class="px-6 py-4">
+        {{soil_ph}}
+    </td>
+    <td class="px-6 py-4">
+        {{fertilizer_expiration_date}}
+    </td>
+    <td class="px-6 py-4">
+        {{water_consumption}}
     </td>
     <td class="px-6 py-4">
         {{ambient_humidity}}
     </td>
     <td class="px-6 py-4">
         {{temperature}}
+    </td>
+    <td class="px-6 py-4">
+        {{illuminance}}
+    </td>
+    <td class="px-6 py-4">
+        {{leaf_area_index}}
+    </td>
+    <td class="px-6 py-4">
+        {{leaf_appearence}}
+    </td>
+    <td class="px-6 py-4">
+        {{leaf_color}}
+    </td>
+    <td class="px-6 py-4">
+        {{report}}
     </td>
     <td class="px-6 py-4">
         <p class="rounded-md w-max {{plant_tag_color}} text-black font-semibold py-1 px-2">{{plant_name}}</p>

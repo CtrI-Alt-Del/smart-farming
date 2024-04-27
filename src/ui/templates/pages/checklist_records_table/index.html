@@ -7,6 +7,13 @@
   <h1 class="text-2xl font-bold">Registro do checklist</h1>
 </div>
 
+<div class="flex items-center justify-between mb-5">
+
+  {% include 'components/datepicker.html' %}
+
+  <button type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 my-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Adicionar registro</button>
+</div>
+
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
   <div class="p-5">
     <select name
@@ -18,48 +25,13 @@
       <option data-content="<i class='ph-bold ph-plant'></i>"></option>
     </select>
   </div>
-  <table
-    class="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
+  <table class="text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-      <tr>
-        <th scope="col" class="p-4">
-        </th>
-        <th scope="col" class="px-6 py-3">
-          DATA E HORA DE COLETA
-        </th>
-        <th scope="col" class="px-6 py-3">
-          LOCAL DE PLATIO
-        </th>
-        <th scope="col" class="px-6 py-3">
-          UMIDADE DO SOLO
-        </th>
-        <th scope="col" class="px-6 py-3">
-          PH DO SOLO
-        </th>
-        <th scope="col" class="px-6 py-3">
-          VALIDAÇÃO DE ADUBAÇÃO
-        </th>
-        <th scope="col" class="px-6 py-3">
-          CONSUMO DE ÁGUA (mL)
-        </th>
-        <th scope="col" class="px-6 py-3">
-          TEMPERATURA AMBIENTE
-        </th>
-        <th scope="col" class="px-6 py-3">
-          UMIDADE AMBIENTE
-        </th>
-        <th scope="col" class="px-6 py-3">
-          LUMINOSIDADE
-        </th>
-        <th scope="col" class="px-6 py-3">
-          
-        </th>
-      </tr>
+      {% include 'pages/checklist_records_table/checklist_item_head.html'%}
     </thead>
     <tbody>
-      {{ checklist_item("2021-10-10", "10:25", "PLANTIO INTERNO", "10", "10", "Beterraba", "bg-[#EDEBFE]")}}
-      <!-- {% for i in checklist_records %}
-      {% endfor %} -->
+      {{checklist_records}}
+      {{ checklist_item("2021-10-10", "10:00:00", "Canteiro 1", "20%", "6.5", "Sim", "100", "25°C", "50%", "50%", "50%", "50%", "verde","DESC", "ABACATE", "bg-[#400]")}}
     </tbody>
   </table>
 </div>
