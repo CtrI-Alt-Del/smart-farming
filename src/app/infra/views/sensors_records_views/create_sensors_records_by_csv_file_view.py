@@ -17,8 +17,7 @@ def create_sensors_records_by_csv_file_view():
     try:
         if csv_form.validate_on_submit():
             create_sensors_records_by_csv_file.execute(request.files["csv"])
-    except Error as error:
-        print("ui_message", error.ui_message, flush=True)
+    except Error:
         return redirect(
             url_for("sensors_records_views.sensors_records_table_page_view")
         )

@@ -11,14 +11,14 @@ from wtforms import (
 )
 from wtforms.validators import NumberRange
 
-from infra.repositories import plant_repository
+from infra.repositories import plants_repository
 
 
 class ChecklistRecordForm(FlaskForm):
     def __init__(self, formdata=None, **kwargs):
         super().__init__(formdata, **kwargs)
 
-        plants = plant_repository.get_plants()
+        plants = plants_repository.get_plants()
 
         self.plant_id.choices = [(plant.id, plant.name) for plant in plants]
 
@@ -80,11 +80,11 @@ class ChecklistRecordForm(FlaskForm):
         "Data de coleta",
         render_kw={"max": datetime.now().strftime("%Y-%m-%d")},
     )
+    hour = IntegerField("Hora de coleta", validators=[NumberRange(min=0, max=23)])
     fertilizer_expiration_date = DateField(
         "Validade de adubação",
         render_kw={"max": datetime.now().strftime("%Y-%m-%d")},
     )
-    hour = IntegerField("Hora de coleta", validators=[NumberRange(min=0, max=23)])
     soil_humidity = IntegerField(
         "Umidade do solo (%)", validators=[NumberRange(min=0, max=100)]
     )
