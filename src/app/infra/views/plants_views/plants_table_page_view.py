@@ -1,13 +1,13 @@
 from flask import render_template, request
 
 from core.commons import Error
-from infra.repositories import plant_repository
+from infra.repositories import plants_repository
 
 from infra.forms import PlantForm
 
 
 def plant_table_page_view():
-    plants = plant_repository.get_plants()
+    plants = plants_repository.get_plants()
 
     create_plant_record_form = PlantForm()
     update_plant_record_form = PlantForm()
