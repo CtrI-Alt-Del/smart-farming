@@ -1,3 +1,1 @@
-from .create_plant_by_csv_file import CreatePlantByCsvFile
 
-create_plants_records_by_csv_file = CreatePlantByCsvFile()
