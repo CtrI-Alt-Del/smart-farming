@@ -113,11 +113,12 @@ class CheckListRecordsRepository:
             SELECT *, P.id AS plant_id, P.name AS plant_name
             FROM checklist_records AS CR 
             JOIN plants AS P ON P.id = CR.plant_id
-            ORDER BY created_at
+            ORDER BY created_at DESC
             LIMIT {PAGINATION_LIMIT} OFFSET {page_number};
             """,
             is_single=False,
         )
+
         checklist_records = []
 
         for row in rows:
