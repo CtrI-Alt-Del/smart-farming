@@ -1,53 +1,49 @@
 {% extends "layouts/dashboard/index.html" %}
 
-{% from '/pages/checklist_records_table/row.html' import row %}
-
 {% from "components/modal.html" import modal %}
 
 {% block dashboard_content %}
 
-<div class="mt-6 px-12 py-6 bg-[#ffffff] rounded-md shadow-2xl border">
+<div class="mt-6 px-12 pb-12 bg-white rounded-md shadow-md">
   <div
-    class="flex items-center gap-3 pb-6 mt-10 mb-10 border-b-2 border-gray-300">
+    class="flex items-center gap-3 py-6 border-b-2 border-gray-300">
     <h1 class="text-2xl font-bold">Registro do checklist</h1>
   </div>
 
-  <div class="flex items-center justify-between mb-5">
+  <div class="flex items-center justify-between mt-6">
 
     {% include 'components/datepicker.html' %}
 
-    {% call modal(id="create_checklist_record", title="Adicionar registros") %}
+    {% call modal(id="create_checklist_record", title="Adicionar registro") %}
 
-    {% include "/pages/checklist_records_table/form/index.html" %}
+    {% include "pages/checklist_records_table/form/index.html" %}
 
     {% endcall %}
 
   </div>
 
-  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <div class="p-5">
-      <select name
-        class="flex items-center justify-center w-40 text-center border border-gray-200 rounded-lg border-1"
-        id>
-        <option value="plantas" default>
-          <p>Plantas</p>
+  <div class="relative overflow-x-auto mt-6 shadow-md sm:rounded-lg">
+    <div class="p-6">
+      <label for="plant">Planta: </label>
+      <select
+        id="plant"
+        name="plant"
+        class="flex items-center justify-center w-40 text-center border border-gray-200 rounded-lg border-1 mt-2">
+        {% for plant in plants %}
+        <option value="{{ plant.id }}">
+          {{ plant.name }}
         </option>
-        <option data-content="<i class='ph-bold ph-plant'></i>"></option>
+        {% endfor %}
       </select>
     </div>
-    <table
-      class="text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
-      <thead
-        class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-        {% include 'pages/checklist_records_table/head.html'%}
-      </thead>
-      <tbody>
-        {% for checklist_record in checklist_records %}
-        {{ row(checklist_record=checklist_record) }}
-        {% endfor %}
-      </tbody>
-    </table>
+
+    <div id="checklist_records">
+      {% include "pages/checklist_records_table/records.html" %}
+    </div>
   </div>
 </div>
+
+<script
+  src="{{ url_for('static', filename='scripts/query_param.js') }}"></script>
 
 {% endblock dashboard_content %}

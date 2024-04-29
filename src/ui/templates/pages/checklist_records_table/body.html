@@ -1,0 +1,7 @@
+{% from "pages/checklist_records_table/row.html" import row %}
+
+<tbody>
+  {% for checklist_record in checklist_records %}
+  {{ row(checklist_record) }}
+  {% endfor %}
+</tbody>
