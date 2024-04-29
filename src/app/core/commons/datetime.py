@@ -10,4 +10,4 @@ class Datetime:
         return self
 
     def get_value(self) -> str:
-        return self.value.__str__()
+        return str(self.value)

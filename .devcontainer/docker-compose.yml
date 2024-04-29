@@ -1,7 +1,7 @@
 version: '3'
 
 services:
- database:
+  database:
     image: 'bitnami/mysql:latest'
     container_name: 'smart-farming-mysql'
     env_file:
@@ -20,9 +20,11 @@ services:
       - 3306:3306
 
 networks:
- app-network:
+  app-network:
     driver: bridge
 
 volumes:
- mysql_data:
+  mysql_data:
     driver: local
+
+# docker compose --env-file .env -f .devcontainer/docker-compose.yml up

@@ -1,12 +1,12 @@
 from typing import Generator
-from werkzeug.datastructures import FileStorage
 from datetime import datetime
+from werkzeug.datastructures import FileStorage
 
 from core.commons import CsvFile, Error, Datetime
-from core.entities import CheckListRecord, Plant
+from core.entities import CheckListRecord
 from core.constants import CSV_FILE_COLUMNS
 
-from infra.repositories import checklist_records_repository
+from infra.repositories import checklist_records_repository, plants_repository
 
 
 class CreateChecklistRecordsByCsvFile:
@@ -19,11 +19,7 @@ class CreateChecklistRecordsByCsvFile:
 
             records = csv_file.get_records()
 
-            print(len(records), flush=True)
-
             converted_records = self.__convert_csv_records_to_checklist_records(records)
-
-            print(next(converted_records))
 
             for checklist_record in converted_records:
                 checklist_records_repository.create_checklist_record(checklist_record)
@@ -34,11 +30,13 @@ class CreateChecklistRecordsByCsvFile:
     def __convert_csv_records_to_checklist_records(
         self, records: list[dict]
     ) -> Generator:
-        print(records[0])
+        plants = plants_repository.get_plants()
+
         for record in records:
             record_date = record["data da coleta"].date()
             record_hour = record["hora da coleta (inserir valor de 0 a 23)"]
             record_fertilizer_expiration_date = record["validade da adubação?"].date()
+            record_plant_name = record["planta"]
 
             created_at = Datetime(
                 value=datetime(
@@ -57,14 +55,12 @@ class CreateChecklistRecordsByCsvFile:
                 )
             )
 
-            if "planta" in record:
-                plant = Plant(name=record["planta"])
-            else:
-                plant = Plant(
-                    id="1ded0f79-01a5-11ef-9b63-0242ac1b0002",
-                    name="alface",
-                    hex_color="#D4F7EB",
-                )
+            plant = None
+
+            for current_plant in plants:
+                if current_plant.name.lower() == record_plant_name.lower():
+                    plant = current_plant
+                    break
 
             yield CheckListRecord(
                 soil_ph=record["ph do solo?"],

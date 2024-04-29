@@ -28,24 +28,18 @@ class CheckListRecordsRepository:
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         """
 
-        print(checklist_record, flush=True)
+        print(checklist_record.plant.id, flush=True)
 
         params = [
             checklist_record.soil_ph,
             checklist_record.soil_humidity,
-            checklist_record.water_consumption
-            if checklist_record.water_consumption
-            else 0,
+            checklist_record.water_consumption,
             checklist_record.air_humidity,
             checklist_record.temperature,
             checklist_record.illuminance,
-            checklist_record.lai if checklist_record.lai else 0,
-            checklist_record.leaf_appearance
-            if checklist_record.leaf_appearance
-            else "NÃO REGISTRADO",
-            checklist_record.leaf_color
-            if checklist_record.leaf_color
-            else "NÃO REGISTRADO",
+            checklist_record.lai,
+            checklist_record.leaf_appearance,
+            checklist_record.leaf_color,
             checklist_record.plantation_type,
             checklist_record.fertilizer_expiration_date.get_value(),
             checklist_record.created_at.get_value(),
@@ -85,9 +79,11 @@ class CheckListRecordsRepository:
                 checklist_record.illuminance,
                 checklist_record.lai,
                 checklist_record.leaf_appearance,
-                checklist_record.leaf_color
-                if checklist_record.leaf_color
-                else "NÃO REGISTRADO",
+                (
+                    checklist_record.leaf_color
+                    if checklist_record.leaf_color
+                    else "NÃO REGISTRADO"
+                ),
                 checklist_record.plantation_type,
                 checklist_record.fertilizer_expiration_date.get_value(),
                 checklist_record.created_at.get_value(),
@@ -124,7 +120,7 @@ class CheckListRecordsRepository:
             SELECT *, P.id AS plant_id, P.name AS plant_name
             FROM checklist_records AS CR 
             JOIN plants AS P ON P.id = CR.plant_id
-            ORDER BY created_at DESC
+            ORDER BY created_at DESC;
             LIMIT {PAGINATION_LIMIT} OFFSET {page_number};
             """,
             is_single=False,

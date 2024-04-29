@@ -18,7 +18,7 @@ class CsvFile:
 
         extension = self.get_extension()
 
-        if extension == "csv" or extension == "txt":
+        if extension in ["csv", "txt"]:
             self.data_analyser_provider.read_csv()
         elif extension == "xlsx":
             self.data_analyser_provider.read_excel()
@@ -28,21 +28,11 @@ class CsvFile:
     def get_records(self) -> List[Dict]:
         records = self.data_analyser_provider.convert_to_list_of_records()
 
-        list = []
+        records_list = []
         for record in records:
-            current_record = {}
-            for key, value in record.items():
-                key = key.lower()
-                value = None if isinstance(value, float) and isnan(value) else value
-                current_record = {**current_record, key: value}
+            records_list.append({key.lower(): value for key, value in record.items()})
 
-            print(current_record)
-            list.append(current_record)
-
-        return list
-
-    def remove_missing_values(self):
-        self.data_analyser_provider.drop_none_values()
+        return records_list
 
     def validate_columns(self, columns: List[str]) -> bool:
         csv_columns = self.data_analyser_provider.get_columns()

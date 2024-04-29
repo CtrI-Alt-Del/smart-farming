@@ -1,12 +1,12 @@
 CSV_FILE_COLUMNS = {
     "sensors_records": [
-        "Data",
-        "Hora",
-        "Dia da semana",
-        "Umidade Ambiente",
-        "Umidade solo",
-        "Temperatura",
-        "Volume Água (L)",
+        "data",
+        "hora",
+        "dia da semana",
+        "umidade Ambiente",
+        "umidade solo",
+        "temperatura",
+        "volume Água (L)",
     ],
     "checklist_records": [
         "em qual plantio você quer coletar os dados?",
@@ -23,5 +23,6 @@ CSV_FILE_COLUMNS = {
         "qual o aspecto das folhas?",
         "qual a coloração das folhas?",
         "algum desvio detectado durante o processo?",
+        "planta",
     ],
 }

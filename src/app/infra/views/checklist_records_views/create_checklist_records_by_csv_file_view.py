@@ -1,6 +1,6 @@
 from werkzeug.datastructures import ImmutableMultiDict
 
-from flask import render_template, url_for, request
+from flask import render_template, request
 
 from core.use_cases.checklist_records import (
     create_checklist_records_by_csv_file,
@@ -29,10 +29,13 @@ def create_checklist_records_by_csv_file_view():
             page_number=page_number
         )
     except Error as error:
-        return render_template(
-            "pages/checklist_records_table/records.html",
-            checklist_records=[],
-        ), error.status_code
+        return (
+            render_template(
+                "pages/checklist_records_table/records.html",
+                checklist_records=[],
+            ),
+            error.status_code,
+        )
 
     return render_template(
         "pages/checklist_records_table/records.html",
