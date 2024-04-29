@@ -17,7 +17,7 @@ def create_plant_by_form_view():
 
     if plant_form.validate_on_submit():
         try:
-            create_plants_by_form.execute(
+            create_plants_by_form.CreatePlantByForm.execute(
                 {
                     "name": plant_form.plant_name.data,
                     "hex_color": plant_form.hex_color.data
