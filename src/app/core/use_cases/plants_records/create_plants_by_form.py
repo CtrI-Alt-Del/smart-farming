@@ -12,7 +12,7 @@ class CreatePlantByForm:
                 hex_color = request["hex_color"]
             )
 
-            plants_repository.create_plants_record(plant)
+            plants_repository.create_plant_record(plant)
 
         except Error as error:
             raise error
