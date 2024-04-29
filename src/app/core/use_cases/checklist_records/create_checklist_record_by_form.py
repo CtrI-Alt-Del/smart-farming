@@ -42,7 +42,6 @@ class CreateChecklistRecordByForm:
                 plant=plant,
             )
 
-            print(checklist_record.fertilizer_expiration_date.get_value())
             checklist_records_repository.create_checklist_record(checklist_record)
 
         except Error as error:
