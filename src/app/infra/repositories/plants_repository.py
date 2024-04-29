@@ -3,7 +3,7 @@ from infra.database import mysql
 
 
 class PlantsRepository:
-    def create_plants_record(self, plants_record: Plant):
+    def create_plant_record(self, plants_record: Plant):
         sql = """
         INSERT INTO plants
         (name, hex_color)
