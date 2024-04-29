@@ -1,4 +1,4 @@
--- Active: 1713899386704@@127.0.0.1@3306@smart-farming
+-- Active: 1712674680306@@127.0.0.1@3306
 DROP TABLE IF EXISTS checklist_records;
 
 CREATE TABLE IF NOT EXISTS checklist_records (
