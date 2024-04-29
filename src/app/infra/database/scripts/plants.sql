@@ -1,4 +1,4 @@
--- Active: 1712615929524@@127.0.0.1@3306@smart-farming
+-- Active: 1712674680306@@127.0.0.1@3306
 DROP TABLE IF EXISTS plants;
 
 CREATE TABLE IF NOT EXISTS plants (
