@@ -3,15 +3,19 @@
 @tailwind utilities;
 
 :root {
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-text-size-adjust: 100%;
-    font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
 }
 
 .dashboard {
-    padding-left: 370px;
-    padding-right: 40px;
+  padding-left: 370px;
+  padding-right: 40px;
+}
+
+[data-loading-class].loading {
+  display: none;
 }

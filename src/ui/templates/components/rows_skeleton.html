@@ -1,0 +1,14 @@
+{% macro rows_skeleton(rows_count, columns_count) %}
+
+{% for _ in range(rows_count, columns_count) %}
+<tr data-loading-class="block" class="loading">
+  {% for _ in range(columns_count) %}
+  <td>
+    <div class="w-full h-12 bg-gray-300 animate-pulse"></div>
+  </td>
+  {% endfor %}
+</tr>
+
+{% endfor %}
+
+{% endmacro %}

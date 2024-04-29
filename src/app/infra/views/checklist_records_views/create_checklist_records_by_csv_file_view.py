@@ -1,8 +1,11 @@
 from werkzeug.datastructures import ImmutableMultiDict
 
-from flask import redirect, url_for, request
+from flask import render_template, url_for, request
 
-from core.use_cases.checklist_records import create_checklist_record_by_csv_file
+from core.use_cases.checklist_records import (
+    create_checklist_records_by_csv_file,
+    get_checklist_records_table_page_data,
+)
 
 from core.commons import Error
 
@@ -15,14 +18,23 @@ def create_checklist_records_by_csv_file_view():
 
     csv_form = CsvForm(ImmutableMultiDict(form_data))
 
-    try:
-        if csv_form.validate_on_submit():
-            create_checklist_record_by_csv_file.execute(request.files["csv"])
-    except Error:
-        return redirect(
-            url_for("checklist_records_views.sensors_records_table_page_view")
-        )
+    page_number = request.args.get("page")
 
-    return redirect(
-        url_for("checklist_records_views.sensors_records_dashboard_page_view")
+    try:
+        if not csv_form.validate_on_submit():
+            raise Error(ui_message="Formulário de check-list inválido", status_code=400)
+
+        create_checklist_records_by_csv_file.execute(request.files["csv"])
+        updated_checklist_records = get_checklist_records_table_page_data.execute(
+            page_number=page_number
+        )
+    except Error as error:
+        return render_template(
+            "pages/checklist_records_table/records.html",
+            checklist_records=[],
+        ), error.status_code
+
+    return render_template(
+        "pages/checklist_records_table/records.html",
+        checklist_records=updated_checklist_records,
     )

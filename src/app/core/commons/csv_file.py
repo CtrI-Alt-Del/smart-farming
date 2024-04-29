@@ -1,5 +1,6 @@
 from typing import Dict, List
 from werkzeug.datastructures import FileStorage
+from math import isnan
 
 
 from core.commons import Error
@@ -27,7 +28,21 @@ class CsvFile:
     def get_records(self) -> List[Dict]:
         records = self.data_analyser_provider.convert_to_list_of_records()
 
-        return records
+        list = []
+        for record in records:
+            current_record = {}
+            for key, value in record.items():
+                key = key.lower()
+                value = None if isinstance(value, float) and isnan(value) else value
+                current_record = {**current_record, key: value}
+
+            print(current_record)
+            list.append(current_record)
+
+        return list
+
+    def remove_missing_values(self):
+        self.data_analyser_provider.drop_none_values()
 
     def validate_columns(self, columns: List[str]) -> bool:
         csv_columns = self.data_analyser_provider.get_columns()

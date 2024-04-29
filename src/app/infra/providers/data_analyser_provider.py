@@ -14,11 +14,15 @@ class DataAnalyserProvider:
 
     def read_csv(self) -> None:
         if self.__has_dataframe():
-            self.dataframe = read_csv(self.dataframe).dropna()
+            self.dataframe = read_csv(self.dataframe)
 
     def read_excel(self) -> None:
         if self.__has_dataframe():
-            self.dataframe = read_excel(self.dataframe).dropna()
+            self.dataframe = read_excel(self.dataframe)
+
+    def drop_none_values(self) -> None:
+        if self.__has_dataframe():
+            self.dataframe = self.dataframe.dropna()
 
     def get_columns(self) -> List[str] | None:
         if self.__has_dataframe():

@@ -27,20 +27,29 @@ class CheckListRecordsRepository:
         )
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         """
+
+        print(checklist_record, flush=True)
+
         params = [
             checklist_record.soil_ph,
             checklist_record.soil_humidity,
-            checklist_record.water_consumption,
+            checklist_record.water_consumption
+            if checklist_record.water_consumption
+            else 0,
             checklist_record.air_humidity,
             checklist_record.temperature,
             checklist_record.illuminance,
-            checklist_record.lai,
-            checklist_record.leaf_appearance,
-            checklist_record.leaf_color,
+            checklist_record.lai if checklist_record.lai else 0,
+            checklist_record.leaf_appearance
+            if checklist_record.leaf_appearance
+            else "NÃO REGISTRADO",
+            checklist_record.leaf_color
+            if checklist_record.leaf_color
+            else "NÃO REGISTRADO",
             checklist_record.plantation_type,
             checklist_record.fertilizer_expiration_date.get_value(),
             checklist_record.created_at.get_value(),
-            checklist_record.report,
+            checklist_record.report if checklist_record.report else "Não",
             checklist_record.plant.id,
         ]
 
@@ -76,11 +85,13 @@ class CheckListRecordsRepository:
                 checklist_record.illuminance,
                 checklist_record.lai,
                 checklist_record.leaf_appearance,
-                checklist_record.leaf_color,
+                checklist_record.leaf_color
+                if checklist_record.leaf_color
+                else "NÃO REGISTRADO",
                 checklist_record.plantation_type,
                 checklist_record.fertilizer_expiration_date.get_value(),
                 checklist_record.created_at.get_value(),
-                checklist_record.report,
+                checklist_record.report if checklist_record.report else "Não",
                 checklist_record.plant.id,
                 checklist_record.id,
             ],
