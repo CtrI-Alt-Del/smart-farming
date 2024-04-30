@@ -2,17 +2,20 @@
 
 {% block dashboard_content %}
 
-  
+{% from "components/modal.html" import modal %}  
 <div class="mt-6 px-12 pb-12 bg-white rounded-md shadow-md">
   <div
     class="flex items-center gap-3 py-6 border-b-2 border-gray-300">
     <h1 class="text-2xl font-bold">Registro do checklist</h1>
   </div>
 
-  <button class="m-4 px-5 py-2.5 block text-white bg-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-400 font-medium rounded-lg text-sm  text-center dark:bg-gray-700 dark:hover:bg-gray-800 dark:focus:ring-gray-400">
-    Adicionar Planta
-  </button>
-  
+
+  <div class="mt-2">
+    {% call modal(id="create_checklist_record", title="Adicionar registro") %}
+
+    {% endcall %}
+  </div>
+
   <div class="my-6">
     {% include 'components/search.html' %}
   </div>
