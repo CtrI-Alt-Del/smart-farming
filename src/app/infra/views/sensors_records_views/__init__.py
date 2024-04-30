@@ -7,10 +7,9 @@ from .create_sensors_records_by_csv_file_view import (
 )
 from .update_sensors_records_view import update_sensors_record_view
 from .delete_sensors_records_view import delete_sensors_records_view
-
 from .sensors_records_table_page_view import sensors_records_table_page_view
-
 from .create_sensors_records_by_form_view import create_sensors_record_by_form_view
+from .filter_sensors_records_view import filter_sensors_records_view
 
 sensors_records_views = Blueprint("sensors_records_views", __name__)
 
@@ -27,6 +26,13 @@ route(
 route(
     "/sensors_records/table",
     view_func=sensors_records_table_page_view,
+    methods=["GET"],
+)
+
+route(
+    "/sensors_records/filter",
+    view_func=filter_sensors_records_view,
+    methods=["GET"],
 )
 
 route(
