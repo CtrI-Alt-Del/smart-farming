@@ -1,7 +1,7 @@
 {% from "pages/checklist_records_table/row.html" import row %}
 {% from "components/rows_skeleton.html" import rows_skeleton %}
 
-<tbody class="h-[455px]">
+<tbody>
   {% for checklist_record in checklist_records %}
   {{ row(checklist_record) }}
   {% endfor %}

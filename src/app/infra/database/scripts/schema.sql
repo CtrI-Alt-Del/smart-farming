@@ -1,4 +1,4 @@
--- Active: 1712258180714@@127.0.0.1@3306@smart-farming
+-- Active: 1714479268496@@127.0.0.1@3306@smart-farming
 CREATE DATABASE IF NOT EXISTS `smart-farming`;
 
 USE DATABASE `smart-farming`;
@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS sensors_records (
   water_volume DECIMAL(10, 2) NOT NULL,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
 
 CREATE TABLE IF NOT EXISTS checklist_records (
   id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,

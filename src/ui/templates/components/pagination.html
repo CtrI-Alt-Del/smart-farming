@@ -1,20 +1,17 @@
 {% macro pagination(pages_count) %}
 
+{% if pages_count > 1 %}
+
 {% set button_class =
-"flex items-center justify-center h-8 px-3 leading-tight text-gray-500 border border-gray-300 ms-0 rounded-lg dark:border-gray-700 dark:text-gray-400 dark:hover:text-white"
+"flex items-center justify-center h-8 px-3 leading-tight text-gray-500 border border-gray-300 ms-0 rounded-lg
+dark:border-gray-700 dark:text-gray-400 dark:hover:text-white"
 %}
 
-<nav
-    class="flex flex-wrap items-center justify-between pt-4 flex-column md:flex-row"
-    aria-label="Table navigation">
+<nav class="flex flex-wrap items-center justify-between pt-4 flex-column md:flex-row" aria-label="Table navigation">
     <ul class="flex h-8 gap-2 -space-x-px text-sm rtl:space-x-reverse ">
         {% for page_number in range(1, pages_count + 1) %}
         <li>
-            <button
-                data-pagination="page-button"
-                type="button"
-                value="{{ page_number }}"
-                class="{{ button_class }} ">
+            <button data-pagination="page-button" type="button" value="{{ page_number }}" class="{{ button_class }} ">
                 {{ page_number }}
             </button>
         </li>
@@ -23,7 +20,8 @@
     </ul>
 </nav>
 
-<script
-    src="{{ url_for('static', filename='scripts/pagination.js') }}"></script>
+<script src="{{ url_for('static', filename='scripts/pagination.js') }}"></script>
+
+{% endif %}
 
 {% endmacro %}

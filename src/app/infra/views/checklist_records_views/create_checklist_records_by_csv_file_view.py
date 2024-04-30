@@ -18,8 +18,9 @@ def create_checklist_records_by_csv_file_view():
 
     csv_form = CsvForm(ImmutableMultiDict(form_data))
 
-    page_number = request.args.get("page")
+    page_number = request.args.get("page", 1)
 
+    print(page_number, flush=True)
     try:
         if not csv_form.validate_on_submit():
             raise Error(ui_message="Formulário de check-list inválido", status_code=400)
@@ -27,7 +28,7 @@ def create_checklist_records_by_csv_file_view():
         create_checklist_records_by_csv_file.execute(request.files["csv"])
         updated_checklist_records = get_checklist_records_table_page_data.execute(
             page_number=page_number
-        )
+        )[0]
     except Error as error:
         return (
             render_template(

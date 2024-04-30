@@ -13,9 +13,17 @@ class Pagination {
     this.input = input
     this.queryParam = new QueryParam()
 
-    const currentPage = this.queryParam.get("page")
+    const observer = new MutationObserver((mutationList) => {
+      for (const mutation of mutationList) {
+        if (mutation.type === "childList") {
+          console.log("A child node has been added or removed.");
+        } else if (mutation.type === "attributes") {
+          console.log(`The ${mutation.attributeName} attribute was modified.`);
+        }
+      }
+    });
 
-    console.log({ currentPage })
+    const currentPage = this.queryParam.get("page")
 
     this.activePageButton(currentPage ?? "1")
 

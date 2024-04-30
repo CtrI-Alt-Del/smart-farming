@@ -119,7 +119,7 @@ class CheckListRecordsRepository:
 
         rows = mysql.query(
             sql=f"""
-            SELECT *, P.id AS plant_id, P.name AS plant_name
+            SELECT *, P.id AS plant_id, P.name AS plant_name, P.hex_color AS plant_color
             FROM checklist_records AS CR 
             JOIN plants AS P ON P.id = CR.plant_id
             ORDER BY created_at DESC
@@ -134,7 +134,7 @@ class CheckListRecordsRepository:
             checklist_records.append(self.__get_checklist_record_entity(row))
 
         return checklist_records
-    
+
     def get_checklist_records_count(self):
         result = mysql.query(
             sql="SELECT COUNT(id) AS count FROM checklist_records",
@@ -142,7 +142,6 @@ class CheckListRecordsRepository:
         )
 
         return result["count"]
-
 
     def __get_checklist_record_entity(self, row: dict):
         return CheckListRecord(
@@ -160,5 +159,7 @@ class CheckListRecordsRepository:
             fertilizer_expiration_date=Date(row["fertilizer_expiration_date"]),
             created_at=Datetime(row["created_at"]),
             report=row["report"],
-            plant=Plant(id=row["id"], name=row["name"]),
+            plant=Plant(
+                id=row["plant_id"], name=row["plant_name"], hex_color=row["plant_color"]
+            ),
         )

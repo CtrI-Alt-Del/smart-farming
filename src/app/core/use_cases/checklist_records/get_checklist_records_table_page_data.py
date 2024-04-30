@@ -1,6 +1,7 @@
 from math import ceil
 
 from core.entities import Plant, CheckListRecord
+from core.constants import PAGINATION_LIMIT
 
 from infra.repositories import plants_repository, checklist_records_repository
 
@@ -17,11 +18,8 @@ class GetChecklistRecordsTablePageData:
             page_number=int(page_number)
         )
 
-
         checklist_count = checklist_records_repository.get_checklist_records_count()
 
-        pages_count = ceil(checklist_count /  len(checklist_records))
-
-
+        pages_count = ceil(checklist_count / PAGINATION_LIMIT)
 
         return checklist_records, pages_count, plants

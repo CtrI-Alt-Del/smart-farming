@@ -1,6 +1,6 @@
 {% from "components/loading.html" import loading %}
 
-{% macro csv_input(url, csv_form, attributes) %}
+{% macro csv_input(url, attributes) %}
 
 <div>
   <span>
@@ -10,7 +10,7 @@
       <span class="text-sm">Importar CSV</span>
       <input data-csv-input="input" id="input" type="file" name="csv" hidden>
     </span>
-    <button data-csv-input="submit-button" type="submit">
+    <button data-csv-input="submit-button" type="submit" {{ attributes }}>
       <div data-csv-input="loading"
         class="hidden w-32 p-2 bg-gray-700 place-content-center rounded-xl">
         {{
@@ -26,5 +26,7 @@
     </button>
   </span>
 </div>
+
+<script src="{{ url_for('static', filename='scripts/csv_input.js') }}"></script>
 
 {% endmacro %}
