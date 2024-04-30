@@ -23,8 +23,11 @@
   </div>
 
   <div class="relative mt-6 overflow-x-auto shadow-md sm:rounded-lg">
-    <form hx-get="{{ url_for('checklist_records_views.filter_checklist_records_view') }}" hx-trigger="submit"
-      hx-target="#checklist_records" hx-swap="innerHTML" data-pagination="form" data-query-param="hx-get"
+    <form
+      hx-get="{{ url_for('checklist_records_views.filter_checklist_records_view') }}"
+      hx-trigger="submit"
+      hx-target="#checklist_records" hx-swap="innerHTML" data-pagination="form"
+      data-query-param="hx-get"
       id="filter_checklist_records_form" class="p-6">
 
       <label for="plant">Planta: </label>
@@ -48,6 +51,7 @@
   {{ pagination(pages_count) }}
 </div>
 
-<script src="{{ url_for('static', filename='scripts/query_param.js') }}"></script>
+<script
+  src="{{ url_for('static', filename='scripts/query_param.js') }}"></script>
 
 {% endblock dashboard_content %}

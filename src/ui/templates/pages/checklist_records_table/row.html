@@ -10,7 +10,8 @@
     </div>
   </td>
 
-  <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+  <th scope="row"
+    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
     <time>
       {{ checklist_record.created_at.format_value().get_value() }}
     </time>
@@ -49,7 +50,6 @@
     {{ checklist_record.water_consumption }}
   </td>
 
-
   <td class="px-6 py-4">
     {{ checklist_record.temperature }}
   </td>
@@ -71,7 +71,7 @@
   </td>
 
   <td class="px-6 py-4">
-    {{ checklist_record.report }}
+    {{ checklist_record.report[:100] }}
   </td>
 
 </tr>
