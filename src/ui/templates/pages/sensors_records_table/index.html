@@ -1,7 +1,63 @@
 {% extends "layouts/dashboard/index.html" %}
 
+{% from "components/modal.html" import modal %}
+{% from "components/pagination.html" import pagination %}
+
 {% block dashboard_content %}
 
-{% include "/pages/sensors_records_table/form/index.html" %}
+<div class="px-12 pb-12 mt-6 bg-white rounded-md shadow-md">
+    <div
+        class="flex items-center gap-3 py-6 border-b-2 border-gray-300">
+        <h1 class="text-2xl font-bold">Registro dos Sensores</h1>
+    </div>
+
+    <div class="flex items-center justify-between mt-6">
+
+        {% include 'components/datepicker.html' %}
+
+        {% call modal(id="sensors-records-modal", title="Adicionar registro") %}
+
+        {% include "pages/sensors_records_table/form/index.html" %}
+
+        {% endcall %}
+
+    </div>
+
+    <div class="relative mt-6 overflow-x-auto shadow-md sm:rounded-lg">
+        <form
+            hx-get="{{ url_for('sensors_records_views.filter_sensors_records_view') }}"
+            hx-target="#sensors_records"
+            hx-target-error="#form_fields"
+            hx-swap="innerHTML"
+            data-pagination="form"
+            data-query-param="hx-get"
+            id="filter_sensors_records_form"
+            class="p-6">
+
+            <label for="plant">Planta: </label>
+            <select
+                id="plant"
+                name="plant"
+                class="flex items-center justify-center w-40 mt-2 text-center border border-gray-200 rounded-lg border-1">
+                {% for plant in plants %}
+                <option value="{{ plant.id }}">
+                    {{ plant.name }}
+                </option>
+                {% endfor %}
+            </select>
+
+            <input data-pagination="input" type="text" hidden>
+        </form>
+
+        <div id="sensors_records">
+            {% include "pages/sensors_records_table/records.html" %}
+        </div>
+    </div>
+
+    {{ pagination(pages_count) }}
+</div>
+
+<script
+    src="{{ url_for('static', filename='scripts/query_param.js') }}"></script>
 
 {% endblock dashboard_content %}

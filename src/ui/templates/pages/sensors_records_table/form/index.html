@@ -1,99 +1,61 @@
 {% from "components/logo.html" import logo %}
-
 {% from "components/csv_input.html" import csv_input %}
-
 {% from "components/label.html" import label %}
 
 {% set input_class =
-"p-4 bg-[#ffffff] mt-3 w-52 rounded-lg"%}
+"p-4 bg-white mt-3 w-52 rounded-lg"%}
 
-<div class="mt-6 px-12 py-6 border bg-[#ffffff] rounded-md shadow-2xl animate-fade-up animate-delay-100">
-  <div class="flex flex-col h-auto rounded-2xl">
-    <header class="container pb-5">
-      <div class="w-60">
-        {{ logo() }}
-      </div>
-    </header>
+<div class="flex flex-col h-auto rounded-2xl">
+  <div class="flex items-center justify-center gap-1 mt-6">
+    <span>Manualmente</span> <span>ou</span>
+    <form
+      hx-post="{{ url_for('sensors_records_views.create_sensors_records_by_csv_file_view') }}"
+      hx-target="#sensors_records"
+      hx-target-error="#form_fields"
+      hx-swap="innerHTML"
+      data-query-param="hx-post"
+      enctype="multipart/form-data"
+      class="flex items-center justify-center">
+      {{ csv_form.csrf_token }}
 
-    <div class="flex items-center justify-center gap-1">
-      <span>Manualmente</span> <span>ou</span>
       {{
-      csv_input(url=url_for("sensors_records_views.create_sensors_records_by_csv_file_view"),
-      csv_form=csv_form) }}
-    </div>
-    <div class="flex flex-col items-center justify-center">
-      <hr class="bg-black w-[75%] h-[0.5px] mt-6">
-      <form class="grid grid-cols-3 gap-x-2 gap-y-1 mt-6"
-        action="{{url_for('sensors_records_views.create_sensors_record_by_form_view')}}" method="post">
-        {{ create_sensors_records_form.csrf_token }}
-
-        <div class="{{ input_class }}">
-          {{ label(id="date", title="Data", icon="calendar-blank") }}
-          {{ create_sensors_records_form.date(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
-          focus:ring-gray-400 focus:border-gray-400 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
-          dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400 dark:focus:border-gray-400",
-          placeholder="12/12/2024", required=True) }}
-        </div>
-
-        <div class="{{ input_class }}">
-          {{ label(id="date", title="Hora", icon="calendar-blank") }}
-          {{ create_sensors_records_form.hour(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
-          focus:ring-gray-400 focus:border-gray-400 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
-          dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400 dark:focus:border-gray-400",
-          placeholder="15:00", required=True) }}
-        </div>
-
-        <div class="{{ input_class }}">
-          {{ label(id="umidade_ambiente", title="Umidade ambiente (%)", icon="drop") }}
-          {{ create_sensors_records_form.ambient_humidity(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm
-          rounded-lg focus:ring-gray-400 focus:border-gray-400 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
-          dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400 dark:focus:border-gray-400",
-          placeholder="%", required=True) }}
-        </div>
-
-        <div class="{{ input_class }}">
-          {{ label(id="umidade_solo", title="Umidade solo (%)", icon="drop-half-bottom") }}
-          {{ create_sensors_records_form.soil_humidity(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm
-          rounded-lg focus:ring-gray-400 focus:border-gray-400 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
-          dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400 dark:focus:border-gray-400",
-          placeholder="%", required=True) }}
-        </div>
-
-        <div class="{{ input_class }}">
-          {{ label(id="temperatura", title="Temperatura (°C)", icon="thermometer") }}
-          {{ create_sensors_records_form.temperature(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
-          focus:ring-gray-400 focus:border-gray-400 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
-          dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400 dark:focus:border-gray-400",
-          placeholder="ºC", required=True) }}
-        </div>
-
-        <div class="{{ input_class }}">
-          {{ label(id="volume", title="Volume da água (ml)", icon="waves") }}
-          {{ create_sensors_records_form.water_volume(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
-          focus:ring-gray-400 focus:border-gray-400 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
-          dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400 dark:focus:border-gray-400",
-          placeholder="mL", required=True) }}
-        </div>
-
-        <div></div>
-
-        <div class="{{ input_class }}">
-          {{ label(id="planta", title="Planta", icon="plant") }}
-          {{ create_sensors_records_form.plant_id(class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
-          focus:ring-gray-400 focus:border-gray-400 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
-          dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400 dark:focus:border-gray-400') }}
-        </div>
-    </div>
+      csv_input(
+      url=url_for("sensors_records_views.create_sensors_records_by_csv_file_view"),
+      attributes="hx-post="
+      )
+      }}
+    </form>
   </div>
+  <div class="flex flex-col items-center justify-center">
+    <hr class="bg-black w-[75%] h-[0.5px] mt-6">
+    <form
+      hx-post="{{ url_for('sensors_records_views.create_sensors_record_by_form_view') }}"
+      hx-target="#sensors_records"
+      hx-target-error="#form_fields"
+      hx-swap="innerHTML"
+      data-query-param="hx-post">
+      {{ create_sensors_records_form.csrf_token }}
 
-  <div class="flex items-center justify-center gap-4 mt-6">
-    {{ create_sensors_records_form.submit_button(class='w-24 focus:outline-none text-white bg-gray-700 hover:bg-gray-800
-    focus:ring-4 focus:ring-gray-600 font-medium rounded-2xl text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-gray-950') }}
-    </button>
-    <button type="button"
-      class="w-24 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-600 font-medium rounded-2xl text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-red-950">
-      Cancelar
-    </button>
+      <div id="form_fields" class="grid grid-cols-3 mt-6 gap-x-2 gap-y-1">
+        {% include 'pages/sensors_records_table/form/fields.html' %}
+      </div>
+
+      <div class="flex justify-center gap-3 mt-6">
+        {{
+        create_sensors_records_form.submit_button(
+        class='w-24
+        focus:outline-none text-white bg-gray-700 hover:bg-gray-800
+        focus:ring-4 focus:ring-gray-600 font-medium rounded-2xl text-sm
+        px-5
+        py-2.5 me-2 mb-2 dark:focus:ring-gray-950')
+        }}
+        <button
+          data-modal-hide="sensors-records-modal"
+          type="button"
+          class="w-24 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-600 font-medium rounded-2xl text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-red-950">
+          Cancelar
+        </button>
+      </div>
     </form>
   </div>
 </div>
