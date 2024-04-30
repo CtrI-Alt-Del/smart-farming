@@ -12,7 +12,7 @@ from infra.forms import ChecklistRecordForm
 def create_checklist_record_by_form_view():
     checklist_record_form = ChecklistRecordForm(request.form)
 
-    page_number = request.args.get("page")
+    page_number = request.args.get("page", 1)
 
     try:
         if not checklist_record_form.validate_on_submit():
@@ -44,10 +44,13 @@ def create_checklist_record_by_form_view():
         )[0]
 
     except Error as error:
-        return render_template(
-            "pages/checklist_records_table/form/fields.html",
-            create_checklist_record_form=checklist_record_form,
-        ), error.status_code
+        return (
+            render_template(
+                "pages/checklist_records_table/form/fields.html",
+                create_checklist_record_form=checklist_record_form,
+            ),
+            error.status_code,
+        )
 
     return render_template(
         "pages/checklist_records_table/records.html",
