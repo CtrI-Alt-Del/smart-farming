@@ -14,7 +14,7 @@ def checklist_records_table_page_view():
     csv_form = CsvForm()
 
     try:
-        checklist_records, plants = get_checklist_records_table_page_data.execute(
+        checklist_records, pages_count, plants = get_checklist_records_table_page_data.execute(
             page_number=page_number, should_get_plants=True
         )
 
@@ -25,6 +25,7 @@ def checklist_records_table_page_view():
             csv_form=csv_form,
             checklist_records=checklist_records,
             plants=plants,
+            pages_count=pages_count
         )
     except Error:
         return "500 ERROR PAGE"
