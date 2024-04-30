@@ -2,20 +2,14 @@
 
 {% block dashboard_content %}
 
-<<<<<<< HEAD
 {% from "components/modal.html" import modal %}
-=======
-{% from "components/modal.html" import modal %}  
->>>>>>> refs/remotes/origin/main
-<div class="mt-6 px-12 pb-12 bg-white rounded-md shadow-md">
+<div class="mt-6 px-12 pb-12 bg-white rounded-md">
   <div class="flex items-center gap-3 py-6 border-b-2 border-gray-300">
     <h1 class="text-2xl font-bold">Registro do checklist</h1>
   </div>
 
-
-  <div class="mt-2">
+  <div class="mt-5">
     {% call modal(id="create_checklist_record", title="Adicionar registro") %}
-
     {% endcall %}
   </div>
 
@@ -23,11 +17,11 @@
     {% include 'components/search.html' %}
   </div>
 
-  <div class="relative h-16 w-60  bg-slate-100 shadow shadow-black rounded" style="display: flex;">
+  <div class="flex relative h-16 w-60  bg-slate-100 border-2 rounded">
     <div class="grid place-content-center h-16 w-20 m-0 bg-green-500 rounded">
       <i class="ph ph-plant text-white text-4xl"></i>
     </div>
-    <h2 style="margin-top: 7%; margin-left: 20%;"> Alface </h2>
+    <h2 class="mt-[7%] ml-[20%]"> Alface </h2>
   </div>
 
 </div>
