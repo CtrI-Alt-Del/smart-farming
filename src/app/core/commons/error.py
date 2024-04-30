@@ -14,4 +14,5 @@ class Error(Exception):
 
         print(self.internal_message, flush=True)
 
+        cow_say(ui_message)
         cow_say(internal_message)
