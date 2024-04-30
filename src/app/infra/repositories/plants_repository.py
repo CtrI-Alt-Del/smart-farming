@@ -37,3 +37,24 @@ class PlantsRepository:
             is_single=True,
             params=[id],
         )
+
+        if row:
+            return self.__get_plant_entity(row)
+
+        return None
+
+    def update_plant_by_id(self, plant: Plant) -> None:
+        mysql.mutate(
+            """
+            UPDATE plants 
+            SET
+                name = %s, 
+                hex_color = %s
+            WHERE id = %s
+            """,
+            params=[
+                plant.name,
+                plant.hex_color,
+                plant.id,
+            ],
+        )
