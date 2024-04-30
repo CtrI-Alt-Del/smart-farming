@@ -1,8 +1,4 @@
-<<<<<<< HEAD
--- Active: 1714396197562@@127.0.0.1@3306@smart-farming
-=======
--- Active: 1714479268496@@127.0.0.1@3306@smart-farming
->>>>>>> refs/remotes/origin/main
+
 DROP TABLE IF EXISTS plants;
 
 CREATE TABLE IF NOT EXISTS plants (
