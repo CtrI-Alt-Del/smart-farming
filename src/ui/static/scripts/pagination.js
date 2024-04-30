@@ -15,8 +15,6 @@ class Pagination {
 
     const currentPage = this.queryParam.get("page")
 
-    console.log({ currentPage })
-
     this.activePageButton(currentPage ?? "1")
 
     for (const pageButton of this.pageButtons) {

@@ -20,8 +20,6 @@ def checklist_records_table_page_view():
             )
         )
 
-        print(checklist_records[0].temperature, flush=True)
-
         return render_template(
             "pages/checklist_records_table/index.html",
             create_checklist_record_form=create_checklist_record_form,

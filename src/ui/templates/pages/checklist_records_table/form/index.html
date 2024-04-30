@@ -7,20 +7,33 @@
 
     <div class="flex items-center justify-center gap-1">
       <span>Manualmente</span> <span>ou</span>
-      {{
-      csv_input(
-      url_for('checklist_records_views.create_checklist_records_by_csv_file_view'),
-      csv_form
-      )
-      }}
+
+      <form
+        hx-post="{{ url_for('checklist_records_views.create_checklist_records_by_csv_file_view') }}"
+        hx-target="#checklist_records"
+        hx-target-error="#toast_message"
+        hx-swap="innerHTML"
+        enctype="multipart/form-data"
+        data-query-param="hx-post">
+        {{ csv_form.csrf_token }}
+        {{
+        csv_input(
+        url_for('checklist_records_views.create_checklist_records_by_csv_file_view'),
+        attributes="data-modal-hide=create_checklist_record"
+        )
+        }}
+      </form>
+
     </div>
 
     <div class="flex flex-col items-center justify-center">
 
       <hr class="bg-black w-[75%] h-[0.5px] mt-3">
 
-      <form hx-post="{{ url_for('checklist_records_views.create_checklist_record_by_form_view') }}"
-        hx-target="#checklist_records" hx-target-error="#form_fields" hx-swap="innerHTML" data-query-param="hx-post">
+      <form
+        hx-post="{{ url_for('checklist_records_views.create_checklist_record_by_form_view') }}"
+        hx-target="#checklist_records" hx-target-error="#form_fields"
+        hx-swap="innerHTML" data-query-param="hx-post">
 
         <div id="form_fields" class="grid grid-cols-3 gap-6 mt-6">
           {% include 'pages/checklist_records_table/form/fields.html' %}
