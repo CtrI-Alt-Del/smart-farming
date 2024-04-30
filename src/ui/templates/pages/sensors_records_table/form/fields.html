@@ -1,68 +1,38 @@
 <div class="{{ input_class }}">
     {{ label(id="date", title="Data", icon="calendar-blank") }}
-    {{ create_sensors_records_form.date(class="bg-gray-50 border border-gray-300
-    text-gray-900 text-sm rounded-lg
-    focus:ring-gray-400 focus:border-gray-400 block w-full p-2.5
-    dark:bg-gray-700 dark:border-gray-600
-    dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400
-    dark:focus:border-gray-400",
+    {{ create_sensors_records_form.date(class="input-field",
     placeholder="12/12/2024", required=True) }}
 </div>
 
 <div class="{{ input_class }}">
     {{ label(id="date", title="Hora", icon="calendar-blank") }}
-    {{ create_sensors_records_form.hour(class="bg-gray-50 border border-gray-300
-    text-gray-900 text-sm rounded-lg
-    focus:ring-gray-400 focus:border-gray-400 block w-full p-2.5
-    dark:bg-gray-700 dark:border-gray-600
-    dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400
-    dark:focus:border-gray-400",
+    {{ create_sensors_records_form.hour(class="input-field",
     placeholder="15:00", required=True) }}
 </div>
 
 <div class="{{ input_class }}">
     {{ label(id="umidade_ambiente", title="Umidade ambiente (%)", icon="drop")
     }}
-    {{ create_sensors_records_form.ambient_humidity(class="bg-gray-50 border
-    border-gray-300 text-gray-900 text-sm
-    rounded-lg focus:ring-gray-400 focus:border-gray-400 block w-full p-2.5
-    dark:bg-gray-700 dark:border-gray-600
-    dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400
-    dark:focus:border-gray-400",
+    {{ create_sensors_records_form.ambient_humidity(class="input-field",
     placeholder="%", required=True) }}
 </div>
 
 <div class="{{ input_class }}">
     {{ label(id="umidade_solo", title="Umidade solo (%)",
     icon="drop-half-bottom") }}
-    {{ create_sensors_records_form.soil_humidity(class="bg-gray-50 border
-    border-gray-300 text-gray-900 text-sm
-    rounded-lg focus:ring-gray-400 focus:border-gray-400 block w-full p-2.5
-    dark:bg-gray-700 dark:border-gray-600
-    dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400
-    dark:focus:border-gray-400",
+    {{ create_sensors_records_form.soil_humidity(class="input-field",
     placeholder="%", required=True) }}
 </div>
 
 <div class="{{ input_class }}">
     {{ label(id="temperatura", title="Temperatura (°C)", icon="thermometer") }}
-    {{ create_sensors_records_form.temperature(class="bg-gray-50 border
-    border-gray-300 text-gray-900 text-sm rounded-lg
-    focus:ring-gray-400 focus:border-gray-400 block w-full p-2.5
-    dark:bg-gray-700 dark:border-gray-600
-    dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400
-    dark:focus:border-gray-400",
+    {{ create_sensors_records_form.temperature(class="input-field",
     placeholder="ºC", required=True) }}
 </div>
 
 <div class="{{ input_class }}">
     {{ label(id="volume", title="Volume da água (ml)", icon="waves") }}
-    {{ create_sensors_records_form.water_volume(class="bg-gray-50 border
-    border-gray-300 text-gray-900 text-sm rounded-lg
-    focus:ring-gray-400 focus:border-gray-400 block w-full p-2.5
-    dark:bg-gray-700 dark:border-gray-600
-    dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400
-    dark:focus:border-gray-400",
+    {{ create_sensors_records_form.water_volume(class="input-field",
     placeholder="mL", required=True) }}
 </div>
 
@@ -70,10 +40,5 @@
 
 <div class="{{ input_class }}">
     {{ label(id="planta", title="Planta", icon="plant") }}
-    {{ create_sensors_records_form.plant_id(class='bg-gray-50 border
-    border-gray-300 text-gray-900 text-sm rounded-lg
-    focus:ring-gray-400 focus:border-gray-400 block w-full p-2.5
-    dark:bg-gray-700 dark:border-gray-600
-    dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400
-    dark:focus:border-gray-400') }}
+    {{ create_sensors_records_form.plant_id(class="input-field") }}
 </div>

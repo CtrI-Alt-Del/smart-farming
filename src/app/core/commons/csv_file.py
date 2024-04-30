@@ -32,8 +32,6 @@ class CsvFile:
         for record in records:
             records_list.append({key.lower(): value for key, value in record.items()})
 
-        print(records_list[0], flush=True)
-
         return records_list
 
     def validate_columns(self, columns: List[str]) -> bool:

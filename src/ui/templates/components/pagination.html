@@ -12,7 +12,7 @@ dark:border-gray-700 dark:text-gray-400 dark:hover:text-white"
 	<ul data-pagination="page-buttons-container"
 		class="flex h-8 gap-2 -space-x-px text-sm rtl:space-x-reverse">
 
-		<li>
+		<li class="flex items-end gap-1">
 			<button
 				data-pagination="page-button"
 				type="button"
@@ -20,6 +20,9 @@ dark:border-gray-700 dark:text-gray-400 dark:hover:text-white"
 				class="{{ button_class }}">
 				1
 			</button>
+			{% if current_page_number > 1 + page_buttons_limit %}
+			<span>...</span>
+			{% endif %}
 		</li>
 
 		{% for page_number in range(
@@ -45,7 +48,10 @@ dark:border-gray-700 dark:text-gray-400 dark:hover:text-white"
 		{% endfor %}
 
 		{% if last_page_number > current_page_number + page_buttons_limit %}
-		<li>
+		<li class="flex items-end gap-1">
+			{% if current_page_number < last_page_number - page_buttons_limit %}
+			<span>...</span>
+			{% endif %}
 			<button
 				data-pagination="page-button"
 				type="button"

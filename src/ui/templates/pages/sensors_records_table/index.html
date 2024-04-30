@@ -1,7 +1,6 @@
 {% extends "layouts/dashboard/index.html" %}
 
 {% from "components/modal.html" import modal %}
-{% from "components/pagination.html" import pagination %}
 
 {% block dashboard_content %}
 
@@ -12,15 +11,17 @@
     </div>
 
     <div class="flex items-center justify-between mt-6">
+        {% include "components/datepicker.html" %}
 
-        {% include 'components/datepicker.html' %}
-
-        {% call modal(id="sensors-records-modal", title="Adicionar registro") %}
+        {% call modal(
+        id="create-sensors-records-modal",
+        title="Adicionar registro"
+        )
+        %}
 
         {% include "pages/sensors_records_table/form/index.html" %}
 
         {% endcall %}
-
     </div>
 
     <div class="relative mt-6 overflow-x-auto shadow-md sm:rounded-lg">
@@ -33,31 +34,23 @@
             data-query-param="hx-get"
             id="filter_sensors_records_form"
             class="p-6">
-
-            <label for="plant">Planta: </label>
-            <select
-                id="plant"
-                name="plant"
-                class="flex items-center justify-center w-40 mt-2 text-center border border-gray-200 rounded-lg border-1">
-                {% for plant in plants %}
-                <option value="{{ plant.id }}">
-                    {{ plant.name }}
-                </option>
-                {% endfor %}
-            </select>
+            {% include "components/plant_select.html" %}
 
             <input data-pagination="input" type="text" hidden>
         </form>
 
-        <div id="sensors_records">
+        <div
+            data-pagination="container"
+            id="sensors_records"
+            class="flex flex-col justify-between h-[28rem]">
             {% include "pages/sensors_records_table/records.html" %}
         </div>
     </div>
-
-    {{ pagination(pages_count) }}
 </div>
 
 <script
     src="{{ url_for('static', filename='scripts/query_param.js') }}"></script>
+<script
+    src="{{ url_for('static', filename='scripts/pagination.js') }}"></script>
 
 {% endblock dashboard_content %}

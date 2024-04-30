@@ -1,4 +1,4 @@
-from flask import  request
+from flask import request
 
 from core.use_cases.plants_records import create_plant_by_form, get_plants_page_data
 
@@ -24,7 +24,5 @@ def create_plant_by_form_view():
 
     except Error as error:
         return "ERROR", error.status_code
-
-    print(plants, flush=True)
 
     return str(plants)

@@ -15,7 +15,6 @@ def update_checklist_record_view():
 
     if checklist_record_form.validate_on_submit():
         try:
-            print(request.form)
             update_checklist_record.execute(
                 {
                     "fertilizer_expiration_date": checklist_record_form.fertilizer_expiration_date.data,

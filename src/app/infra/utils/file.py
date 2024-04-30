@@ -13,5 +13,4 @@ class File:
         return None
 
     def exists(self) -> bool:
-        print(self.path.absolute())
         return self.path.exists()

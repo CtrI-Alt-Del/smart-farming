@@ -21,7 +21,7 @@
       {{
       csv_input(
       url=url_for("sensors_records_views.create_sensors_records_by_csv_file_view"),
-      attributes="hx-post="
+      attributes="data-modal-hide=create-sensors-records-modal"
       )
       }}
     </form>
@@ -41,16 +41,12 @@
       </div>
 
       <div class="flex justify-center gap-3 mt-6">
-        {{
-        create_sensors_records_form.submit_button(
-        class='w-24
-        focus:outline-none text-white bg-gray-700 hover:bg-gray-800
-        focus:ring-4 focus:ring-gray-600 font-medium rounded-2xl text-sm
-        px-5
-        py-2.5 me-2 mb-2 dark:focus:ring-gray-950')
-        }}
+        <button data-modal-hide="create-sensors-records-modal" type="submit"
+          class="w-28 focus:outline-none text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-600 font-medium rounded-2xl text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-gray-950">
+          Enviar
+        </button>
         <button
-          data-modal-hide="sensors-records-modal"
+          data-modal-hide="create-sensors-records-modal"
           type="button"
           class="w-24 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-600 font-medium rounded-2xl text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-red-950">
           Cancelar
@@ -59,7 +55,3 @@
     </form>
   </div>
 </div>
-
-<script src="{{ url_for('static', filename='scripts/csv_input.js') }}">
-
-</script>

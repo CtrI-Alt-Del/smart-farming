@@ -8,7 +8,7 @@ from wtforms import (
     SelectField,
     StringField,
 )
-from wtforms.validators import NumberRange
+from wtforms.validators import DataRequired, NumberRange
 
 from infra.repositories import plants_repository
 
@@ -24,21 +24,25 @@ class SensorsRecordsForm(FlaskForm):
         "Data de coleta", render_kw={"max": datetime.now().strftime("%Y-%m-%d")}
     )
 
-    hour = IntegerField("Hora da Coleta", validators=[NumberRange(min=0, max=23)])
+    hour = IntegerField(
+        "Hora da Coleta", validators=[DataRequired(), NumberRange(min=0, max=23)]
+    )
 
     soil_humidity = IntegerField(
-        "Umidade do Solo (%)", validators=[NumberRange(min=0, max=100)]
+        "Umidade do Solo (%)", validators=[DataRequired(), NumberRange(min=0, max=100)]
     )
 
     ambient_humidity = IntegerField(
-        "Umidade do Ambiente (%)", validators=[NumberRange(min=0, max=100)]
+        "Umidade do Ambiente (%)",
+        validators=[DataRequired(), NumberRange(min=0, max=100)],
     )
 
     temperature = IntegerField(
-        "Temperatura ambiente (%)", validators=[NumberRange(min=0, max=100)]
+        "Temperatura ambiente (%)",
+        validators=[DataRequired(), NumberRange(min=0, max=100)],
     )
     water_volume = IntegerField(
-        "Vazão da água (mL)", validators=[NumberRange(min=0, max=100)]
+        "Vazão da água (mL)", validators=[DataRequired(), NumberRange(min=0, max=100)]
     )
 
     plant_id = SelectField("Planta")

@@ -1,16 +1,18 @@
 MYSQL_TABLES = {
     "sensors_records": """
-    CREATE TABLE sensors_records (
+   CREATE TABLE IF NOT EXISTS sensors_records (
       id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
       soil_humidity INT NOT NULL,
       ambient_humidity INT NOT NULL,
       temperature DECIMAL(10, 2) NOT NULL,
       water_volume DECIMAL(10, 2) NOT NULL,
-      created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+      created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      plant_id CHAR(36) DEFAULT '4544afe3-0661-11ef-9512-0242ac140002',
+      FOREIGN KEY (plant_id) REFERENCES plants(id)
   );
   """,
     "checklist_records": """
-    CREATE TABLE checklist_records (
+  CREATE TABLE checklist_records (
       id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
       soil_ph DECIMAL(10, 2) NOT NULL,
       soil_humidity DECIMAL(10, 2) NOT NULL,
@@ -40,13 +42,12 @@ MYSQL_TABLES = {
       FOREIGN KEY (plant_id) REFERENCES plants(id)
   );
   """,
-  "plants": """
+    "plants": """
    CREATE TABLE plants (
-    id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
-    name VARCHAR(255) NOT NULL,
-    hex_color VARCHAR(7) NOT NULL
+      id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
+      name VARCHAR(255) NOT NULL,
+      hex_color VARCHAR(7) NOT NULL
   );
-  
   """,
     "user": """
     CREATE TABLE user (

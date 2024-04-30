@@ -27,17 +27,9 @@
       hx-trigger="submit"
       hx-target="#checklist_records" hx-swap="innerHTML" data-pagination="form"
       data-query-param="hx-get"
-      id="filter_checklist_records_form" class="p-6">
-
-      <label for="plant">Planta: </label>
-      <select id="plant" name="plant"
-        class="flex items-center justify-center w-40 mt-2 text-center border border-gray-200 rounded-lg border-1">
-        {% for plant in plants %}
-        <option value="{{ plant.id }}">
-          {{ plant.name }}
-        </option>
-        {% endfor %}
-      </select>
+      id="filter_checklist_records_form"
+      class="p-6">
+      {% include "components/plant_select.html" %}
 
       <input data-pagination="input" type="text" hidden>
     </form>

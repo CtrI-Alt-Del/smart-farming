@@ -32,8 +32,6 @@ class CreateSensorsRecordByForm:
                 plant=plant,
             )
 
-            print(created_at.get_value(), flush=True)
-
             sensors_records_repository.create_sensors_record(sensors_records)
 
         except Error as error:

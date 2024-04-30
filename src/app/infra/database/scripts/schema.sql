@@ -1,4 +1,4 @@
--- Active: 1712918435172@@127.0.0.1@3306@smart_farming
+-- Active: 1713899386704@@127.0.0.1@3306@smart-farming
 CREATE DATABASE IF NOT EXISTS `smart-farming`;
 
 USE DATABASE `smart-farming`;
@@ -13,7 +13,6 @@ CREATE TABLE IF NOT EXISTS sensors_records (
   plant_id CHAR(36) DEFAULT '4544afe3-0661-11ef-9512-0242ac140002',
   FOREIGN KEY (plant_id) REFERENCES plants(id)
 );
-
 
 CREATE TABLE IF NOT EXISTS checklist_records (
   id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,

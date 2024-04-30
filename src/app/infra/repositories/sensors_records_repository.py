@@ -1,5 +1,4 @@
 from typing import List, Dict
-from datetime import datetime
 
 from core.entities import SensorsRecord, Datetime, Plant
 from core.constants import PAGINATION
@@ -9,7 +8,6 @@ from infra.database import mysql
 
 class SensorRecordsRepository:
     def create_sensors_record(self, sensors_record: SensorsRecord) -> None:
-        print(sensors_record, flush=True)
         sql = """
         INSERT INTO sensors_records (soil_humidity, ambient_humidity, temperature, water_volume, created_at, plant_id) 
         VALUES (%s, %s, %s, %s, %s , %s)

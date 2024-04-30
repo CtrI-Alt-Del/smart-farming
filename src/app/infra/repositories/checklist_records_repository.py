@@ -27,9 +27,6 @@ class CheckListRecordsRepository:
         )
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         """
-
-        print(checklist_record.plant.id, flush=True)
-
         params = [
             checklist_record.soil_ph,
             checklist_record.soil_humidity,
@@ -102,7 +99,6 @@ class CheckListRecordsRepository:
         )
 
     def get_checklist_record_by_id(self, id: str) -> CheckListRecord | None:
-        print(id)
         row = mysql.query(
             sql="SELECT * FROM checklist_records WHERE id = %s",
             is_single=True,

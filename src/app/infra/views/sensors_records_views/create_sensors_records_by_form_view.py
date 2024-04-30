@@ -1,11 +1,11 @@
-from json import dumps
+from flask import render_template, request
 
-from flask import redirect, url_for, flash, make_response, request
-
-
-from core.use_cases.sensors_records import create_sensors_records_by_form
-
+from core.use_cases.sensors_records import (
+    create_sensors_records_by_form,
+    get_sensors_records_table_page_data,
+)
 from core.commons import Error
+from core.constants import PAGINATION
 
 from infra.forms import SensorsRecordsForm
 
@@ -13,9 +13,8 @@ from infra.forms import SensorsRecordsForm
 def create_sensors_record_by_form_view():
     sensors_record_form = SensorsRecordsForm(request.form)
 
-    response = make_response(
-        redirect(url_for("sensors_records_views.sensors_records_table_page_view"))
-    )
+    page_number = int(request.args.get("page", 1))
+
     if sensors_record_form.validate_on_submit():
         try:
             create_sensors_records_by_form.execute(
@@ -30,15 +29,20 @@ def create_sensors_record_by_form_view():
                     "hour": sensors_record_form.hour.data,
                 }
             )
-            flash("Registro dos sensores salvo com sucesso", "sucess")
-            return response
+
+            data = get_sensors_records_table_page_data.execute(page_number=page_number)
+
+            updated_sensors_records = data["sensors_records"]
+            plants = data["plants"]
+            last_page_number = data["last_page_number"]
+
+            return render_template(
+                "pages/sensors_records_table/records.html",
+                sensors_records=updated_sensors_records,
+                plants=plants,
+                last_page_number=last_page_number,
+                current_page_number=page_number,
+                page_buttons_limit=PAGINATION["page_buttons_siblings_count"],
+            )
         except Error as error:
-            flash(error.ui_message, "error")
-            return response
-
-    response.set_cookie(
-        "create_sensors_records_form_errors", dumps(sensors_record_form.errors)
-    )
-
-    flash("Registro dos sensores inválido", "error")
-    return response
+            return "ERROR", error.status_code
