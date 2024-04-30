@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS sensors_records (
   FOREIGN KEY (plant_id) REFERENCES plants(id)
 );
 
+
 CREATE TABLE IF NOT EXISTS checklist_records (
   id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
   soil_ph DECIMAL(10, 2) NOT NULL,

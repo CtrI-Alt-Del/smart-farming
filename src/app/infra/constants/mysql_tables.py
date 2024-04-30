@@ -33,16 +33,26 @@ MYSQL_TABLES = {
       'OPACO PREDOMINANTE',
       'AVERMELHADO PREDOMINANTE'),
       plantation_type ENUM('PLANTIO INTERNO(FATEC)', 'PLANTIO EXTERNO(CASA)'),
-      fertiliziation_date DATE NOT NULL DEFAULT (CURDATE()),
-      harvested_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-      report TEXT
+      fertilizer_expiration_date DATE NOT NULL DEFAULT (CURDATE()),
+      created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      report TEXT,
+      plant_id CHAR(36) DEFAULT '4544afe3-0661-11ef-9512-0242ac140002',
+      FOREIGN KEY (plant_id) REFERENCES plants(id)
   );
+  """,
+  "plants": """
+   CREATE TABLE plants (
+    id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    hex_color VARCHAR(7) NOT NULL
+  );
+  
   """,
     "user": """
     CREATE TABLE user (
-    id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
-    email VARCHAR(320) NOT NULL,
-    password VARCHAR(40) NOT NULL
+      id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
+      email VARCHAR(320) NOT NULL,
+      password VARCHAR(40) NOT NULL
   );
   """,
 }
