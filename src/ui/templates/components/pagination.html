@@ -1,27 +1,61 @@
-{% macro pagination(pages_count) %}
-
-{% if pages_count > 1 %}
+{% if last_page_number > 1 %}
 
 {% set button_class =
-"flex items-center justify-center h-8 px-3 leading-tight text-gray-500 border border-gray-300 ms-0 rounded-lg
+"flex items-center justify-center h-8 px-3 leading-tight text-gray-500 border
+border-gray-300 ms-0 rounded-lg
 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white"
 %}
 
-<nav class="flex flex-wrap items-center justify-between pt-4 flex-column md:flex-row" aria-label="Table navigation">
-    <ul class="flex h-8 gap-2 -space-x-px text-sm rtl:space-x-reverse ">
-        {% for page_number in range(1, pages_count + 1) %}
-        <li>
-            <button data-pagination="page-button" type="button" value="{{ page_number }}" class="{{ button_class }} ">
-                {{ page_number }}
-            </button>
-        </li>
-        {% endfor %}
+<nav
+	class="flex flex-wrap items-center justify-between p-4 flex-column md:flex-row"
+	aria-label="Table navigation">
+	<ul data-pagination="page-buttons-container"
+		class="flex h-8 gap-2 -space-x-px text-sm rtl:space-x-reverse">
 
-    </ul>
+		<li>
+			<button
+				data-pagination="page-button"
+				type="button"
+				value="1"
+				class="{{ button_class }}">
+				1
+			</button>
+		</li>
+
+		{% for page_number in range(
+		current_page_number - page_buttons_limit,
+		current_page_number + page_buttons_limit + 1
+		)
+		%}
+
+		{% if page_number >= 2 and page_number <= last_page_number %}
+
+		<li>
+			<button
+				data-pagination="page-button"
+				type="button"
+				value="{{ page_number }}"
+				class="{{ button_class }}">
+				{{ page_number }}
+			</button>
+		</li>
+
+		{% endif %}
+
+		{% endfor %}
+
+		{% if last_page_number > current_page_number + page_buttons_limit %}
+		<li>
+			<button
+				data-pagination="page-button"
+				type="button"
+				value="{{ last_page_number }}"
+				class="{{ button_class }}">
+				{{ last_page_number }}
+			</button>
+		</li>
+		{% endif %}
+	</ul>
 </nav>
 
-<script src="{{ url_for('static', filename='scripts/pagination.js') }}"></script>
-
 {% endif %}
-
-{% endmacro %}

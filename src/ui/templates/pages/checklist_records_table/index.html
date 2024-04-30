@@ -1,6 +1,5 @@
 {% extends "layouts/dashboard/index.html" %}
 
-{% from "components/pagination.html" import pagination%}
 {% from "components/modal.html" import modal %}
 
 {% block dashboard_content %}
@@ -22,7 +21,7 @@
 
   </div>
 
-  <div class="relative mt-6 overflow-x-auto shadow-md sm:rounded-lg">
+  <div class="relative mt-6 shadow-md pb-6 sm:rounded-lg">
     <form
       hx-get="{{ url_for('checklist_records_views.filter_checklist_records_view') }}"
       hx-trigger="submit"
@@ -43,15 +42,19 @@
       <input data-pagination="input" type="text" hidden>
     </form>
 
-    <div id="checklist_records" class="h-[26rem]">
+    <div
+      data-pagination="container"
+      id="checklist_records"
+      class="flex flex-col justify-between h-[28rem]">
       {% include "pages/checklist_records_table/records.html" %}
     </div>
   </div>
 
-  {{ pagination(pages_count) }}
 </div>
 
 <script
   src="{{ url_for('static', filename='scripts/query_param.js') }}"></script>
+<script
+  src="{{ url_for('static', filename='scripts/pagination.js') }}"></script>
 
 {% endblock dashboard_content %}

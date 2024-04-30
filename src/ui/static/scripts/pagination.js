@@ -1,5 +1,21 @@
 class Pagination {
   constructor() {
+    const container = document.querySelector('[data-pagination="container"]')
+
+    if (!container) return
+
+    this.addEventListeners()
+
+    const observer = new MutationObserver((mutations) => {
+      if (mutations[0].type === "childList") {
+        this.addEventListeners()
+      }
+    })
+
+    observer.observe(container, { childList: true })
+  }
+
+  addEventListeners() {
     const pageButtons = document.querySelectorAll(
       '[data-pagination="page-button"]',
     )
@@ -12,16 +28,6 @@ class Pagination {
     this.form = form
     this.input = input
     this.queryParam = new QueryParam()
-
-    const observer = new MutationObserver((mutationList) => {
-      for (const mutation of mutationList) {
-        if (mutation.type === "childList") {
-          console.log("A child node has been added or removed.");
-        } else if (mutation.type === "attributes") {
-          console.log(`The ${mutation.attributeName} attribute was modified.`);
-        }
-      }
-    });
 
     const currentPage = this.queryParam.get("page")
 
