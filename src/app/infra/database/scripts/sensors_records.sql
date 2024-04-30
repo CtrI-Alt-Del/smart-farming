@@ -1,19 +1,6 @@
--- Active: 1712258180714@@127.0.0.1@3306@smart-farming
--- Active: 1712258180714@@127.0.0.1@3306@smart-farming
+-- Active: 1712918435172@@127.0.0.1@3306@smart_farming
 
 DROP TABLE IF EXISTS sensors_records;
-
-CREATE TABLE IF NOT EXISTS sensors_records (
-  id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
-  soil_humidity INT NOT NULL,
-  ambient_humidity INT NOT NULL,
-  temperature DECIMAL(10, 2) NOT NULL,
-  water_volume DECIMAL(10, 2) NOT NULL,
-  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  plant_id CHAR(36) DEFAULT '4544afe3-0661-11ef-9512-0242ac140002',
-  FOREIGN KEY (plant_id) REFERENCES plants(id)
-);
-
 DESC sensors_records;
 
 SELECT * FROM sensors_records ORDER BY created_at ASC
