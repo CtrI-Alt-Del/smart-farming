@@ -1,0 +1,10 @@
+{% from "pages/sensors_records_table/row.html" import row %}
+{% from "components/rows_skeleton.html" import rows_skeleton %}
+
+<tbody class="h-[455px]">
+  {% for sensors_record in sensors_records %}
+  {{ row(sensors_record) }}
+  {% endfor %}
+
+  {{ rows_skeleton(6, 15) }}
+</tbody>

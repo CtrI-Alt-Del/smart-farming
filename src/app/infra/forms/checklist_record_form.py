@@ -25,8 +25,8 @@ class ChecklistRecordForm(FlaskForm):
     plantation_type = SelectField(
         "Local de plantio",
         choices=[
-            ("PLANTIO INTERNO(FATEC)", "Interno"),
-            ("PLANTIO EXTERNO(CASA)", "Externo"),
+            ("PLANTIO INTERNO (FATEC)", "Interno"),
+            ("PLANTIO EXTERNO (CASA)", "Externo"),
         ],
     )
     leaf_appearance = SelectField(
@@ -39,7 +39,8 @@ class ChecklistRecordForm(FlaskForm):
     leaf_color = SelectField(
         "Coloração das folhas",
         choices=[
-            ("VERDE CLARO DOMINANTE", "Verde claro dominante"),
+            ("VERDE CLARO PREDOMINANTE", "Verde claro predominante"),
+            ("VERDE ESCURO PREDOMINANTE", "Verde escuro predominante"),
             (
                 "VERDE CLARO COM ALGUMAS MANCHAS CLARAS",
                 "Verde claro com algumas claras",

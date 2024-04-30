@@ -1,8 +1,7 @@
-from json import dumps
+from flask import  request
 
-from flask import redirect, url_for, flash, make_response, request
+from core.use_cases.plants_records import create_plant_by_form, get_plants_page_data
 
-from core.use_cases.plants_records import create_plants_by_form
 from core.commons import Error
 
 from infra.forms import PlantForm
@@ -11,28 +10,21 @@ from infra.forms import PlantForm
 def create_plant_by_form_view():
     plant_form = PlantForm(request.form)
 
-    response = make_response(
-        redirect(url_for(""))
-    )
+    plants = []
 
-    if plant_form.validate_on_submit():
-        try:
-            create_plants_by_form.CreatePlantByForm.execute(
-                {
-                    "name": plant_form.plant_name.data,
-                    "hex_color": plant_form.hex_color.data
-                }
-            )
+    try:
+        if not plant_form.validate_on_submit():
+            raise Error("Formulário inválido")
 
-            flash("Registro plant salvo com sucesso", "success")
-            return response
-        except Error as error:
-            flash(error.ui_message, "error")
-            return response
+        create_plant_by_form.execute(
+            {"name": plant_form.plant_name.data, "hex_color": plant_form.hex_color.data}
+        )
 
-    response.set_cookie(
-        "plant_form_errors", dumps(plant_form.errors)
-    )
+        plants = get_plants_page_data.execute()
 
-    flash("Registro plant inválido", "error")
-    return response
+    except Error as error:
+        return "ERROR", error.status_code
+
+    print(plants, flush=True)
+
+    return str(plants)

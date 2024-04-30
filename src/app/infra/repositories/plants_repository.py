@@ -29,3 +29,32 @@ class PlantsRepository:
 
     def __get_plant_entity(self, row):
         return Plant(id=row["id"], name=row["name"], hex_color=row["hex_color"])
+
+    def get_plant_by_id(self, id: str) -> Plant | None:
+        print(id)
+        row = mysql.query(
+            sql="SELECT * FROM plants WHERE id = %s",
+            is_single=True,
+            params=[id],
+        )
+
+        if row:
+            return self.__get_plant_entity(row)
+
+        return None
+
+    def update_plant_by_id(self, plant: Plant) -> None:
+        mysql.mutate(
+            """
+            UPDATE plants 
+            SET
+                name = %s, 
+                hex_color = %s
+            WHERE id = %s
+            """,
+            params=[
+                plant.name,
+                plant.hex_color,
+                plant.id,
+            ],
+        )

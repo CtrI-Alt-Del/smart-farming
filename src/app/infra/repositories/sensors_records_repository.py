@@ -1,17 +1,19 @@
 from typing import List, Dict
+from datetime import datetime
 
-from core.entities.sensors_record import SensorsRecord
+from core.entities import SensorsRecord, Datetime, Plant
+from core.constants import PAGINATION_LIMIT
 
 from infra.database import mysql
 
-from core.constants import PAGINATION_LIMIT
-
 class SensorRecordsRepository:
     def create_sensors_record(self, sensors_record: SensorsRecord) -> None:
+        print(sensors_record, flush=True)
         sql = """
-        INSERT INTO sensors_records (soil_humidity, ambient_humidity, temperature, water_volume, created_at,plant_id) 
+        INSERT INTO sensors_records (soil_humidity, ambient_humidity, temperature, water_volume, created_at, plant_id) 
         VALUES (%s, %s, %s, %s, %s , %s)
         """
+
         mysql.mutate(
             sql=sql,
             params=[
@@ -43,11 +45,11 @@ class SensorRecordsRepository:
 
     def get_last_sensors_record(self) -> SensorsRecord:
         sql_data = """
-            SELECT 
-                soil_humidity, ambient_humidity, temperature, water_volume, created_at
-            FROM sensors_records
-            ORDER BY created_at DESC
-            LIMIT 1;
+        SELECT 
+            soil_humidity, ambient_humidity, temperature, water_volume, created_at
+        FROM sensors_records
+        ORDER BY created_at DESC
+        LIMIT 1;
         """
 
         row = mysql.query(sql=sql_data, is_single=True)
@@ -55,40 +57,33 @@ class SensorRecordsRepository:
         if row:
             return self.__get_sensors_record_entity(row)
 
-    def __get_sensors_record_entity(self, row: Dict) -> SensorsRecord:
-        if row:
-            return SensorsRecord(
-                ambient_humidity=row["ambient_humidity"],
-                soil_humidity=row["soil_humidity"],
-                temperature=row["temperature"],
-                water_volume=row["water_volume"],
-                created_at=row["created_at"],
-            )
-        else:
-            return None
+    def get_filtered_sensors_records(self, page_number: int = 1) -> list[SensorsRecord]:
+        offset = (page_number - 1) * PAGINATION_LIMIT
 
-    def get_filtered_sensors_records(self, page_number) -> list[SensorsRecord]:
         rows = mysql.query(
             sql=f"""
-            SELECT *  FROM sensors_records
-            ORDER BY created_at LIMIT {PAGINATION_LIMIT} OFFSET {page_number}            
+            SELECT 
+                SR.*,
+                P.id AS plant_id, 
+                P.name AS plant_name, 
+                P.hex_color as plant_color
+            FROM sensors_records AS SR
+            JOIN plants AS P ON P.id = SR.plant_id
+            ORDER BY created_at DESC
+            LIMIT {PAGINATION_LIMIT} OFFSET {offset};    
             """,
             is_single=False,
         )
+
         sensors_records = []
-        for row in rows:
-            sensors_records.append(self.__get_sensors_record_entity(row))
+
+        if len(rows) > 0:
+            for row in rows:
+                sensors_records.append(self.__get_sensors_record_entity(row))
 
         return sensors_records
 
-    def delete_sensors_record_by_id(self, sensors_record_id: str):
-        mysql.mutate(
-            "DELETE FROM sensors_records WHERE id = %s",
-            params=[sensors_record_id],
-        )
-
-    def get_sensors_record_by_id(self, id: str) ->    SensorsRecord | None:
-        print(id)
+    def get_sensors_record_by_id(self, id: str) -> SensorsRecord | None:
         row = mysql.query(
             sql="SELECT * FROM sensors_records WHERE id = %s",
             is_single=True,
@@ -99,6 +94,14 @@ class SensorRecordsRepository:
             return self.__get_sensors_record_entity(row)
         
         return None
+    
+    def get_sensors_records_count(self) -> int:
+        result = mysql.query(
+            sql="SELECT COUNT(*) AS count FROM sensors_records",
+            is_single=True,
+        )
+
+        return result["count"]
     
     def update_sensors_record_by_id(self,sensors_record:SensorsRecord) -> None:
         mysql.mutate(
@@ -123,3 +126,25 @@ class SensorRecordsRepository:
                 sensors_record.id
             ],
         )
+
+    def delete_sensors_record_by_id(self, sensors_record_id: str):
+        mysql.mutate(
+            "DELETE FROM sensors_records WHERE id = %s",
+            params=[sensors_record_id],
+        )
+
+    def __get_sensors_record_entity(self, row: Dict) -> SensorsRecord:
+        if row:
+            created_at = Datetime(row["created_at"])
+            plant = Plant(id=row["plant_id"], name=row["plant_name"], hex_color=row["plant_color"])
+
+            return SensorsRecord(
+                ambient_humidity=row["ambient_humidity"],
+                soil_humidity=row["soil_humidity"],
+                temperature=row["temperature"],
+                water_volume=row["water_volume"],
+                plant=plant,
+                created_at=created_at
+            )
+        else:
+            return None

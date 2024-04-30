@@ -1,8 +1,8 @@
-from flask import request, redirect, url_for
+from flask import request, render_template, redirect, url_for
 
 from werkzeug.datastructures import ImmutableMultiDict
 
-from core.use_cases.sensors_records import create_sensors_records_by_csv_file
+from core.use_cases.sensors_records import create_sensors_records_by_csv_file, get_sensors_records_table_page_data
 from core.commons import Error
 
 from infra.forms.csv_form import CsvForm
@@ -14,15 +14,26 @@ def create_sensors_records_by_csv_file_view():
 
     csv_form = CsvForm(ImmutableMultiDict(form_data))
 
+    page_number = request.args.get('page', 1)
+
     try:
-        if csv_form.validate_on_submit():
-            create_sensors_records_by_csv_file.execute(request.files["csv"])
+        if not csv_form.validate_on_submit():
+            raise Error(ui_message="Formulário de check-list inválido", status_code=400)
+        
+        create_sensors_records_by_csv_file.execute(request.files["csv"])
 
-    except Error:
-        return redirect(
-            url_for("sensors_records_views.sensors_records_table_page_view")
+        sensors_records = get_sensors_records_table_page_data.execute(
+            page_number=page_number
+        )[0]
+
+    except Error as error:
+         return render_template(
+            "pages/sensors_records_table/records.html",
+            sensors_records=[],
+        ), error.status_code
+            
+
+    return render_template(
+            "pages/sensors_records_table/records.html",
+            sensors_records=sensors_records,
         )
-
-    return redirect(
-        url_for("sensors_records_views.sensors_records_dashboard_page_view")
-    )

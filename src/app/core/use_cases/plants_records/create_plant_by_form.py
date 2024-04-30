@@ -5,12 +5,8 @@ from infra.repositories import plants_repository
 
 class CreatePlantByForm:
     def execute(self, request: dict) -> None:
-
         try:
-            plant = Plant(
-                name = request["name"],
-                hex_color = request["hex_color"]
-            )
+            plant = Plant(name=request["name"], hex_color=request["hex_color"])
 
             plants_repository.create_plant_record(plant)
 

@@ -7,7 +7,7 @@ from core.commons import CsvFile, Error, Datetime
 from core.entities.sensors_record import SensorsRecord
 from core.constants import CSV_FILE_COLUMNS
 
-from infra.repositories import sensors_records_repository
+from infra.repositories import sensors_records_repository, plants_repository
 
 
 class CreateSensorsRecordsByCsvFile:
@@ -31,9 +31,12 @@ class CreateSensorsRecordsByCsvFile:
     def __convert_csv_records_to_sensors_records(
         self, records: List[Dict]
     ) -> Generator:
+        plants = plants_repository.get_plants()
+
         for record in records:
-            record_date = record["Data"].date()
-            record_time = record["Hora"]
+            record_date = record["data"].date()
+            record_time = record["hora"]
+            record_plant_name = record["planta"]
 
             created_at = Datetime(
                 value=datetime(
@@ -45,10 +48,18 @@ class CreateSensorsRecordsByCsvFile:
                 )
             )
 
+            plant = None
+
+            for current_plant in plants:
+                if current_plant.name.lower() == record_plant_name.lower():
+                    plant = current_plant
+                    break
+
             yield SensorsRecord(
-                ambient_humidity=record["Umidade Ambiente"],
-                soil_humidity=record["Umidade solo"],
-                temperature=record["Temperatura"],
-                water_volume=record["Volume Água (L)"],
+                ambient_humidity=record["umidade ambiente"],
+                soil_humidity=record["umidade solo"],
+                temperature=record["temperatura"],
+                water_volume=record["volume de água (ml)"],
                 created_at=created_at,
+                plant=plant
             )

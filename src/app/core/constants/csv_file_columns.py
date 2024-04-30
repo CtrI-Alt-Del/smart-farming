@@ -6,7 +6,8 @@ CSV_FILE_COLUMNS = {
         "umidade Ambiente",
         "umidade solo",
         "temperatura",
-        "volume Água (L)",
+        "volume de Água (ml)",
+        "planta",
     ],
     "checklist_records": [
         "em qual plantio você quer coletar os dados?",

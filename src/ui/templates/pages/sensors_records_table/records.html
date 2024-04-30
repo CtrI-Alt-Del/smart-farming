@@ -1,13 +1,10 @@
-{% if checklist_records | length > 0 %}
 
+{% if sensors_records | length > 0 %}
 <table
   class="text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
-  {% include "pages/checklist_records_table/head.html"%}
-  {% include "pages/checklist_records_table/body.html"%}
+  {% include "pages/sensors_records_table/head.html"%}
+  {% include "pages/sensors_records_table/body.html"%}
 </table>
-
 {% else %}
-
 <p class="p-6 text-lg font-bold text-center">Nenhum registro encontrado 😢.</p>
-
 {% endif %}
