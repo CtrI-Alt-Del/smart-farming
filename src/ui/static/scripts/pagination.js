@@ -13,7 +13,7 @@ class Pagination {
     this.input = input
     this.queryParam = new QueryParam()
 
-    const observer = new MutationObserver((mutationList, observer) => {
+    const observer = new MutationObserver((mutationList) => {
       for (const mutation of mutationList) {
         if (mutation.type === "childList") {
           console.log("A child node has been added or removed.");
