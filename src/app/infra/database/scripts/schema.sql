@@ -1,4 +1,4 @@
--- Active: 1712674680306@@127.0.0.1@3306
+-- Active: 1712258180714@@127.0.0.1@3306@smart-farming
 CREATE DATABASE IF NOT EXISTS `smart-farming`;
 
 USE DATABASE `smart-farming`;
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS checklist_records (
   temperature DECIMAL(10, 2) NOT NULL,
   illuminance DECIMAL(10, 2) NOT NULL,
   lai DECIMAL(10, 2),
-  leaf_apperance ENUM('SAUDAVEL', 'MURCHA'),
+  leaf_appearance ENUM('SAUDAVEL', 'MURCHA'),
   leaf_color ENUM('VERDE CLARO DOMINANTE',
    'VERDE ESCURO DOMINATE',
    'VERDE CLARO COM ALGUMAS MANCHAS CLARAS',
