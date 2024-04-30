@@ -7,6 +7,9 @@ from infra.database import mysql
 
 class CheckListRecordsRepository:
     def create_checklist_record(self, checklist_record: CheckListRecord) -> None:
+
+        print(checklist_record, flush=True)
+        return None
         sql = """
         INSERT INTO checklist_records
         (
@@ -120,11 +123,13 @@ class CheckListRecordsRepository:
             SELECT *, P.id AS plant_id, P.name AS plant_name
             FROM checklist_records AS CR 
             JOIN plants AS P ON P.id = CR.plant_id
-            ORDER BY created_at DESC;
-            LIMIT {PAGINATION_LIMIT} OFFSET {page_number};
+            ORDER BY created_at DESC
+            LIMIT {PAGINATION_LIMIT} OFFSET {(page_number - 1) * PAGINATION_LIMIT};
             """,
             is_single=False,
         )
+
+        print(rows, flush=True)
 
         checklist_records = []
 

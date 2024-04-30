@@ -8,12 +8,12 @@ class GetChecklistRecordsTablePageData:
     def execute(
         self, page_number: int = 1, should_get_plants: bool = False
     ) -> tuple[list[CheckListRecord], list[Plant]]:
-        plants = []
-        if should_get_plants:
-            plants = plants_repository.get_plants()
-
         checklist_records = checklist_records_repository.get_filtered_checklist_records(
             page_number=page_number
         )
+
+        plants = []
+        if should_get_plants:
+            plants = plants_repository.get_plants()
 
         return checklist_records, plants

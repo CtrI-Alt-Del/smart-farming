@@ -28,6 +28,7 @@ def create_checklist_records_by_csv_file_view():
         updated_checklist_records = get_checklist_records_table_page_data.execute(
             page_number=page_number
         )
+
     except Error as error:
         return (
             render_template(
