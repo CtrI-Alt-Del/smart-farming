@@ -1,4 +1,4 @@
--- Active: 1712918435172@@127.0.0.1@3306@smart_farming
+-- Active: 1712147539997@@127.0.0.1@3306@smart-farming
 DROP TABLE IF EXISTS checklist_records;
 
 INSERT INTO checklist_records (
@@ -28,10 +28,15 @@ INSERT INTO checklist_records (
   'PLANTIO INTERNO(FATEC)', -- plantation_type
   CURDATE(), -- fertilizer_expiration_date
   'Relatório de checagem', -- report
-  '1ded0f79-01a5-11ef-9b63-0242ac1b0002' -- plant_id
+  '4544afe3-0661-11ef-9512-0242ac140002' -- plant_id
 );
 
-SELECT *, P.id AS plant_id, P.name AS plant_name
+SELECT CR.*, P.id AS plant_id, P.name AS plant_name, P.id AS plant_id, P.hex_color AS plant_color
+FROM checklist_records AS CR
+JOIN plants AS P.id = CR.plant_id
+WHERE CR.id = '';
+
+SELECT CR.*, P.id AS plant_id, P.name AS plant_name, P.hex_color AS plant_color
 FROM checklist_records AS CR 
 JOIN plants AS P ON P.id = CR.plant_id
 ORDER BY created_at DESC;
@@ -63,7 +68,7 @@ INSERT INTO checklist_records (
   'PLANTIO INTERNO (FATEC)', -- plantation_type
   '2024-03-03', -- fertilizer_expiration_date
   'Relatório de checagem', -- report
-  '1ded0f79-01a5-11ef-9b63-0242ac1b0002' -- plant_id
+  '4544afe3-0661-11ef-9512-0242ac140002' -- plant_id
 );
 
 DELETE FROM checklist_records;

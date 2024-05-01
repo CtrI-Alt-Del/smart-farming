@@ -1,14 +1,15 @@
 {% extends "layouts/dashboard/index.html" %}
+{% from 'pages/plants/plants_card.html' import plant_card %}
+{% from 'components/title.html' import title %}
 
 {% from "components/button.html" import button %}
 
 {% block dashboard_content %}
 
 {% from "components/modal.html" import modal %}
-<div class="px-12 pb-12 mt-6 bg-white rounded-md">
-  <div class="flex items-center gap-3 py-6 border-b-2 border-gray-300">
-    <h1 class="text-2xl font-bold">Registro do checklist</h1>
-  </div>
+<div class="pb-12 bg-white rounded-md ">
+  
+  {{title("Plantas")}}
 
   <div class="mt-5">
     {% call modal(id="create-plant-modal") %}
@@ -25,11 +26,11 @@
     {% include 'components/search.html' %}
   </div>
 
-  <div class="relative flex h-16 border-2 rounded w-60 bg-slate-100">
-    <div class="grid w-20 h-16 m-0 bg-green-500 rounded place-content-center">
-      <i class="text-4xl text-white ph ph-plant"></i>
-    </div>
-    <h2 class="mt-[7%] ml-[20%]">Alface</h2>
+  <div class="grid w-full grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-8 xl:grid-cols-4 xl:gap-3 ">
+    {{ plant_card("Alface", "bg-green-700") }}
+    {{ plant_card("Alface", "bg-blue-700") }}
+    {{ plant_card("Alface", "bg-red-700") }}
+    {{ plant_card("Alface", "bg-yellow-500") }}
   </div>
 
 </div>
