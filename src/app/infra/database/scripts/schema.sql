@@ -16,11 +16,11 @@ CREATE TABLE IF NOT EXISTS sensors_records (
 
 CREATE TABLE IF NOT EXISTS checklist_records (
   id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
-  soil_ph DECIMAL(10, 2) NOT NULL,
+  soil_ph INTEGER NOT NULL,
   soil_humidity DECIMAL(10, 2) NOT NULL,
   water_consumption DECIMAL(10, 2) NOT NULL,
   air_humidity DECIMAL(10, 2) NOT NULL,
-  temperature DECIMAL(10, 2) NOT NULL,
+  temperature DECIMAL(10, 1) NOT NULL,
   illuminance DECIMAL(10, 2) NOT NULL,
   lai DECIMAL(10, 2),
   leaf_appearance ENUM('SAUDAVEL', 'MURCHA', 'NÃO REGISTRADO') DEFAULT 'NÃO REGISTRADO',
