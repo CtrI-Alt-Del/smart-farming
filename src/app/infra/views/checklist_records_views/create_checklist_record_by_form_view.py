@@ -43,15 +43,14 @@ def create_checklist_record_by_form_view():
         data = get_checklist_records_table_page_data.execute(page_number=page_number)
 
         updated_checklist_records = data["checklist_records"]
-        plants = data["plants"]
         last_page_number = data["last_page_number"]
+        current_page_number = data["current_page_number"]
 
         return render_template(
             "pages/checklist_records_table/records.html",
             checklist_records=updated_checklist_records,
-            plants=plants,
             last_page_number=last_page_number,
-            current_page_number=page_number,
+            current_page_number=current_page_number,
             page_buttons_limit=PAGINATION["page_buttons_siblings_count"],
         )
 

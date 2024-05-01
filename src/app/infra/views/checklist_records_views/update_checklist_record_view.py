@@ -7,9 +7,7 @@ from infra.forms import ChecklistRecordForm
 
 
 def update_checklist_record_view(id: str):
-    print(request.form, flush=True)
     checklist_record_form = ChecklistRecordForm(formdata=request.form)
-    print(checklist_record_form.data, flush=True)
 
     try:
         if not checklist_record_form.validate_on_submit():
@@ -42,5 +40,4 @@ def update_checklist_record_view(id: str):
             checklist_record=updated_checklist_record,
         )
     except Error as error:
-        print(checklist_record_form.errors, flush=True)
         return "ERROR", error.status_code
