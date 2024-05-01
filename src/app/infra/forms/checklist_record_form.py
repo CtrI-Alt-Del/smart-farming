@@ -7,19 +7,39 @@ from wtforms import (
     IntegerField,
     TextAreaField,
     StringField,
+    FloatField,
 )
 from wtforms.validators import NumberRange, DataRequired
+
+from core.entities import CheckListRecord
 
 from infra.repositories import plants_repository
 
 
 class ChecklistRecordForm(FlaskForm):
-    def __init__(self, formdata=None, **kwargs):
+    def __init__(self, formdata=None, checklist_record=None, **kwargs):
         super().__init__(formdata, **kwargs)
 
         plants = plants_repository.get_plants()
-
         self.plant_id.choices = [(plant.id, plant.name) for plant in plants]
+
+        if isinstance(checklist_record, CheckListRecord):
+            self.date.data = checklist_record.created_at.get_value(is_datetime=True)
+            self.hour.data = checklist_record.created_at.get_hour()
+            self.air_humidity.data = checklist_record.air_humidity
+            self.illuminance.data = checklist_record.illuminance
+            self.lai.data = checklist_record.lai
+            self.temperature.data = checklist_record.temperature
+            self.water_consumption.data = checklist_record.water_consumption
+            self.report.data = checklist_record.report
+            self.soil_ph.data = checklist_record.soil_ph
+            self.soil_humidity.data = checklist_record.soil_humidity
+            self.plantation_type.data = checklist_record.plantation_type
+            self.leaf_color.data = checklist_record.leaf_color
+            self.leaf_appearance.data = checklist_record.leaf_appearance
+            self.fertilizer_expiration_date.data = (
+                checklist_record.fertilizer_expiration_date.get_value(is_date=True)
+            )
 
     plantation_type = SelectField(
         "Local de plantio",
@@ -81,30 +101,32 @@ class ChecklistRecordForm(FlaskForm):
         render_kw={"max": datetime.now().strftime("%Y-%m-%d")},
     )
     hour = IntegerField(
-        "Hora de coleta", validators=[DataRequired(), NumberRange(min=0, max=23)]
+        "Hora de coleta (0 a 23)",
+        validators=[DataRequired(), NumberRange(min=0, max=23)],
     )
     fertilizer_expiration_date = DateField(
         "Validade de adubação",
         render_kw={"max": datetime.now().strftime("%Y-%m-%d")},
     )
-    soil_humidity = IntegerField(
+    soil_humidity = FloatField(
         "Umidade do solo (%)", validators=[DataRequired(), NumberRange(min=0, max=100)]
     )
-    air_humidity = IntegerField(
+    air_humidity = FloatField(
         "Umidade do ar (%)", validators=[DataRequired(), NumberRange(min=0, max=100)]
     )
-    lai = IntegerField(
-        "Umidade do ar (%)", validators=[DataRequired(), NumberRange(min=0, max=100)]
+    lai = FloatField(
+        "Índice de área foliar (m²/m²)",
+        validators=[DataRequired(), NumberRange(min=0)],
     )
-    water_consumption = IntegerField(
+    water_consumption = FloatField(
         "Consumo de água detectado (ml)",
         validators=[DataRequired(), NumberRange(min=0)],
     )
-    temperature = IntegerField(
+    temperature = FloatField(
         "Temperatura ambiente (°C)",
         validators=[DataRequired(), NumberRange(min=-273, max=60)],
     )
-    illuminance = IntegerField(
+    illuminance = FloatField(
         "Luminosidade (Lux)", validators=[DataRequired(), NumberRange(min=0)]
     )
     soil_ph = IntegerField(
