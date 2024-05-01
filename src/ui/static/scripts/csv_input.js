@@ -5,15 +5,14 @@ class CsvInput {
     const submitButton = document.querySelector(
       '[data-csv-input="submit-button"]',
     )
-    const loading = document.querySelector('[data-csv-input="loading"]')
 
-    if (input && submitIcon && submitButton && loading) {
+    if (input && submitIcon && submitButton) {
       input.addEventListener("change", (event) =>
         this.handleInputChange(event, submitIcon),
       )
 
       submitButton.addEventListener("click", () =>
-        this.handleSubmitButtonClick(submitButton, submitIcon, loading),
+        this.handleSubmitButtonClick(submitButton, submitIcon),
       )
     }
   }
@@ -28,13 +27,6 @@ class CsvInput {
       submitIcon.classList.add("hidden")
       submitIcon.classList.remove("flex")
     }
-  }
-
-  handleSubmitButtonClick(submitButton, submitIcon, loading) {
-    // submitButton.setAttribute("disabled", "true")
-    // submitIcon.remove()
-    // loading.classList.remove("hidden")
-    // loading.classList.add("grid")
   }
 }
 

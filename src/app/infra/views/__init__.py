@@ -1,5 +1,3 @@
-from time import sleep
-
 from flask import Flask
 
 from .auth_views import auth_views
@@ -13,8 +11,3 @@ def init_views(app: Flask):
     app.register_blueprint(sensors_records_views)
     app.register_blueprint(checklist_records_views)
     app.register_blueprint(plants_views)
-
-    @app.route("/teste")
-    def teste():
-        sleep(2)
-        return "EITA"
