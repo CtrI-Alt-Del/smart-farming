@@ -4,7 +4,6 @@ from core.use_cases.checklist_records import get_checklist_records_table_page_da
 from core.commons import Error
 from core.constants import PAGINATION
 
-
 from infra.forms import ChecklistRecordForm, CsvForm
 
 
@@ -12,7 +11,6 @@ def checklist_records_table_page_view():
     page_number = int(request.args.get("page", 1))
 
     create_checklist_record_form = ChecklistRecordForm()
-    update_checklist_record_form = ChecklistRecordForm()
     csv_form = CsvForm()
 
     try:
@@ -27,7 +25,6 @@ def checklist_records_table_page_view():
         return render_template(
             "pages/checklist_records_table/index.html",
             create_checklist_record_form=create_checklist_record_form,
-            update_checklist_record_form=update_checklist_record_form,
             csv_form=csv_form,
             checklist_records=checklist_records,
             plants=plants,

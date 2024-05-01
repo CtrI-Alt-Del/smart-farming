@@ -56,6 +56,8 @@ def create_checklist_record_by_form_view():
         )
 
     except Error as error:
+        print(error.ui_message, flush=True)
+        print(checklist_record_form.errors, flush=True)
         return (
             "ERROR",
             error.status_code,
