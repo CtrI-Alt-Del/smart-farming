@@ -1,8 +1,7 @@
-{% extends "layouts/root.html" %} 
+{% extends "layouts/dashboard/index.html" %} 
+{% from "components/title.html" import title%}
 
-{% block body %} 
-
-{% include "/layouts/dashboard/index.html" %}
+{% block dashboard_content %} 
 
 {% for days in [7, 30, 90] %}
 
@@ -49,7 +48,9 @@
 
 {% endfor %}
 
-<div class="grid grid-cols-2 pt-5 pb-5 gap-9 dashboard">
+{{title("Registro dos Sensores")}}
+
+<div class="grid grid-cols-2 pt-5 pb-5 gap-9">
     {% include "/pages/sensors_records_dashboard/ambient_humidity_chart.html" %}
     {% include "/pages/sensors_records_dashboard/soil_humidity_chart.html" %}
     {% include "/pages/sensors_records_dashboard/temperature_chart.html" %}
@@ -60,5 +61,5 @@
   <script src="{{url_for('static', filename='scripts/temperature_chart.js')}}"></script>
   <script src="{{url_for('static', filename='scripts/water_volume_chart.js')}}"></script>
   <script src="{{url_for('static', filename='scripts/soil_humidity_chart.js')}}"></script>
-  {% endblock body %}
-</div>
+  
+{% endblock dashboard_content %}

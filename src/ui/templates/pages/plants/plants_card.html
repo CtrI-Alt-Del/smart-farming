@@ -1,0 +1,16 @@
+{% macro plant_card(plant, color)%}
+    <div class="relative flex items-center justify-start h-20 border rounded group bg-slate-100">
+        <div class="absolute bottom-0 right-0 flex items-center justify-center">
+            <button class="hidden bg-transparent rounded-full group-hover:block">
+                <i class="text-[20px] text-zinc-400 hover:text-blue-500 ph-light ph-pencil"></i>
+            </button>
+            <button class="hidden bg-transparent rounded-full group-hover:block">
+                <i class="text-[20px] text-zinc-400 hover:text-red-500 ph-light ph-trash"></i>
+            </button>
+        </div>
+        <div class="w-[90px] h-full flex justify-center items-center rounded-s {{color}} place-content-center">
+        <i class="text-4xl text-white ph ph-plant"></i>
+        </div>
+        <h2 class="ml-[20%] font-bold">{{plant}}</h2>
+    </div>
+{% endmacro %}
