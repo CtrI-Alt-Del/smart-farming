@@ -58,7 +58,7 @@ route(
 )
 
 route(
-    "/checklist_records/<id>",
+    "/checklist_records",
     view_func=delete_checklist_records_view,
     methods=["DELETE"],
 )

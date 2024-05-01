@@ -1,15 +1,32 @@
-from flask import request
+from flask import request, render_template
 
-from core.use_cases.checklist_records import delete_checklist_records
+from core.use_cases.checklist_records import (
+    delete_checklist_records,
+    get_checklist_records_table_page_data,
+)
 from core.commons import Error
+from core.constants import PAGINATION
 
 
 def delete_checklist_records_view():
-    checklist_records_ids = request.form.getlist("checklist_records_ids[]")
+    checklist_records_ids = request.form.getlist("checklist-records-ids[]")
+
+    page_number = int(request.args.get("page", 1))
 
     try:
         delete_checklist_records.execute(checklist_records_ids)
+        data = get_checklist_records_table_page_data.execute(page_number=page_number)
 
-        return ""
+        checklist_records = data["checklist_records"]
+        last_page_number = data["last_page_number"]
+        current_page_number = data["current_page_number"]
+
+        return render_template(
+            "pages/checklist_records_table/records.html",
+            checklist_records=checklist_records,
+            last_page_number=last_page_number,
+            current_page_number=current_page_number,
+            page_buttons_limit=PAGINATION["page_buttons_siblings_count"],
+        )
     except Error as error:
-        return ""
+        return "ERROR", error.status_code

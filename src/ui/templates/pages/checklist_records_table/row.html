@@ -12,7 +12,10 @@
     <div class="flex items-center gap-3 w-4">
       <input
         id="checkbox-{{ checklist_record.id }}"
+        data-table="checkbox-row"
         type="checkbox"
+        name="checklist-records-ids[]"
+        value="{{ checklist_record.id }}"
         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
       <label
         for="checkbox-{{ checklist_record.id }}"
@@ -49,7 +52,7 @@
     </time>
   </th>
 
-  <td class="px-6 py-4">
+  <td class="px-4 py-4">
     <span
       data-record-form="record-{{ checklist_record.id }}-value:update-checklist-record-plant"
       {{ plant_style }}

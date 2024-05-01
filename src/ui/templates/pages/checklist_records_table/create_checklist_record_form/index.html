@@ -12,7 +12,7 @@
 
       <form
         hx-post="{{ url_for('checklist_records_views.create_checklist_records_by_csv_file_view') }}"
-        hx-target="#checklist_records"
+        hx-target="#checklist-records"
         hx-target-error="#create-checklist-record-form-fields"
         hx-swap="innerHTML"
         enctype="multipart/form-data"
@@ -28,13 +28,14 @@
     </div>
 
     <div class="flex flex-col items-center justify-center">
-
       <hr class="bg-black w-[75%] h-[0.5px] mt-3">
 
       <form
         hx-post="{{ url_for('checklist_records_views.create_checklist_record_by_form_view') }}"
-        hx-target="#checklist_records" hx-target-error="#form_fields"
-        hx-swap="innerHTML" data-query-param="hx-post">
+        hx-target="#checklist_records"
+        hx-target-error="#form_fields"
+        hx-swap="innerHTML"
+        data-query-param="hx-post">
 
         <div
           id="create-checklist-record-form-fields"
