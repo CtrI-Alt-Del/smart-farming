@@ -4,16 +4,24 @@
 <tbody>
   <form method="POST"
   action="{{ url_for('checklist_records_views.delete_checklist_records_view') }}">
-  <button type = "submit">Deletar Registro</button>
 
   {% for checklist_record in checklist_records %}
   
   {{ row(checklist_record) }}
 
   {% endfor %}
-</form>
+  <button id = "deleteButton" type = "submit" class="w-28 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-600 font-medium rounded-2xl text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-red-950" style="display:none;">Deletar Registros</button>
+
+  
 
   {{ rows_skeleton(6, 15) }}
 
 
 </tbody>
+
+</form>
+<script src="{{url_for('static', filename='scripts/appear_when_checkbox.js')}}"></script>
+
+
+
+  

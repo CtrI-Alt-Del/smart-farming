@@ -7,10 +7,9 @@ from core.commons import Error
 def delete_checklist_records_view():
     checklist_records_ids = request.form.getlist("checklist_records_ids[]")
 
-    print(checklist_records_ids, flush=True)
 
     try:
         delete_checklist_records.execute(checklist_records_ids)
-        return "DELETADO"
+        return redirect(url_for("checklist_records_views.checklist_records_table_page_view"))
     except Error as error:
         return "ERROR", error.status_code
