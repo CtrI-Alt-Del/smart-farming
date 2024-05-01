@@ -28,7 +28,7 @@ INSERT INTO checklist_records (
   'PLANTIO INTERNO(FATEC)', -- plantation_type
   CURDATE(), -- fertilizer_expiration_date
   'Relatório de checagem', -- report
-  '1ded0f79-01a5-11ef-9b63-0242ac1b0002' -- plant_id
+  '4544afe3-0661-11ef-9512-0242ac140002' -- plant_id
 );
 
 SELECT CR.*, P.id AS plant_id, P.name AS plant_name, P.id AS plant_id, P.hex_color AS plant_color
@@ -68,7 +68,7 @@ INSERT INTO checklist_records (
   'PLANTIO INTERNO (FATEC)', -- plantation_type
   '2024-03-03', -- fertilizer_expiration_date
   'Relatório de checagem', -- report
-  '1ded0f79-01a5-11ef-9b63-0242ac1b0002' -- plant_id
+  '4544afe3-0661-11ef-9512-0242ac140002' -- plant_id
 );
 
 DELETE FROM checklist_records;
