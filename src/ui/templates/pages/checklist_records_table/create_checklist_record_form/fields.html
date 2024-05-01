@@ -1,0 +1,255 @@
+{% from "components/label.html" import label %}
+
+{% set input_class = "bg-gray-50 border border-gray-300 text-gray-900 text-sm
+rounded-lg
+focus:ring-gray-400 focus:border-gray-400 block w-full p-2.5 dark:bg-gray-700
+dark:border-gray-600
+dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400
+dark:focus:border-gray-400"
+%}
+
+{{ create_checklist_record_form.csrf_token }}
+
+<div class="input-container">
+  {{ label(
+  id="create-checklist-record-date",
+  title=create_checklist_record_form.date.label,
+  icon="calendar-blank"
+  )
+  }}
+  {{ create_checklist_record_form.date(
+  class=input_class,
+  required=True
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(
+  id="create-checklist-record-date-hour",
+  title=create_checklist_record_form.hour.label,
+  icon="calendar-blank"
+  )
+  }}
+  {{ create_checklist_record_form.hour(
+  placeholder="10",
+  class=input_class,
+  required=True,
+  min=0,
+  max=23
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(
+  id="create-checklist-record-soil-ph",
+  title="PH do solo",
+  icon="ph ph-speedometer"
+  )
+  }}
+  {{
+  create_checklist_record_form.soil_ph(
+  type="number",
+  class=input_class,
+  placeholder="7",
+  required=True,
+  min=0,
+  max=7,
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(
+  id="create-checklist-record-soil-humidity",
+  title=create_checklist_record_form.soil_humidity.label,
+  icon="ph ph-drop-half-bottom")
+  }}
+  {{ create_checklist_record_form.soil_humidity(
+  type="number",
+  class=input_class,
+  placeholder="%",
+  required=True,
+  min=0,
+  max=100
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(
+  id="create-checklist-record-date-water-consumption",
+  title="Consumo de água (ml)",
+  icon="ph ph-drop")
+  }}
+  {{ create_checklist_record_form.water_consumption(
+  type="number",
+  class=input_class,
+  placeholder="mL",
+  required=True,
+  min=0,
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(
+  id="create-checklist-record-air-humidity",
+  title="Umidade do ar (%)",
+  icon="ph ph-wind")
+  }}
+  {{ create_checklist_record_form.air_humidity(
+  type="number",
+  class=input_class,
+  placeholder="%",
+  required=True,
+  min=0,
+  max=100
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(
+  id="create-checklist-record-temperature",
+  title="Temperatura (°C)",
+  icon="thermometer")
+  }}
+  {{ create_checklist_record_form.temperature(
+  type="number",
+  class=input_class,
+  placeholder="ºC",
+  required=True,
+  min=-273,
+  max=60,
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(
+  id="create-checklist-record-illuminance",
+  title="Iluminação (Lx)",
+  icon="ph ph-lightbulb-filament"
+  )
+  }}
+  {{ create_checklist_record_form.illuminance(
+  type="number",
+  class=input_class,
+  placeholder="Lx",
+  required=True,
+  min=0,
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(
+  id="create-checklist-record-lai",
+  title=create_checklist_record_form.lai.label,
+  icon="ph ph-flower-lotus"
+  )
+  }}
+  {{ create_checklist_record_form.lai(
+  id="create-checklist-record-lai",
+  type="number",
+  class=input_class,
+  placeholder="m²/m²",
+  required=True,
+  min=0,
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(
+  id="create-checklist-record-leaf-appearence",
+  title="Aparência da folha",
+  icon="ph ph-leaf") }}
+
+  {{ create_checklist_record_form.leaf_appearance(
+  id="create-checklist-record-leaf-appearence",
+  class=input_class,
+  placeholder="Aparência da folha",
+  required=True,
+  **{"data-record-form": "select"}
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(
+  id="create-checklist-record-leaf-color",
+  title="Cor da folha",
+  icon="ph ph-flower"
+  )
+  }}
+  {{ create_checklist_record_form.leaf_color(
+  class=input_class,
+  placeholder="Cor da folha",
+  required=True,
+  **{"data-record-form": "select"}
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(id="create-checklist-record-plantation", title="Área da plantio",
+  icon="ph ph-potted-plant") }}
+  {{
+  create_checklist_record_form.plantation_type(
+  class=input_class,
+  placeholder="Tipo da planta", required=True
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(
+  id="create-checklist-record-fertilizer-expiration-date",
+  title=create_checklist_record_form.fertilizer_expiration_date.label,
+  icon="ph ph-tree"
+  )
+  }}
+  {{
+  create_checklist_record_form.fertilizer_expiration_date(
+  class=input_class,
+  placeholder="12/12/2024", required=True
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(
+  id="create-checklist-record-plant",
+  title="Planta",
+  icon="plant"
+  )
+  }}
+  {{ create_checklist_record_form.plant_id(
+  class=input_class ,
+  placeholder="Reporte", required=True
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(
+  id="create-checklist-record-report",
+  title="Reporte",
+  icon="ph ph-exclamation-mark")
+  }}
+  {{ create_checklist_record_form.report(
+  class="bg-gray-50 border
+  border-gray-300 text-gray-900 text-sm
+  rounded-lg
+  focus:ring-gray-400 focus:border-gray-400 block h-[42px] w-full p-2.5
+  dark:bg-gray-700 dark:border-gray-600
+  dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400
+  dark:focus:border-gray-400 resize-none",
+  placeholder="Reporte",
+  required=True
+  )
+  }}
+</div>

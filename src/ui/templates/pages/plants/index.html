@@ -1,5 +1,7 @@
 {% extends "layouts/dashboard/index.html" %}
 
+{% from "components/button.html" import button %}
+
 {% block dashboard_content %}
 
 {% from "components/modal.html" import modal %}
@@ -9,7 +11,13 @@
   </div>
 
   <div class="mt-5">
-    {% call modal(id="create_checklist_record", title="Adicionar registro") %}
+    {% call modal(id="create-plant-modal") %}
+
+    {{ button(
+    title="Adicionar planta",
+    attributes="data-modal-target=create-plant-modal data-modal-toggle=create-plant-modal")
+    }}
+
     {% endcall %}
   </div>
 
