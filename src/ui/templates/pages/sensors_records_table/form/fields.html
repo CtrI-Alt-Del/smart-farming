@@ -13,7 +13,9 @@
 <div class="{{ input_class }}">
     {{ label(id="umidade_ambiente", title="Umidade ambiente (%)", icon="drop")
     }}
-    {{ create_sensors_records_form.ambient_humidity(class="input-field",
+    {{ create_sensors_records_form.ambient_humidity(
+    type="number",
+    class="input-field",
     placeholder="%", required=True) }}
 </div>
 
@@ -21,7 +23,8 @@
     {{ label(id="umidade_solo", title="Umidade solo (%)",
     icon="drop-half-bottom") }}
     {{ create_sensors_records_form.soil_humidity(class="input-field",
-    placeholder="%", required=True) }}
+    placeholder="%",
+    required=True) }}
 </div>
 
 <div class="{{ input_class }}">

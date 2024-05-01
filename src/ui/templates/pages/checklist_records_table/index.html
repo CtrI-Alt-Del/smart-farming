@@ -1,6 +1,8 @@
 {% extends "layouts/dashboard/index.html" %}
 
-{% from "components/modal.html" import modal %}
+{% from "components/modal.html" import modal, modal_controls %}
+{% from "components/button.html" import button %}
+{% from "components/loading.html" import loading %}
 
 {% block dashboard_content %}
 
@@ -13,13 +15,30 @@
 
     {% include 'components/datepicker.html' %}
 
-    {% call modal(id="create_checklist_record", title="Adicionar registro") %}
+    {% call modal(id="create-checklist-records-modal") %}
 
-    {% include "pages/checklist_records_table/form/index.html" %}
+    {% include
+    "pages/checklist_records_table/create_checklist_record_form/index.html"
+    %}
 
     {% endcall %}
 
+    {{ button(
+    title="Adicionar registro",
+    attributes="data-modal-target=create-checklist-records-modal data-modal-toggle=create-checklist-records-modal")
+    }}
+
   </div>
+
+  {% call modal(id="update-checklist-record-modal") %}
+
+  <div id="update-checklist-record-form" class="flex w-full">
+    <div class="grid place-content-center w-full h-[32rem]">
+      {{ loading("w-32 h-32") }}
+    </div>
+  </div>
+
+  {% endcall %}
 
   <div class="relative mt-6 shadow-md pb-6 sm:rounded-lg">
     <form
@@ -46,6 +65,7 @@
 
 <script
   src="{{ url_for('static', filename='scripts/query_param.js') }}"></script>
+
 <script
   src="{{ url_for('static', filename='scripts/pagination.js') }}"></script>
 

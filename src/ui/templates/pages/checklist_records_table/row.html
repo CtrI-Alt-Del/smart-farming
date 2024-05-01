@@ -1,82 +1,144 @@
-{% macro row(checklist_record) %}
+{% from "components/modal.html" import modal %}
+
+{% set plant_style =
+"style=background-color:{};".format(checklist_record.plant.hex_color)
+%}
 
 <tr
+  id="{{ checklist_record.id }}"
   data-loading-class="hidden"
-  class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-  <td class="w-4 p-4">
-    <div class="flex items-center">
+  class="group bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+  <td class="relative p-4">
+    <div class="flex items-center gap-3 w-4">
       <input
-        id="checkbox-table-1"
+        id="checkbox-{{ checklist_record.id }}"
         type="checkbox"
         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-      <label for="checkbox-table-1" class="sr-only">checkbox</label>
+      <label
+        for="checkbox-{{ checklist_record.id }}"
+        class="sr-only">
+        Selecionar registro
+      </label>
+
+      <button
+        hx-get="{{ 
+          url_for(
+            'checklist_records_views.update_checklist_record_form_view',
+            id=checklist_record.id
+          )
+         }}"
+        hx-target="#update-checklist-record-form"
+        hx-swap="innerHTML"
+        hx-trigger="click"
+        data-modal-target="update-checklist-record-modal"
+        data-modal-toggle="update-checklist-record-modal"
+        data-hyperscript="process"
+        _="on click trigger click on #update-checklist-record-modal-trigger"
+        type="button"
+        class="hidden group-hover:block absolute border-gray-700 left-[44px]">
+        <i class="ph-bold ph-note-pencil text-lg"></i>
+      </button>
     </div>
   </td>
 
   <th scope="row"
     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-    <time>
+    <time
+      data-record-form="record-{{ checklist_record.id }}-value:update-checklist-record-date">
       {{ checklist_record.created_at.format_value().get_value() }}
     </time>
   </th>
 
   <td class="px-6 py-4">
-    <span style="background-color: {{ checklist_record.plant.hex_color }}"
+    <span
+      data-record-form="record-{{ checklist_record.id }}-value:update-checklist-record-plant"
+      {{ plant_style }}
       class="rounded-md w-max text-black font-semibold py-1 px-2">
       {{ checklist_record.plant.name }}
     </span>
   </td>
 
-  <td class="px-6 py-4">
+  <td
+    data-record-form="record-{{ checklist_record.id }}-value:update-checklist-record-plantation-type"
+    class="px-6 py-4">
     {{ checklist_record.plantation_type }}
   </td>
 
-  <td class="px-6 py-4">
+  <td
+    data-record-form="record-{{ checklist_record.id }}-value:update-checklist-record-leaf-color"
+    class="px-6 py-4">
     {{ checklist_record.leaf_color }}
   </td>
 
-  <td class="px-6 py-4">
+  <td
+    data-record-form="record-{{ checklist_record.id }}-value:update-checklist-record-soil-humidity"
+    class="px-6 py-4">
     {{ checklist_record.soil_humidity }}
   </td>
 
-  <td class="px-6 py-4">
+  <td
+    data-record-form="record-{{ checklist_record.id }}-value:update-checklist-record-soil-ph"
+    class="px-6 py-4">
     {{ checklist_record.soil_ph }}
   </td>
 
-  <td class="px-6 py-4">
+  <td
+    data-record-form="record-{{ checklist_record.id }}-value:update-checklist-record-fertilizer-expiration-date"
+    class="px-6 py-4">
     {{
     checklist_record.fertilizer_expiration_date.format_value().get_value()
     }}
   </td>
 
-  <td class="px-6 py-4">
+  <td
+    data-record-form="record-{{ checklist_record.id }}-value:update-checklist-record-water-consumption"
+    class="px-6 py-4">
     {{ checklist_record.water_consumption }}
   </td>
 
-  <td class="px-6 py-4">
+  <td
+    data-record-form="record-{{ checklist_record.id }}-value:update-checklist-record-temperature"
+    class="px-6 py-4">
     {{ checklist_record.temperature }}
   </td>
 
-  <td class="px-6 py-4">
+  <td
+    data-record-form="record-{{ checklist_record.id }}-value:update-checklist-record-air-humidity"
+    class="px-6 py-4">
     {{ checklist_record.air_humidity }}
   </td>
 
-  <td class="px-6 py-4">
+  <td
+    data-record-form="record-{{ checklist_record.id }}-value:update-checklist-record-illuminance"
+    class="px-6 py-4">
     {{ checklist_record.illuminance }}
   </td>
 
-  <td class="px-6 py-4">
+  <td
+    data-record-form="record-{{ checklist_record.id }}-value:update-checklist-record-lai"
+    class="px-6 py-4">
     {{ checklist_record.lai }}
   </td>
 
-  <td class="px-6 py-4">
+  <td
+    data-record-form="record-{{ checklist_record.id }}-value:update-checklist-record-leaf-appearance"
+    class="px-6 py-4">
     {{ checklist_record.leaf_appearance }}
   </td>
 
-  <td class="px-6 py-4">
-    {{ checklist_record.report[:100] }}
+  <td
+    class="relative px-6 py-4">
+    <span
+      data-record-form="record-{{ checklist_record.id }}-value:update-checklist-record-report"
+      class="absolute invisible" aria-hidden="true">
+      {{ checklist_record.report }}
+    </span>
+    {% if checklist_record.report.lower() == 'não' %}
+    Não
+    {% else %}
+    {{ checklist_record.report[:100] }}...
+    {% endif %}
+
   </td>
 
 </tr>
-
-{% endmacro %}
