@@ -1,4 +1,8 @@
-<label for="plant">Planta: </label>
+{% from "components/label.html" import label %}
+
+<div class="text-xl">
+  {{ label(id="plant", icon="plant", title="Planta:") }}
+</div>
 <select
   id="plant"
   name="plant"
