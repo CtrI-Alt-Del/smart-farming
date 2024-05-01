@@ -100,7 +100,16 @@ class CheckListRecordsRepository:
 
     def get_checklist_record_by_id(self, id: str) -> CheckListRecord | None:
         row = mysql.query(
-            sql="SELECT * FROM checklist_records WHERE id = %s",
+            sql="""
+            SELECT 
+                CR.*,
+                P.id AS plant_id,
+                P.name AS plant_name,
+                P.hex_color AS plant_color
+            FROM checklist_records AS CR
+            JOIN plants AS P ON P.id = CR.plant_id
+            WHERE CR.id = %s;
+            """,
             is_single=True,
             params=[id],
         )
@@ -116,7 +125,7 @@ class CheckListRecordsRepository:
 
         rows = mysql.query(
             sql=f"""
-            SELECT *, P.id AS plant_id, P.name AS plant_name, P.hex_color AS plant_color
+            SELECT CR.*, P.id AS plant_id, P.name AS plant_name, P.hex_color AS plant_color
             FROM checklist_records AS CR 
             JOIN plants AS P ON P.id = CR.plant_id
             ORDER BY created_at DESC

@@ -15,7 +15,7 @@ class GetChecklistRecordsTablePageData:
             plants = plants_repository.get_plants()
 
         checklist_records = checklist_records_repository.get_filtered_checklist_records(
-            page_number=int(page_number)
+            page_number=page_number
         )
 
         checklist_count = checklist_records_repository.get_checklist_records_count()

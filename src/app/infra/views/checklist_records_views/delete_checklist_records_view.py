@@ -5,17 +5,12 @@ from core.commons import Error
 
 
 def delete_checklist_records_view():
-    response = make_response(
-        redirect(url_for("checklist_records_views.checklist_records_table_page_view")),
-    )
-
     checklist_records_ids = request.form.getlist("checklist_records_ids[]")
+
+    print(checklist_records_ids, flush=True)
 
     try:
         delete_checklist_records.execute(checklist_records_ids)
-
-        flash("Registro(s) check-list deletado(s) com sucesso", "success")
-        return response
+        return "DELETADO"
     except Error as error:
-        flash(error.ui_message, "error")
-        return response
+        return "ERROR", error.status_code

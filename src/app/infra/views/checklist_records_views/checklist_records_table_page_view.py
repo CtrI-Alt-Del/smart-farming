@@ -24,6 +24,8 @@ def checklist_records_table_page_view():
         plants = data["plants"]
         last_page_number = data["last_page_number"]
 
+        print(checklist_records, flush=True)
+
         return render_template(
             "pages/checklist_records_table/index.html",
             create_checklist_record_form=create_checklist_record_form,
