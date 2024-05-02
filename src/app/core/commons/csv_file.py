@@ -37,6 +37,9 @@ class CsvFile:
     def validate_columns(self, columns: List[str]) -> bool:
         csv_columns = self.data_analyser_provider.get_columns()
 
+        print(csv_columns, flush=True)
+        print(columns, flush=True)
+
         has_valid_columns = set(map(lambda x: x.lower(), csv_columns)) == set(
             map(lambda x: x.lower(), columns)
         )
