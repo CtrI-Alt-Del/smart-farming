@@ -3,7 +3,7 @@ from core.commons import Error
 from infra.repositories import plants_repository
 
 
-class DeleteChecklistRecords:
+class DeletePlants:
     def execute(self, plants_ids: list[str]) -> None:
         try:
             for id in plants_ids:
