@@ -1,13 +1,5 @@
 {% from "components/label.html" import label %}
 
-{% set input_class = "bg-gray-50 border border-gray-300 text-gray-900 text-sm
-rounded-lg
-focus:ring-gray-400 focus:border-gray-400 block w-full p-2.5 dark:bg-gray-700
-dark:border-gray-600
-dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400
-dark:focus:border-gray-400"
-%}
-
 {{ update_checklist_record_form.csrf_token }}
 
 <div class="input-container">
@@ -18,7 +10,7 @@ dark:focus:border-gray-400"
   )
   }}
   {{ update_checklist_record_form.date(
-  class=input_class,
+  class="input-field",
   required=True
   )
   }}
@@ -26,14 +18,14 @@ dark:focus:border-gray-400"
 
 <div class="input-container">
   {{ label(
-  id="update-checklist-record-date-hour",
-  title=update_checklist_record_form.hour.label,
+  id="update-checklist-record-date-time",
+  title=update_checklist_record_form.time.label,
   icon="calendar-blank"
   )
   }}
-  {{ update_checklist_record_form.hour(
+  {{ update_checklist_record_form.time(
   placeholder="10",
-  class=input_class,
+  class="input-field",
   required=True,
   min=0,
   max=23
@@ -51,7 +43,7 @@ dark:focus:border-gray-400"
   {{
   update_checklist_record_form.soil_ph(
   type="number",
-  class=input_class,
+  class="input-field",
   placeholder="7",
   required=True,
   min=0,
@@ -68,11 +60,12 @@ dark:focus:border-gray-400"
   }}
   {{ update_checklist_record_form.soil_humidity(
   type="number",
-  class=input_class,
-  placeholder="%",
+  class="input-field",
+  placeholder="56",
   required=True,
   min=0,
-  max=100
+  max=100,
+  step="any",
   )
   }}
 </div>
@@ -85,8 +78,8 @@ dark:focus:border-gray-400"
   }}
   {{ update_checklist_record_form.water_consumption(
   type="number",
-  class=input_class,
-  placeholder="mL",
+  class="input-field",
+  placeholder="120.0",
   required=True,
   min=0,
   )
@@ -101,11 +94,12 @@ dark:focus:border-gray-400"
   }}
   {{ update_checklist_record_form.air_humidity(
   type="number",
-  class=input_class,
-  placeholder="%",
+  class="input-field",
+  placeholder="52",
   required=True,
   min=0,
-  max=100
+  max=100,
+  step="any",
   )
   }}
 </div>
@@ -118,8 +112,8 @@ dark:focus:border-gray-400"
   }}
   {{ update_checklist_record_form.temperature(
   type="number",
-  class=input_class,
-  placeholder="ºC",
+  class="input-field",
+  placeholder="25",
   required=True,
   min=-273,
   max=60,
@@ -136,8 +130,8 @@ dark:focus:border-gray-400"
   }}
   {{ update_checklist_record_form.illuminance(
   type="number",
-  class=input_class,
-  placeholder="Lx",
+  class="input-field",
+  placeholder="960.0",
   required=True,
   min=0,
   )
@@ -154,8 +148,8 @@ dark:focus:border-gray-400"
   {{ update_checklist_record_form.lai(
   id="update-checklist-record-lai",
   type="number",
-  class=input_class,
-  placeholder="m²/m²",
+  class="input-field",
+  placeholder="0.00",
   required=True,
   min=0,
   )
@@ -170,10 +164,9 @@ dark:focus:border-gray-400"
 
   {{ update_checklist_record_form.leaf_appearance(
   id="update-checklist-record-leaf-appearence",
-  class=input_class,
+  class="input-field",
   placeholder="Aparência da folha",
   required=True,
-  **{"data-record-form": "select"}
   )
   }}
 </div>
@@ -186,7 +179,7 @@ dark:focus:border-gray-400"
   )
   }}
   {{ update_checklist_record_form.leaf_color(
-  class=input_class,
+  class="input-field",
   placeholder="Cor da folha",
   required=True,
   **{"data-record-form": "select"}
@@ -199,7 +192,7 @@ dark:focus:border-gray-400"
   icon="ph ph-potted-plant") }}
   {{
   update_checklist_record_form.plantation_type(
-  class=input_class,
+  class="input-field",
   placeholder="Tipo da planta", required=True
   )
   }}
@@ -214,7 +207,7 @@ dark:focus:border-gray-400"
   }}
   {{
   update_checklist_record_form.fertilizer_expiration_date(
-  class=input_class,
+  class="input-field",
   placeholder="12/12/2024", required=True
   )
   }}
@@ -228,7 +221,7 @@ dark:focus:border-gray-400"
   )
   }}
   {{ update_checklist_record_form.plant_id(
-  class=input_class ,
+  class="input-field",
   placeholder="Reporte", required=True
   )
   }}

@@ -1,7 +1,7 @@
 {% from "components/csv_input.html" import csv_input %}
 {% from "components/modal.html" import modal_controls %}
 
-<div class="mt-4 px-2 bg=white rounded-md">
+<div class="mt-4 px-2 h-[520px] rounded-md">
   <div class="flex flex-col rounded-2xl">
     <div class="flex flex-col items-center justify-center">
       <form
@@ -11,8 +11,8 @@
             id=checklist_record_id
           )
          }}"
-        hx-target="#{{ checklist_record_id }}"
-        hx-target-error="#form_fields"
+        hx-target="#checklist-record-{{ checklist_record_id }}"
+        hx-target-error="#update-checklist-record-form-fields"
         hx-swap="outerHTML">
 
         <div
@@ -23,7 +23,7 @@
           %}
         </div>
 
-        <div class="mt-6">
+        <div class="mt-3 pb-6">
           {{ modal_controls(modal_id="update-checklist-record-modal") }}
         </div>
       </form>

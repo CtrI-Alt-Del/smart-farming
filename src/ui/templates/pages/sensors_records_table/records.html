@@ -1,24 +1,27 @@
-{% if sensors_records | length > 0 %}
-<div class="overflow-x-auto">
+{% from "components/loading.html" import loading %}
 
+{% if sensors_records | length > 0 %}
+
+<div class="overflow-x-auto">
   <table
     class="text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
     {% include "pages/sensors_records_table/head.html"%}
     {% include "pages/sensors_records_table/body.html"%}
   </table>
 
-  <input
-    data-pagination="total-count"
-    type="hidden"
-    value="{{ total_count }}">
-
   {% else %}
 
-  <p class="p-6 text-lg font-bold text-center">
-    Nenhum registro encontrado 😢.
-  </p>
+  <div>
+    <div class="grid place-content-center">
+      {{ loading("w-24 h-24") }}
+    </div>
+    <p data-loading-class="hidden" class="p-6 text-lg font-bold text-center">
+      Nenhum registro encontrado 😢.
+    </p>
+  </div>
 
   {% endif %}
+
 </div>
 
 {% include "components/pagination.html" %}

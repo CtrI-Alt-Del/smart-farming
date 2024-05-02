@@ -2,7 +2,7 @@
 {% from "components/modal.html" import modal_controls %}
 {% from "components/csv_input.html" import csv_input %}
 
-<div class="mt-4 px-2 pb-6 bg=white rounded-md">
+<div class="mt-4 px-2 h-[520px] rounded-md">
   <div class="flex flex-col rounded-2xl">
 
     <div
@@ -32,8 +32,8 @@
 
       <form
         hx-post="{{ url_for('checklist_records_views.create_checklist_record_by_form_view') }}"
-        hx-target="#checklist_records"
-        hx-target-error="#form_fields"
+        hx-target="#checklist-records"
+        hx-target-error="#create-checklist-record-form-fields"
         hx-swap="innerHTML"
         data-query-param="hx-post">
 
@@ -45,7 +45,7 @@
           %}
         </div>
 
-        <div class="mt-6">
+        <div class="mt-6 pb-12">
           {{ modal_controls(modal_id="create-checklist-records-modal") }}
         </div>
       </form>

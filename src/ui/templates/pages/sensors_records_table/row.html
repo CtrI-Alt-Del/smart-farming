@@ -1,18 +1,42 @@
-{% macro row(sensors_record) %}
-
 {% set plant_style =
-"style=background-color:{};".format(checklist_record.plant.hex_color)
+"style=background-color:{};".format(sensors_record.plant.hex_color)
 %}
 
 <tr
+  id="sensors-record-{{ sensors_record.id }}"
   data-loading-class="hidden"
   class="group bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-  <td class="w-4 p-4">
-    <div class="flex items-center">
+  <td class="relative w-4 p-4">
+    <div class="flex items-center gap-3 w-4">
       <input
+        id="checkbox-{{ sensors_record.id }}"
+        data-table="checkbox-row"
         type="checkbox"
-        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-      <label for="checkbox-table-1" class="sr-only">checkbox</label>
+        name="sensors-records-ids[]"
+        value="{{ sensors_record.id }}"
+        class="checkbox">
+      <label
+        for="checkbox-{{ sensors_record.id }}"
+        class="sr-only">
+        Selecionar registro
+      </label>
+
+      <button
+        hx-get="{{ 
+        url_for(
+          'sensors_records_views.update_sensors_record_form_view',
+          id=sensors_record.id
+        )
+       }}"
+        hx-target="#update-sensors-record-form"
+        hx-swap="innerHTML"
+        hx-trigger="click"
+        data-hyperscript="process"
+        _="on click trigger click on #update-sensors-record-modal-trigger"
+        type="button"
+        class="hidden group-hover:block absolute border-gray-700 mt-1 left-[44px]">
+        <i class="ph-bold ph-note-pencil text-lg"></i>
+      </button>
     </div>
   </td>
   <td
@@ -22,25 +46,23 @@
       {{ sensors_record.created_at.format_value().get_value() }}
     </time>
   </td>
-  <td class="px-6 py-4">
+  <td class="py-4">
     <span
-      class="px-2 py-1 font-semibold text-black rounded-md w-max"
-      {{ plant_style }}>
+      {{ plant_style }}
+      class="px-2 py-1 font-semibold text-black rounded-md w-max">
       {{ sensors_record.plant.name }}
     </span>
   </td>
-  <td class="px-6 py-4">
+  <td class="py-4">
     {{ sensors_record.soil_humidity }}
   </td>
-  <td class="px-6 py-4">
+  <td class="py-4">
     {{ sensors_record.ambient_humidity }}
   </td>
-  <td class="px-6 py-4">
+  <td class="py-4">
     {{ sensors_record.temperature }}
   </td>
-  <td class="px-6 py-4">
+  <td class="py-4">
     {{ sensors_record.water_volume }}
   </td>
 </tr>
-
-{% endmacro %}
