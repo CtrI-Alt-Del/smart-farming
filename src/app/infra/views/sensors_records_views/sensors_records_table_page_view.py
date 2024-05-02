@@ -4,15 +4,15 @@ from core.use_cases.sensors_records import get_sensors_records_table_page_data
 from core.commons import Error
 from core.constants import PAGINATION
 
-from infra.forms import SensorsRecordsForm
+from infra.forms import SensorsRecordForm
 from infra.forms import CsvForm
 
 
 def sensors_records_table_page_view():
     page_number = int(request.args.get("page", 1))
 
-    create_sensors_records_form = SensorsRecordsForm()
-    update_sensors_records_form = SensorsRecordsForm()
+    create_sensors_record_form = SensorsRecordForm()
+    update_sensors_record_form = SensorsRecordForm()
 
     csv_form = CsvForm()
     try:
@@ -27,8 +27,8 @@ def sensors_records_table_page_view():
         return render_template(
             "pages/sensors_records_table/index.html",
             csv_form=csv_form,
-            create_sensors_records_form=create_sensors_records_form,
-            update_sensors_records_form=update_sensors_records_form,
+            create_sensors_record_form=create_sensors_record_form,
+            update_sensors_record_form=update_sensors_record_form,
             sensors_records=sensors_records,
             plants=plants,
             last_page_number=last_page_number,

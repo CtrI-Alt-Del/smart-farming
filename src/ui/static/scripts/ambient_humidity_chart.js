@@ -8,10 +8,10 @@ class AmbientHumidityChart {
       '[data-ambient-humidity-chart="select"]',
     )
 
-    if (container && select && typeof ApexCharts !== 'undefined') {
-      const initialData = this.getSelectedData('7 days')
-      const initialDates = this.getSelectedDates('7 days')
-      const initialAverage = this.getAverage('7 days')
+    if (container && select && typeof ApexCharts !== "undefined") {
+      const initialData = this.getSelectedData("7 days")
+      const initialDates = this.getSelectedDates("7 days")
+      const initialAverage = this.getAverage("7 days")
 
       const chart = new ApexCharts(
         container,
@@ -22,7 +22,7 @@ class AmbientHumidityChart {
 
       this.chart = chart
 
-      select.addEventListener('change', (event) =>
+      select.addEventListener("change", (event) =>
         this.handleSelectChange(event),
       )
 
@@ -45,8 +45,8 @@ class AmbientHumidityChart {
     return {
       chart: {
         height: 200,
-        type: 'area',
-        fontFamily: 'Inter, sans-serif',
+        type: "area",
+        fontFamily: "Inter, sans-serif",
         dropShadow: {
           enabled: false,
         },
@@ -64,12 +64,12 @@ class AmbientHumidityChart {
         },
       },
       fill: {
-        type: 'gradient',
+        type: "gradient",
         gradient: {
           opacityFrom: 0.55,
           opacityTo: 0,
-          shade: '#1C64F2',
-          gradientToColors: ['#1C64F2'],
+          shade: "#1C64F2",
+          gradientToColors: ["#1C64F2"],
         },
       },
       dataLabels: {
@@ -89,9 +89,9 @@ class AmbientHumidityChart {
       },
       series: [
         {
-          name: 'Umidade',
+          name: "Umidade",
           data: data,
-          color: '#1A56DB',
+          color: "#1A56DB",
         },
       ],
       xaxis: {
@@ -128,7 +128,7 @@ class AmbientHumidityChart {
     )
 
     if (chartDataField) {
-      const data = chartDataField.value.split(';').map(Number)
+      const data = chartDataField.value.split(";").map(Number)
       return data
     }
 
@@ -141,7 +141,7 @@ class AmbientHumidityChart {
     )
 
     if (chartDatesField) {
-      const dates = chartDatesField.value.split(';')
+      const dates = chartDatesField.value.split(";")
       return dates
     }
 
@@ -167,6 +167,4 @@ class AmbientHumidityChart {
   }
 }
 
-window.addEventListener('load', () => new AmbientHumidityChart())
-
-
+window.addEventListener("load", () => new AmbientHumidityChart())

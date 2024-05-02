@@ -1,56 +1,95 @@
 {% extends "layouts/dashboard/index.html" %}
 
 {% from "components/modal.html" import modal %}
+{% from "components/button.html" import button %}
+{% from "components/loading.html" import loading %}
 
 {% block dashboard_content %}
 
 <div class="px-12 pb-12 mt-6 bg-white rounded-md shadow-md">
-    <div
-        class="flex items-center gap-3 py-6 border-b-2 border-gray-300">
-        <h1 class="text-2xl font-bold">Registro dos Sensores</h1>
-    </div>
+	<div
+		class="flex items-center gap-3 py-6 border-b-2 border-gray-300">
+		<h1 class="text-2xl font-bold">Registro dos Sensores</h1>
+	</div>
 
-    <div class="flex items-center justify-between mt-6">
-        {% include "components/datepicker.html" %}
+	<div class="flex items-center justify-between mt-6">
+		{% include "components/datepicker.html" %}
 
-        {% call modal(
-        id="create-sensors-records-modal",
-        title="Adicionar registro"
-        )
-        %}
+		{% call modal(id="create-sensors-records-modal") %}
 
-        {% include "pages/sensors_records_table/form/index.html" %}
+		{% include
+		"pages/sensors_records_table/create_sensors_record_form/index.html"
+		%}
 
-        {% endcall %}
-    </div>
+		{% endcall %}
 
-    <div class="relative mt-6 overflow-x-auto shadow-md sm:rounded-lg">
-        <form
-            hx-get="{{ url_for('sensors_records_views.filter_sensors_records_view') }}"
-            hx-target="#sensors_records"
-            hx-target-error="#form_fields"
-            hx-swap="innerHTML"
-            data-pagination="form"
-            data-query-param="hx-get"
-            id="filter_sensors_records_form"
-            class="p-6">
-            {% include "components/plant_select.html" %}
+		{{ button(
+		type="button",
+		title="Adicionar registro",
+		attributes="data-modal-target=create-sensors-records-modal data-modal-toggle=create-sensors-records-modal")
+		}}
+	</div>
 
-            <input data-pagination="input" type="text" hidden>
-        </form>
+	{% call modal(id="update-sensors-record-modal") %}
 
-        <div
-            data-pagination="container"
-            id="sensors_records"
-            class="flex flex-col justify-between h-[28rem]">
-            {% include "pages/sensors_records_table/records.html" %}
-        </div>
-    </div>
+	<div id="update-sensors-record-form" class="flex w-full">
+		<div class="grid place-content-center w-full h-[32rem]">
+			{{ loading("w-32 h-32") }}
+		</div>
+	</div>
+
+	{% endcall %}
+
+	<div class="relative sm:rounded-lg">
+		<div class="flex items-end gap-3 p-6">
+			<form
+				hx-get="{{ url_for('sensors_records_views.filter_sensors_records_view') }}"
+				hx-target="#sensors-records"
+				hx-swap="innerHTML"
+				data-pagination="form"
+				data-query-param="hx-get"
+				id="filter-sensors-records-form">
+				{% include "components/plant_select.html" %}
+
+				<input data-pagination="input" type="text" hidden>
+			</form>
+
+			{{
+			button(
+			type="submit",
+			title="Deletar registro(s)",
+			attributes="data-loading-disable data-table=delete-button form=delete-sensors-records-form",
+			class="bg-red-700 animate-pulse hidden",
+			)
+			}}
+		</div>
+
+		<form
+			id="delete-sensors-records-form"
+			hx-delete="{{ url_for('sensors_records_views.delete_sensors_records_view') }}"
+			hx-target="#sensors-records"
+			hx-trigger="submit"
+			hx-swap="innerHTML"
+			data-query-param="hx-delete">
+			<div
+				data-table="container"
+				data-pagination="container"
+				id="sensors-records"
+				class="flex flex-col justify-between h-[28rem]">
+				{% include "pages/sensors_records_table/records.html" %}
+			</div>
+		</form>
+
+	</div>
 </div>
 
 <script
-    src="{{ url_for('static', filename='scripts/query_param.js') }}"></script>
+	src="{{ url_for('static', filename='scripts/query_param.js') }}"></script>
+
 <script
-    src="{{ url_for('static', filename='scripts/pagination.js') }}"></script>
+	src="{{ url_for('static', filename='scripts/table.js') }}"></script>
+
+<script
+	src="{{ url_for('static', filename='scripts/pagination.js') }}"></script>
 
 {% endblock dashboard_content %}

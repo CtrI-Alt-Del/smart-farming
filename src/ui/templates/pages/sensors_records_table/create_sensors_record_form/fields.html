@@ -1,0 +1,106 @@
+{% from "components/label.html" import label %}
+
+{{ create_sensors_record_form.csrf_token }}
+
+<div class="input-container">
+  {{ label(
+  id="create-sensors-record-date",
+  title="Data",
+  icon="calendar-blank"
+  )
+  }}
+  {{ create_sensors_record_form.date(
+  id="create-sensors-record-date",
+  class="input-field",
+  placeholder="12/12/2024",
+  required=True
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(
+  id="create-sensors-record-time",
+  title="Hora",
+  icon="calendar-blank")
+  }}
+  {{ create_sensors_record_form.time(
+  id="create-sensors-record-time",
+  class="input-field",
+  placeholder="10",
+  required=True
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{
+  label(
+  id="create-sensors-record-ambient-humidity",
+  title="Umidade ambiente (%)",
+  icon="drop"
+  )
+  }}
+  {{ create_sensors_record_form.ambient_humidity(
+  id="create-sensors-record-ambient-humidity",
+  type="number",
+  class="input-field",
+  placeholder="25",
+  required=True,
+  min=0,
+  max=100
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(
+  id="create-sensors-record-soil-humidity",
+  title="Umidade solo (%)",
+  icon="drop-half-bottom"
+  )
+  }}
+  {{ create_sensors_record_form.soil_humidity(
+  id="create-sensors-record-soil-humidity",
+  type="number",
+  class="input-field",
+  placeholder="32",
+  required=True,
+  min=0,
+  max=100
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(id="temperatura", title="Temperatura (°C)", icon="thermometer") }}
+  {{ create_sensors_record_form.temperature(
+  id="create-sensors-record-temperature",
+  type="number",
+  class="input-field",
+  placeholder="25",
+  required=True,
+  min=-273,
+  max=60,
+  ) }}
+</div>
+
+<div class="input-container">
+  {{ label(id="volume", title="Volume da água (ml)", icon="waves") }}
+  {{ create_sensors_record_form.water_volume(
+  id="create-sensors-water-volume",
+  type="number",
+  class="input-field",
+  placeholder="0",
+  required=True,
+  min=0,
+  )
+  }}
+</div>
+
+<div></div>
+
+<div class="input-container">
+  {{ label(id="planta", title="Planta", icon="plant") }}
+  {{ create_sensors_record_form.plant_id(class="input-field") }}
+</div>

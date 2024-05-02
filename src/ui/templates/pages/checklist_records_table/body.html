@@ -1,19 +1,9 @@
-{% from "pages/checklist_records_table/row.html" import row %}
 {% from "components/rows_skeleton.html" import rows_skeleton %}
 
 <tbody>
-  <form method="POST"
-  action="{{ url_for('checklist_records_views.delete_checklist_records_view') }}">
-  <button type = "submit">Deletar Registro</button>
-
   {% for checklist_record in checklist_records %}
-  
-  {{ row(checklist_record) }}
-
+  {% include "pages/checklist_records_table/row.html" %}
   {% endfor %}
-</form>
 
   {{ rows_skeleton(6, 15) }}
-
-
 </tbody>

@@ -45,8 +45,12 @@ class SensorRecordsRepository:
     def get_last_sensors_record(self) -> SensorsRecord:
         sql_data = """
         SELECT 
-            soil_humidity, ambient_humidity, temperature, water_volume, created_at
-        FROM sensors_records
+            SR.*, 
+            P.id AS plant_id, 
+            P.name AS plant_name,
+            P.hex_color AS plant_color
+        FROM sensors_records AS SR
+        JOIN plants AS P ON P.id = SR.plant_id
         ORDER BY created_at DESC
         LIMIT 1;
         """
@@ -85,7 +89,12 @@ class SensorRecordsRepository:
 
     def get_sensors_record_by_id(self, id: str) -> SensorsRecord | None:
         row = mysql.query(
-            sql="SELECT * FROM sensors_records WHERE id = %s",
+            sql="""
+            SELECT SR.*, P.id AS plant_id, P.name AS plant_name, P.hex_color AS plant_color
+            FROM sensors_records AS SR 
+            JOIN plants AS P ON P.id = SR.plant_id
+            WHERE SR.id = %s
+            """,
             is_single=True,
             params=[id],
         )
@@ -141,10 +150,11 @@ class SensorRecordsRepository:
             )
 
             return SensorsRecord(
-                ambient_humidity=row["ambient_humidity"],
-                soil_humidity=row["soil_humidity"],
-                temperature=row["temperature"],
-                water_volume=row["water_volume"],
+                id=row["id"],
+                ambient_humidity=int(row["ambient_humidity"]),
+                soil_humidity=int(row["soil_humidity"]),
+                temperature=float(row["temperature"]),
+                water_volume=float(row["water_volume"]),
                 plant=plant,
                 created_at=created_at,
             )

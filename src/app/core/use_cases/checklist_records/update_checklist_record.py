@@ -1,9 +1,9 @@
 from datetime import datetime, date
 
-from core.entities import Plant, CheckListRecord
+from core.entities import CheckListRecord
 from core.commons import Error, Date, Datetime
 
-from infra.repositories import checklist_records_repository
+from infra.repositories import checklist_records_repository, plants_repository
 
 
 class UpdateChecklistRecord:
@@ -34,7 +34,8 @@ class UpdateChecklistRecord:
 
             created_at = Datetime(
                 datetime(
-                    hour=int(request["hour"]),
+                    hour=request["time"].hour,
+                    minute=request["time"].minute,
                     year=request["date"].year,
                     month=request["date"].month,
                     day=request["date"].day,
@@ -43,7 +44,10 @@ class UpdateChecklistRecord:
 
             fertilizer_expiration_date = Date(request["fertilizer_expiration_date"])
 
-            plant = Plant(id=request["plant_id"])
+            plant = plants_repository.get_plant_by_id(request["plant_id"])
+
+            if not plant:
+                raise Error(ui_message="Planta não encontrada para esse registro")
 
             checklist_record = CheckListRecord(
                 id=checklist_record_id,
@@ -64,6 +68,8 @@ class UpdateChecklistRecord:
             )
 
             checklist_records_repository.update_checklist_record_by_id(checklist_record)
+
+            return checklist_record
 
         except Error as error:
             raise error

@@ -1,3 +1,7 @@
+function teste(element) {
+  console.log(element)
+}
+
 class QueryParam {
   constructor() {
     setTimeout(() => {

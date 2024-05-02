@@ -16,6 +16,7 @@
       src="https://unpkg.com/htmx.org@1.9.11/dist/ext/loading-states.js"></script>
     <script
       src="https://unpkg.com/htmx.org@1.9.12/dist/ext/response-targets.js"></script>
+    <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
   </head>
 
   <body
@@ -24,6 +25,8 @@
     {% block body %}
     {% endblock body %}
 
+    <script
+      src="{{ url_for('static', filename='scripts/hyperscript.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <script

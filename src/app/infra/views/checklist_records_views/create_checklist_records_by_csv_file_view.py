@@ -31,12 +31,13 @@ def create_checklist_records_by_csv_file_view():
 
         updated_checklist_records = data["checklist_records"]
         last_page_number = data["last_page_number"]
+        current_page_number = data["current_page_number"]
 
         return render_template(
             "pages/checklist_records_table/records.html",
             checklist_records=updated_checklist_records,
             last_page_number=last_page_number,
-            current_page_number=page_number,
+            current_page_number=current_page_number,
             page_buttons_limit=PAGINATION["page_buttons_siblings_count"],
         )
 

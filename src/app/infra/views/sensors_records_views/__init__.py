@@ -6,6 +6,7 @@ from .create_sensors_records_by_csv_file_view import (
     create_sensors_records_by_csv_file_view,
 )
 from .update_sensors_records_view import update_sensors_record_view
+from .update_sensors_record_form_view import update_sensors_record_form_view
 from .delete_sensors_records_view import delete_sensors_records_view
 from .sensors_records_table_page_view import sensors_records_table_page_view
 from .create_sensors_records_by_form_view import create_sensors_record_by_form_view
@@ -30,6 +31,12 @@ route(
 )
 
 route(
+    "/sensors_records/<id>/form",
+    view_func=update_sensors_record_form_view,
+    methods=["GET"],
+)
+
+route(
     "/sensors_records/filter",
     view_func=filter_sensors_records_view,
     methods=["GET"],
@@ -47,10 +54,10 @@ route(
     methods=["POST"],
 )
 
-route("/sensors_records/update", view_func=update_sensors_record_view, methods=["POST"])
+route("/sensors_records/<id>", view_func=update_sensors_record_view, methods=["PUT"])
 
 route(
-    "/sensors_records/delete",
+    "/sensors_records",
     view_func=delete_sensors_records_view,
-    methods=["POST"],
+    methods=["DELETE"],
 )

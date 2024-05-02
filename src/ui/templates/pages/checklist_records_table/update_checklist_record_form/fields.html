@@ -1,0 +1,248 @@
+{% from "components/label.html" import label %}
+
+{{ update_checklist_record_form.csrf_token }}
+
+<div class="input-container">
+  {{ label(
+  id="update-checklist-record-date",
+  title=update_checklist_record_form.date.label,
+  icon="calendar-blank"
+  )
+  }}
+  {{ update_checklist_record_form.date(
+  class="input-field",
+  required=True
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(
+  id="update-checklist-record-date-time",
+  title=update_checklist_record_form.time.label,
+  icon="calendar-blank"
+  )
+  }}
+  {{ update_checklist_record_form.time(
+  placeholder="10",
+  class="input-field",
+  required=True,
+  min=0,
+  max=23
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(
+  id="update-checklist-record-soil-ph",
+  title="PH do solo",
+  icon="ph ph-speedometer"
+  )
+  }}
+  {{
+  update_checklist_record_form.soil_ph(
+  type="number",
+  class="input-field",
+  placeholder="7",
+  required=True,
+  min=0,
+  max=7,
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(
+  id="update-checklist-record-soil-humidity",
+  title=update_checklist_record_form.soil_humidity.label,
+  icon="ph ph-drop-half-bottom")
+  }}
+  {{ update_checklist_record_form.soil_humidity(
+  type="number",
+  class="input-field",
+  placeholder="56",
+  required=True,
+  min=0,
+  max=100,
+  step="any",
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(
+  id="update-checklist-record-date-water-consumption",
+  title="Consumo de água (ml)",
+  icon="ph ph-drop")
+  }}
+  {{ update_checklist_record_form.water_consumption(
+  type="number",
+  class="input-field",
+  placeholder="120.0",
+  required=True,
+  min=0,
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(
+  id="update-checklist-record-air-humidity",
+  title="Umidade do ar (%)",
+  icon="ph ph-wind")
+  }}
+  {{ update_checklist_record_form.air_humidity(
+  type="number",
+  class="input-field",
+  placeholder="52",
+  required=True,
+  min=0,
+  max=100,
+  step="any",
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(
+  id="update-checklist-record-temperature",
+  title="Temperatura (°C)",
+  icon="thermometer")
+  }}
+  {{ update_checklist_record_form.temperature(
+  type="number",
+  class="input-field",
+  placeholder="25",
+  required=True,
+  min=-273,
+  max=60,
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(
+  id="update-checklist-record-illuminance",
+  title="Iluminação (Lx)",
+  icon="ph ph-lightbulb-filament"
+  )
+  }}
+  {{ update_checklist_record_form.illuminance(
+  type="number",
+  class="input-field",
+  placeholder="960.0",
+  required=True,
+  min=0,
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(
+  id="update-checklist-record-lai",
+  title=update_checklist_record_form.lai.label,
+  icon="ph ph-flower-lotus"
+  )
+  }}
+  {{ update_checklist_record_form.lai(
+  id="update-checklist-record-lai",
+  type="number",
+  class="input-field",
+  placeholder="0.00",
+  required=True,
+  min=0,
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(
+  id="update-checklist-record-leaf-appearence",
+  title="Aparência da folha",
+  icon="ph ph-leaf") }}
+
+  {{ update_checklist_record_form.leaf_appearance(
+  id="update-checklist-record-leaf-appearence",
+  class="input-field",
+  placeholder="Aparência da folha",
+  required=True,
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(
+  id="update-checklist-record-leaf-color",
+  title="Cor da folha",
+  icon="ph ph-flower"
+  )
+  }}
+  {{ update_checklist_record_form.leaf_color(
+  class="input-field",
+  placeholder="Cor da folha",
+  required=True,
+  **{"data-record-form": "select"}
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(id="update-checklist-record-plantation", title="Área da plantio",
+  icon="ph ph-potted-plant") }}
+  {{
+  update_checklist_record_form.plantation_type(
+  class="input-field",
+  placeholder="Tipo da planta", required=True
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(
+  id="update-checklist-record-fertilizer-expiration-date",
+  title=update_checklist_record_form.fertilizer_expiration_date.label,
+  icon="ph ph-tree"
+  )
+  }}
+  {{
+  update_checklist_record_form.fertilizer_expiration_date(
+  class="input-field",
+  placeholder="12/12/2024", required=True
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(
+  id="update-checklist-record-plant",
+  title="Planta",
+  icon="plant"
+  )
+  }}
+  {{ update_checklist_record_form.plant_id(
+  class="input-field",
+  placeholder="Reporte", required=True
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(
+  id="update-checklist-record-report",
+  title="Reporte",
+  icon="ph ph-exclamation-mark")
+  }}
+  {{ update_checklist_record_form.report(
+  class="bg-gray-50 border
+  border-gray-300 text-gray-900 text-sm
+  rounded-lg
+  focus:ring-gray-400 focus:border-gray-400 block h-[42px] w-full p-2.5
+  dark:bg-gray-700 dark:border-gray-600
+  dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400
+  dark:focus:border-gray-400 resize-none",
+  placeholder="Reporte",
+  required=True
+  )
+  }}
+</div>
