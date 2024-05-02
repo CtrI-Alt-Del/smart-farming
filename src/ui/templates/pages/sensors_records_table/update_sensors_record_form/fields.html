@@ -1,0 +1,108 @@
+{% from "components/label.html" import label %}
+
+{{ update_sensors_record_form.csrf_token }}
+
+<div class="input-container">
+  {{ label(
+  id="update-sensors-record-date",
+  title="Data",
+  icon="calendar-blank"
+  )
+  }}
+  {{ update_sensors_record_form.date(
+  id="update-sensors-record-date",
+  class="input-field",
+  placeholder="12/12/2024",
+  required=True
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(
+  id="update-sensors-record-time",
+  title="Hora",
+  icon="calendar-blank")
+  }}
+  {{ update_sensors_record_form.time(
+  id="update-sensors-record-time",
+  class="input-field",
+  placeholder="10",
+  required=True
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{
+  label(
+  id="update-sensors-record-ambient-humidity",
+  title="Umidade ambiente (%)",
+  icon="drop"
+  )
+  }}
+  {{ update_sensors_record_form.ambient_humidity(
+  id="update-sensors-record-ambient-humidity",
+  type="number",
+  class="input-field",
+  placeholder="25",
+  required=True,
+  min=0,
+  max=100
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(
+  id="update-sensors-record-soil-humidity",
+  title="Umidade solo (%)",
+  icon="drop-half-bottom"
+  )
+  }}
+  {{ update_sensors_record_form.soil_humidity(
+  id="update-sensors-record-soil-humidity",
+  type="number",
+  class="input-field",
+  placeholder="32",
+  required=True,
+  min=0,
+  max=100
+  )
+  }}
+</div>
+
+<div class="input-container">
+  {{ label(id="temperatura", title="Temperatura (°C)", icon="thermometer") }}
+  {{ update_sensors_record_form.temperature(
+  id="update-sensors-record-temperature",
+  type="number",
+  class="input-field",
+  placeholder="25",
+  required=True,
+  min=-273,
+  max=60,
+  step="any"
+  ) }}
+</div>
+
+<div class="input-container">
+  {{ label(id="volume", title="Volume da água (ml)", icon="waves") }}
+  {{ update_sensors_record_form.water_volume(
+  id="update-sensors-water-volume",
+  type="number",
+  class="input-field",
+  placeholder="0",
+  required=True,
+  min=0,
+  step="any"
+  )
+  }}
+</div>
+
+<div></div>
+
+<div class="input-container">
+  {{ label(id="planta", title="Planta", icon="plant") }}
+  {{ update_sensors_record_form.plant_id(class="input-field") }}
+</div>

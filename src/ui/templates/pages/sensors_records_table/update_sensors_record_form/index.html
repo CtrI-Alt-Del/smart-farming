@@ -1,0 +1,32 @@
+{% from "components/csv_input.html" import csv_input %}
+{% from "components/modal.html" import modal_controls %}
+
+<div class="mt-4 px-2 bg=white rounded-md">
+  <div class="flex flex-col rounded-2xl">
+    <div class="flex flex-col items-center justify-center">
+      <form
+        hx-put="{{ 
+          url_for(
+            'sensors_records_views.update_sensors_record_view', 
+            id=sensors_record_id
+          )
+         }}"
+        hx-target="#sensors-record-{{ sensors_record_id }}"
+        hx-target-error="#update-sensors-record-form-fields"
+        hx-swap="outerHTML">
+
+        <div
+          id="update-sensors-record-form-fields"
+          class="grid grid-cols-3 gap-6">
+          {% include
+          "pages/sensors_records_table/update_sensors_record_form/fields.html"
+          %}
+        </div>
+
+        <div class="mt-6">
+          {{ modal_controls(modal_id="update-sensors-record-modal") }}
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
