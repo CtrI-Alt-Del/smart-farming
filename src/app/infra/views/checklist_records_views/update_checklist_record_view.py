@@ -18,7 +18,7 @@ def update_checklist_record_view(id: str):
                 "fertilizer_expiration_date": checklist_record_form.fertilizer_expiration_date.data,
                 "illuminance": checklist_record_form.illuminance.data,
                 "plantation_type": checklist_record_form.plantation_type.data,
-                "hour": checklist_record_form.hour.data,
+                "time": checklist_record_form.time.data,
                 "leaf_appearance": checklist_record_form.leaf_appearance.data,
                 "leaf_color": checklist_record_form.leaf_color.data,
                 "air_humidity": checklist_record_form.air_humidity.data,
@@ -40,4 +40,5 @@ def update_checklist_record_view(id: str):
             checklist_record=updated_checklist_record,
         )
     except Error as error:
+        print(checklist_record_form.errors, flush=True)
         return "ERROR", error.status_code

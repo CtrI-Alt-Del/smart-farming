@@ -34,7 +34,8 @@ class UpdateChecklistRecord:
 
             created_at = Datetime(
                 datetime(
-                    hour=int(request["hour"]),
+                    hour=request["time"].hour,
+                    minute=request["time"].minute,
                     year=request["date"].year,
                     month=request["date"].month,
                     day=request["date"].day,

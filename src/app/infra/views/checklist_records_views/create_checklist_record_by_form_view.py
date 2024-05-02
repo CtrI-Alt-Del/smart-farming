@@ -15,6 +15,8 @@ def create_checklist_record_by_form_view():
 
     page_number = int(request.args.get("page", 1))
 
+    print(checklist_record_form.data, flush=True)
+
     try:
         if not checklist_record_form.validate_on_submit():
             raise Error(status_code=400)
@@ -24,7 +26,7 @@ def create_checklist_record_by_form_view():
                 "fertilizer_expiration_date": checklist_record_form.fertilizer_expiration_date.data,
                 "illuminance": checklist_record_form.illuminance.data,
                 "plantation_type": checklist_record_form.plantation_type.data,
-                "hour": checklist_record_form.hour.data,
+                "time": checklist_record_form.time.data,
                 "leaf_appearance": checklist_record_form.leaf_appearance.data,
                 "leaf_color": checklist_record_form.leaf_color.data,
                 "air_humidity": checklist_record_form.air_humidity.data,
@@ -55,8 +57,6 @@ def create_checklist_record_by_form_view():
         )
 
     except Error as error:
-        print(error.ui_message, flush=True)
-        print(checklist_record_form.errors, flush=True)
         return (
             "ERROR",
             error.status_code,

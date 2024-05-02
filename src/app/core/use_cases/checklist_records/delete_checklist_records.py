@@ -12,8 +12,6 @@ class DeleteChecklistRecords:
                         checklist_records_repository.get_checklist_record_by_id(id)
                     )
 
-                    print(has_checklist_record, flush=True)
-
                     if not has_checklist_record:
                         raise Error(
                             ui_message="Registro check-list não encontrado",

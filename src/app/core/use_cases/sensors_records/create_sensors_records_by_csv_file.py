@@ -61,5 +61,5 @@ class CreateSensorsRecordsByCsvFile:
                 temperature=record["temperatura"],
                 water_volume=record["volume de água (ml)"],
                 created_at=created_at,
-                plant=plant
+                plant=plant,
             )
