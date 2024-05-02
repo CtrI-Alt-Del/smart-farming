@@ -18,7 +18,7 @@ class GetChecklistRecordsTablePageData:
 
         last_page_number = ceil(checklist_count / PAGINATION["records_per_page"])
 
-        if page_number > last_page_number:
+        if last_page_number > 0 and page_number > last_page_number:
             current_page_number = last_page_number
         else:
             current_page_number = page_number
