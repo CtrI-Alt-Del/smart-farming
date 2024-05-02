@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS sensors_records;
 DESC sensors_records;
 
 SELECT * FROM sensors_records ORDER BY created_at ASC
-LIMIT 30000;
+LIMIT 20000;
 
 SELECT 
   DATE(created_at) AS date, 
