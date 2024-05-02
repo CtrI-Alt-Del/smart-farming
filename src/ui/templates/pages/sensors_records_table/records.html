@@ -1,5 +1,3 @@
-{% from "components/loading.html" import loading %}
-
 {% if sensors_records | length > 0 %}
 
 <div class="overflow-x-auto">
@@ -11,17 +9,17 @@
 
   {% else %}
 
-  <div>
-    <div class="grid place-content-center">
-      {{ loading("w-24 h-24") }}
-    </div>
-    <p data-loading-class="hidden" class="p-6 text-lg font-bold text-center">
-      Nenhum registro encontrado 😢.
-    </p>
+  <div
+    _="on load add .hidden to #delete-sensors-record-button"
+    data-hyperscript="process"
+    class="sr-only">
   </div>
 
-  {% endif %}
+  <p class="p-6 text-lg font-bold text-center">
+    Nenhum registro encontrado 😢.
+  </p>
 
+  {% endif %}
 </div>
 
 {% include "components/pagination.html" %}
