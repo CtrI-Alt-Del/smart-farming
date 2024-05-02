@@ -6,7 +6,7 @@ from wtforms import (
     DateField,
     IntegerField,
     TextAreaField,
-    StringField,
+    TimeField,
     FloatField,
 )
 from wtforms.validators import NumberRange, DataRequired
@@ -25,7 +25,7 @@ class ChecklistRecordForm(FlaskForm):
 
         if isinstance(checklist_record, CheckListRecord):
             self.date.data = checklist_record.created_at.get_value(is_datetime=True)
-            self.hour.data = checklist_record.created_at.get_hour()
+            self.time.data = checklist_record.created_at.get_time()
             self.air_humidity.data = checklist_record.air_humidity
             self.illuminance.data = checklist_record.illuminance
             self.lai.data = checklist_record.lai
@@ -100,38 +100,33 @@ class ChecklistRecordForm(FlaskForm):
         "Data de coleta",
         render_kw={"max": datetime.now().strftime("%Y-%m-%d")},
     )
-    hour = IntegerField(
-        "Hora de coleta (0 a 23)",
-        validators=[DataRequired(), NumberRange(min=0, max=23)],
-    )
     fertilizer_expiration_date = DateField(
         "Validade de adubação",
         render_kw={"max": datetime.now().strftime("%Y-%m-%d")},
     )
-    soil_humidity = FloatField(
-        "Umidade do solo (%)", validators=[DataRequired(), NumberRange(min=0, max=100)]
+    time = TimeField(
+        "Hora de coleta",
+        validators=[DataRequired()],
     )
-    air_humidity = FloatField(
-        "Umidade do ar (%)", validators=[DataRequired(), NumberRange(min=0, max=100)]
+    soil_humidity = IntegerField(
+        "Umidade do solo (%)", validators=[NumberRange(min=0, max=100)]
     )
+    air_humidity = IntegerField(
+        "Umidade do ar (%)", validators=[NumberRange(min=0, max=100)]
+    )
+    soil_ph = IntegerField("PH do solo", validators=[NumberRange(min=0, max=7)])
     lai = FloatField(
         "Índice de área foliar (m²/m²)",
-        validators=[DataRequired(), NumberRange(min=0)],
+        validators=[NumberRange(min=0)],
     )
     water_consumption = FloatField(
         "Consumo de água detectado (ml)",
-        validators=[DataRequired(), NumberRange(min=0)],
+        validators=[NumberRange(min=0)],
     )
     temperature = FloatField(
         "Temperatura ambiente (°C)",
         validators=[DataRequired(), NumberRange(min=-273, max=60)],
     )
-    illuminance = FloatField(
-        "Luminosidade (Lux)", validators=[DataRequired(), NumberRange(min=0)]
-    )
-    soil_ph = IntegerField(
-        "PH do solo", validators=[DataRequired(), NumberRange(min=0, max=7)]
-    )
+    illuminance = FloatField("Luminosidade (Lux)", validators=[NumberRange(min=0)])
     report = TextAreaField("Algum desvio detectado?")
     plant_id = SelectField("Planta", validators=[DataRequired()])
-    id = StringField()
