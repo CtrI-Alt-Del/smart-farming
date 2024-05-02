@@ -1,19 +1,9 @@
 {% from "components/rows_skeleton.html" import rows_skeleton %}
 
 <tbody>
-  <form
-    hx-delete="{{ url_for('checklist_records_views.delete_checklist_records_view') }}"
-    hx-target="#checklist-records">
+  {% for checklist_record in checklist_records %}
+  {% include "pages/checklist_records_table/row.html" %}
+  {% endfor %}
 
-    {% for checklist_record in checklist_records %}
-    {% include "pages/checklist_records_table/row.html" %}
-    {% endfor %}
-    <button id="deleteButton" type="submit"
-      class="w-28 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-600 font-medium rounded-2xl text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-red-950"
-      style="display:none;">Deletar Registros</button>
-
-    {{ rows_skeleton(6, 15) }}
-  </tbody>
-
-  <script
-    src="{{url_for('static', filename='scripts/appear_when_checkbox.js')}}"></script>
+  {{ rows_skeleton(6, 15) }}
+</tbody>
