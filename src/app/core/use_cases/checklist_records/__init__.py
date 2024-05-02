@@ -3,9 +3,13 @@ from .create_checklist_record_by_form import CreateChecklistRecordByForm
 from .update_checklist_record import UpdateChecklistRecord
 from .delete_checklist_records import DeleteChecklistRecords
 from .get_checklist_records_table_page_data import GetChecklistRecordsTablePageData
+from .get_checklist_records_dashboard_page_data import (
+    GetChecklistRecordsDashboardPageData,
+)
 
 create_checklist_records_by_csv_file = CreateChecklistRecordsByCsvFile()
 create_checklist_record_by_form = CreateChecklistRecordByForm()
 update_checklist_record = UpdateChecklistRecord()
 delete_checklist_records = DeleteChecklistRecords()
 get_checklist_records_table_page_data = GetChecklistRecordsTablePageData()
+get_checklist_records_dashboard_page_data = GetChecklistRecordsDashboardPageData()
