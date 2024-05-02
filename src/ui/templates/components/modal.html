@@ -12,13 +12,13 @@
   tabindex="-1"
   aria-hidden="true"
   class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 max-h-full bg-black/70">
-  <div class="relative p-4 w-full max-w-4xl ">
+  <div class="relative w-full max-w-4xl ">
     <!-- Modal content -->
     <div
-      class="relative bg-white h-[640px] overflow-y-auto rounded-lg shadow dark:bg-gray-700 animate-fade-up animate-delay-100">
+      class="relative p-6 bg-white overflow-y-auto rounded-lg shadow dark:bg-gray-700 animate-fade-up animate-delay-100">
       <!-- Modal header -->
       <div
-        class="flex items-center justify-between md:p-5 border-b rounded-t dark:border-gray-600">
+        class="flex items-center justify-between pb-3 border-b rounded-t dark:border-gray-600">
         <div class="w-56">
           {{ logo() }}
         </div>
@@ -37,7 +37,7 @@
         </button>
       </div>
       <!-- Modal body -->
-      <div class="py-4 md:mx-20 space-y-8">
+      <div class="grid place-content-center">
         {{ caller() }}
       </div>
     </div>
@@ -50,13 +50,15 @@
 
 <div class="flex items-center justify-center w-full gap-4">
   <button
-    data-modal-hide="{{ modal_id }}"
+    _="on click trigger click on #{{ modal_id }}"
     type="button"
     class="w-28 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-600 font-medium rounded-2xl text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-red-950">
     Cancelar
   </button>
   <button
-    data-modal-hide="{{ modal_id }}"
+    _="on click trigger click on #{{ modal_id }}"
+    data-loading-disable
+    data-hyperscript="process"
     type="submit"
     class="w-28 focus:outline-none text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-600 font-medium rounded-2xl text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-gray-950">
     Enviar
