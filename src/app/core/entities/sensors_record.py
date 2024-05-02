@@ -9,7 +9,7 @@ from core.entities.plant import Plant
 class SensorsRecord(Entity):
     soil_humidity: int = None
     ambient_humidity: int = None
-    temperature: int = None
-    water_volume: int = None
+    water_volume: float = None
+    temperature: float = None
     created_at: Datetime = None
     plant: Plant = None
