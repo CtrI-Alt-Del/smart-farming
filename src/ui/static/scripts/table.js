@@ -22,8 +22,6 @@ class Table {
   addEventListenerToCheckboxes(container) {
     const checkboxes = container.querySelectorAll("[data-table='checkbox-row']")
 
-    console.log({ checkboxes })
-
     if (!checkboxes.length) return
 
     this.hideDeleteButton()
