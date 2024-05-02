@@ -1,2 +1,2 @@
--- Active: 1713806216316@@127.0.0.1@3306@smart-farming
+-- Active: 1713835984566@@127.0.0.1@3306@smart-farming
 DROP TABLE IF EXISTS user;
