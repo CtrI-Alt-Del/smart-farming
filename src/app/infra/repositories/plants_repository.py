@@ -31,7 +31,6 @@ class PlantsRepository:
         return Plant(id=row["id"], name=row["name"], hex_color=row["hex_color"])
 
     def get_plant_by_id(self, id: str) -> Plant | None:
-        print(id)
         row = mysql.query(
             sql="SELECT * FROM plants WHERE id = %s",
             is_single=True,
