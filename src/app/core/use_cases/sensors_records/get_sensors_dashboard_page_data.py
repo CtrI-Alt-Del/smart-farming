@@ -1,68 +1,28 @@
-from datetime import timedelta
+from core.commons import LineChart, Error
 
-from core.commons import Chart, Error
-
-from infra.repositories import sensors_records_repository
+from infra.repositories import sensors_records_repository, plants_repository
 
 
 class GetSensorDashboardPageData:
     def execute(self):
-        sensor_records_grouped_by_date = (
+        plants = plants_repository.get_plants()
+
+        sensors_records = (
             sensors_records_repository.get_sensor_records_grouped_by_date()
         )
 
-        if len(sensor_records_grouped_by_date) == 0:
+        if len(sensors_records) == 0:
             raise Error("Sem nenhum registro cadastrado no sistema")
 
-        chart = Chart(sensor_records_grouped_by_date)
+        soil_humidity_chart = LineChart(sensors_records, "soil_humidity")
+        ambient_humidity_chart = LineChart(sensors_records, "ambient_humidity")
+        temperature_chart = LineChart(sensors_records, "temperature")
+        water_volume_chart = LineChart(sensors_records, "water_volume")
 
-        charts_filtered_data = {}
-
-        for days in [7, 30, 90]:
-            charts_filtered_data[f"{days} days"] = (
-                {
-                    "records": chart.filter_records_by_range_of_days(days),
-                    "average": self.get_sensors_records_average_by_range_of_days(
-                        days, sensor_records_grouped_by_date
-                    ),
-                },
-            )[0]
-
-        return charts_filtered_data
-
-    def get_sensors_records_average_by_range_of_days(
-        self, days_range, sensor_records_grouped_by_date
-    ):
-        last_date = sensor_records_grouped_by_date[-1]["date"]
-        total = {
-            "soil_humidity": 0,
-            "ambient_humidity": 0,
-            "temperature": 0,
-            "water_volume": 0,
+        return {
+            "soil_humidity_chart_data": soil_humidity_chart.get_data(plants),
+            "ambient_humidity_chart_data": ambient_humidity_chart.get_data(plants),
+            "temperature_chart_data": temperature_chart.get_data(plants),
+            "water_volume_chart_data": water_volume_chart.get_data(plants),
+            "plants": plants,
         }
-        sensors_records_count = 0
-
-        for day in range(days_range, -1, -1):
-            current_date = last_date - timedelta(days=day)
-
-            for sensors_record in sensor_records_grouped_by_date:
-                if sensors_record["date"] == current_date:
-                    for attribute, value in sensors_record.items():
-                        if attribute == "date":
-                            continue
-
-                        total[attribute] += value
-
-                    sensors_records_count += 1
-
-        average = {
-            "soil_humidity": 0,
-            "ambient_humidity": 0,
-            "temperature": 0,
-            "water_volume": 0,
-        }
-
-        for attribute, value in total.items():
-            average[attribute] += round(value / sensors_records_count, 2)
-
-        return average

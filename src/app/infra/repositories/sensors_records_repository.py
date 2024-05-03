@@ -25,17 +25,18 @@ class SensorRecordsRepository:
             ],
         )
 
-    def get_sensor_records_grouped_by_date(self) -> List[SensorsRecord]:
+    def get_sensor_records_grouped_by_date(self):
         sql = """
         SELECT 
             DATE(created_at) AS date, 
             ROUND(AVG(soil_humidity), 1) AS soil_humidity,
             ROUND(AVG(ambient_humidity), 1) AS ambient_humidity,
             ROUND(AVG(temperature), 1) AS temperature,
-            ROUND(AVG(water_volume), 1) AS water_volume
+            ROUND(AVG(water_volume), 1) AS water_volume,
+            plant_id
         FROM sensors_records
-        GROUP BY DATE(created_at)
-        ORDER BY DATE(created_at) ASC
+        GROUP BY date, plant_id
+        ORDER BY date ASC
         LIMIT 500;
         """
         rows = mysql.query(sql=sql, is_single=False)

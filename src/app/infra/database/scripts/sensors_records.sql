@@ -1,4 +1,4 @@
--- Active: 1714396197562@@127.0.0.1@3306@smart-farming
+-- Active: 1713899386704@@127.0.0.1@3306@smart-farming
 
 DROP TABLE IF EXISTS sensors_records;
 DESC sensors_records;
@@ -11,11 +11,12 @@ SELECT
   ROUND(AVG(soil_humidity), 1) AS soil_humidity,
   ROUND(AVG(ambient_humidity), 1) AS ambient_humidity,
   ROUND(AVG(temperature), 1) AS temperature,
-  ROUND(AVG(water_volume), 1) AS water_volume
+  ROUND(AVG(water_volume), 1) AS water_volume,
+  plant_id
 FROM sensors_records
-GROUP BY DATE(created_at)
-ORDER BY DATE(created_at) ASC
-LIMIT 20000;
+GROUP BY date, plant_id
+ORDER BY date ASC
+LIMIT 500;
 
 SELECT * FROM sensors_records LIMIT 20000;
 SELECT COUNT(*) AS count FROM sensors_records;
