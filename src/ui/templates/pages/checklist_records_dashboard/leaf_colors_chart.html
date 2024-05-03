@@ -1,4 +1,5 @@
 {% from "components/dropdown.html" import dropdown %}
+{% from "components/plant_select.html" import plant_select %}
 
 <input
   data-leaf-colors-chart="data"
@@ -49,18 +50,13 @@
   <div
     class="grid items-center justify-between grid-cols-1 border-t border-gray-200 dark:border-gray-700">
     <div class="flex items-center justify-between pt-5">
-      <div>
-        <label
-          for="days"
-          class="block mt-3 text-sm font-medium text-gray-900 dark:text-white">Planta</label>
-        <select
-          data-leaf-colors-chart="select"
-          class="select mt-2">
-          {% for plant in plants %}
-          <option value="{{ plant.id }}">{{ plant.name }}</option>
-          {% endfor %}
-        </select>
-      </div>
+      {{
+      plant_select(
+      id="leaf-colors-chart-plant-select",
+      plants=plants,
+      attributes="data-leaf-colors-chart=select"
+      )
+      }}
     </div>
   </div>
 

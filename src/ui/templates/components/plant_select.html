@@ -1,15 +1,18 @@
 {% from "components/label.html" import label %}
 
-<div class="text-xl">
-  {{ label(id="plant", icon="plant", title="Planta:") }}
+{% macro plant_select(id, plants, attributes) %}
+
+<div>
+  {{ label(id=id, icon="plant", title="Planta") }}
+
+  <select
+    id="{{ id }}"
+    {{ attributes }}
+    class="select">
+    {% for plant in plants %}
+    <option value="{{ plant.id }}">{{ plant.name }}</option>
+    {% endfor %}
+  </select>
 </div>
-<select
-  id="plant"
-  name="plant"
-  class="flex items-center justify-center w-40 mt-2 text-center border border-gray-200 rounded-lg border-1">
-  {% for plant in plants %}
-  <option value="{{ plant.id }}">
-    {{ plant.name }}
-  </option>
-  {% endfor %}
-</select>
+
+{% endmacro %}

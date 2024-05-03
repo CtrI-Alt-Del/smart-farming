@@ -1,10 +1,17 @@
+{% from "components/plant_select.html" import plant_select %}
+
+<input
+  data-leaf-appearances-chart="data"
+  type="text"
+  value="{{ leaf_appearences_chart_data }}"
+  hidden />
 
 <div
   class="w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
 
   <div class="flex justify-between items-start w-full">
     <div class="flex-col items-center">
-      <div class="flex items-center mt-1">
+      <div class="flex items-center mb-1">
         <h2
           class="text-xl font-bold leading-none text-gray-900 dark:text-white me-1">
           Aspecto da Planta x Dias
@@ -22,18 +29,13 @@
   <div
     class="grid items-center justify-between grid-cols-1 border-t border-gray-200 dark:border-gray-700">
     <div class="flex items-center justify-between pt-5">
-      <div>
-        <label
-          for="days"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Planta</label>
-        <select
-          data-leaf-appearances-chart="select"
-          class="select">
-          {% for plant in plants %}
-          <option value="{{ plant.id }}">{{ plant.name }}</option>
-          {% endfor %}
-        </select>
-      </div>
+      {{
+      plant_select(
+      id="leaf-appearances-chart-plant-select",
+      plants=plants,
+      attributes="data-leaf-appearances-chart=select"
+      )
+      }}
     </div>
   </div>
 

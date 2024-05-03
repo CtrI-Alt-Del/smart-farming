@@ -1,3 +1,6 @@
+{% from "components/days_range_select.html" import days_range_select %}
+{% from "components/plant_select.html" import plant_select %}
+
 <input
   data-plant-growth-chart="data"
   type="text"
@@ -8,9 +11,9 @@
   class="w-full h-full p-4 bg-white rounded-lg shadow-md dark:bg-gray-800 md:p-6 animate-fade-up animate-delay-100">
   <div class="flex items-center justify-between">
     <div class="flex items-center justify-center gap-1">
-      <i class="text-2xl text-blue-500 ph-bold ph-drop"></i>
+      <i class="text-2xl text-green-500 ph-bold ph-flower-lotus"></i>
       <h2
-        class="text-2xl font-bold leading-none text-gray-900 dark:text-white">
+        class="text-xl font-bold leading-none text-gray-900 dark:text-white">
         Indice de Crescimento Folial (LAI)
       </h2>
     </div>
@@ -25,6 +28,24 @@
 
   </div>
 
-  <div data-plant-growth-chart="container" id="chart"></div>
+  <div data-plant-growth-chart="container"></div>
 
+  <div
+    class="flex items-center gap-8 border-t border-gray-200 dark:border-gray-700">
+    {{
+    days_range_select(
+    id="plant-growth-chart-plant-select",
+    days_ranges=days_ranges,
+    attributes="data-plant-growth-chart=days-range-select"
+    )
+    }}
+
+    {{
+    plant_select(
+    id="plant-growth-chart-plant-select",
+    plants=plants,
+    attributes="data-plant-growth-chart=plant-select"
+    )
+    }}
+  </div>
 </div>
