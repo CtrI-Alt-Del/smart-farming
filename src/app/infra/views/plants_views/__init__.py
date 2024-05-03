@@ -10,3 +10,5 @@ route = plants_views.add_url_rule
 route("/plants", view_func=plants_page_view, methods=["GET"])
 
 route("/plants/form", view_func=create_plant_by_form_view, methods=["POST"])
+
+route("/plants/<id>", view_func=create_plant_by_form_view, methods=["PUT"])
