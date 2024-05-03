@@ -22,10 +22,16 @@ class GetChecklistRecordsDashboardPageData:
                 lai_records, plants
             )
 
+            days_ranges = [
+                (f"{days_range} days", f"{days_range} dias")
+                for days_range in DAYS_RANGES
+            ]
+
             return {
                 **leaf_charts_data,
                 "plant_growth_chart_data": plant_growth_chart_data,
                 "plants": plants,
+                "days_ranges": days_ranges,
             }
         except Error as error:
             raise error
