@@ -17,7 +17,7 @@ class PlantsRepository:
         mysql.mutate(sql, params)
 
     def get_plants(self) -> list[Plant]:
-        select_query = "SELECT * FROM plants"
+        select_query = "SELECT * FROM plants ORDER BY created_at DESC"
         rows = mysql.query(sql=select_query, is_single=False)
 
         plants = []
@@ -60,8 +60,8 @@ class PlantsRepository:
 
     def delete_plant_by_id(self, plant_id: str):
         mysql.mutate(
-        "DELETE FROM plants WHERE id = %s",
-        params=[
-            plant_id,
-        ],
-    )
+            "DELETE FROM plants WHERE id = %s",
+            params=[
+                plant_id,
+            ],
+        )
