@@ -3,7 +3,7 @@ from decimal import Decimal
 
 
 class JSONEncoder(json.JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, Decimal):
-            return float(obj)
-        return super().default(obj)
+    def default(self, value):
+        if isinstance(value, Decimal):
+            return float(value)
+        return super().default(value)
