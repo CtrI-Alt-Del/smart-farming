@@ -26,7 +26,7 @@ class AmbientHumidityChart {
         this.handleSelectChange(event),
       )
 
-      this.updateAverageValue(initialAverage)
+      this.renderAverageValue(initialAverage)
     }
   }
 
@@ -38,7 +38,7 @@ class AmbientHumidityChart {
     const average = this.getAverage(selectedValue)
 
     this.chart.updateOptions(this.getChartOptions(data, dates))
-    this.updateAverageValue(average)
+    this.renderAverageValue(average)
   }
 
   getChartOptions(data, dates) {
@@ -156,7 +156,7 @@ class AmbientHumidityChart {
     return averageValue.value
   }
 
-  updateAverageValue(value) {
+  renderAverageValue(value) {
     const average = document.querySelector(
       '[data-ambient-humidity-chart="average"]',
     )
