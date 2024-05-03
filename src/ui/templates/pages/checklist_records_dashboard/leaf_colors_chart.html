@@ -1,0 +1,67 @@
+{% from "components/dropdown.html" import dropdown %}
+
+<input
+  data-leaf-colors-chart="data"
+  type="text"
+  value="{{ leaf_colors_chart_data }}"
+  hidden />
+
+<input
+  data-leaf-colors-chart="legend-colors"
+  type="text"
+  value="{{ 
+    leaf_colors_chart_hex_colors 
+    | join(';')  
+  }}"
+  hidden />
+
+<div
+  class="w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+
+  <div class="flex justify-between items-start w-full">
+    <div class="flex-col items-center w-full">
+      <div class="flex items-center justify-between w-full">
+        <h2
+          class="text-xl font-bold leading-none text-gray-900 dark:text-white">
+          Coloração da Planta x Dias
+        </h2>
+        {% call dropdown(id="leaf-colors-chart-legend", title="Legenda") %}
+        {% for leaf_color in leaf_colors %}
+        {% set legend_style =
+        "style=background-color:{};".format(leaf_colors_chart_hex_colors[loop.index0])
+        %}
+        <li class="flex items-center gap-3">
+          <span {{ legend_style }} class="h-4 w-4 rounded-full"></span>
+          <p class="text-sm text-gray-500 lowercase">{{ leaf_color }}</p>
+        </li>
+        {% endfor %}
+        {% endcall %}
+      </div>
+    </div>
+  </div>
+
+  <div
+    id="pie-chart"
+    data-leaf-colors-chart="container"
+    class="py-6">
+  </div>
+
+  <div
+    class="grid items-center justify-between grid-cols-1 border-t border-gray-200 dark:border-gray-700">
+    <div class="flex items-center justify-between pt-5">
+      <div>
+        <label
+          for="days"
+          class="block mt-3 text-sm font-medium text-gray-900 dark:text-white">Planta</label>
+        <select
+          data-leaf-colors-chart="select"
+          class="select mt-2">
+          {% for plant in plants %}
+          <option value="{{ plant.id }}">{{ plant.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+  </div>
+
+</div>

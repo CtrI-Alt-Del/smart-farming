@@ -7,11 +7,9 @@
 <input type="text" data-leaf-appearances-chart="data"
   value="{{ leaf_appearences_chart_data }}" hidden />
 
-<input type="text" data-leaf-colors-chart="data"
-  value="{{ leaf_colors_chart_data }}" hidden />
-
-<div class=" grid-cols-2 pt-5 pb-5 gap-9 w-full ">
+<div class="grid grid-cols-2 pt-5 pb-5 gap-9 w-full">
   {% include '/pages/checklist_records_dashboard/leaf_appearances_chart.html' %}
+  {% include '/pages/checklist_records_dashboard/leaf_colors_chart.html' %}
 </div>
 
 {% include '/pages/checklist_records_dashboard/plant_growth_chart.html' %}
