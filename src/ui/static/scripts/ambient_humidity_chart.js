@@ -1,50 +1,90 @@
 class AmbientHumidityChart {
   constructor() {
+    const chartData = document.querySelector(
+      '[data-ambient-humidity-chart="data"]',
+    )
+
     const container = document.querySelector(
       '[data-ambient-humidity-chart="container"]',
     )
 
-    const select = document.querySelector(
-      '[data-ambient-humidity-chart="select"]',
+    const plantSelect = document.querySelector(
+      '[data-ambient-humidity-chart="plant-select"]',
     )
 
-    if (container && select && typeof ApexCharts !== "undefined") {
-      const initialData = this.getSelectedData("7 days")
-      const initialDates = this.getSelectedDates("7 days")
-      const initialAverage = this.getAverage("7 days")
+    const daysRangeSelect = document.querySelector(
+      '[data-ambient-humidity-chart="days-range-select"]',
+    )
 
-      const chart = new ApexCharts(
-        container,
-        this.getChartOptions(initialData, initialDates),
-      )
+    const averageElement = document.querySelector(
+      '[data-ambient-humidity-chart="average"]',
+    )
+
+    if (
+      chartData &&
+      container &&
+      plantSelect &&
+      averageElement &&
+      daysRangeSelect &&
+      typeof ApexCharts !== "undefined"
+    ) {
+      this.data = JSON.parse(chartData.value)
+      this.plantId = Object.keys(this.data)[0]
+      this.daysRange = Object.keys(this.data[this.plantId])[0]
+      this.average = averageElement
+      this.color = "#1C64F2"
+
+      const chart = new ApexCharts(container, this.getChartOptions())
 
       chart.render()
 
       this.chart = chart
 
-      select.addEventListener("change", (event) =>
-        this.handleSelectChange(event),
-      )
+      plantSelect.addEventListener("change", (event) => {
+        this.handlePlantSelectChange(event)
+      })
 
-      this.renderAverageValue(initialAverage)
+      daysRangeSelect.addEventListener("change", (event) => {
+        this.handleDaysRangeSelectChange(event)
+      })
+
+      this.renderAverageValue()
     }
   }
 
-  handleSelectChange(event) {
-    const selectedValue = event.currentTarget.value
-
-    const data = this.getSelectedData(selectedValue)
-    const dates = this.getSelectedDates(selectedValue)
-    const average = this.getAverage(selectedValue)
-
-    this.chart.updateOptions(this.getChartOptions(data, dates))
-    this.renderAverageValue(average)
+  renderAverageValue() {
+    const averageValue = this.data[this.plantId][this.daysRange].average
+    this.average.textContent = `${averageValue.toFixed(2)}%`
   }
 
-  getChartOptions(data, dates) {
+  handlePlantSelectChange(event) {
+    const plantId = event.currentTarget.value
+    this.plantId = plantId
+
+    this.updateChart()
+  }
+
+  handleDaysRangeSelectChange(event) {
+    const daysRange = event.currentTarget.value
+    this.daysRange = daysRange
+
+    this.updateChart()
+  }
+
+  updateChart() {
+    this.chart.updateOptions(this.getChartOptions())
+    this.renderAverageValue()
+  }
+
+  getChartOptions() {
+    const data = this.data[this.plantId][this.daysRange]
+
+    const dates = data.dates
+    const values = data.values
+
     return {
       chart: {
-        height: 200,
+        height: 240,
         type: "area",
         fontFamily: "Inter, sans-serif",
         dropShadow: {
@@ -68,8 +108,8 @@ class AmbientHumidityChart {
         gradient: {
           opacityFrom: 0.55,
           opacityTo: 0,
-          shade: "#1C64F2",
-          gradientToColors: ["#1C64F2"],
+          shade: this.color,
+          gradientToColors: [this.color],
         },
       },
       dataLabels: {
@@ -89,9 +129,9 @@ class AmbientHumidityChart {
       },
       series: [
         {
-          name: "Umidade",
-          data: data,
-          color: "#1A56DB",
+          name: "Crescimento",
+          data: values,
+          color: this.color,
         },
       ],
       xaxis: {
@@ -119,50 +159,6 @@ class AmbientHumidityChart {
           },
         },
       },
-    }
-  }
-
-  getSelectedData(selectedDaysRange) {
-    const chartDataField = document.querySelector(
-      `[data-filtered-data-chart="${selectedDaysRange}"][name="ambient_humidity"]`,
-    )
-
-    if (chartDataField) {
-      const data = chartDataField.value.split(";").map(Number)
-      return data
-    }
-
-    return []
-  }
-
-  getSelectedDates(selectedDaysRange) {
-    const chartDatesField = document.querySelector(
-      `[data-filtered-data-chart="${selectedDaysRange}"]`,
-    )
-
-    if (chartDatesField) {
-      const dates = chartDatesField.value.split(";")
-      return dates
-    }
-
-    return []
-  }
-
-  getAverage(selectedDaysRange) {
-    const averageValue = document.querySelector(
-      `[data-filtered-data-chart="${selectedDaysRange}"][name="ambient_humidity_average"]`,
-    )
-
-    return averageValue.value
-  }
-
-  renderAverageValue(value) {
-    const average = document.querySelector(
-      '[data-ambient-humidity-chart="average"]',
-    )
-
-    if (average) {
-      average.textContent = `${value}%`
     }
   }
 }

@@ -54,7 +54,7 @@ class PlantGrowthChart {
 
   renderAverageValue() {
     const averageValue = this.data[this.plantId][this.daysRange].average
-    this.average.textContent = `${averageValue}%`
+    this.average.textContent = `${averageValue.toFixed(2)}%`
   }
 
   handlePlantSelectChange(event) {
@@ -66,7 +66,6 @@ class PlantGrowthChart {
 
   handleDaysRangeSelectChange(event) {
     const daysRange = event.currentTarget.value
-    console.log({ daysRange })
     this.daysRange = daysRange
 
     this.updateChart()
@@ -81,12 +80,11 @@ class PlantGrowthChart {
     const data = this.data[this.plantId][this.daysRange]
 
     const dates = data.dates
-    const records = data.records
-    const laiValues = records.map((record) => record.lai)
+    const values = data.values
 
     return {
       chart: {
-        height: 200,
+        height: 240,
         type: "area",
         fontFamily: "Inter, sans-serif",
         dropShadow: {
@@ -132,7 +130,7 @@ class PlantGrowthChart {
       series: [
         {
           name: "Crescimento",
-          data: laiValues,
+          data: values,
           color: this.color,
         },
       ],
