@@ -1,8 +1,26 @@
 {% extends "layouts/dashboard/index.html" %}
-{% from "components/title.html" import title%}
+{% from "components/title.html" import title %}
 
 {% block dashboard_content %}
 
-{{title("Registro do Checklist")}}
+{{ title("Registro de Check-list") }}
+
+<input
+  type="text"
+  data-leaf-appearances-chart="data"
+  value="{{ leaf_appearences_chart_data }}"
+  hidden>
+
+<input
+  type="text"
+  data-leaf-colors-chart="data"
+  value="{{ leaf_colors_chart_data }}"
+  hidden>
+
+<script
+  src="{{url_for('static', filename='scripts/leaf_appearances_chart.js')}}"></script>
+
+<script
+  src="{{url_for('static', filename='scripts/leaf_colors_chart.js')}}"></script>
 
 {% endblock dashboard_content %}
