@@ -1,25 +1,30 @@
+<input
+  data-plant-growth-chart="data"
+  type="text"
+  value="{{ plant_growth_chart_data }}"
+  hidden />
+
 <div
-    class="w-full h-full p-4 bg-white rounded-lg shadow-md dark:bg-gray-800 md:p-6 animate-fade-up animate-delay-100">
-    <div class="flex items-center justify-between">
-        <div class="flex items-center justify-center gap-1">
-            <i class="text-2xl text-blue-500 ph-bold ph-drop"></i>
-            <h2
-                class="text-2xl font-bold leading-none text-gray-900 dark:text-white">
-                Indice de Crescimento Folial (LAI)
-            </h2>
-        </div>
-        <p>
-            Média:
-            <span
-                data-plant-growth-chart="average"
-                class="font-bold">
-                0%
-            </span>
-        </p>
-
+  class="w-full h-full p-4 bg-white rounded-lg shadow-md dark:bg-gray-800 md:p-6 animate-fade-up animate-delay-100">
+  <div class="flex items-center justify-between">
+    <div class="flex items-center justify-center gap-1">
+      <i class="text-2xl text-blue-500 ph-bold ph-drop"></i>
+      <h2
+        class="text-2xl font-bold leading-none text-gray-900 dark:text-white">
+        Indice de Crescimento Folial (LAI)
+      </h2>
     </div>
+    <p>
+      Média:
+      <span
+        data-plant-growth-chart="average"
+        class="font-bold">
+        0%
+      </span>
+    </p>
 
-    <div data-plant-growth-chart="container" id = "chart"></div>
+  </div>
 
-    
+  <div data-plant-growth-chart="container" id="chart"></div>
+
 </div>
