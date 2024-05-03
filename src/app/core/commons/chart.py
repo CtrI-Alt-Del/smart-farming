@@ -12,6 +12,7 @@ class Chart:
 
         for day in range(days_range, -1, -1):
             current_date = last_date - timedelta(days=day)
+            # print(f"days_range: {days_range}", current_date, flush=True)
 
             for record in self.records:
                 if record["date"] == current_date:

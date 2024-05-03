@@ -12,6 +12,7 @@ def checklist_records_dashboard_page_view():
     leaf_colors_chart_data = dumps(
         data["days_count_by_leaf_color_and_plant"], ensure_ascii=False
     )
+    plants = dumps(data["plants"], ensure_ascii=False)
 
     print(dumps(leaf_appearences_chart_data), flush=True)
 
@@ -19,4 +20,5 @@ def checklist_records_dashboard_page_view():
         "pages/checklist_records_dashboard/index.html",
         leaf_appearences_chart_data=leaf_appearences_chart_data,
         leaf_colors_chart_data=leaf_colors_chart_data,
+        plants=plants,
     )

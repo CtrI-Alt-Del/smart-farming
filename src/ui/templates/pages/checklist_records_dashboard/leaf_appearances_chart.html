@@ -1,0 +1,37 @@
+
+<div
+  class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+
+  <div class="flex justify-between items-start w-full">
+    <div class="flex-col items-center">
+      <div class="flex items-center mb-1">
+        <h2
+          class="text-xl font-bold leading-none text-gray-900 dark:text-white me-1">
+          Aspecto da planta x Dias
+        </h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- Line Chart -->
+  <div class="py-6" id="pie-chart"></div>
+
+  <div
+    class="grid items-center justify-between grid-cols-1 border-t border-gray-200 dark:border-gray-700">
+    <div class="flex items-center justify-between pt-5">
+      <div>
+        <label
+          for="days"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Período</label>
+        <select
+          data-soil-humidity-chart="select"
+          class="select">
+          <option value="7 days">7 dias</option>
+          <option value="30 days">30 dias</option>
+          <option value="90 days">90 dias</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+</div>

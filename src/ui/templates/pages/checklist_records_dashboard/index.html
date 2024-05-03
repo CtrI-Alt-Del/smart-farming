@@ -2,19 +2,26 @@
 {% from 'components/title.html' import title %}
 
 {% block dashboard_content %}
-  {{ title('Registro de Checklist') }}
+{{ title('Registro de Checklist') }}
 
-  <input type="text" data-leaf-appearances-chart="data" value="{{ leaf_appearences_chart_data }}" hidden />
+<input type="text" data-leaf-appearances-chart="data"
+  value="{{ leaf_appearences_chart_data }}" hidden />
 
-  <input type="text" data-leaf-colors-chart="data" value="{{ leaf_colors_chart_data }}" hidden />
+<input type="text" data-leaf-colors-chart="data"
+  value="{{ leaf_colors_chart_data }}" hidden />
 
-  <div class=" grid-cols-2 pt-5 pb-5 gap-9 w-full ">
-    {% include '/pages/checklist_records_dashboard/plant_growth_chart.html' %}
-  </div>
+<div class=" grid-cols-2 pt-5 pb-5 gap-9 w-full ">
+  {% include '/pages/checklist_records_dashboard/leaf_appearances_chart.html' %}
+</div>
 
-  <script src="{{ url_for('static', filename='scripts/leaf_appearances_chart.js') }}"></script>
+{% include '/pages/checklist_records_dashboard/plant_growth_chart.html' %}
 
-  <script src="{{ url_for('static', filename='scripts/leaf_colors_chart.js') }}"></script>
+<script
+  src="{{ url_for('static', filename='scripts/leaf_appearances_chart.js') }}"></script>
 
-  <script src="{{ url_for('static', filename='scripts/plant_growth_chart.js') }}"></script>
+<script
+  src="{{ url_for('static', filename='scripts/leaf_colors_chart.js') }}"></script>
+
+<script
+  src="{{ url_for('static', filename='scripts/plant_growth_chart.js') }}"></script>
 {% endblock %}

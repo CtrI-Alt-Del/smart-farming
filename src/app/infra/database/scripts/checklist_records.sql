@@ -1,4 +1,4 @@
--- Active: 1713835984566@@127.0.0.1@3306@smart-farming
+-- Active: 1712918435172@@127.0.0.1@3306@smart_farming
 DROP TABLE IF EXISTS checklist_records;
 
 INSERT INTO checklist_records (
@@ -66,7 +66,7 @@ SELECT * FROM checklist_records;
 SELECT *, P.id AS plant_id, P.name AS plant_name
 FROM checklist_records AS CR 
 JOIN plants AS P ON P.id = CR.plant_id
-ORDER BY created_at DESC;
+ORDER BY created_at;
 
 SELECT leaf_appearance, leaf_color, created_at 
 FROM checklist_records

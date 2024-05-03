@@ -1,5 +1,5 @@
 from core.constants import LEAF_APPEARANCES, LEAF_COLORS
-from core.commons import Error
+from core.commons import Error, Chart
 
 from infra.repositories import checklist_records_repository, plants_repository
 
@@ -27,6 +27,7 @@ class GetChecklistRecordsDashboardPageData:
 
             for plant in plants:
                 for leaf_appearance in LEAF_APPEARANCES:
+
                     for record in records:
                         if (
                             record["leaf_appearance"] == leaf_appearance
@@ -50,3 +51,14 @@ class GetChecklistRecordsDashboardPageData:
             }
         except Error as error:
             raise error
+
+    def __get_plant_growth_chart_data(self, records: list[dict]):
+        chart = Chart(records)
+
+        records_7_days = chart.filter_records_by_range_of_days(7)
+        records_30_days = chart.filter_records_by_range_of_days(30)
+        records_90_days = chart.filter_records_by_range_of_days(90)
+
+        print(records_7_days, flush=True)
+        print(records_30_days, flush=True)
+        print(records_90_days, flush=True)
