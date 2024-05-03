@@ -1,5 +1,48 @@
-document.addEventListener('DOMContentLoaded', function() {
-  var options = {
+class PlantGrowthChart {
+  constructor() {
+    const container = document.querySelector(
+      '[data-plant-growth-chart="container"]',
+    )
+
+    const select = document.querySelector(
+      '[data-plant-growth-chart="select"]',
+    )
+
+    if (container && select && typeof ApexCharts !== "undefined") {
+      const initialData = this.getSelectedData("7 days")
+      const initialDates = this.getSelectedDates("7 days")
+      const initialAverage = this.getAverage("7 days")
+
+      const chart = new ApexCharts(
+        container,
+        this.getChartOptions(initialData, initialDates),
+      )
+
+      chart.render()
+
+      this.chart = chart
+
+      select.addEventListener("change", (event) =>
+        this.handleSelectChange(event),
+      )
+
+      this.renderAverageValue(initialAverage)
+    }
+  }
+
+  handleSelectChange(event) {
+    const selectedValue = event.currentTarget.value
+
+    const data = this.getSelectedData(selectedValue)
+    const dates = this.getSelectedDates(selectedValue)
+    const average = this.getAverage(selectedValue)
+
+    this.chart.updateOptions(this.getChartOptions(data, dates))
+    this.renderAverageValue(average)
+  }
+
+  getChartOptions(data, dates) {
+    return {
       chart: {
         height: 200,
         type: "area",
@@ -18,7 +61,6 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         y: {
           show: true,
-          //THIAGO VIADO obrigado viado :).
         },
       },
       fill: {
@@ -26,8 +68,8 @@ document.addEventListener('DOMContentLoaded', function() {
         gradient: {
           opacityFrom: 0.55,
           opacityTo: 0,
-          shade: "#1C64F2",
-          gradientToColors: ["#1C64F2"],
+          shade: "#34D399",
+          gradientToColors: ["#34D399"],
         },
       },
       dataLabels: {
@@ -45,22 +87,24 @@ document.addEventListener('DOMContentLoaded', function() {
           top: 0,
         },
       },
-      series: [{
-          name: 'Indice',
-          data: [30,40,35,50,49,60,70,91,125],
-          color: "#000000"
-      }],
+      series: [
+        {
+          name: "Crescimento",
+          data: data,
+          color: "#34D399",
+        },
+      ],
       xaxis: {
-          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
-          labels: {
-            show: false,
-          },
-          axisBorder: {
-            show: false,
-          },
-          axisTicks: {
-            show: false,
-          },
+        categories: dates,
+        labels: {
+          show: false,
+        },
+        axisBorder: {
+          show: false,
+        },
+        axisTicks: {
+          show: false,
+        },
       },
       yaxis: {
         show: true,
@@ -70,11 +114,57 @@ document.addEventListener('DOMContentLoaded', function() {
         labels: {
           show: true,
           offsetX: -12,
-          
+          formatter: (value) => {
+            return `${value}%`
+          },
         },
       },
-  };
+    }
+  }
 
-  var chart = new ApexCharts(document.querySelector("#chart"), options);
-  chart.render();
-});
+  getSelectedData(selectedDaysRange) {
+    const chartDataField = document.querySelector(
+      `[data-filtered-data-chart="${selectedDaysRange}"][name="plant_growth"]`,
+    )
+
+    if (chartDataField) {
+      const data = chartDataField.value.split(";").map(Number)
+      return data
+    }
+
+    return []
+  }
+
+  getSelectedDates(selectedDaysRange) {
+    const chartDatesField = document.querySelector(
+      `[data-filtered-data-chart="${selectedDaysRange}"]`,
+    )
+
+    if (chartDatesField) {
+      const dates = chartDatesField.value.split(";")
+      return dates
+    }
+
+    return []
+  }
+
+  getAverage(selectedDaysRange) {
+    const averageValue = document.querySelector(
+      `[data-filtered-data-chart="${selectedDaysRange}"][name="plant_growth_average"]`,
+    )
+
+    return averageValue.value
+  }
+
+  renderAverageValue(value) {
+    const average = document.querySelector(
+      '[data-plant-growth-chart="average"]',
+    )
+
+    if (average) {
+      average.textContent = `${value}%`
+    }
+  }
+}
+
+window.addEventListener("load", () => new PlantGrowthChart())

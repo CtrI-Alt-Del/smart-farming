@@ -14,6 +14,57 @@
   {% include '/pages/checklist_records_dashboard/leaf_appearances_chart.html' %}
 </div>
 
+{% for days in [7, 30, 90] %}
+<div>
+  <input
+  type="text"
+  data-filtered-data-chart="{{ days }} days"
+  value="
+  {{ 
+    charts_filtered_data['{} days'.format(days)]['records']
+    | map(attribute='date') 
+    | join(';') 
+  }}"
+  hidden>
+
+  {% for attribute in ["plant_growth"] %}
+  <!--coloquei esse FOR aqui caso queiram botar mais grafico futuramente -->
+
+  <input
+    type="text"
+    data-filtered-data-chart="{{ days }} days"
+    name="{{ attribute }}_average"
+    value="
+    {{ 
+      charts_filtered_data['{} days'.format(days)]['average'][attribute]
+    }}"
+    hidden>
+
+  <input
+    type="text"
+    data-filtered-data-chart="{{ days }} days"
+    name="{{ attribute }}"
+    value="
+    {{ 
+      charts_filtered_data['{} days'.format(days)]['records']
+      | map(attribute=attribute) 
+      | join(';') 
+    }}"
+    hidden>
+
+  {% endfor %}
+
+
+
+</div>
+
+{% endfor%}
+
+
+
+
+
+
 {% include '/pages/checklist_records_dashboard/plant_growth_chart.html' %}
 
 <script

@@ -13,12 +13,16 @@ def checklist_records_dashboard_page_view():
         data["days_count_by_leaf_color_and_plant"], ensure_ascii=False
     )
     plants = dumps(data["plants"], ensure_ascii=False)
+    
+    plant_growth_data = get_checklist_dashboard_page_data.get_plant_growth_chart_data()
+    
+    
 
-    print(dumps(leaf_appearences_chart_data), flush=True)
 
     return render_template(
         "pages/checklist_records_dashboard/index.html",
         leaf_appearences_chart_data=leaf_appearences_chart_data,
         leaf_colors_chart_data=leaf_colors_chart_data,
         plants=plants,
+        charts_filtered_data = plant_growth_data
     )

@@ -2,6 +2,8 @@ from core.entities.checklist_record import CheckListRecord, Plant
 from core.commons import Datetime, Date
 from core.constants import PAGINATION
 
+from typing import List
+
 from infra.database import mysql
 
 
@@ -199,3 +201,18 @@ class ChecklistRecordsRepository:
                 id=row["plant_id"], name=row["plant_name"], hex_color=row["plant_color"]
             ),
         )
+        
+    def get_plant_growth_grouped_by_date(self) -> List[CheckListRecord]:
+        sql= """
+        SELECT
+            DATE(created_at) AS date,
+            ROUND (AVG(lai) ,1 ) AS plant_growth
+        FROM checklist_records
+        GROUP BY DATE(created_at)
+        ORDER BY DATE(created_at) ASC
+        LIMIT 500;
+        """
+        
+        rows = mysql.query(sql=sql,is_single=False)
+        
+        return rows
