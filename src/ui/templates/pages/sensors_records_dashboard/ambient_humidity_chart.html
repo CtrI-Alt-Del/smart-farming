@@ -1,41 +1,51 @@
+{% from "components/days_range_select.html" import days_range_select %}
+{% from "components/plant_select.html" import plant_select %}
+
+<input
+  data-ambient-humidity-chart="data"
+  type="text"
+  value="{{ ambient_humidity_chart_data }}"
+  hidden />
+
 <div
-    class="w-full h-full p-4 bg-white rounded-lg shadow-md dark:bg-gray-800 md:p-6 animate-fade-up animate-delay-100">
-    <div class="flex items-center justify-between">
-        <div class="flex items-center justify-center gap-1">
-            <i class="text-2xl text-blue-500 ph-bold ph-drop"></i>
-            <h2
-                class="text-2xl font-bold leading-none text-gray-900 dark:text-white">
-                Umidade do ar
-            </h2>
-        </div>
-        <p>
-            Média:
-            <span
-                data-ambient-humidity-chart="average"
-                class="font-bold">
-                0%
-            </span>
-        </p>
-
+  class="w-full h-full p-4 bg-white rounded-lg shadow-md dark:bg-gray-800 md:p-6 animate-fade-up animate-delay-100">
+  <div class="flex items-center justify-between">
+    <div class="flex items-center justify-center gap-1">
+      <i class="text-2xl text-blue-500 ph-bold ph-drop"></i>
+      <h2
+        class="text-xl font-bold leading-none text-gray-900 dark:text-white">
+        Umidade do Ar (%)
+      </h2>
     </div>
+    <p>
+      Média:
+      <span
+        data-ambient-humidity-chart="average"
+        class="font-bold">
+        0%
+      </span>
+    </p>
 
-    <div data-ambient-humidity-chart="container"></div>
+  </div>
 
-    <div
-        class="grid items-center justify-between grid-cols-1 border-t border-gray-200 dark:border-gray-700">
-        <div class="flex items-center justify-between pt-5">
-            <form class>
-                <label
-                    for="days"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Período</label>
-                <select
-                    data-ambient-humidity-chart="select"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option value="7 days" selected>7 dias</option>
-                    <option value="30 days">30 dias</option>
-                    <option value="90 days">90 dias</option>
-                </select>
-            </form>
-        </div>
-    </div>
+  <div data-ambient-humidity-chart="container"></div>
+
+  <div
+    class="flex items-center gap-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+    {{
+    days_range_select(
+    id="ambient-humidity-chart-days-range-select",
+    days_ranges=days_ranges,
+    attributes="data-ambient-humidity-chart=days-range-select"
+    )
+    }}
+
+    {{
+    plant_select(
+    id="ambient-humidity-chart-plant-select",
+    plants=plants,
+    attributes="data-ambient-humidity-chart=plant-select"
+    )
+    }}
+  </div>
 </div>

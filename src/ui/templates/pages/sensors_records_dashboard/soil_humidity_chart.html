@@ -1,42 +1,51 @@
+{% from "components/days_range_select.html" import days_range_select %}
+{% from "components/plant_select.html" import plant_select %}
+
+<input
+  data-soil-humidity-chart="data"
+  type="text"
+  value="{{ soil_humidity_chart_data }}"
+  hidden />
+
 <div
-    class="w-full h-full p-4 bg-white rounded-lg shadow-md dark:bg-gray-800 md:p-6 animate-fade-up animate-delay-100">
-    <div class="flex items-center justify-between">
-        <div class="flex items-center justify-center gap-1">
-            <i
-                class="text-2xl text-green-500 ph-bold ph-drop-half-bottom p"></i>
-            <h2
-                class="text-2xl font-bold leading-none text-gray-900  dark:text-white">
-                Umidade do solo
-            </h2>
-        </div>
-        <p>
-            Média:
-            <span
-                data-soil-humidity-chart="average"
-                class="font-bold">
-                0%
-            </span>
-        </p>
-
+  class="w-full h-full p-4 bg-white rounded-lg shadow-md dark:bg-gray-800 md:p-6 animate-fade-up animate-delay-100">
+  <div class="flex items-center justify-between">
+    <div class="flex items-center justify-center gap-1">
+      <i class="text-2xl text-green-500 ph-bold ph-drop-half-bottom"></i>
+      <h2
+        class="text-xl font-bold leading-none text-gray-900 dark:text-white">
+        Umidade do Solo (%)
+      </h2>
     </div>
+    <p>
+      Média:
+      <span
+        data-soil-humidity-chart="average"
+        class="font-bold">
+        0%
+      </span>
+    </p>
 
-    <div data-soil-humidity-chart="container"></div>
+  </div>
 
-    <div
-        class="grid items-center justify-between grid-cols-1 border-t border-gray-200 dark:border-gray-700">
-        <div class="flex items-center justify-between pt-5">
-            <div>
-                <label
-                    for="days"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Período</label>
-                <select
-                    data-soil-humidity-chart="select"
-                    class="select">
-                    <option value="7 days">7 dias</option>
-                    <option value="30 days">30 dias</option>
-                    <option value="90 days">90 dias</option>
-                </select>
-            </div>
-        </div>
-    </div>
+  <div data-soil-humidity-chart="container"></div>
+
+  <div
+    class="flex items-center gap-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+    {{
+    days_range_select(
+    id="soil-humidity-chart-days-range-select",
+    days_ranges=days_ranges,
+    attributes="data-soil-humidity-chart=days-range-select"
+    )
+    }}
+
+    {{
+    plant_select(
+    id="soil-humidity-chart-plant-select",
+    plants=plants,
+    attributes="data-soil-humidity-chart=plant-select"
+    )
+    }}
+  </div>
 </div>
