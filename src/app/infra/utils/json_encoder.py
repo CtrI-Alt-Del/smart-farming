@@ -5,5 +5,5 @@ from decimal import Decimal
 class JSONEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, Decimal):
-            return int(obj)
+            return float(obj)
         return super().default(obj)
