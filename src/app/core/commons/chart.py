@@ -17,7 +17,7 @@ class Chart:
         last_date = last_record["date"]
         data = []
 
-        for day in range(days_range, -1, -1):
+        for day in range(days_range + 1, -1, -1):
             current_date = last_date - timedelta(days=day)
 
             for record in self.records:
