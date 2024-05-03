@@ -2,6 +2,7 @@
 
 {% from "components/modal.html" import modal %}
 {% from "components/button.html" import button %}
+{% from "components/plant_select.html" import plant_select %}
 {% from "components/loading.html" import loading %}
 
 {% block dashboard_content %}
@@ -49,8 +50,12 @@
         data-pagination="form"
         data-query-param="hx-get"
         id="filter-checklist-records-form">
-
-        {% include "components/plant_select.html" %}
+        {{
+        plant_select(
+        id="plant-select",
+        plants=plants,
+        )
+        }}
 
         <input data-pagination="input" type="text" hidden>
       </form>
