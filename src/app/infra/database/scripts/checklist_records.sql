@@ -1,4 +1,4 @@
--- Active: 1712918435172@@127.0.0.1@3306@smart_farming
+-- Active: 1713899386704@@127.0.0.1@3306@smart-farming
 DROP TABLE IF EXISTS checklist_records;
 
 INSERT INTO checklist_records (
@@ -71,5 +71,9 @@ ORDER BY created_at;
 SELECT leaf_appearance, leaf_color, created_at 
 FROM checklist_records
 ORDER BY created_at;  
+
+SELECT lai, created_at, plant_id
+FROM checklist_records
+ORDER BY created_at ASC
 
 DELETE FROM checklist_records;
