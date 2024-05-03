@@ -125,7 +125,7 @@ class ChecklistRecordsRepository:
             sql="""
             SELECT leaf_appearance, leaf_color, created_at, plant_id
             FROM checklist_records
-            ORDER BY created_at
+            ORDER BY created_at DESC
             """,
             is_single=False,
         )

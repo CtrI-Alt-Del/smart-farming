@@ -13,12 +13,12 @@ class Chart:
         for day in range(days_range, -1, -1):
             current_date = last_date - timedelta(days=day)
 
-            for sensors_record in self.records:
-                if sensors_record["date"] == current_date:
+            for record in self.records:
+                if record["date"] == current_date:
                     data.append(
                         {
-                            **sensors_record,
-                            "date": sensors_record["date"].strftime("%d/%m/%Y"),
+                            **record,
+                            "date": record["date"].strftime("%d/%m/%Y"),
                         }
                     )
 
