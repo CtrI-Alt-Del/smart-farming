@@ -1,6 +1,5 @@
+from infra.constants import MYSQL_TABLES
 from .mysql import MySQL
-
-from infra.constants.mysql_tables import MYSQL_TABLES
 
 mysql = MySQL()
 

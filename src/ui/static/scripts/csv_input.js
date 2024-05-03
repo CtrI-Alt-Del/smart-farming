@@ -7,26 +7,43 @@ class CsvInput {
     )
 
     if (input && submitIcon && submitButton) {
+      this.submitButton = submitButton
+      this.submitIcon = submitIcon
+      this.input = input
+
       input.addEventListener("change", (event) =>
         this.handleInputChange(event, submitIcon),
       )
 
       submitButton.addEventListener("click", () =>
-        this.handleSubmitButtonClick(submitButton, submitIcon),
+        this.handleSubmitButtonClick(),
       )
     }
   }
 
-  handleInputChange(event, submitIcon) {
+  showSubmitButton() {
+    this.submitIcon.classList.remove("hidden")
+    this.submitIcon.classList.add("flex")
+  }
+
+  hideSubmitButton() {
+    this.submitIcon.classList.add("hidden")
+    this.submitIcon.classList.remove("flex")
+  }
+
+  handleInputChange(event) {
     const hasFile = event.currentTarget.value
 
     if (hasFile) {
-      submitIcon.classList.remove("hidden")
-      submitIcon.classList.add("flex")
+      this.showSubmitButton()
     } else {
-      submitIcon.classList.add("hidden")
-      submitIcon.classList.remove("flex")
+      this.hideSubmitButton()
     }
+  }
+
+  handleSubmitButtonClick() {
+    this.hideSubmitButton()
+    this.input.value = null
   }
 }
 

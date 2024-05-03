@@ -43,6 +43,8 @@ class CreateChecklistRecordByForm:
                 plant=plant,
             )
 
+            print("request", request["report"], flush=True)
+
             checklist_records_repository.create_checklist_record(checklist_record)
 
         except Error as error:

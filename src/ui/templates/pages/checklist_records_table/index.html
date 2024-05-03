@@ -55,10 +55,11 @@
         <input data-pagination="input" type="text" hidden>
       </form>
 
-      {{ button(
+      {{
+      button(
       type="submit",
       title="Deletar registro(s)",
-      attributes="data-table=delete-button form=delete-checklist-records-form",
+      attributes="id=delete-sensors-record-button data-table=delete-button form=delete-checklist-records-form",
       class="bg-red-700 animate-pulse hidden",
       )
       }}

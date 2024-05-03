@@ -6,6 +6,9 @@ from .get_checklist_records_table_page_data import GetChecklistRecordsTablePageD
 from .get_checklist_records_dashboard_page_data import (
     GetChecklistRecordsDashboardPageData,
 )
+from .get_checklist_records_dashboard_page_data import (
+    GetChecklistRecordsDashboardPageData,
+)
 
 create_checklist_records_by_csv_file = CreateChecklistRecordsByCsvFile()
 create_checklist_record_by_form = CreateChecklistRecordByForm()

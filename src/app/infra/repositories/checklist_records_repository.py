@@ -147,6 +147,21 @@ class ChecklistRecordsRepository:
 
         return result["count"]
 
+    def get_ordered_by_date_leaf_appearance_and_leaf_color_records(self):
+        rows = mysql.query(
+            sql="SELECT leaf_appearance, leaf_color, created_at FROM checklist_records",
+            is_single=False,
+        )
+
+        if len(rows) == 0:
+            return []
+
+        for row in rows:
+            row["date"] = row["created_at"].date()
+            del row["created_at"]
+
+        return rows
+
     def get_checklist_record_by_id(self, id: str) -> CheckListRecord | None:
         row = mysql.query(
             sql="""

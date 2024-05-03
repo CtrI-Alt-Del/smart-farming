@@ -24,7 +24,7 @@ def update_checklist_record_view(id: str):
                 "air_humidity": checklist_record_form.air_humidity.data,
                 "lai": checklist_record_form.lai.data,
                 "created_at": checklist_record_form.date.data,
-                "report": checklist_record_form.plantation_type.data,
+                "report": checklist_record_form.report.data,
                 "soil_humidity": checklist_record_form.soil_humidity.data,
                 "soil_ph": checklist_record_form.soil_ph.data,
                 "water_consumption": checklist_record_form.water_consumption.data,
