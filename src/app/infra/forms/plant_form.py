@@ -1,18 +1,18 @@
 from flask_wtf import FlaskForm
 
-from wtforms import (
-    SubmitField,
-    StringField,
-)
-from wtforms.validators import DataRequired, Regexp
+from wtforms import StringField, ColorField
+from wtforms.validators import DataRequired
 
 
 class PlantForm(FlaskForm):
     def __init__(self, formdata=None, **kwargs):
         super().__init__(formdata, **kwargs)
 
-    plant_name = StringField("Nome da planta", validators=[DataRequired()])
-    hex_color = StringField(
-        "Cor", validators=[Regexp(r"^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$")]
+    name = StringField(
+        "Nome da planta",
+        validators=[DataRequired()],
+        render_kw={"data-color-picker": "name"},
     )
-    submit_button = SubmitField("Enviar")
+    hex_color = ColorField(
+        "Cor", validators=[DataRequired()], render_kw={"data-color-picker": "control"}
+    )

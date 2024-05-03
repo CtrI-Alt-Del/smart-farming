@@ -1,18 +1,33 @@
 {% from "components/label.html" import label %}
 
-<form class="grid place-content-center h-50">
+<form
+  class="grid place-content-center h-50"
+  hx-post="{{ url_for('plants_views.create_plant_by_form_view') }}"
+  hx-target="#plants"
+  hx-target-error
+  hx-swap="innerHTML"
+  enctype="multipart/form-data"
+  data-query-param="hx-post">
+  {{ create_plant_form.csrf_token }}
   <div class="flex flex-col place-items-center">
     <div class="input-container mt-5">
-      <label>Nome da Planta
-        <input type="text" name="name" id="name" class="input-field" placeholder="Alface">
-      </label>
+      {{
+      label(
+      id="create-plant-name",
+      title=create_plant_form.name.label,
+      icon="plant"
+      )
+      }}
+      {{ create_plant_form.name(id="create-plant-name", class="input-field") }}
     </div>
     <div class="flex flex-col input-container gap-2 place-items-center">
       <button id="burronNativeColor" type="button"
-      class="relative flex justify-center items-center gap-2 rounded-lg bg-blue-600 px-3 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg">
-      <input id="nativeColorPicker1" type="color" value="#00A803" class="absolute w-full h-full z-50 opacity-0 left-0 top-0"/>
-      <i class="text-2xl ph ph-plant"></i>
-      <p id="exemple-text">Exemplo</p>
+        class="relative flex justify-center items-center gap-2 rounded-lg bg-blue-600 px-3 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg">
+
+        {{ create_plant_form.hex_color(class="") }}
+
+        <i class="text-2xl ph ph-plant"></i>
+        <p data-color-input="preview">Exemplo</p>
       </button>
     </div>
   </div>
@@ -29,10 +44,10 @@
 </form>
 
 <script>
-  const colorPicker = document.getElementById("nativeColorPicker1");
-  const changeColorBtn = document.getElementById("burronNativeColor");
-  const plantInput = document.querySelector(".input-field");
-  const exempleText = document.getElementById("exemple-text");
+  const colorPicker = document.querySelectorAll("[data-color-picker='control']");
+  const changeColorBtn = document.querySelector("[data-color-picker='button']");
+  const plantInput = document.querySelector("[data-color-picker='name']");
+  const exempleText = document.querySelector("[data-color-picker='preview']");
 
   changeColorBtn.style.backgroundColor = colorPicker.value;
   colorPicker.addEventListener("input", () => {

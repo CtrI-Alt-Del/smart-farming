@@ -1,4 +1,4 @@
--- Active: 1712918435172@@127.0.0.1@3306@smart_farming
+-- Active: 1714396197562@@127.0.0.1@3306
 CREATE DATABASE IF NOT EXISTS `smart-farming`;
 
 USE DATABASE `smart-farming`;

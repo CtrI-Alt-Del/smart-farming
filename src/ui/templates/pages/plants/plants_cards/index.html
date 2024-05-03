@@ -1,0 +1,7 @@
+<div
+    id="plants"
+    class="grid w-full grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-8 xl:grid-cols-4 xl:gap-3 ">
+    {% for plant in plants %}
+    {% include "pages/plants/plants_cards/card.html" %}
+    {% endfor %}
+</div>
