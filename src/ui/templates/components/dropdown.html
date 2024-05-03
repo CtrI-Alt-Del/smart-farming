@@ -1,0 +1,22 @@
+{% macro dropdown(id, title) %}
+
+<button
+  id="{{ id }}-button"
+  data-dropdown-toggle="{{ id }}"
+  data-dropdown-placement="bottom"
+  type="button"
+  class="inline-flex items-center justify-center p-2 bg-gray-100 text-gray-500 font-bold dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm">
+  {{ title }}
+</button>
+
+<div
+  id="{{ id }}"
+  class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700">
+  <ul
+    class="space-y-3 p-3 text-sm text-gray-700 dark:text-gray-200"
+    aria-labelledby="{{ id }}-button">
+    {{ caller() }}
+  </ul>
+</div>
+
+{% endmacro %}
