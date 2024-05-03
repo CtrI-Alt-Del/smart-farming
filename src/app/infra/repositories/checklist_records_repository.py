@@ -142,19 +142,21 @@ class ChecklistRecordsRepository:
     def get_lai_records(self):
         rows = mysql.query(
             sql="""
-            SELECT lai, created_at, plant_id
+            SELECT 
+                DATE(created_at) AS date,
+                ROUND(AVG(lai), 1) AS lai,
+                plant_id
             FROM checklist_records
-            ORDER BY created_at ASC
+            GROUP BY DATE(created_at), plant_id
+            ORDER BY date ASC;
             """,
             is_single=False,
         )
 
+        print(rows, flush=True)
+
         if len(rows) == 0:
             return []
-
-        for row in rows:
-            row["date"] = row["created_at"].date()
-            del row["created_at"]
 
         return rows
 

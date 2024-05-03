@@ -72,8 +72,16 @@ SELECT leaf_appearance, leaf_color, created_at
 FROM checklist_records
 ORDER BY created_at;  
 
+
 SELECT lai, created_at, plant_id
 FROM checklist_records
-ORDER BY created_at ASC
+ORDER BY created_at ASC;
 
+SELECT 
+  DATE(created_at) AS date,
+  ROUND(AVG(lai), 1) AS avg_lai,
+  plant_id
+FROM checklist_records
+GROUP BY DATE(created_at), plant_id
+ORDER BY date ASC;
 DELETE FROM checklist_records;
