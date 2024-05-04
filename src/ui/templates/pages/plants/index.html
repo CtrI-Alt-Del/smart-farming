@@ -7,7 +7,7 @@
 {% block dashboard_content %}
 
 {% from "components/modal.html" import modal %}
-<div class="pb-12 bg-white rounded-md w-full">
+<div class="w-full pb-12 bg-white rounded-md">
 
   {{ title("Plantas") }}
 
@@ -20,6 +20,7 @@
 
     {% call modal(id="create-plant-modal", class="h-96") %}
     {% include "pages/plants/create_plant_form/index.html" %}
+    <script src="{{url_for('static', filename='/scripts/plant_color_name_change.js')}}"></script>
     {% endcall %}
   </div>
 
@@ -37,7 +38,7 @@
 
   <div
     id="plants-cards"
-    class="mt-12 w-full">
+    class="w-full mt-12">
     {% include "pages/plants/plants_cards/index.html" %}
   </div>
 
