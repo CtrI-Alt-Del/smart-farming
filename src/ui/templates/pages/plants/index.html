@@ -11,20 +11,28 @@
   {{ title("Plantas") }}
 
   <div class="mt-5">
-    {{ button(
+    {{
+    button(
     title="Adicionar planta",
-    attributes="data-modal-target=create-plant-modal data-modal-toggle=create-plants-modal")
+    attributes="data-modal-target=create-plant-modal data-modal-toggle=create-plant-modal")
     }}
-    {% call modal(id="create-plants-modal") %}
+
+    {% call modal(id="create-plant-modal") %}
     {% include "pages/plants/create_plant_form/index.html" %}
     {% endcall %}
   </div>
+
+  {% call modal(id="update-plant-modal") %}
+  <div id="update-plant-form"></div>
+  {% endcall %}
 
   <div class="w-96">
     {% include "components/search.html" %}
   </div>
 
-  <div id="plants-cards" class="mt-12">
+  <div
+    id="plants-cards"
+    class="mt-12">
     {% if plants | length > 0 %}
     {% include "pages/plants/plants_cards/index.html" %}
     {% else %}
