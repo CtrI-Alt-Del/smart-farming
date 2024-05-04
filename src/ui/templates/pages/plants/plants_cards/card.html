@@ -4,9 +4,18 @@
 %}
 
 <div
+  id="plant-{{ plant.id }}"
+  data-loading-class="animate-pulse animate-duration-500"
   class="relative flex items-center justify-start h-20 border rounded group bg-slate-100">
   <div class="absolute bottom-0 right-0 flex items-center justify-center">
-    <button class="hidden bg-transparent rounded-full group-hover:block">
+    <button
+      hx-get="{{ url_for('plants_views.update_plant_form_view', id=plant.id) }}"
+      hx-target="#update-plant-form"
+      hx-swap="innerHTML"
+      hx-trigger="click"
+      _="on click trigger click on #update-plant-modal-trigger"
+      data-hyperscript="process"
+      class="hidden bg-transparent rounded-full group-hover:block">
       <i
         class="text-[20px] text-zinc-400 hover:text-blue-500 ph-light ph-pencil"></i>
     </button>
@@ -18,7 +27,7 @@
   <div
     {{ card_style }}
     class="w-[90px] h-full flex justify-center items-center rounded-s place-content-center">
-    <i class="text-4xl text-slate-800 ph ph-plant"></i>
+    <i class="text-4xl text-gray-100 ph ph-plant"></i>
   </div>
   <h2 class="ml-[20%] font-bold">{{ plant.name }}</h2>
 </div>
