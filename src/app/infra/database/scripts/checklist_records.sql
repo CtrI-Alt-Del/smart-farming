@@ -1,4 +1,4 @@
--- Active: 1713899386704@@127.0.0.1@3306@smart-farming
+-- Active: 1712258180714@@127.0.0.1@3306@smart-farming
 DROP TABLE IF EXISTS checklist_records;
 
 INSERT INTO checklist_records (
@@ -24,11 +24,11 @@ INSERT INTO checklist_records (
   50000.0, -- illuminance
   3.5, -- lai
   'SAUDAVEL', -- leaf_appearance
-  'VERDE CLARO DOMINANTE', -- leaf_color
-  'PLANTIO INTERNO(FATEC)', -- plantation_type
+  'VERDE CLARO PREDOMINANTE', -- leaf_color
+  'PLANTIO INTERNO (FATEC)', -- plantation_type
   CURDATE(), -- fertilizer_expiration_date
   'Relatório de checagem', -- report
-  '1ded0f79-01a5-11ef-9b63-0242ac1b0002' -- plant_id
+  '4544afe3-0661-11ef-9512-0242ac140002' -- plant_id
 );
 
 INSERT INTO checklist_records (
