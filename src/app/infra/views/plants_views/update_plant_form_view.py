@@ -14,6 +14,7 @@ def update_plant_form_view(id: str):
         return render_template(
             "pages/plants/update_plant_form/index.html",
             update_plant_form=plant_form,
+            plant_id=plant.id,
         )
     except Error as error:
         print(plant_form.errors, flush=True)

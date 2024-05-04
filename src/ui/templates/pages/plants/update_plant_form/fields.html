@@ -1,0 +1,45 @@
+{{ update_plant_form.csrf_token }}
+
+<div class="input-container mt-10">
+  {{
+  label(
+  id="update-plant-name",
+  title=update_plant_form.name.label,
+  icon="plant"
+  )
+  }}
+  {{ update_plant_form.name(id="update-plant-name", class="input-field") }}
+</div>
+
+<div class="input-container flex flex-col mt-6 gap-2 place-items-center">
+  <label
+    id="burronNativeColor"
+    for="update-plant-form-hex-color"
+    class="relative flex justify-center items-center gap-2 rounded-lg bg-blue-600 px-3 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg">
+
+    {{
+    update_plant_form.hex_color(
+    id="update-plant-form-hex-color",
+    class="absolute invisible")
+    }}
+
+    <i class="text-2xl ph ph-plant"></i>
+    <p data-color-input="preview">Nome da planta</p>
+  </label>
+</div>
+
+<script>
+  const colorPicker = document.querySelectorAll("[data-color-picker='control']");
+  const changeColorBtn = document.querySelector("[data-color-picker='button']");
+  const plantInput = document.querySelector("[data-color-picker='name']");
+  const exempleText = document.querySelector("[data-color-picker='preview']");
+
+  changeColorBtn.style.backgroundColor = colorPicker.value;
+  colorPicker.addEventListener("input", () => {
+    changeColorBtn.style.backgroundColor = colorPicker.value;
+  });
+  plantInput.addEventListener("input", (text) => {
+    exempleText.innerHTML = plantInput.value
+    console.log(exempleText)
+  })
+</script>
