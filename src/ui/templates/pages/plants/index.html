@@ -2,11 +2,12 @@
 
 {% from "components/title.html" import title %}
 {% from "components/button.html" import button %}
+{% from "components/loading.html" import loading %}
 
 {% block dashboard_content %}
 
 {% from "components/modal.html" import modal %}
-<div class="pb-12 bg-white rounded-md ">
+<div class="pb-12 bg-white rounded-md w-full">
 
   {{ title("Plantas") }}
 
@@ -17,13 +18,17 @@
     attributes="data-modal-target=create-plant-modal data-modal-toggle=create-plant-modal")
     }}
 
-    {% call modal(id="create-plant-modal") %}
+    {% call modal(id="create-plant-modal", class="h-96") %}
     {% include "pages/plants/create_plant_form/index.html" %}
     {% endcall %}
   </div>
 
   {% call modal(id="update-plant-modal") %}
-  <div id="update-plant-form"></div>
+  <div id="update-plant-form" class="w-full">
+    <div class="grid place-content-center w-full h-[32rem]">
+      {{ loading("w-24 h-24") }}
+    </div>
+  </div>
   {% endcall %}
 
   <div class="w-96">
@@ -32,14 +37,8 @@
 
   <div
     id="plants-cards"
-    class="mt-12">
-    {% if plants | length > 0 %}
+    class="mt-12 w-full">
     {% include "pages/plants/plants_cards/index.html" %}
-    {% else %}
-    <p class="text-center text-xl tracking-wide text-gray-900 font-semibold">
-      Nenhuma planta encontrada 😢.
-    </p>
-    {% endif %}
   </div>
 
 </div>
