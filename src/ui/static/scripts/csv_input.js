@@ -43,7 +43,9 @@ class CsvInput {
 
   handleSubmitButtonClick() {
     this.hideSubmitButton()
-    this.input.value = null
+    setTimeout(() => {
+      this.input.value = null
+    }, 1000)
   }
 }
 
