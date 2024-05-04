@@ -69,9 +69,6 @@ class LineChart:
             total = sum([record for record in values])
             average = total / len(values)
 
-            # if days_range == 7:
-            #     print(dates, flush=True)
-
             chart_data[plant.id][days_range_key]["values"] = values
             chart_data[plant.id][days_range_key]["average"] = average
             chart_data[plant.id][days_range_key]["dates"] = dates
