@@ -1,6 +1,6 @@
 {% extends "layouts/dashboard/index.html" %}
-{% from 'components/title.html' import title %}
 
+{% from "components/title.html" import title %}
 {% from "components/button.html" import button %}
 
 {% block dashboard_content %}
@@ -16,16 +16,22 @@
     attributes="data-modal-target=create-plant-modal data-modal-toggle=create-plants-modal")
     }}
     {% call modal(id="create-plants-modal") %}
-    {% include 'pages/plants/create_plant_form/index.html' %}
+    {% include "pages/plants/create_plant_form/index.html" %}
     {% endcall %}
   </div>
 
   <div class="w-96">
-    {% include 'components/search.html' %}
+    {% include "components/search.html" %}
   </div>
 
   <div id="plants-cards" class="mt-12">
-    {% include 'pages/plants/plants_cards/index.html' %}
+    {% if plants | length > 0 %}
+    {% include "pages/plants/plants_cards/index.html" %}
+    {% else %}
+    <p class="text-center text-xl tracking-wide text-gray-900 font-semibold">
+      Nenhuma planta encontrada 😢.
+    </p>
+    {% endif %}
   </div>
 
 </div>
