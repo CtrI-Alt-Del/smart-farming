@@ -3,20 +3,20 @@ class LeafColorsChart {
     const container = document.querySelector(
       '[data-leaf-colors-chart="container"]',
     )
-    const dataField = document.querySelector('[data-leaf-colors-chart="data"]')
+    const chartData = document.querySelector('[data-leaf-colors-chart="data"]')
     const select = document.querySelector('[data-leaf-colors-chart="select"]')
     const legendColors = document.querySelector(
       '[data-leaf-colors-chart="legend-colors"]',
     )
 
     if (
-      dataField &&
+      chartData &&
       select &&
       legendColors &&
       typeof ApexCharts !== "undefined"
     ) {
       this.legendColors = legendColors.value.split(";")
-      this.data = JSON.parse(dataField.value)
+      this.data = JSON.parse(chartData.value)
       const initialData = this.getSelectedData("default")
 
       const chart = new ApexCharts(container, this.getChartOptions(initialData))
@@ -118,6 +118,9 @@ class LeafColorsChart {
       const defaultValues = Object.values(this.data)[0]
       return defaultValues
     }
+
+    console.log({ plantId })
+    console.log(this.data)
 
     return this.data[plantId]
   }

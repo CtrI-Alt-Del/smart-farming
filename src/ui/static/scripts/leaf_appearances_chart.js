@@ -3,7 +3,7 @@ class LeafAppearancesChart {
     const container = document.querySelector(
       '[data-leaf-appearances-chart="container"]',
     )
-    const dataField = document.querySelector(
+    const chartData = document.querySelector(
       '[data-leaf-appearances-chart="data"]',
     )
 
@@ -11,8 +11,8 @@ class LeafAppearancesChart {
       '[data-leaf-appearances-chart="select"]',
     )
 
-    if (dataField && select && typeof ApexCharts !== "undefined") {
-      this.data = JSON.parse(dataField.value)
+    if (chartData && select && typeof ApexCharts !== "undefined") {
+      this.data = JSON.parse(chartData.value)
       const initialData = this.getSelectedData("default")
 
       const chart = new ApexCharts(container, this.getChartOptions(initialData))
