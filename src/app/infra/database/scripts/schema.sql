@@ -62,3 +62,10 @@ CREATE TABLE IF NOT EXISTS checklist_records (
   plant_id CHAR(36) DEFAULT '4544afe3-0661-11ef-9512-0242ac140002',
   FOREIGN KEY (plant_id) REFERENCES plants(id) ON DELETE CASCADE
 );
+
+-- DROP TABLES
+
+DROP TABLE IF EXISTS checklist_records;
+DROP TABLE IF EXISTS sensors_records;
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS plants;
