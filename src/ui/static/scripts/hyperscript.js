@@ -6,9 +6,7 @@ class Hyperscript {
   }
 
   precessElement(element) {
-    const elementsToBeProcessed = element.querySelectorAll(
-      '[data-hyperscript="process"]',
-    )
+    const elementsToBeProcessed = element.querySelectorAll("[_]")
 
     for (const element of elementsToBeProcessed) {
       _hyperscript.processNode(element)
