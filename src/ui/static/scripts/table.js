@@ -17,6 +17,13 @@ class Table {
     })
 
     observer.observe(container, { childList: true })
+
+    const updateRowEvent = new Event("updateRow")
+    document.dispatchEvent(updateRowEvent)
+
+    container.addEventListener("updateRow", () =>
+      this.addEventListenerToCheckboxes(container),
+    )
   }
 
   addEventListenerToCheckboxes(container) {

@@ -1,9 +1,8 @@
-{% set plant_style =
-"style=background-color:{};".format(sensors_record.plant.hex_color)
-%}
+{% from "components/plant_badge.html" import plant_badge %}
 
 <tr
   id="sensors-record-{{ sensors_record.id }}"
+  _="on load trigger updateRow"
   data-loading-class="hidden"
   class="group bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
   <td class="relative w-4 p-4">
@@ -47,11 +46,7 @@
     </time>
   </td>
   <td class="py-4">
-    <span
-      {{ plant_style }}
-      class="px-2 py-1 font-semibold text-black rounded-md w-max">
-      {{ sensors_record.plant.name }}
-    </span>
+    {{ plant_badge(sensors_record.plant) }}
   </td>
   <td class="py-4">
     {{ sensors_record.soil_humidity }}
