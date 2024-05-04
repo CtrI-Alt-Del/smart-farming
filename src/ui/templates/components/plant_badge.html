@@ -1,0 +1,11 @@
+{% macro plant_badge(plant) %}
+
+{% set badge_style = "style=background-color:{};".format(plant.hex_color) %}
+
+<span
+  {{ badge_style }}
+  class="px-2 py-1 font-medium text-gray-50 rounded-md w-max">
+  {{ plant.name }}
+</span>
+
+{% endmacro %}
