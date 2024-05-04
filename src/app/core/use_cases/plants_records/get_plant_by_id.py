@@ -6,7 +6,7 @@ class GetPlantById:
     def execute(self, id: str) -> None:
         try:
             if not isinstance(id, str):
-                raise Error("Planta não econtrada")
+                raise Error("Planta não econtrada", status_code=404)
 
             plant = plants_repository.get_plant_by_id(id)
             return plant

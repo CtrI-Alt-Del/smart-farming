@@ -39,7 +39,7 @@ def sensors_records_dashboard_page_view():
         flash(error.ui_message, "error")
         return redirect(
             url_for(
-                "sensors_records_views.plants_page_view"
+                "plants_views.plants_page_view"
                 if "planta" in error.ui_message.lower()
                 else "sensors_records_views.sensors_records_table_page_view"
             )

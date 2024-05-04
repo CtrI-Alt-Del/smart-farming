@@ -45,5 +45,9 @@ def checklist_records_dashboard_page_view():
     except Error as error:
         flash(error.ui_message, "error")
         return redirect(
-            url_for("checklist_records_views.checklist_records_table_page_view")
+            url_for(
+                "plants_views.plants_page_view"
+                if "planta" in error.ui_message.lower()
+                else "checklist_records_views.checklist_records_table_page_view"
+            )
         )

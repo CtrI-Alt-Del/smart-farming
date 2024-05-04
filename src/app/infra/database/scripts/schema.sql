@@ -1,4 +1,4 @@
--- Active: 1714396197562@@127.0.0.1@3306
+-- Active: 1713899386704@@127.0.0.1@3306@smart-farming
 CREATE DATABASE IF NOT EXISTS `smart-farming`;
 
 USE DATABASE `smart-farming`;
@@ -6,10 +6,12 @@ USE DATABASE `smart-farming`;
 CREATE TABLE IF NOT EXISTS plants (
   id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
   name VARCHAR(255) NOT NULL,
-  hex_color VARCHAR(7) NOT NULL UNIQUE
+  hex_color VARCHAR(7) NOT NULL,
+  created_at DATETIME DEFAULT (NOW()) NOT NULL
 );
 
-INSERT INTO plants (id, name, hex_color) VALUES ('4544afe3-0661-11ef-9512-0242ac140002' ,'alface','#D4F7EB');
+INSERT INTO plants (id, name, hex_color) 
+VALUES ('4544afe3-0661-11ef-9512-0242ac140002' ,'alface','#D4F7EB');
 
 CREATE TABLE IF NOT EXISTS user (
   id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
@@ -25,7 +27,7 @@ CREATE TABLE IF NOT EXISTS sensors_records (
   water_volume DECIMAL(10, 2) NOT NULL,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   plant_id CHAR(36) DEFAULT '4544afe3-0661-11ef-9512-0242ac140002',
-  FOREIGN KEY (plant_id) REFERENCES plants(id)
+  FOREIGN KEY (plant_id) REFERENCES plants(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS checklist_records (
@@ -58,5 +60,5 @@ CREATE TABLE IF NOT EXISTS checklist_records (
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   report TEXT,
   plant_id CHAR(36) DEFAULT '4544afe3-0661-11ef-9512-0242ac140002',
-  FOREIGN KEY (plant_id) REFERENCES plants(id)
+  FOREIGN KEY (plant_id) REFERENCES plants(id) ON DELETE CASCADE
 );
