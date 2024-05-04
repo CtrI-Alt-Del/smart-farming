@@ -153,8 +153,6 @@ class ChecklistRecordsRepository:
             is_single=False,
         )
 
-        print(rows, flush=True)
-
         if len(rows) == 0:
             return []
 

@@ -53,8 +53,6 @@ class UpdateSensorsRecord:
                 created_at=created_at,
             )
 
-            print(sensors_record, flush=True)
-
             sensors_records_repository.update_sensors_record_by_id(sensors_record)
 
             return sensors_record

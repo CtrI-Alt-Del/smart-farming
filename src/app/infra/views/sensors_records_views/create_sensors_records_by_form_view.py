@@ -47,5 +47,4 @@ def create_sensors_record_by_form_view():
             page_buttons_limit=PAGINATION["page_buttons_siblings_count"],
         )
     except Error as error:
-        print(sensors_record_form.errors, flush=True)
         return "ERROR", error.status_code

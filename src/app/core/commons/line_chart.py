@@ -29,9 +29,6 @@ class LineChart:
         for day in range(days_range - 1, -1, -1):
             current_date = last_date - timedelta(days=day)
 
-            if days_range == 7:
-                print(current_date, flush=True)
-
             for record in self.records:
                 if record["date"] == current_date:
                     data.append(
@@ -56,21 +53,22 @@ class LineChart:
             for plant in plants:
                 days_range_records = self.filter_records_by_range_of_days(days_range)
 
-            values = []
-            dates = []
+                values = []
+                dates = []
 
-            for record in days_range_records:
-                if record["plant_id"] == plant.id:
-                    days_range_key = f"{days_range} days"
+                for record in days_range_records:
+                    if record["plant_id"] == plant.id:
+                        dates.append(record["date"])
+                        values.append(record["value"])
 
-                    dates.append(record["date"])
-                    values.append(record["value"])
+                total = sum([record for record in values])
+                values_count = len(values)
+                average = total / len(values) if values_count > 0 else 0
 
-            total = sum([record for record in values])
-            average = total / len(values)
+                days_range_key = f"{days_range} days"
 
-            chart_data[plant.id][days_range_key]["values"] = values
-            chart_data[plant.id][days_range_key]["average"] = average
-            chart_data[plant.id][days_range_key]["dates"] = dates
+                chart_data[plant.id][days_range_key]["values"] = values
+                chart_data[plant.id][days_range_key]["average"] = average
+                chart_data[plant.id][days_range_key]["dates"] = dates
 
         return chart_data
