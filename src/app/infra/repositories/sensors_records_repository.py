@@ -1,5 +1,3 @@
-from typing import List, Dict
-
 from core.entities import SensorsRecord, Datetime, Plant
 from core.constants import PAGINATION
 
@@ -143,7 +141,7 @@ class SensorRecordsRepository:
             params=[sensors_record_id],
         )
 
-    def __get_sensors_record_entity(self, row: Dict) -> SensorsRecord:
+    def __get_sensors_record_entity(self, row: dict) -> SensorsRecord:
         if row:
             created_at = Datetime(row["created_at"])
             plant = Plant(
