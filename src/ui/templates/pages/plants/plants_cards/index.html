@@ -1,6 +1,16 @@
+
+{% if plants | length > 0 %}
+
 <div
-    class="grid w-full grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-8 xl:grid-cols-4 xl:gap-3 ">
-    {% for plant in plants %}
-    {% include "pages/plants/plants_cards/card.html" %}
-    {% endfor %}
+  class="grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-8 xl:grid-cols-4 xl:gap-3 w-full">
+  {% for plant in plants %}
+  {% include "pages/plants/plants_cards/card.html" %}
+  {% endfor %}
 </div>
+
+{% else %}
+<p class="text-center text-xl tracking-wide text-gray-900 font-semibold">
+  Nenhuma planta encontrada 😢.
+</p>
+
+{% endif %}
