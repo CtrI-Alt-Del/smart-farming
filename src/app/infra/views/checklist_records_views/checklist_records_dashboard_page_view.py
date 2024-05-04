@@ -13,9 +13,6 @@ def checklist_records_dashboard_page_view():
     try:
         data = get_checklist_dashboard_page_data.execute()
 
-        if len(data) == 0:
-            raise Error("Nenhum registro check-list encontrado", status_code=404)
-
         leaf_appearences_chart_data = dumps(
             data["days_count_by_leaf_appearance_and_plant"], ensure_ascii=False
         )
@@ -23,6 +20,8 @@ def checklist_records_dashboard_page_view():
         leaf_colors_chart_data = dumps(
             data["days_count_by_leaf_color_and_plant"], ensure_ascii=False
         )
+
+        print(leaf_appearences_chart_data, flush=True)
 
         plant_growth_chart_data = dumps(
             data["plant_growth_chart_data"], cls=JSONEncoder

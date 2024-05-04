@@ -37,35 +37,36 @@ class GetChecklistRecordsDashboardPageData:
             raise error
 
     def __get_leaf_charts_data(self, records, plants):
-        days_count_by_leaf_appearance = {
-            leaf_appearance: 0 for leaf_appearance in LEAF_APPEARANCES
-        }
         days_count_by_leaf_appearance_and_plant = {
-            plant.id: days_count_by_leaf_appearance for plant in plants
+            plant.id: {leaf_appearance: 0 for leaf_appearance in LEAF_APPEARANCES}
+            for plant in plants
         }
 
-        days_count_by_leaf_color = {leaf_color: 0 for leaf_color in LEAF_COLORS}
         days_count_by_leaf_color_and_plant = {
-            plant.id: days_count_by_leaf_color for plant in plants
+            plant.id: {leaf_color: 0 for leaf_color in LEAF_COLORS} for plant in plants
         }
 
         for plant in plants:
             for leaf_appearance in LEAF_APPEARANCES:
-
                 for record in records:
                     if (
                         record["leaf_appearance"] == leaf_appearance
                         and record["plant_id"] == plant.id
                     ):
+                        print(days_count_by_leaf_appearance_and_plant, flush=True)
                         days_count_by_leaf_appearance_and_plant[plant.id][
                             leaf_appearance
                         ] += 1
 
             for leaf_color in LEAF_COLORS:
                 for record in records:
-                    if record["leaf_color"] == leaf_color:
+                    if (
+                        record["leaf_color"] == leaf_color
+                        and record["plant_id"] == plant.id
+                    ):
                         days_count_by_leaf_color_and_plant[plant.id][leaf_color] += 1
 
+        print(days_count_by_leaf_appearance_and_plant, flush=True)
         return {
             "days_count_by_leaf_appearance_and_plant": days_count_by_leaf_appearance_and_plant,
             "days_count_by_leaf_color_and_plant": days_count_by_leaf_color_and_plant,
