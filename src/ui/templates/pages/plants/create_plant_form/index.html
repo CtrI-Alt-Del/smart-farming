@@ -9,11 +9,49 @@
   hx-swap="innerHTML"
   enctype="multipart/form-data"
   data-query-param="hx-post">
+
+  
   {{ create_plant_form.csrf_token }}
-  <div id="create-plant-form-fields" class="flex flex-col place-items-center">
-    {% include "pages/plants/create_plant_form/fields.html" %}
+
+
+  <div class="flex flex-col place-items-center">
+    <div class="mt-10 input-container">
+
+      {{
+      label(
+      id="create-plant-name",
+      title=create_plant_form.name.label,
+      icon="plant"
+      )
+      }}
+
+
+      {{ create_plant_form.name(id="create-plant-name", class="input-field") }}
+
+      
+    </div>
+    <div class="flex flex-col gap-2 mt-6 input-container place-items-center">
+      
+      <label
+        id="buttonNativeColor"
+        for="create-plant-form-hex-color"
+        class="relative flex justify-center items-center gap-2 rounded-lg bg-blue-600 px-3 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg">
+
+        {{
+        create_plant_form.hex_color(
+        id="create-plant-form-hex-color",
+        class="absolute invisible")
+        }}
+
+        <i class="text-2xl ph ph-plant"></i>
+        <p id="exempleText" data-color-input='preview'>Nome da planta</p>
+        
+      </label>
+    </div>
   </div>
   <div class="mt-10">
-    {{ modal_controls(modal_id="create-plant-modal") }}
+    {{ modal_controls(modal_id="create-plants-modal") }}
   </div>
 </form>
+
+<script src="{{url_for('static', filename='/scripts/plant_color_name_change.js')}}"></script>
