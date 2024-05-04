@@ -1,12 +1,12 @@
 from flask import request, render_template
 
-from core.use_cases.plants_records import create_plant_by_form, get_plants_page_data
+from core.use_cases.plants import create_plant_by_form, get_plants_page_data
 from core.commons import Error
 
 from infra.forms import PlantForm
 
 
-def create_plant_by_form_view():
+def create_plant_view():
     plant_form = PlantForm(request.form)
 
     try:

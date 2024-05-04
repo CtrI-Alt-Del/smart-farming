@@ -1,6 +1,6 @@
 from flask import render_template
 
-from core.use_cases.plants_records import get_plant_by_id
+from core.use_cases.plants import get_plant_by_id
 from core.commons import Error
 
 from infra.forms import PlantForm
@@ -17,5 +17,4 @@ def update_plant_form_view(id: str):
             plant_id=plant.id,
         )
     except Error as error:
-        print(plant_form.errors, flush=True)
         return "ERROR", error.status_code

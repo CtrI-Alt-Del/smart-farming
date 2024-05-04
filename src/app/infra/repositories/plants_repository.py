@@ -58,10 +58,10 @@ class PlantsRepository:
             ],
         )
 
-    def delete_plant_by_id(self, plant_id: str):
+    def delete_plant_by_id(self, id: str):
         mysql.mutate(
             "DELETE FROM plants WHERE id = %s",
             params=[
-                plant_id,
+                id,
             ],
         )

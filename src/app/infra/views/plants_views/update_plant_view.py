@@ -1,6 +1,6 @@
 from flask import request, render_template
 
-from core.use_cases.plants_records import update_plant
+from core.use_cases.plants import update_plant
 from core.commons import Error
 
 from infra.forms import PlantForm
@@ -8,8 +8,6 @@ from infra.forms import PlantForm
 
 def update_plant_view(id: str):
     plant_form = PlantForm(formdata=request.form)
-
-    print(plant_form.data, flush=True)
 
     try:
         if not plant_form.validate_on_submit():
@@ -28,5 +26,4 @@ def update_plant_view(id: str):
             plant=updated_plant,
         )
     except Error as error:
-        print(plant_form.errors, flush=True)
         return "ERROR", error.status_code
