@@ -7,12 +7,15 @@ class GetSensorDashboardPageData:
     def execute(self):
         plants = plants_repository.get_plants()
 
+        if len(plants) == 0:
+            raise Error("Nenhuma planta encontrada", status_code=404)
+
         sensors_records = (
             sensors_records_repository.get_sensor_records_grouped_by_date()
         )
 
         if len(sensors_records) == 0:
-            raise Error("Sem nenhum registro cadastrado no sistema")
+            raise Error("Nenhum registro dos sensores encontrado", status_code=404)
 
         soil_humidity_chart = LineChart(sensors_records, "soil_humidity")
         ambient_humidity_chart = LineChart(sensors_records, "ambient_humidity")

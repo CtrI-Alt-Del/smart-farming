@@ -84,4 +84,5 @@ SELECT
 FROM checklist_records
 GROUP BY DATE(created_at), plant_id
 ORDER BY date ASC;
+
 DELETE FROM checklist_records;

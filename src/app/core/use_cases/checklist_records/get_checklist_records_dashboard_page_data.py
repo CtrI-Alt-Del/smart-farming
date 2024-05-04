@@ -9,13 +9,22 @@ class GetChecklistRecordsDashboardPageData:
         try:
             plants = plants_repository.get_plants()
 
+            if len(plants) == 0:
+                raise Error("Nenhuma planta encontrada", status_code=404)
+
             leaf_records = (
                 checklist_records_repository.get_leaf_appearances_and_leaf_colors_records()
             )
 
+            if len(leaf_records) == 0:
+                raise Error("Nenhum registro de check-list encontrado", status_code=404)
+
             leaf_charts_data = self.__get_leaf_charts_data(leaf_records, plants)
 
             lai_records = checklist_records_repository.get_lai_records()
+
+            if len(lai_records) == 0:
+                raise Error("Nenhum registro de check-list encontrado", status_code=404)
 
             plant_growth_chart = LineChart(lai_records, "lai")
 

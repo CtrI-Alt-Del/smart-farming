@@ -19,8 +19,7 @@ def create_plant_by_form_view():
 
         plants = get_plants_page_data.execute()
 
-        return render_template("")
+        return render_template("pages/plants/plants_cards/index.html", plants=plants)
     except Error as error:
         print(error.ui_message, flush=True)
         return "ERROR", error.status_code
-
