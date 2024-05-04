@@ -8,23 +8,25 @@
 {% from "components/modal.html" import modal %}
 <div class="pb-12 bg-white rounded-md ">
 
-  {{title("Plantas")}}
+  {{ title("Plantas") }}
 
   <div class="mt-5">
     {{ button(
     title="Adicionar planta",
-    attributes="data-modal-target=create-plant-modal data-modal-toggle=create-plant-modal")
+    attributes="data-modal-target=create-plant-modal data-modal-toggle=create-plants-modal")
     }}
-    {% call modal(id="create-plant-modal") %}
+    {% call modal(id="create-plants-modal") %}
     {% include 'pages/plants/create_plant_form/index.html' %}
     {% endcall %}
   </div>
 
-  <div class="my-6">
+  <div class="w-96">
     {% include 'components/search.html' %}
   </div>
 
-  {% include 'pages/plants/plants_cards/index.html' %}
+  <div id="plants-cards" class="mt-12">
+    {% include 'pages/plants/plants_cards/index.html' %}
+  </div>
 
 </div>
 

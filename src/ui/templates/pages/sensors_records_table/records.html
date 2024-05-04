@@ -1,3 +1,5 @@
+{% from "components/loading.html" import loading %}
+
 {% if sensors_records | length > 0 %}
 
 <div class="overflow-x-auto">
@@ -15,7 +17,13 @@
     class="sr-only">
   </div>
 
-  <p class="p-6 text-lg font-bold text-center">
+  <div
+    data-loading-class-remove="absolute"
+    class="absolute grid place-content-center w-full h-full">
+    {{ loading("w-32 h-32") }}
+  </div>
+
+  <p data-loading-class="hidden" class="p-6 text-lg font-bold text-center">
     Nenhum registro encontrado 😢.
   </p>
 
