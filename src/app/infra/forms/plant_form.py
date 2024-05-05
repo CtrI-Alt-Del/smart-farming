@@ -13,12 +13,10 @@ class PlantForm(FlaskForm):
         if isinstance(plant, Plant):
             self.name.data = plant.name
             self.hex_color.data = plant.hex_color
+            self.hex_color.default = plant.hex_color
 
     name = StringField(
         "Nome da planta",
         validators=[DataRequired()],
-        render_kw={"data-color-picker": "name"},
     )
-    hex_color = ColorField(
-        "Cor", validators=[DataRequired()], render_kw={"data-color-picker": "control"}
-    )
+    hex_color = ColorField("Cor", validators=[DataRequired()], default="#1c64f2d9")
