@@ -20,7 +20,8 @@
 
     {% call modal(id="create-plant-modal", class="h-96") %}
     {% include "pages/plants/create_plant_form/index.html" %}
-    <script src="{{url_for('static', filename='/scripts/plant_color_name_change.js')}}"></script>
+    <script
+      src="{{url_for('static', filename='/scripts/plant_color_name_change.js')}}"></script>
     {% endcall %}
   </div>
 
@@ -43,5 +44,12 @@
   </div>
 
 </div>
+
+<script
+  src="{{ url_for('static', filename='scripts/colorpicker.js') }}"></script>
+
+<script>
+  new Colorpicker("create-plant-form")  
+</script>
 
 {% endblock %}

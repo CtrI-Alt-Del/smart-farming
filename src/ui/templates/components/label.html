@@ -1,9 +1,10 @@
 {% macro label(id, title, icon) %}
 
-<label for="{{ id }}"
-    class="flex items-center justify-start gap-1 mb-2 text-sm font-medium text-gray-900 dark:text-white">
-    <i class="ph-bold ph-{{ icon }}"></i>
-    <p>{{ title }}</p>
+<label
+  for="{{ id }}"
+  class="flex items-center justify-start gap-1 mb-2 text-sm font-medium text-gray-900 dark:text-white">
+  <i class="ph-bold ph-{{ icon }}"></i>
+  {{ title }}
 </label>
 
 {% endmacro %}

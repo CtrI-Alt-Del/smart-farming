@@ -2,6 +2,7 @@
 {% from "components/label.html" import label %}
 
 <form
+  id="update-plant-form"
   hx-put="{{ url_for('plants_views.update_plant_view', id=plant_id) }}"
   hx-target="#plant-{{ plant_id }}"
   hx-target-error
@@ -9,10 +10,14 @@
   data-query-param="hx-put"
   enctype="multipart/form-data"
   class="grid place-content-center h-50">
-  <div class="flex flex-col place-items-center">
-    {% include "pages/plants/update_plant_form/fields.html" %}
-  </div>
+
+  {% include "pages/plants/update_plant_form/fields.html" %}
+
   <div class="mt-10">
     {{ modal_controls(modal_id="update-plant-modal") }}
   </div>
 </form>
+
+<script>
+  new Colorpicker("update-plant-form")
+</script>
