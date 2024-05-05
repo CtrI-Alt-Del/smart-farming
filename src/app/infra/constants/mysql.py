@@ -65,7 +65,7 @@ MYSQL = {
     "inserts": [
         """
         INSERT INTO plants (id, name, hex_color) 
-        VALUES ('4544afe3-0661-11ef-9512-0242ac140002' ,'alface','#3A7D44');
+        VALUES ('4544afe3-0661-11ef-9512-0242ac140002' ,'Alface','#3A7D44');
         """,
     ],
 }
