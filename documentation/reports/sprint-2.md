@@ -1,6 +1,6 @@
 # Sprint - 2️⃣
 
-- [ ] **Cadastro de dados de check-list via arquivo CSV**
+- [x] **Cadastro de dados de check-list via arquivo CSV**
 
 *Contexto:*
 
@@ -16,7 +16,7 @@
 
 ---
 
-- [ ] **Geração de gráficos acerca dados de check-list**
+- [x] **Geração de gráficos acerca dados de check-list**
 
 *Contexto:*
 
@@ -66,7 +66,7 @@
 
 ---
 
-- [ ] **Tabela de exibição de registros**
+- [x] **Tabela de exibição de registros**
 
 *História de usuário:*
 
@@ -79,7 +79,7 @@
 
 ---
 
-- [ ] **Cadastro de planta**
+- [x] **Cadastro de planta**
 
 *História de usuário:*
 
@@ -93,7 +93,7 @@
 
 ---
 
-- [ ] **Edição de planta**
+- [x] **Edição de planta**
 
 *História de usuário:*
 
@@ -105,7 +105,7 @@
 
 ---
 
-- [ ] **Listagem de plantas**
+- [x] **Listagem de plantas**
 
 *História de usuário:*
 
@@ -117,7 +117,7 @@
 
 ---
 
-- [ ] **Cadastro de dados dos sensores via formulário**
+- [x] **Cadastro de dados dos sensores via formulário**
 
 *História de usuário:*
 
@@ -137,17 +137,37 @@
 
 ---
 
-- [ ] **Mensagens de erro**
+- [x] **Edição de registros**
 
 *História de usuário:*
 
-> Como mantenedor da estufa, quero que o sistema exiba mensagens quando alguma ação minha não for realizada com sucesso para que eu tenha consciência de fato que algo ocorreu de errado.
+> Como administrador, quero pode editar qualquer campo de qualquer registro referente aos dados coletados pelos sensores para que eu possa corregir eventuais erros de cadastro.*
 
 *Critérios de aceitação:*
 
-- O sistema deve exibir mensagens de error referente à má formatação dos dados inseridos pelo usuário nos formulários em cada campo má formatado, assim como exibir uma mensagem de erro na página caso o erro não esteja relacionado a um campo de formulário mas a algum erro interno do sistema.
-- As mensagens devem estar bem destacadas do resto dos elementos da página.
+- O usuário deve poder editar por meio de formulário que conterá por padrão todos os dados atuais daquele registro.
+- Os sistema deve validar os novos dados cadastrado.
 
----
+- [x] **Deleção de registros**
+
+*História de usuário:*
+
+> Como administrador, quero pode deletar qualquer registro referente aos dados coletados pelos sensores para poder remover os repetidos ou os incongruentes.*
+
+*Critérios de aceitação:*
+
+- O usuário deve poder selecionar um ou mais registros para deletar.
+
+- [x] **Paginação de registros**
+
+*História de usuário:*
+
+> Como administrador, quero que as tabelas possuem páginas onde cada página tenha no máximo 20 registros para que nem todos os registros cadastrados nos sistema seja exibidos.
+
+*Critérios de aceitação:*
+
+- Deverá haver uma navegação composta por botões embaixo de cada tabela para que o usuário possa nagevar entre as páginas.
+- Deve haver um indicativo de qual página o usuário está.
+- A nevegação deve exibir no máximo 5 botões, ou seja, a numeração dos botões deve ser dinâmica com base na quantidade.
 
 ## Gráfico Burndown 📈

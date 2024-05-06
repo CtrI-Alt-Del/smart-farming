@@ -37,27 +37,6 @@
 
 ---
 
-- [ ] **Edição de registros**
-
-*História de usuário:*
-
-> Como administrador, quero pode editar qualquer campo de qualquer registro referente aos dados coletados pelos sensores para que eu possa corregir eventuais erros de cadastro.*
-
-*Critérios de aceitação:*
-
-- O usuário deve poder editar por meio de formulário que conterá por padrão todos os dados atuais daquele registro.
-- Os sistema deve validar os novos dados cadastrado.
-
-- [ ] **Deleção de registros**
-
-*História de usuário:*
-
-> Como administrador, quero pode deletar qualquer registro referente aos dados coletados pelos sensores para poder remover os repetidos ou os incongruentes.*
-
-*Critérios de aceitação:*
-
-- O usuário deve poder selecionar um ou mais registros para deletar.
-
 - [ ] **Filtragem de registros**
 
 *História de usuário:*
@@ -69,17 +48,7 @@
 - O usuário deve selecionar uma data de início e uma data de fim (as duas datas são inclusas no filtro).
 - Apenas os registros compreendidos entre essas duas datas devem ser exibidos nas suas respectivas tabelas.
 
-- [ ] **Paginação de registros**
-
-*História de usuário:*
-
-> Como administrador, quero que as tabelas possuem páginas onde cada página tenha no máximo 20 registros para que nem todos os registros cadastrados nos sistema seja exibidos.
-
-*Critérios de aceitação:*
-
-- Deverá haver uma navegação composta por botões embaixo de cada tabela para que o usuário possa nagevar entre as páginas.
-- Deve haver um indicativo de qual página o usuário está.
-- A nevegação deve exibir no máximo 5 botões, ou seja, a numeração dos botões deve ser dinâmica com base na quantidade.
+---
 
 - [ ] **Mensagens de alerta**
 
@@ -91,5 +60,18 @@
 
 - O usuário deve ser avisado por mensagem de texto ao tentar editar ou deletar qualquer registro do sistema (seja referente aos dados dos sensores ou do check-list).
 - O usuário deve poder confirmar ou cancelar a ação por botões presentes abaixo da mensagem.
+
+---
+
+- [ ] **Mensagens de erro**
+
+*História de usuário:*
+
+> Como mantenedor da estufa, quero que o sistema exiba mensagens quando alguma ação minha não for realizada com sucesso para que eu tenha consciência de fato que algo ocorreu de errado.
+
+*Critérios de aceitação:*
+
+- O sistema deve exibir mensagens de error referente à má formatação dos dados inseridos pelo usuário nos formulários em cada campo má formatado, assim como exibir uma mensagem de erro na página caso o erro não esteja relacionado a um campo de formulário mas a algum erro interno do sistema.
+- As mensagens devem estar bem destacadas do resto dos elementos da página.
 
 ## Gráfico Burndown 📈
