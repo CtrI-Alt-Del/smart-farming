@@ -116,7 +116,11 @@ https://github.com/CtrI-Alt-Del/smart-farming/assets/64440486/bfb05046-668f-4b10
 
 ### Sprint - 2️⃣
 
-`🚧 Em desenvolvimento 🚧`
+
+
+https://github.com/CtrI-Alt-Del/smart-farming/assets/64440486/3ec7f83c-e408-481d-96ad-5ce47e6c26f5
+
+
 
 ### Sprint - 3️⃣
 
