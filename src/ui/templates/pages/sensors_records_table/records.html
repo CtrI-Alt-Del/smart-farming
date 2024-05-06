@@ -4,7 +4,7 @@
 
 <div class="overflow-x-auto">
   <table
-    class="text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
+    class="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
     {% include "pages/sensors_records_table/head.html"%}
     {% include "pages/sensors_records_table/body.html"%}
   </table>
@@ -19,7 +19,7 @@
 
   <div
     data-loading-class-remove="absolute"
-    class="absolute grid place-content-center w-full h-full">
+    class="absolute grid w-full h-full place-content-center">
     {{ loading("w-24 h-24") }}
   </div>
 
