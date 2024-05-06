@@ -4,15 +4,24 @@
 {% from "components/button.html" import button %}
 {% from "components/plant_select.html" import plant_select %}
 {% from "components/loading.html" import loading %}
+{% from "components/title.html" import title%}
+
+
 
 {% block dashboard_content %}
-
-<div class="px-12 pb-12 mt-6 bg-white rounded-md shadow-md">
-  <div class="flex items-center gap-3 py-6 border-b-2 border-gray-300">
-    <h1 class="text-2xl font-bold">Registro do checklist</h1>
-  </div>
+{{title("Registro da Checklist")}}
+    
+ 
 
   <div class="flex items-center justify-between mt-6">
+  
+    <a
+      href="{{ url_for('checklist_records_views.checklist_records_dashboard_page_view') }}"
+      class="border-2 rounded-md p-2 border-gray-800 w-max px-2 flex items-center gap-1">
+      Todos os Gráficos
+      <i class="ph ph-arrow-right"></i>
+
+    </a>  
 
     {% include 'components/datepicker.html' %}
 

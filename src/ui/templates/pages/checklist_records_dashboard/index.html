@@ -3,8 +3,15 @@
 
 {% block dashboard_content %}
 {{ title('Registro de Checklist') }}
+<a
+      href="{{ url_for('checklist_records_views.checklist_records_table_page_view') }}"
+      class="border-2 rounded-md p-2 border-gray-800 w-max px-2 flex items-center gap-1 mt-2">
+      Todos os Registros
+      <i class="ph ph-arrow-right"></i>
 
+    </a>  
 <div class="grid grid-cols-2 pt-5 pb-5 gap-9 w-full">
+  
   {% include '/pages/checklist_records_dashboard/leaf_appearances_chart.html' %}
   {% include '/pages/checklist_records_dashboard/leaf_colors_chart.html' %}
 </div>
