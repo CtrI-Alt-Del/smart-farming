@@ -4,7 +4,9 @@
 {% block dashboard_content %}
 
 {{ title("Registro dos Sensores") }}
-
+<a href="{{url_for('sensors_records_views.sensors_records_table_page_view')}}" class="flex items-center gap-1 border border-gray-800 rounded-md w-max px-2 mt-3">
+  Todos os registros <i class="ph ph-arrow-right"></i>
+</a>
 <div class="grid grid-cols-2 pt-5 pb-5 gap-9">
   {% include "/pages/sensors_records_dashboard/ambient_humidity_chart.html" %}
   {% include "/pages/sensors_records_dashboard/soil_humidity_chart.html" %}
