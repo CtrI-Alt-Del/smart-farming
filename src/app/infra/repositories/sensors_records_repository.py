@@ -41,23 +41,26 @@ class SensorRecordsRepository:
 
         return rows
 
-    def get_last_sensors_record(self) -> SensorsRecord:
-        sql_data = """
-        SELECT 
-            SR.*, 
-            P.id AS plant_id, 
-            P.name AS plant_name,
-            P.hex_color AS plant_color
-        FROM sensors_records AS SR
-        JOIN plants AS P ON P.id = SR.plant_id
-        ORDER BY created_at DESC
-        LIMIT 1;
-        """
+    def get_last_sensors_records(self, count) -> list[SensorsRecord]:
+        rows = mysql.query(
+            sql=f"""
+            SELECT 
+                SR.*, 
+                P.id AS plant_id, 
+                P.name AS plant_name,
+                P.hex_color AS plant_color
+            FROM sensors_records AS SR
+            JOIN plants AS P ON P.id = SR.plant_id
+            ORDER BY created_at DESC
+            LIMIT {count};
+            """,
+            is_single=False,
+        )
 
-        row = mysql.query(sql=sql_data, is_single=True)
+        if len(rows) == 0:
+            return []
 
-        if row:
-            return self.__get_sensors_record_entity(row)
+        return [self.__get_sensors_record_entity(row) for row in rows]
 
     def get_filtered_sensors_records(self, page_number: int = 1) -> list[SensorsRecord]:
         pagination_limit = PAGINATION["records_per_page"]
