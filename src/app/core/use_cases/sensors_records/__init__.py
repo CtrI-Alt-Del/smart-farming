@@ -1,6 +1,6 @@
 from .create_sensors_records_by_csv_file import CreateSensorsRecordsByCsvFile
 from .get_sensors_dashboard_page_data import GetSensorDashboardPageData
-from .get_last_sensors_record import GetLastSensorsRecord
+from .get_last_sensors_record_page_data import GetLastSensorsRecordPageData
 from .create_sensors_records_by_form import CreateSensorsRecordByForm
 from .get_sensors_records_table_page_data import GetSensorsRecordsTablePageData
 from .update_sensors_records import UpdateSensorsRecord
@@ -8,7 +8,7 @@ from .delete_sensors_records import DeleteSensorsRecord
 
 create_sensors_records_by_csv_file = CreateSensorsRecordsByCsvFile()
 get_sensors_dashboard_page_data = GetSensorDashboardPageData()
-get_last_sensors_record = GetLastSensorsRecord()
+get_last_sensors_record_page_data = GetLastSensorsRecordPageData()
 create_sensors_records_by_form = CreateSensorsRecordByForm()
 get_sensors_records_table_page_data = GetSensorsRecordsTablePageData()
 update_sensors_records = UpdateSensorsRecord()
