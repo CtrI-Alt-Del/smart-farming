@@ -4,34 +4,36 @@
 {% from "components/button.html" import button %}
 {% from "components/plant_select.html" import plant_select %}
 {% from "components/loading.html" import loading %}
+{% from 'components/title.html' import title %}
 
 {% block dashboard_content %}
-<div class="px-12 pb-12 mt-6 bg-white rounded-md shadow-md">
-	<div
-		class="flex items-center gap-3 py-6 border-b-2 border-gray-300">
-		<h1 class="text-2xl font-bold">Registro dos Sensores</h1>
-	</div>
+{{title("Registro dos sensores")}}
 
-	<a href="{{url_for('sensors_records_views.sensors_records_dashboard_page_view')}}" class="flex items-center gap-1 border border-gray-800 rounded-md w-max px-2 mt-3">
-		<i class="ph ph-arrow-left"></i> Visualizar gráficos
-	  </a>
-	<div class="flex items-center justify-between mt-6">
-		{% include "components/datepicker.html" %}
+<div class="flex items-center justify-between mt-6">
+	<a
+      href="{{url_for('sensors_records_views.sensors_records_dashboard_page_view')}}"
+      class="flex items-center gap-1 p-2 px-2 mt-2 border-2 border-gray-800 rounded-md w-max">
+      Todos os Registros
+      <i class="ph ph-arrow-right"></i>
 
-		{% call modal(id="create-sensors-records-modal") %}
+    </a> 
+	{% include "components/datepicker.html" %}
 
-		{% include
-		"pages/sensors_records_table/create_sensors_record_form/index.html"
-		%}
+	{% call modal(id="create-sensors-records-modal") %}
 
-		{% endcall %}
+	{% include
+	"pages/sensors_records_table/create_sensors_record_form/index.html"
+	%}
 
-		{{ button(
-		type="button",
-		title="Adicionar registro",
-		attributes="data-modal-target=create-sensors-records-modal data-modal-toggle=create-sensors-records-modal")
-		}}
-	</div>
+	{% endcall %}
+
+	{{ button(
+	type="button",
+	title="Adicionar registro",
+	attributes="data-modal-target=create-sensors-records-modal data-modal-toggle=create-sensors-records-modal")
+	}}
+</div>
+<div class="relative pb-6 shadow-md sm:rounded-lg"> 
 
 	{% call modal(id="update-sensors-record-modal") %}
 
@@ -66,7 +68,7 @@
 			type="submit",
 			title="Deletar registro(s)",
 			attributes="id=delete-sensors-record-button data-loading-disable data-table=delete-button form=delete-sensors-records-form",
-			class="bg-red-700 animate-pulse hidden",
+			class="hidden bg-red-700 animate-pulse",
 			)
 			}}
 		</div>
