@@ -1,15 +1,27 @@
-{% macro card(title, value, class) %}
+{% macro card(title, value, variation, class) %}
 
 <div
-  class="grid place-content-center gap-2 h-52 rounded-md shadow-md animate-fade-up animate-delay-100 {{ class }}">
-  <div class="grid w-full text-3xl place-content-center">
-    {{ caller() }}
+  class="grid place-content-center gap-2 h-60 rounded-md shadow-md animate-fade-up animate-delay-100 {{ class }}">
+  <div class="grid place-content-center space-y-2">
+    <div class="grid w-full text-3xl place-content-center">
+      {{ caller() }}
+    </div>
+    <h2 class="font-medium text-center">{{ title }}</h2>
+    <strong
+      class="text-3xl text-center">
+      {{ value }}
+    </strong>
   </div>
-  <h2 class="font-medium text-center">{{ title }}</h2>
-  <strong
-    class="text-3xl text-center">
-    {{ value }}
+
+  {% if variation > 0 %}
+  <strong class="text-sm">
+    {{ variation }}% acima desde o último registro.
   </strong>
+  {% else %}
+  <strong class="text-sm">
+    Sem variação desde o último registro.
+  </strong>
+  {% endif %}
 </div>
 
 {% endmacro %}

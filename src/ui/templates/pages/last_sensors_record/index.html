@@ -2,31 +2,43 @@
 
 {% from "pages/last_sensors_record/card.html" import card %}
 
-{% set icon_class = "grid place-content-center rounded-md w-16 h-16"
+{% set icon_class = "grid place-content-center rounded-md w-16 h-16" %}
+
+{% set plant_badge_style =
+"style=background-color:{};".format(last_sensors_record.plant.hex_color)
 %}
 
 {% block dashboard_content %}
 
-{% if datetime is not none %}
-<div class="flex items-center gap-3 pb-6 mt-10 border-b-2 border-gray-300">
-  <h1 class="text-2xl font-bold">Último Registro -</h1>
-  {% include "pages/last_sensors_record/datetime.html" %}
-</div>
-{% else %}
-<div class="flex justify-between gap-3 pb-6 mt-10 border-b-2 border-gray-300">
-  <h1 class="text-2xl font-bold">Nenhum registro encontrado</h1>
-  <label class="relative flex justify-center items-center gap-2 rounded-lg bg-green-400 px-3 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-800 active:shadow-lg">
-  <i class="text-2xl ph ph-plant"></i>
-  <p>Alface</p>
-  
-</label>
-</div>
-{% endif %}
+<div
+  class="flex items-center justify-between pb-6 mt-10 border-b-2 border-gray-300">
+  {% if datetime is not none %}
 
-<div class="grid grid-cols-2 mt-12 gap-x-10 gap-y-8">
+  <div class="flex items-center gap-3">
+    <h1 class="text-2xl font-bold">Último Registro -</h1>
+    {% include "pages/last_sensors_record/datetime.html" %}
+  </div>
+
+  <div
+    {{ plant_badge_style }}
+    class="relative flex justify-center items-center gap-2 rounded-lg px-3 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md">
+    <i class="text-2xl ph ph-plant"></i>
+    <p>{{ last_sensors_record.plant.name }}</p>
+  </div>
+
+  {% else %}
+
+  <h1 class="text-2xl font-bold">Nenhum registro encontrado</h1>
+
+  {% endif %}
+
+</div>
+
+<div class="grid grid-cols-2 mt-6 gap-x-10 gap-y-8">
   {% call card(
   title="temperatura",
   value="{:.1f}ºC".format(last_sensors_record.temperature),
+  variation=variations["temperature"],
   class="bg-red-50 animate-delay-100")
   %}
   <div class="{{ icon_class }} bg-red-100">
@@ -37,6 +49,7 @@
   {% call card(
   title="Umidade do ambiente",
   value="{:.1f}%".format(last_sensors_record.ambient_humidity),
+  variation=variations["ambient_humidity"],
   class="bg-blue-50 animate-delay-200"
   )
   %}
@@ -48,6 +61,7 @@
   {% call card(
   title="Umidade do solo",
   value="{:.1f}%".format(last_sensors_record.soil_humidity),
+  variation=variations["soil_humidity"],
   class="bg-green-50 animate-delay-300")
   %}
   <div class="{{ icon_class }} bg-green-100">
@@ -58,6 +72,7 @@
   {% call card(
   title="Vazão",
   value="{:.1f}mL".format(last_sensors_record.water_volume),
+  variation=variations["water_volume"],
   class="bg-purple-50 animate-delay-300")
   %}
   <div class="{{ icon_class }} bg-purple-100">
