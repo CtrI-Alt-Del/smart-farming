@@ -5,16 +5,28 @@ from infra.repositories import sensors_records_repository
 
 
 class GetLastSensorsRecordPageData:
+
     def execute(self):
+        variations = {
+            "soil_humidity": 0,
+            "ambient_humidity": 0,
+            "water_volume": 0,
+            "temperature": 0,
+        }
+
         try:
             last_sensors_records = sensors_records_repository.get_last_sensors_records(
                 count=2
             )
 
-            if len(last_sensors_records) == 0:
+            if not len(last_sensors_records) >= 2:
                 return {
-                    "last_sensors_record": self.__get_empty_sensors_record(),
-                    "variations": {},
+                    "last_sensors_record": (
+                        last_sensors_records[0]
+                        if len(last_sensors_records) == 1
+                        else self.__get_empty_sensors_record()
+                    ),
+                    "variations": variations,
                 }
 
             variations = {
@@ -40,7 +52,7 @@ class GetLastSensorsRecordPageData:
         except Error:
             return {
                 "last_sensors_record": self.__get_empty_sensors_record(),
-                "variations": {},
+                "variations": variations,
             }
 
     def __get_variation(
