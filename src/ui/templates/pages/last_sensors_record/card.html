@@ -8,17 +8,18 @@
     </div>
     <h2 class="font-medium text-center">{{ title }}</h2>
     <strong
-      class="text-3xl text-center">
+      class="text-3xl text-center
+      ">
       {{ value }}
     </strong>
   </div>
 
-  {% if variation > 0 %}
-  <strong class="text-sm">
-    {{ variation }}% acima desde o último registro.
+  {% if variation != 0 %}
+  <strong class="text-sm text-gray-950 font-bold">
+    {{ variation }}% de variação desde o último registro.
   </strong>
   {% else %}
-  <strong class="text-sm">
+  <strong class="text-sm text-gray-950 font-bold">
     Sem variação desde o último registro.
   </strong>
   {% endif %}
