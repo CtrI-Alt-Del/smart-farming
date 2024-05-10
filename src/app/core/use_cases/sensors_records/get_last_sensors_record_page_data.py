@@ -69,7 +69,7 @@ class GetLastSensorsRecordPageData:
 
         difference = last_record_atribute_value - penultimate_record_value
 
-        return difference / penultimate_record_value * 100
+        return round(difference / penultimate_record_value * 100, 2)
 
     def __get_empty_sensors_record(self) -> SensorsRecord:
         return SensorsRecord(
