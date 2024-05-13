@@ -10,6 +10,7 @@ from .update_sensors_record_form_view import update_sensors_record_form_view
 from .delete_sensors_records_view import delete_sensors_records_view
 from .sensors_records_table_page_view import sensors_records_table_page_view
 from .create_sensors_records_by_form_view import create_sensors_record_by_form_view
+from .create_sensors_record_by_api_view import create_sensors_record_by_api_view
 from .filter_sensors_records_view import filter_sensors_records_view
 
 sensors_records_views = Blueprint("sensors_records_views", __name__)
@@ -40,6 +41,12 @@ route(
     "/sensors_records/filter",
     view_func=filter_sensors_records_view,
     methods=["GET"],
+)
+
+route(
+    "/sensors_records/api",
+    view_func=create_sensors_record_by_api_view,
+    methods=["POST"],
 )
 
 route(
