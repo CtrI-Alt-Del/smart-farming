@@ -27,14 +27,22 @@ class PlantsRepository:
 
         return plants
 
-    def __get_plant_entity(self, row):
-        return Plant(id=row["id"], name=row["name"], hex_color=row["hex_color"])
-
     def get_plant_by_id(self, id: str) -> Plant | None:
         row = mysql.query(
             sql="SELECT * FROM plants WHERE id = %s",
             is_single=True,
             params=[id],
+        )
+
+        if row:
+            return self.__get_plant_entity(row)
+
+        return None
+
+    def get_last_plant(self) -> Plant | None:
+        row = mysql.query(
+            sql="SELECT * FROM plants ORDER BY created_at DESC LIMIT 1",
+            is_single=True,
         )
 
         if row:
@@ -65,3 +73,6 @@ class PlantsRepository:
                 id,
             ],
         )
+
+    def __get_plant_entity(self, row):
+        return Plant(id=row["id"], name=row["name"], hex_color=row["hex_color"])
