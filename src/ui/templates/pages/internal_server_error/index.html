@@ -2,18 +2,23 @@
 
 {% block body %}
 
-<div class="">
-    <div class="flex justify-center mt-20 text-9xl">
-        <p class="text-red-500">404</p>    
-    </div>
+<button class="absolute top-[10%] left-[10%]">
+    <p class="text-4xl"><i class="ph ph-arrow-bend-down-left"></i>Voltar</p>
+</button>
 
-    <div class="flex justify-center ">
-        <p>Ops... Página não encontrada</p>
-    </div>
+<div class=" ciclePosition w-[590px] h-[480px] bg-[#FFE3B9] rounded-full absolute top-[27%] left-[27%] z-[-1] blur-[90px]">
+</div>
 
-    <div class="flex justify-center m-4">
-        <img src="../../../static/images/withered.png" alt="">
-    </div>
+<div class="flex justify-center mt-32 text-9xl font-black z-10">
+    <p class="text-[#e72d2d]">404</p>    
+</div>
+
+<div class="flex justify-center mt-6 text-2xl font-medium z-10">
+    <p>Ops... Página não encontrada</p>
+</div>
+
+<div class="flex justify-center m-16 z-10">
+    <img src="../../../static/images/withered.png" class="h-[25%] w-[25%]" alt="">
 </div>
 
 {% endblock body %}
