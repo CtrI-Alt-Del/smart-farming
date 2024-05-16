@@ -8,6 +8,7 @@
   <select
     id="{{ id }}"
     {{ attributes }}
+    name="plant"
     class="select">
     {% for plant in plants %}
     <option value="{{ plant.id }}">{{ plant.name }}</option>

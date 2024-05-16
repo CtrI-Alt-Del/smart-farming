@@ -1,16 +1,26 @@
+from datetime import datetime
+
 from flask import render_template, request
 
 from core.use_cases.checklist_records import get_checklist_records_table_page_data
-from core.commons import Error
+from core.commons import Error, Date
 from core.constants import PAGINATION
 
 
 def filter_checklist_records_view():
+    start_date = request.args.get("start-date")
+    end_date = request.args.get("end-date")
+    plant_id = request.args.get("plant", "all")
     page_number = int(request.args.get("page", 1))
 
     try:
+        print("request", plant_id, flush=True)
         data = get_checklist_records_table_page_data.execute(
-            page_number=page_number, should_get_plants=False
+            page_number=page_number,
+            start_date=Date(start_date).get_value(),
+            end_date=Date(end_date).get_value(),
+            plant_id=plant_id,
+            should_get_plants=False,
         )
 
         updated_checklist_records = data["checklist_records"]
