@@ -15,6 +15,9 @@ module.exports = {
           dark: "#FDF6B2",
         },
       },
+      backgroundImage: {
+        'radial-gradient': 'radial-gradient(closest-side, rgba(255, 227, 185, 1), #fff)',
+      },
     },
   },
   plugins: [
