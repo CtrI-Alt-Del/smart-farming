@@ -11,12 +11,12 @@
 
 <div class="flex items-center justify-between mt-6">
 	<a
-      href="{{url_for('sensors_records_views.sensors_records_dashboard_page_view')}}"
-      class="flex items-center gap-1 p-2 px-2 mt-2 border-2 border-gray-800 rounded-md w-max">
-      Todos os Registros
-      <i class="ph ph-arrow-right"></i>
+		href="{{url_for('sensors_records_views.sensors_records_dashboard_page_view')}}"
+		class="flex items-center gap-1 p-2 px-2 mt-2 border-2 border-gray-800 rounded-md w-max">
+		<i class="ph ph-arrow-left"></i>
+		Todos os Registros
 
-    </a> 
+	</a>
 	{% include "components/datepicker.html" %}
 
 	{% call modal(id="create-sensors-records-modal") %}
@@ -33,7 +33,7 @@
 	attributes="data-modal-target=create-sensors-records-modal data-modal-toggle=create-sensors-records-modal")
 	}}
 </div>
-<div class="relative pb-6 shadow-md sm:rounded-lg"> 
+<div class="relative pb-6 shadow-md sm:rounded-lg">
 
 	{% call modal(id="update-sensors-record-modal") %}
 

@@ -8,6 +8,9 @@ from infra.forms import ChecklistRecordForm, CsvForm
 
 
 def checklist_records_table_page_view():
+    start_date = request.args.get("start_date")
+    end_date = request.args.get("end_date")
+    plant_id = request.args.get("plant", "all")
     page_number = int(request.args.get("page", 1))
 
     create_checklist_record_form = ChecklistRecordForm()
@@ -15,7 +18,11 @@ def checklist_records_table_page_view():
 
     try:
         data = get_checklist_records_table_page_data.execute(
-            page_number=page_number, should_get_plants=True
+            page_number=page_number,
+            start_date=start_date,
+            end_date=end_date,
+            plant_id=plant_id,
+            should_get_plants=True,
         )
 
         checklist_records = data["checklist_records"]
@@ -33,5 +40,6 @@ def checklist_records_table_page_view():
             current_page_number=current_page_number,
             page_buttons_limit=PAGINATION["page_buttons_siblings_count"],
         )
-    except Error:
+    except Error as error:
+        print(error, flush=True)
         return "500 ERROR PAGE"

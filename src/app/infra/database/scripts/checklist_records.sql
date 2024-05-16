@@ -1,4 +1,4 @@
--- Active: 1713835984566@@127.0.0.1@3306@smart-farming
+-- Active: 1715856551584@@localhost@3306@smart_farming
 DROP TABLE IF EXISTS checklist_records;
 
 INSERT INTO checklist_records (
@@ -63,8 +63,32 @@ INSERT INTO checklist_records (
 
 SELECT * FROM checklist_records;
 
+SELECT 
+  CR.*,
+  P.id AS plant_id, 
+  P.name AS plant_name, 
+  P.hex_color as plant_color
+FROM checklist_records AS CR
+JOIN plants AS P ON P.id = CR.plant_id
+WHERE 
+  CR.plant_id = '4544afe3-0661-11ef-9512-0242ac140002' AND 
+  CR.created_at BETWEEN '2023-10-02 00:00:00' AND '2023-10-04 23:59:59'
+ORDER BY CR.created_at DESC
+LIMIT 25 OFFSET 0;   
+
+
+SELECT 
+  CR.*,
+  P.id AS plant_id, 
+  P.name AS plant_name, 
+  P.hex_color as plant_color
+FROM checklist_records AS CR
+JOIN plants AS P ON P.id = CR.plant_id             
+ORDER BY CR.created_at DESC
+LIMIT 6 OFFSET 0;    
+
 SELECT *, P.id AS plant_id, P.name AS plant_name
-FROM checklist_records AS CR 
+FROM checklist_records AS CR
 JOIN plants AS P ON P.id = CR.plant_id
 ORDER BY created_at;
 
