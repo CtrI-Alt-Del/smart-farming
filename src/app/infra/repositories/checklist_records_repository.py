@@ -105,8 +105,6 @@ class ChecklistRecordsRepository:
     ) -> list[CheckListRecord]:
         filters = []
 
-        print(plant_id, flush=True)
-
         if plant_id:
             filters.append(f"CR.plant_id = '{plant_id}'")
 
@@ -121,6 +119,21 @@ class ChecklistRecordsRepository:
 
         pagination_limit = PAGINATION["records_per_page"]
         offset = (page_number - 1) * pagination_limit
+
+        print(
+            f"""
+            SELECT 
+                CR.*,
+                P.id AS plant_id, 
+                P.name AS plant_name, 
+                P.hex_color as plant_color
+            FROM checklist_records AS CR
+            JOIN plants AS P ON P.id = CR.plant_id
+            {where}
+            ORDER BY CR.created_at DESC
+            LIMIT {pagination_limit} OFFSET {offset};    
+            """
+        )
 
         rows = mysql.query(
             sql=f"""
