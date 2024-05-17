@@ -2,6 +2,7 @@
 
 {% from "components/modal.html" import modal %}
 {% from "components/button.html" import button %}
+{% from "components/datepicker.html" import datepicker %}
 {% from "components/plant_select.html" import plant_select %}
 {% from "components/loading.html" import loading %}
 {% from "components/title.html" import title %}
@@ -19,7 +20,13 @@
     Visualizar graficos
   </a>
 
-  {% include "components/datepicker.html" %}
+  {{
+  datepicker(
+  attributes="data-table=filter",
+  selected_start_date=selected_start_date,
+  selected_end_date=selected_end_date,
+  )
+  }}
 
   {% call modal(id="create-checklist-records-modal") %}
 
@@ -54,13 +61,16 @@
       hx-target="#checklist-records"
       hx-swap="innerHTML"
       hx-include="#start-date, #end-date"
-      hx-trigger="change from:#plant-select"
+      hx-trigger="submit, change from:#plant-select, change from:#end-date"
       data-pagination="form"
       data-query-param="hx-get">
       {{
       plant_select(
       id="plant-select",
       plants=plants,
+      can_include_all=True,
+      attributes="data-table=filter",
+      selected_plant_id=selected_plant_id
       )
       }}
 

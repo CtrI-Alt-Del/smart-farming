@@ -1,3 +1,5 @@
+{% macro datepicker(attributes, selected_start_date, selected_end_date) %}
+
 {% set input_class =
 "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 %}
@@ -14,11 +16,13 @@
       </svg>
     </div>
     <input
+      {{ attributes }}
       id="start-date"
       name="start-date"
       type="date"
-      class="{{ input_class }}"
-      placeholder="Selecione a Data de Início">
+      placeholder="Selecione a Data de Início"
+      value="{{ selected_start_date }}"
+      class="{{ input_class }}">
   </div>
   <span class="mx-4 text-gray-500">à</span>
   <div class="relative">
@@ -32,13 +36,17 @@
       </svg>
     </div>
     <input
+      {{ attributes }}
       id="end-date"
       name="end-date"
       type="date"
+      value="{{ selected_end_date }}"
       class="{{ input_class }}"
       placeholder="Selecione a Data Final">
   </div>
 </div>
+
+{% endmacro %}
 
 <!-- <script
   src="{{ url_for('static', filename='scripts/datepicker.js') }}"></script> -->
