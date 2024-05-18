@@ -1,3 +1,5 @@
+from datetime import date
+
 from core.entities.checklist_record import CheckListRecord, Plant
 from core.commons import Datetime, Date
 from core.constants import PAGINATION
@@ -98,25 +100,62 @@ class ChecklistRecordsRepository:
             ],
         )
 
-    def get_filtered_checklist_records(self, page_number: int) -> list[CheckListRecord]:
+    def get_filtered_checklist_records(
+        self, plant_id: str, start_date: date, end_date: date, page_number: int = 1
+    ) -> list[CheckListRecord]:
+        filters = []
+
+        if plant_id:
+            filters.append(f"CR.plant_id = '{plant_id}'")
+
+        if start_date and end_date:
+            filters.append(
+                f"CR.created_at BETWEEN '{start_date} 00:00:00' AND '{end_date} 23:59:59'"
+            )
+
+        where = ""
+        if len(filters) > 0:
+            where = "WHERE " + " AND ".join(filters)
+
         pagination_limit = PAGINATION["records_per_page"]
         offset = (page_number - 1) * pagination_limit
 
+        print(
+            f"""
+            SELECT 
+                CR.*,
+                P.id AS plant_id, 
+                P.name AS plant_name, 
+                P.hex_color as plant_color
+            FROM checklist_records AS CR
+            JOIN plants AS P ON P.id = CR.plant_id
+            {where}
+            ORDER BY CR.created_at DESC
+            LIMIT {pagination_limit} OFFSET {offset};    
+            """
+        )
+
         rows = mysql.query(
             sql=f"""
-            SELECT CR.*, P.id AS plant_id, P.name AS plant_name, P.hex_color AS plant_color
-            FROM checklist_records AS CR 
+            SELECT 
+                CR.*,
+                P.id AS plant_id, 
+                P.name AS plant_name, 
+                P.hex_color as plant_color
+            FROM checklist_records AS CR
             JOIN plants AS P ON P.id = CR.plant_id
-            ORDER BY created_at DESC
-            LIMIT {pagination_limit} OFFSET {offset};
+            {where}
+            ORDER BY CR.created_at DESC
+            LIMIT {pagination_limit} OFFSET {offset};    
             """,
             is_single=False,
         )
 
         checklist_records = []
 
-        for row in rows:
-            checklist_records.append(self.__get_checklist_record_entity(row))
+        if len(rows) > 0:
+            for row in rows:
+                checklist_records.append(self.__get_checklist_record_entity(row))
 
         return checklist_records
 

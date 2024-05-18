@@ -2,101 +2,110 @@
 
 {% from "components/modal.html" import modal %}
 {% from "components/button.html" import button %}
+{% from "components/datepicker.html" import datepicker %}
 {% from "components/plant_select.html" import plant_select %}
 {% from "components/loading.html" import loading %}
-{% from "components/title.html" import title%}
-
-
+{% from "components/title.html" import title %}
 
 {% block dashboard_content %}
-{{title("Registro da Checklist")}}
-    
- 
 
-  <div class="flex items-center justify-between mt-6">
-  
-    <a
-      href="{{ url_for('checklist_records_views.checklist_records_dashboard_page_view') }}"
-      class="border-2 rounded-md p-2 border-gray-800 w-max px-2 flex items-center gap-1">
-      <i class="ph ph-arrow-left"></i>
-      Visualizar graficos
-      
+{{ title("Registro da Checklist") }}
 
-    </a>  
+<div class="flex items-center justify-between mt-6">
 
-    {% include 'components/datepicker.html' %}
+  <a
+    href="{{ url_for('checklist_records_views.checklist_records_dashboard_page_view') }}"
+    class="border-2 rounded-md p-2 border-gray-800 w-max px-2 flex items-center gap-1">
+    <i class="ph ph-arrow-left"></i>
+    Visualizar graficos
+  </a>
 
-    {% call modal(id="create-checklist-records-modal") %}
+  {{
+  datepicker(
+  attributes="data-table=filter",
+  selected_start_date=selected_start_date,
+  selected_end_date=selected_end_date,
+  )
+  }}
 
-    {% include
-    "pages/checklist_records_table/create_checklist_record_form/index.html"
-    %}
+  {% call modal(id="create-checklist-records-modal") %}
 
-    {% endcall %}
-
-    {{ button(
-    title="Adicionar registro",
-    attributes="data-modal-target=create-checklist-records-modal data-modal-toggle=create-checklist-records-modal")
-    }}
-
-  </div>
-
-  {% call modal(id="update-checklist-record-modal") %}
-
-  <div id="update-checklist-record-form" class="flex w-full">
-    <div class="grid place-content-center w-full h-[32rem]">
-      {{ loading("w-24 h-24") }}
-    </div>
-  </div>
+  {% include
+  "pages/checklist_records_table/create_checklist_record_form/index.html"
+  %}
 
   {% endcall %}
 
-  <div class="relative shadow-md pb-6 sm:rounded-lg">
-    <div class="flex items-end gap-3 p-6">
-      <form
-        hx-get="{{ url_for('checklist_records_views.filter_checklist_records_view') }}"
-        hx-trigger="submit"
-        hx-target="#checklist-records" hx-swap="innerHTML"
-        data-pagination="form"
-        data-query-param="hx-get"
-        id="filter-checklist-records-form">
-        {{
-        plant_select(
-        id="plant-select",
-        plants=plants,
-        )
-        }}
+  {{ button(
+  title="Adicionar registro",
+  attributes="data-modal-target=create-checklist-records-modal data-modal-toggle=create-checklist-records-modal")
+  }}
 
-        <input data-pagination="input" type="text" hidden>
-      </form>
+</div>
 
+{% call modal(id="update-checklist-record-modal") %}
+
+<div id="update-checklist-record-form" class="flex w-full">
+  <div class="grid place-content-center w-full h-[32rem]">
+    {{ loading("w-24 h-24") }}
+  </div>
+</div>
+
+{% endcall %}
+
+<div class="relative shadow-md pb-6 sm:rounded-lg">
+  <div class="flex items-end gap-3 p-6">
+    <form
+      id="filter-checklist-records-form"
+      hx-get="{{ url_for('checklist_records_views.filter_checklist_records_view') }}"
+      hx-target="#checklist-records"
+      hx-swap="innerHTML"
+      hx-include="#start-date, #end-date"
+      hx-trigger="submit, change from:#plant-select, change from:#end-date"
+      data-pagination="form"
+      data-query-param="hx-get">
       {{
-      button(
-      type="submit",
-      title="Deletar registro(s)",
-      attributes="id=delete-checklist-record-button data-table=delete-button form=delete-checklist-records-form",
-      class="bg-red-700 animate-pulse hidden",
+      plant_select(
+      id="plant-select",
+      plants=plants,
+      can_include_all=True,
+      attributes="data-table=filter",
+      selected_plant_id=selected_plant_id
       )
       }}
-    </div>
 
-    <form
-      id="delete-checklist-records-form"
-      hx-delete="{{ url_for('checklist_records_views.delete_checklist_records_view') }}"
-      hx-target="#checklist-records"
-      hx-trigger="submit"
-      hx-swap="innerHTML"
-      data-query-param="hx-delete">
-      <div
-        id="checklist-records"
-        data-table="container"
-        data-pagination="container"
-        class="flex flex-col justify-between h-[28rem]">
-        {% include "pages/checklist_records_table/records.html" %}
-      </div>
+      <input
+        data-pagination="input"
+        type="text"
+        value="{{ current_page_number }}"
+        hidden>
     </form>
 
+    {{
+    button(
+    type="submit",
+    title="Deletar registro(s)",
+    attributes="id=delete-checklist-record-button data-table=delete-button form=delete-checklist-records-form",
+    class="bg-red-700 animate-pulse hidden",
+    )
+    }}
   </div>
+
+  <form
+    id="delete-checklist-records-form"
+    hx-delete="{{ url_for('checklist_records_views.delete_checklist_records_view') }}"
+    hx-target="#checklist-records"
+    hx-trigger="submit"
+    hx-swap="innerHTML"
+    data-query-param="hx-delete">
+    <div
+      id="checklist-records"
+      data-table="container"
+      data-pagination="container"
+      class="flex flex-col justify-between h-[28rem]">
+      {% include "pages/checklist_records_table/records.html" %}
+    </div>
+  </form>
 
 </div>
 

@@ -6,11 +6,18 @@ from core.constants import PAGINATION
 
 
 def filter_checklist_records_view():
+    start_date = request.args.get("start-date", None)
+    end_date = request.args.get("end-date", None)
+    plant_id = request.args.get("plant", "all")
     page_number = int(request.args.get("page", 1))
 
     try:
         data = get_checklist_records_table_page_data.execute(
-            page_number=page_number, should_get_plants=False
+            page_number=page_number,
+            start_date=start_date,
+            end_date=end_date,
+            plant_id=plant_id,
+            should_get_plants=False,
         )
 
         updated_checklist_records = data["checklist_records"]

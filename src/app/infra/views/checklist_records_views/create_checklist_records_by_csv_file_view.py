@@ -19,7 +19,10 @@ def create_checklist_records_by_csv_file_view():
 
     csv_form = CsvForm(ImmutableMultiDict(form_data))
 
-    page_number = int(request.args.get("page", 1))
+    start_date = request.args.get("start_date")
+    end_date = request.args.get("end_date")
+    plant_id = request.args.get("plant", "all")
+    page_number = request.args.get("page", 1)
 
     try:
         if not csv_form.validate_on_submit():
@@ -27,7 +30,13 @@ def create_checklist_records_by_csv_file_view():
 
         create_checklist_records_by_csv_file.execute(request.files["csv"])
 
-        data = get_checklist_records_table_page_data.execute(page_number=page_number)
+        data = get_checklist_records_table_page_data.execute(
+            page_number=page_number,
+            plant_id=plant_id,
+            start_date=start_date,
+            end_date=end_date,
+            should_get_plants=False,
+        )
 
         updated_checklist_records = data["checklist_records"]
         last_page_number = data["last_page_number"]

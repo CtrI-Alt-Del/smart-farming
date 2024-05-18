@@ -1,16 +1,25 @@
 {% from "components/label.html" import label %}
 
-{% macro plant_select(id, plants, attributes) %}
+{% macro plant_select(id, plants, attributes, selected_plant_id,
+can_include_all = False) %}
 
 <div>
   {{ label(id=id, icon="plant", title="Planta") }}
 
   <select
-    id="{{ id }}"
     {{ attributes }}
+    id="{{ id }}"
+    name="plant"
     class="select">
+    {% if can_include_all %}
+    <option value="all">Todas</option>
+    {% endif %}
+
     {% for plant in plants %}
-    <option value="{{ plant.id }}">{{ plant.name }}</option>
+
+    {% set selected = "selected" if selected_plant_id == plant.id else "" %}
+
+    <option value="{{ plant.id }}" {{ selected }}>{{ plant.name }}</option>
     {% endfor %}
   </select>
 </div>

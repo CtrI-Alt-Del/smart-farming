@@ -47,8 +47,6 @@ A aplicação permite fazer o gerenciamento (adição, edição e deleção) dos
         <img src="documentation/images/apexcharts.jpeg" width="48" height="48" alt="ApexCharts" />
       </a>
       <span>ApexCharts</span>
-    <tr/>
-    <tr>
     </td>
     <td align="center" width="96">
       <a target="_blank" href="https://www.python.org/">
