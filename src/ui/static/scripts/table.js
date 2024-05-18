@@ -2,11 +2,15 @@ class Table {
   constructor() {
     const container = document.querySelector("[data-table='container']")
     const deleteButton = document.querySelector("[data-table='delete-button']")
+    const filters = document.querySelectorAll("[data-table='filter']")
 
-    if (!container || !deleteButton) return
+    console.log({ filters })
+
+    if (!container || !deleteButton || !filters.length) return
 
     this.rowsIds = []
     this.deleteButton = deleteButton
+    this.queryParam = new QueryParam()
 
     this.addEventListenerToCheckboxes(container)
 
@@ -24,6 +28,12 @@ class Table {
     container.addEventListener("updateRow", () =>
       this.addEventListenerToCheckboxes(container),
     )
+
+    for (const filter of filters) {
+      filter.addEventListener("input", (event) =>
+        this.handleFilterChange(event),
+      )
+    }
   }
 
   addEventListenerToCheckboxes(container) {
@@ -69,6 +79,11 @@ class Table {
     } else {
       this.hideDeleteButton()
     }
+  }
+
+  handleFilterChange(event) {
+    const field = event.currentTarget
+    this.queryParam.append(field.name, field.value)
   }
 }
 
