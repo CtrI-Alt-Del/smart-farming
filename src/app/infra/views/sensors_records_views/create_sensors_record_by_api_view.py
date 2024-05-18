@@ -9,7 +9,7 @@ def create_sensors_record_by_api_view():
         data = request.get_json()
         create_sensors_record_by_api.execute(data)
 
-        return "Chupa Sky Fly", 200
+        return "Chupa Sky Fly", 200 ##scary!!
     except Error as error:
         print(error.ui_message, flush=True)
         return error.ui_message, error.status_code

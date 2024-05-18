@@ -51,6 +51,8 @@
 				hx-get="{{ url_for('sensors_records_views.filter_sensors_records_view') }}"
 				hx-target="#sensors-records"
 				hx-swap="innerHTML"
+				hx-include = "#start-date,#end-date"
+				hx-trigger="change from:#plant-select"
 				data-pagination="form"
 				data-query-param="hx-get"
 				id="filter-sensors-records-form">
@@ -60,7 +62,9 @@
 				plants=plants,
 				)
 				}}
-				<input data-pagination="input" type="text" hidden>
+				<input data-pagination="input" type="text"
+				value = "{{current_page_number}}"
+				hidden>
 			</form>
 
 			{{

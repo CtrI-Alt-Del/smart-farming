@@ -3,6 +3,8 @@ from core.constants import PAGINATION
 
 from infra.database import mysql
 
+from datetime import date
+
 
 class SensorRecordsRepository:
     def create_sensors_record(self, sensors_record: SensorsRecord) -> None:
@@ -62,32 +64,7 @@ class SensorRecordsRepository:
 
         return [self.__get_sensors_record_entity(row) for row in rows]
 
-    def get_filtered_sensors_records(self, page_number: int = 1) -> list[SensorsRecord]:
-        pagination_limit = PAGINATION["records_per_page"]
-        offset = (page_number - 1) * pagination_limit
-
-        rows = mysql.query(
-            sql=f"""
-            SELECT 
-                SR.*,
-                P.id AS plant_id, 
-                P.name AS plant_name, 
-                P.hex_color as plant_color
-            FROM sensors_records AS SR
-            JOIN plants AS P ON P.id = SR.plant_id
-            ORDER BY created_at DESC
-            LIMIT {pagination_limit} OFFSET {offset};    
-            """,
-            is_single=False,
-        )
-
-        sensors_records = []
-
-        if len(rows) > 0:
-            for row in rows:
-                sensors_records.append(self.__get_sensors_record_entity(row))
-
-        return sensors_records
+    
 
     def get_sensors_record_by_id(self, id: str) -> SensorsRecord | None:
         row = mysql.query(
@@ -162,3 +139,40 @@ class SensorRecordsRepository:
             )
         else:
             return None
+    
+    def get_filtered_sensors_records(self, plant_id: str,start_date: date,end_date: date,page_number: int = 1) -> list[SensorsRecord]:
+        filters = []
+        
+        if plant_id:
+            filters.append(f"SR.plant_id = '{plant_id}'")
+            
+        if start_date and end_date:
+            filters.append(f"SR.created_at BETWEEN '{start_date} 00:)00:00' AND '{end_date} 23:59:59'")
+        
+        where = ""
+        if len(filters) > 0:
+            where = "WHERE" + "AND".join(filters)
+        pagination_limit = PAGINATION["records_per_page"]
+        offset = (page_number - 1) * pagination_limit
+        
+        rows = mysql.query(
+            sql = f"""
+            SELECT
+                SR.*,
+                P.id as plant_id,
+                P.name AS plant_name,
+                P.hex_color as plant_color
+            FROM sensors_records AS SR
+            JOIN plants AS P on P.id = SR.plant_id
+            {where}
+            ORDER BY SR.created_at DESC
+            LIMIT {pagination_limit} OFFSET {offset}
+            """,
+            is_single=False
+        )
+        sensors_records = []
+        
+        if len(rows) > 0:
+            for row in rows:
+                sensors_records.append(self.__get_sensors_record_entity(row))
+        return sensors_records
