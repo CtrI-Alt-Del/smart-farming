@@ -147,11 +147,11 @@ class SensorRecordsRepository:
             filters.append(f"SR.plant_id = '{plant_id}'")
             
         if start_date and end_date:
-            filters.append(f"SR.created_at BETWEEN '{start_date} 00:)00:00' AND '{end_date} 23:59:59'")
+            filters.append(f"SR.created_at BETWEEN '{start_date} 00:00:00' AND '{end_date} 23:59:59'")
         
         where = ""
         if len(filters) > 0:
-            where = "WHERE" + "AND".join(filters)
+            where = "WHERE " + " AND ".join(filters)
         pagination_limit = PAGINATION["records_per_page"]
         offset = (page_number - 1) * pagination_limit
         
@@ -170,6 +170,7 @@ class SensorRecordsRepository:
             """,
             is_single=False
         )
+        
         sensors_records = []
         
         if len(rows) > 0:
