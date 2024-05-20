@@ -6,8 +6,6 @@ COPY . .
 
 RUN pip install -r requirements.txt && npm install
 
-EXPOSE 5000
+EXPOSE 8000
 
-USER pn
-
-CMD npm run dev
+CMD npm start
