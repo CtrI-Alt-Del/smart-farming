@@ -16,6 +16,11 @@ def create_sensors_records_by_csv_file_view():
     form_data = request.form.to_dict()
     form_data["csv"] = request.files["csv"]
 
+    start_date = request.args.get("start-date", None)
+    end_date = request.args.get("end-date", None)
+    plant_id = request.args.get("plant", "all")
+    page_number = int(request.args.get("page", 1))
+
     csv_form = CsvForm(ImmutableMultiDict(form_data))
 
     page_number = int(request.args.get("page", 1))
@@ -26,7 +31,12 @@ def create_sensors_records_by_csv_file_view():
 
         create_sensors_records_by_csv_file.execute(request.files["csv"])
 
-        data = get_sensors_records_table_page_data.execute(page_number=page_number)
+        data = get_sensors_records_table_page_data.execute(
+            start_date=start_date,
+            end_date=end_date,
+            page_number=page_number,
+            plant_id=plant_id,
+        )
 
         updated_sensors_records = data["sensors_records"]
         last_page_number = data["last_page_number"]
