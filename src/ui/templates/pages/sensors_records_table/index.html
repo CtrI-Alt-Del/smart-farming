@@ -11,13 +11,11 @@
 {{title("Registro dos sensores")}}
 
 <div class="flex items-center justify-between mt-6">
-	<a
-		href="{{url_for('sensors_records_views.sensors_records_dashboard_page_view')}}"
-		class="flex items-center gap-1 p-2 px-2 mt-2 border-2 border-gray-800 rounded-md w-max">
-		<i class="ph ph-arrow-left"></i>
-		Todos os Registros
 
-	</a>
+<a href="{{url_for('sensors_records_views.sensors_records_dashboard_page_view')}}" class="flex items-center gap-1 p-2 px-2 border border-gray-800 rounded-md w-max"><i class="ph ph-presentation-chart"></i>
+	Visualizar gráficos
+</a>
+
 	{{
 	datepicker(
 	attributes="data-table=filter",
@@ -25,6 +23,7 @@
 	selected_end_date=selected_end_date,
 	)
 	}}
+
 
 	{% call modal(id="create-sensors-records-modal") %}
 
