@@ -19,12 +19,12 @@
 
 	</a>
 	{{
-		datepicker(
-		attributes="data-table=filter",
-		selected_start_date=selected_start_date,
-		selected_end_date=selected_end_date,
-		)
-		}}
+	datepicker(
+	attributes="data-table=filter",
+	selected_start_date=selected_start_date,
+	selected_end_date=selected_end_date,
+	)
+	}}
 
 	{% call modal(id="create-sensors-records-modal") %}
 
@@ -58,8 +58,8 @@
 				hx-get="{{ url_for('sensors_records_views.filter_sensors_records_view') }}"
 				hx-target="#sensors-records"
 				hx-swap="innerHTML"
-				hx-include = "#start-date,#end-date"
-				hx-trigger="submit,change from:#plant-select, change from:#end-date"
+				hx-include="#start-date,#end-date"
+				hx-trigger="submit, change from:#plant-select, change from:#end-date"
 				data-pagination="form"
 				data-query-param="hx-get"
 				id="filter-sensors-records-form">
@@ -72,9 +72,11 @@
 				selected_plant_id=selected_plant_id
 				)
 				}}
-				<input data-pagination="input" type="text"
-				value = "{{current_page_number}}"
-				hidden>
+				<input
+					data-pagination="input"
+					type="text"
+					value="{{current_page_number}}"
+					hidden>
 			</form>
 
 			{{
