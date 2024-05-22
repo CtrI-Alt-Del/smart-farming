@@ -103,24 +103,12 @@ class ChecklistRecordsRepository:
     def get_filtered_checklist_records(
         self, plant_id: str, start_date: date, end_date: date, page_number: int = 1
     ) -> list[CheckListRecord]:
-        filters = []
+        where = self.__get_where_with_filters(plant_id, start_date, end_date)
 
-        if plant_id:
-            filters.append(f"CR.plant_id = '{plant_id}'")
-
-        if start_date and end_date:
-            filters.append(
-                f"CR.created_at BETWEEN '{start_date} 00:00:00' AND '{end_date} 23:59:59'"
-            )
-
-        where = ""
-        if len(filters) > 0:
-            where = "WHERE " + " AND ".join(filters)
+        print("where", where, flush=True)
 
         pagination_limit = PAGINATION["records_per_page"]
         offset = (page_number - 1) * pagination_limit
-
-        
 
         rows = mysql.query(
             sql=f"""
@@ -184,9 +172,18 @@ class ChecklistRecordsRepository:
 
         return rows
 
-    def get_checklist_records_count(self) -> int:
+    def get_checklist_records_count(
+        self, plant_id: str, start_date: date, end_date: date
+    ) -> int:
+        where = self.__get_where_with_filters(
+            plant_id=plant_id, start_date=start_date, end_date=end_date
+        )
+
         result = mysql.query(
-            sql="SELECT COUNT(id) AS count FROM checklist_records",
+            sql=f"""
+            SELECT COUNT(id) AS count FROM checklist_records AS CR
+            {where}
+            """,
             is_single=True,
         )
 
@@ -223,6 +220,23 @@ class ChecklistRecordsRepository:
             return None
 
         return self.__get_checklist_record_entity(row)
+
+    def __get_where_with_filters(self, plant_id: str, start_date: date, end_date: date):
+        filters = []
+
+        if plant_id:
+            filters.append(f"CR.plant_id = '{plant_id}'")
+
+        if start_date and end_date:
+            filters.append(
+                f"CR.created_at BETWEEN '{start_date} 00:00:00' AND '{end_date} 23:59:59'"
+            )
+
+        where = ""
+        if len(filters) > 0:
+            where = "WHERE " + " AND ".join(filters)
+
+        return where
 
     def __get_checklist_record_entity(self, row: dict):
         return CheckListRecord(
