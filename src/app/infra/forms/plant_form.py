@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 
 from wtforms import StringField, ColorField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired , Length
 
 from core.entities import Plant
 
@@ -17,6 +17,6 @@ class PlantForm(FlaskForm):
 
     name = StringField(
         "Nome da planta",
-        validators=[DataRequired()],
+        validators=[Length(min=1,message="O campo nao pode ficar vazio")],
     )
     hex_color = ColorField("Cor", validators=[DataRequired()], default="#1c64f2d9")
