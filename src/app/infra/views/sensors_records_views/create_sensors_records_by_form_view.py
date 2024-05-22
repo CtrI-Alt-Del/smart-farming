@@ -55,7 +55,6 @@ def create_sensors_record_by_form_view():
         )
 
     except Error as error:
-        print(sensors_record_form.errors,flush=True)
         return (
-            render_template('pages/sensors_records_table/create_sensors_record_form/fields.html',create_sensors_record_form=sensors_record_form,csv_form=csv_form,sennsors_records = sensors_record_form,error_message=error.ui_message),error.status_code)
+            render_template('pages/sensors_records_table/create_sensors_record_form/fields.html',create_sensors_record_form=sensors_record_form,csv_form=csv_form,sensors_records = sensors_record_form,error_message=error.ui_message),error.status_code)
         
