@@ -5,8 +5,11 @@
   {% include "/layouts/dashboard/sidebar.html" %}
 </div>
 
-<main class="dashboard pb-20">
+<main class="pb-20 dashboard">
   {% block dashboard_content %} {% endblock dashboard_content %}
 </main>
+
+<script
+  src="{{url_for('static', filename='scripts/sidebar.js')}}"></script>
 
 {% endblock body %}
