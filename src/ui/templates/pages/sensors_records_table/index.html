@@ -5,19 +5,25 @@
 {% from "components/plant_select.html" import plant_select %}
 {% from "components/loading.html" import loading %}
 {% from 'components/title.html' import title %}
+{% from 'components/datepicker.html' import datepicker%}
 
 {% block dashboard_content %}
 {{title("Registro dos sensores")}}
 
 <div class="flex items-center justify-between mt-6">
-	<a
-		href="{{url_for('sensors_records_views.sensors_records_dashboard_page_view')}}"
-		class="flex items-center gap-1 p-2 px-2 mt-2 border-2 border-gray-800 rounded-md w-max">
-		<i class="ph ph-arrow-left"></i>
-		Todos os Registros
 
-	</a>
-	{% include "components/datepicker.html" %}
+<a href="{{url_for('sensors_records_views.sensors_records_dashboard_page_view')}}" class="flex items-center gap-1 p-2 px-2 border border-gray-800 rounded-md w-max"><i class="ph ph-presentation-chart"></i>
+	Visualizar gráficos
+</a>
+
+	{{
+	datepicker(
+	attributes="data-table=filter",
+	selected_start_date=selected_start_date,
+	selected_end_date=selected_end_date,
+	)
+	}}
+
 
 	{% call modal(id="create-sensors-records-modal") %}
 
@@ -51,6 +57,8 @@
 				hx-get="{{ url_for('sensors_records_views.filter_sensors_records_view') }}"
 				hx-target="#sensors-records"
 				hx-swap="innerHTML"
+				hx-include="#start-date,#end-date"
+				hx-trigger="submit, change from:#plant-select, change from:#end-date"
 				data-pagination="form"
 				data-query-param="hx-get"
 				id="filter-sensors-records-form">
@@ -59,9 +67,15 @@
 				id="plant-select",
 				plants=plants,
 				can_include_all=True,
+				attributes="data-table-filter",
+				selected_plant_id=selected_plant_id
 				)
 				}}
-				<input data-pagination="input" type="text" hidden>
+				<input
+					data-pagination="input"
+					type="text"
+					value="{{current_page_number}}"
+					hidden>
 			</form>
 
 			{{

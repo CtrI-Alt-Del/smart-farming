@@ -13,6 +13,9 @@ from infra.forms import SensorsRecordForm
 def create_sensors_record_by_form_view():
     sensors_record_form = SensorsRecordForm(request.form)
 
+    start_date = request.args.get("start-date", None)
+    end_date = request.args.get("end-date", None)
+    plant_id = request.args.get("plant", "all")
     page_number = int(request.args.get("page", 1))
 
     try:
@@ -32,7 +35,12 @@ def create_sensors_record_by_form_view():
             }
         )
 
-        data = get_sensors_records_table_page_data.execute(page_number=page_number)
+        data = get_sensors_records_table_page_data.execute(
+            start_date=start_date,
+            end_date=end_date,
+            plant_id=plant_id,
+            page_number=page_number,
+        )
 
         updated_sensors_records = data["sensors_records"]
         plants = data["plants"]

@@ -1,7 +1,7 @@
--- Active: 1713899386704@@127.0.0.1@3306@smart-farming
+-- Active: 1716317810261@@127.0.0.1@3306@smart-farming
 CREATE DATABASE IF NOT EXISTS `smart-farming`;
 
-USE DATABASE `smart-farming`;
+USE `smart-farming`;
 
 CREATE TABLE IF NOT EXISTS plants (
   id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,

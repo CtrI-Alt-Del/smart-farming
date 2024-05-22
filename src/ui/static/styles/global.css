@@ -16,6 +16,12 @@
   padding-right: 40px;
 }
 
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 20px;
+  }
+}
+
 [data-loading-class].loading {
   display: none;
 }
