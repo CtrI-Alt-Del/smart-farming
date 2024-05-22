@@ -17,6 +17,6 @@ class PlantForm(FlaskForm):
 
     name = StringField(
         "Nome da planta",
-        validators=[Length(min=1,message="O campo nao pode ficar vazio")],
+        validators=[Length(min=1,message="O campo de nome não pode ser nulo")],
     )
     hex_color = ColorField("Cor", validators=[DataRequired()], default="#1c64f2d9")
