@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS plants (
 );
 
 INSERT INTO plants (id, name, hex_color) 
-VALUES ('4544afe3-0661-11ef-9512-0242ac140002' ,'alface','#D4F7EB');
+VALUES ('4544afe3-0661-11ef-9512-0242ac140002' ,'alface','#3A7D44');
 
 CREATE TABLE IF NOT EXISTS user (
   id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
@@ -62,6 +62,8 @@ CREATE TABLE IF NOT EXISTS checklist_records (
   plant_id CHAR(36) DEFAULT '4544afe3-0661-11ef-9512-0242ac140002',
   FOREIGN KEY (plant_id) REFERENCES plants(id) ON DELETE CASCADE
 );
+
+desc checklist_records;
 
 -- DROP TABLES
 
