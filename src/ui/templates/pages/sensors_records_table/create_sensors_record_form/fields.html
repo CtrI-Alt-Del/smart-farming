@@ -1,6 +1,8 @@
 {% from "components/label.html" import label %}
+{%from "components/error_component.hmtl" import error_messages%}
 
 {{ create_sensors_record_form.csrf_token }}
+
 
 <div class="input-container">
   {{ label(
@@ -17,7 +19,6 @@
   )
   }}
 </div>
-
 <div class="input-container">
   {{ label(
   id="create-sensors-record-time",
@@ -51,6 +52,9 @@
   max=100
   )
   }}
+  {% if create_sensors_record_form.ambient_humidity.errors %}
+  {{error_messages(create_sensors_record_form.ambient_humidity.errors)}}
+  {% endif %}
 </div>
 
 <div class="input-container">
@@ -70,6 +74,9 @@
   max=100
   )
   }}
+  {% if create_sensors_record_form.soil_humidity.errors %}
+  {{error_messages(create_sensors_record_form.soil_humidity.errors)}}
+  {% endif %}
 </div>
 
 <div class="input-container">
@@ -83,6 +90,9 @@
   min=-273,
   max=60,
   ) }}
+  {% if create_sensors_record_form.temperature.errors %}
+  {{error_messages(create_sensors_record_form.temperature.errors)}}
+  {% endif %}
 </div>
 
 <div class="input-container">
@@ -96,6 +106,9 @@
   min=0,
   )
   }}
+  {% if create_sensors_record_form.water_volume.errors %}
+  {{error_messages(create_sensors_record_form.water_volume.errors)}}
+  {% endif %}
 </div>
 
 <div></div>
