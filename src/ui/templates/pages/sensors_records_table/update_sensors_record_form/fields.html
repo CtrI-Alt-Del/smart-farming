@@ -1,5 +1,5 @@
 {% from "components/label.html" import label %}
-
+{%from "components/error_component.html" import error_messages%}
 {{ update_sensors_record_form.csrf_token }}
 
 <div class="input-container">
@@ -51,6 +51,7 @@
   max=100
   )
   }}
+  {{error_messages(update_sensors_record_form.ambient_humidity.errors[0])}}
 </div>
 
 <div class="input-container">
@@ -70,6 +71,8 @@
   max=100
   )
   }}
+  {{error_messages(update_sensors_record_form.soil_humidity.errors[0])}}
+
 </div>
 
 <div class="input-container">
@@ -84,6 +87,8 @@
   max=60,
   step="any"
   ) }}
+  {{error_messages(update_sensors_record_form.temperature.errors[0])}}
+
 </div>
 
 <div class="input-container">
@@ -98,6 +103,8 @@
   step="any"
   )
   }}
+  {{error_messages(update_sensors_record_form.water_volume.errors[0])}}
+
 </div>
 
 <div></div>

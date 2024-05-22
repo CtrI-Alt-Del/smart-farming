@@ -38,7 +38,7 @@ class SensorsRecordForm(FlaskForm):
     soil_humidity = IntegerField(
         "Umidade do Solo (%)",
         validators=[
-            NumberRange(min=1, max=100,message="O valor deve estar entre  e 100"),
+            NumberRange(min=1, max=100,message="O valor deve estar entre 0 e 100"),
         ],
     )
     ambient_humidity = IntegerField(
