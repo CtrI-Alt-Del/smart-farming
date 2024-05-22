@@ -1,12 +1,11 @@
--- Active: 1713835984566@@127.0.0.1@3306@smart-farming
+-- Active: 1715856551584@@localhost@3306@smart_farming
 
 DROP TABLE IF EXISTS plants;
 
-ALTER TABLE plants ADD COLUMN created_at DATETIME DEFAULT (NOW()) NOT NULL;
-
-INSERT INTO plants (id, name, hex_color) 
-VALUES ('1ded0f79-01a5-11ef-9b63-0242ac1b0002' ,'Alface','#D9F7EB');
+CREATE TABLE IF NOT EXISTS plants (
+  id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  hex_color VARCHAR(7) NOT NULL UNIQUE
+);
 
 SELECT * FROM plants;
-
-DELETE FROM plants;
