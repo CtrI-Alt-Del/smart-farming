@@ -5,14 +5,14 @@
   id="create-plant-form"
   hx-post="{{ url_for('plants_views.create_plant_view') }}"
   hx-target="#plants-cards"
-  hx-target-error
+  hx-target-error = "#create-plant-form-fields"
   hx-swap="innerHTML"
   enctype="multipart/form-data"
   data-query-param="hx-post"
   class="grid place-content-center h-50">
-
+<div id = "create-plant-form-fields" >
   {% include "pages/plants/create_plant_form/fields.html" %}
-
+</div>
   <div class="mt-10">
     {{ modal_controls(modal_id="create-plant-modal") }}
   </div>

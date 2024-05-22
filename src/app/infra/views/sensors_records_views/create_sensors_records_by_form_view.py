@@ -8,7 +8,7 @@ from core.commons import Error
 from core.constants import PAGINATION
 
 from infra.forms import SensorsRecordForm
-
+from infra.forms import CsvForm
 
 def create_sensors_record_by_form_view():
     sensors_record_form = SensorsRecordForm(request.form)
@@ -18,10 +18,11 @@ def create_sensors_record_by_form_view():
     plant_id = request.args.get("plant", "all")
     page_number = int(request.args.get("page", 1))
 
+    csv_form = CsvForm()
     try:
         if not sensors_record_form.validate_on_submit():
-            raise Error("Formulário inválido")
-
+            raise Error
+    
         create_sensors_records_by_form.execute(
             {
                 "soil_humidity": sensors_record_form.soil_humidity.data,
@@ -34,7 +35,6 @@ def create_sensors_record_by_form_view():
                 "time": sensors_record_form.time.data,
             }
         )
-
         data = get_sensors_records_table_page_data.execute(
             start_date=start_date,
             end_date=end_date,
@@ -45,7 +45,6 @@ def create_sensors_record_by_form_view():
         updated_sensors_records = data["sensors_records"]
         plants = data["plants"]
         last_page_number = data["last_page_number"]
-
         return render_template(
             "pages/sensors_records_table/records.html",
             sensors_records=updated_sensors_records,
@@ -54,5 +53,8 @@ def create_sensors_record_by_form_view():
             current_page_number=page_number,
             page_buttons_limit=PAGINATION["page_buttons_siblings_count"],
         )
+
     except Error as error:
-        return "ERROR", error.status_code
+        return (
+            render_template('pages/sensors_records_table/create_sensors_record_form/fields.html',create_sensors_record_form=sensors_record_form,csv_form=csv_form,sensors_records = sensors_record_form,error_message=error.ui_message),error.status_code)
+        
