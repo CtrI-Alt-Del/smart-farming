@@ -1,14 +1,12 @@
-{% extends "layouts/root.html" %}
+{% extends "layouts/root.html" %} {% block body %} {% include
+"/layouts/dashboard/header.html" %}
 
-{% block body %}
-
-{% include "/layouts/dashboard/header.html" %}
-
-{% include "/layouts/dashboard/sidebar.html" %}
+<div class="hidden md:flex">
+  {% include "/layouts/dashboard/sidebar.html" %}
+</div>
 
 <main class="dashboard pb-20">
-	{% block dashboard_content %}
-	{% endblock dashboard_content %}
+  {% block dashboard_content %} {% endblock dashboard_content %}
 </main>
 
 {% endblock body %}

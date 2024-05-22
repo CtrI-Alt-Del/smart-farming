@@ -7,8 +7,7 @@
 <a href="{{url_for('sensors_records_views.sensors_records_table_page_view')}}" class="mt-6 flex items-center gap-1 p-2 px-2 border border-gray-800 rounded-md w-max"><i class="ph ph-table"></i>
   Visualizar registros
 </a>
-
-<div class="grid grid-cols-2 pt-5 pb-5 gap-9">
+<div class="flex flex-wrap justify-center items-center md:grid grid-cols-2 pt-5 pb-5 gap-9">
   {% include "/pages/sensors_records_dashboard/ambient_humidity_chart.html" %}
   {% include "/pages/sensors_records_dashboard/soil_humidity_chart.html" %}
   {% include "/pages/sensors_records_dashboard/temperature_chart.html" %}
