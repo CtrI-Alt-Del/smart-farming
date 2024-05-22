@@ -2,6 +2,29 @@
 
 <header
   class="w-full h-[72px] bg-header-background flex items-center justify-between dashboard">
-  <h1 class="text-white text-[30px]">Bem vindo!</h1>
+  <div class="flex justify-center items-center gap-1">
+    <div class="text-center md:hidden">
+      <button
+      _="on click remove .hidden from #close-button"
+      class="text-white focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-example" data-drawer-show="drawer-example" aria-controls="drawer-example">
+        <i class="ph ph-list text-[40px] text-white hover:text-zinc-300"></i>
+      </button>
+    </div>
+    <button
+      id="close-button"
+      _="on click add .hidden on me"
+      type="button"
+      data-drawer-hide="drawer-example"
+      aria-controls="drawer-example"
+      class="hidden bg-white z-50 "
+    >
+    
+    </button>
+    <div id="drawer-example" class="fixed z-40 top-0 left-0 h-screen p-4 overflow-y-auto transition-transorm -translate-x-full w-80 " tabindex="-1" aria-labelledby="drawer-label">
+      
+      {% include 'layouts/dashboard/sidebar.html'%}
+    </div>
+    <h1 class="text-white text-[20px] text-center p-2 md:text-[30px]">Bem vindo!</h1>
+  </div>
   {{ login_link() }}
 </header>
