@@ -3,6 +3,7 @@
 {% from "components/title.html" import title %}
 {% from "components/button.html" import button %}
 {% from "components/loading.html" import loading %}
+{% from 'components/alert.html' import alert %}
 
 {% block dashboard_content %}
 
@@ -35,6 +36,13 @@
     {% include "components/search.html" %}
   </div>
 
+  {{
+  alert(
+  id="delete-plant",
+  description="O registro selecionado será excluído. Confirmar Exclusão?",
+  )
+  }}
+
   <div
     id="plants-cards"
     class="w-full mt-12">
@@ -45,9 +53,5 @@
 
 <script
   src="{{ url_for('static', filename='scripts/colorpicker.js') }}"></script>
-
-<script>
-  new Colorpicker("create-plant-form")  
-</script>
 
 {% endblock %}
