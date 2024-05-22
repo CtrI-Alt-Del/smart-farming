@@ -1,5 +1,5 @@
 {% from "components/label.html" import label %}
-{%from "components/error_component.hmtl" import error_messages%}
+{%from "components/error_component.html" import error_messages%}
 
 {{ create_sensors_record_form.csrf_token }}
 
@@ -52,9 +52,7 @@
   max=100
   )
   }}
-  {% if create_sensors_record_form.ambient_humidity.errors %}
-  {{error_messages(create_sensors_record_form.ambient_humidity.errors)}}
-  {% endif %}
+  {{error_messages(create_sensors_record_form.ambient_humidity.errors[0])}}
 </div>
 
 <div class="input-container">
@@ -74,9 +72,7 @@
   max=100
   )
   }}
-  {% if create_sensors_record_form.soil_humidity.errors %}
-  {{error_messages(create_sensors_record_form.soil_humidity.errors)}}
-  {% endif %}
+  {{error_messages(create_sensors_record_form.soil_humidity.errors[0])}}
 </div>
 
 <div class="input-container">
@@ -90,9 +86,7 @@
   min=-273,
   max=60,
   ) }}
-  {% if create_sensors_record_form.temperature.errors %}
-  {{error_messages(create_sensors_record_form.temperature.errors)}}
-  {% endif %}
+  {{error_messages(create_sensors_record_form.temperature.errors[0])}}
 </div>
 
 <div class="input-container">
@@ -106,9 +100,7 @@
   min=0,
   )
   }}
-  {% if create_sensors_record_form.water_volume.errors %}
-  {{error_messages(create_sensors_record_form.water_volume.errors)}}
-  {% endif %}
+  {{error_messages(create_sensors_record_form.water_volume.errors[0])}}
 </div>
 
 <div></div>
