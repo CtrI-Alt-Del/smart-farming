@@ -76,6 +76,17 @@ WHERE
 ORDER BY CR.created_at DESC
 LIMIT 25 OFFSET 0;   
 
+SELECT 
+    CR.*,
+    P.id AS plant_id, 
+    P.name AS plant_name, 
+    P.hex_color as plant_color
+FROM checklist_records AS CR
+JOIN plants AS P ON P.id = CR.plant_id
+WHERE CR.plant_id = '4544afe3-0661-11ef-9512-0242ac140002'
+ORDER BY CR.created_at DESC
+LIMIT 6 OFFSET 0;    
+
 
 SELECT 
   CR.*,

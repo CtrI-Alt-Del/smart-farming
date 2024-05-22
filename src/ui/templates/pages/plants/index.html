@@ -3,6 +3,7 @@
 {% from "components/title.html" import title %}
 {% from "components/button.html" import button %}
 {% from "components/loading.html" import loading %}
+{% from 'components/alert.html' import alert %}
 
 {% block dashboard_content %}
 
@@ -20,8 +21,6 @@
 
     {% call modal(id="create-plant-modal", class="h-96") %}
     {% include "pages/plants/create_plant_form/index.html" %}
-    <script
-      src="{{url_for('static', filename='/scripts/plant_color_name_change.js')}}"></script>
     {% endcall %}
   </div>
 
@@ -37,6 +36,13 @@
     {% include "components/search.html" %}
   </div>
 
+  {{
+  alert(
+  id="delete-plant",
+  description="O registro selecionado será excluído. Confirmar Exclusão?",
+  )
+  }}
+
   <div
     id="plants-cards"
     class="w-full mt-12">
@@ -47,9 +53,5 @@
 
 <script
   src="{{ url_for('static', filename='scripts/colorpicker.js') }}"></script>
-
-<script>
-  new Colorpicker("create-plant-form")  
-</script>
 
 {% endblock %}
