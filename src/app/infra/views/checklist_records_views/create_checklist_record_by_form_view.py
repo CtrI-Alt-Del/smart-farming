@@ -58,6 +58,11 @@ def create_checklist_record_by_form_view():
         )
 
     except Error as error:
+        render_template(
+            "pages/checklist_records_table/create_checklist_record_form/fields.html",
+            checklist_record_form=checklist_record_form,
+        )
+
         return (
             render_template(
                 "pages/checklist_records_table/create_checklist_record_form/fields.html",

@@ -5,115 +5,117 @@
 {% from "components/plant_select.html" import plant_select %}
 {% from "components/loading.html" import loading %}
 {% from 'components/title.html' import title %}
-{% from 'components/datepicker.html' import datepicker%}
+{% from 'components/datepicker.html' import datepicker %}
 
 {% block dashboard_content %}
 {{title("Registro dos sensores")}}
 
 <div class="flex items-center justify-between mt-6">
 
-<a href="{{url_for('sensors_records_views.sensors_records_dashboard_page_view')}}" class="flex items-center gap-1 p-2 px-2 border border-gray-800 rounded-md w-max"><i class="ph ph-presentation-chart"></i>
-	Visualizar gráficos
-</a>
+  <a
+    href="{{url_for('sensors_records_views.sensors_records_dashboard_page_view')}}"
+    class="flex items-center gap-1 p-2 px-2 border border-gray-800 rounded-md w-max"><i
+      class="ph ph-presentation-chart"></i>
+    Visualizar gráficos
+  </a>
 
-	{{
-	datepicker(
-	attributes="data-table=filter",
-	selected_start_date=selected_start_date,
-	selected_end_date=selected_end_date,
-	)
-	}}
+  {{
+  datepicker(
+  attributes="data-table=filter",
+  selected_start_date=selected_start_date,
+  selected_end_date=selected_end_date,
+  )
+  }}
 
+  {% call modal(id="create-sensors-records-modal") %}
 
-	{% call modal(id="create-sensors-records-modal") %}
+  {% include
+  "pages/sensors_records_table/create_sensors_record_form/index.html"
+  %}
 
-	{% include
-	"pages/sensors_records_table/create_sensors_record_form/index.html"
-	%}
+  {% endcall %}
 
-	{% endcall %}
-
-	{{ button(
-	type="button",
-	title="Adicionar registro",
-	attributes="data-modal-target=create-sensors-records-modal data-modal-toggle=create-sensors-records-modal")
-	}}
+  {{ button(
+  type="button",
+  title="Adicionar registro",
+  attributes="data-modal-target=create-sensors-records-modal data-modal-toggle=create-sensors-records-modal")
+  }}
 </div>
 <div class="relative pb-6 shadow-md sm:rounded-lg">
 
-	{% call modal(id="update-sensors-record-modal") %}
+  {% call modal(id="update-sensors-record-modal") %}
 
-	<div id="update-sensors-record-form" class="flex w-full">
-		<div class="grid place-content-center w-full h-[32rem]">
-			{{ loading("w-24 h-24") }}
-		</div>
-	</div>
+  <div id="update-sensors-record-form" class="flex w-full">
+    <div class="grid place-content-center w-full h-[32rem]">
+      {{ loading("w-24 h-24") }}
+    </div>
+  </div>
 
-	{% endcall %}
+  {% endcall %}
 
-	<div class="relative sm:rounded-lg">
-		<div class="flex items-end gap-3 p-6">
-			<form
-				hx-get="{{ url_for('sensors_records_views.filter_sensors_records_view') }}"
-				hx-target="#sensors-records"
-				hx-swap="innerHTML"
-				hx-include="#start-date,#end-date"
-				hx-trigger="submit, change from:#plant-select, change from:#end-date"
-				data-pagination="form"
-				data-query-param="hx-get"
-				id="filter-sensors-records-form">
-				{{
-				plant_select(
-				id="plant-select",
-				plants=plants,
-				can_include_all=True,
-				attributes="data-table-filter",
-				selected_plant_id=selected_plant_id
-				)
-				}}
-				<input
-					data-pagination="input"
-					type="text"
-					value="{{current_page_number}}"
-					hidden>
-			</form>
+  <div class="relative sm:rounded-lg">
+    <div class="flex items-end gap-3 p-6">
+      <form
+        hx-get="{{ url_for('sensors_records_views.filter_sensors_records_view') }}"
+        hx-target="#sensors-records"
+        hx-swap="innerHTML"
+        hx-include="#start-date,#end-date"
+        hx-trigger="submit, change from:#plant-select, change from:#end-date"
+        data-pagination="form"
+        data-query-param="hx-get"
+        id="filter-sensors-records-form">
+        {{
+        plant_select(
+        id="plant-select",
+        plants=plants,
+        can_include_all=True,
+        attributes="data-table-filter",
+        selected_plant_id=selected_plant_id
+        )
+        }}
+        <input
+          data-pagination="input"
+          type="text"
+          value="{{current_page_number}}"
+          hidden>
+      </form>
 
-			{{
-			button(
-			type="submit",
-			title="Deletar registro(s)",
-			attributes="id=delete-sensors-record-button data-loading-disable data-table=delete-button form=delete-sensors-records-form",
-			class="hidden bg-red-700 animate-pulse",
-			)
-			}}
-		</div>
+      {{
+      button(
+      type="button",
+      title="Deletar registro(s)",
+      attributes="id=delete-sensors-record-button data-loading-disable data-table=delete-button _=",
+      class="hidden bg-red-700 animate-pulse",
+      )
+      }}
+    </div>
 
-		<form
-			id="delete-sensors-records-form"
-			hx-delete="{{ url_for('sensors_records_views.delete_sensors_records_view') }}"
-			hx-target="#sensors-records"
-			hx-trigger="submit"
-			hx-swap="innerHTML"
-			data-query-param="hx-delete">
-			<div
-				data-table="container"
-				data-pagination="container"
-				id="sensors-records"
-				class="flex flex-col justify-between h-[28rem]">
-				{% include "pages/sensors_records_table/records.html" %}
-			</div>
-		</form>
+    <form
+      id="delete-sensors-records-form"
+      hx-delete="{{ url_for('sensors_records_views.delete_sensors_records_view') }}"
+      hx-target="#sensors-records"
+      hx-trigger="submit"
+      hx-swap="innerHTML"
+      data-query-param="hx-delete">
+      <div
+        data-table="container"
+        data-pagination="container"
+        id="sensors-records"
+        class="flex flex-col justify-between h-[28rem]">
+        {% include "pages/sensors_records_table/records.html" %}
+      </div>
+    </form>
 
-	</div>
+  </div>
 </div>
 
 <script
-	src="{{ url_for('static', filename='scripts/query_param.js') }}"></script>
+  src="{{ url_for('static', filename='scripts/query_param.js') }}"></script>
 
 <script
-	src="{{ url_for('static', filename='scripts/table.js') }}"></script>
+  src="{{ url_for('static', filename='scripts/table.js') }}"></script>
 
 <script
-	src="{{ url_for('static', filename='scripts/pagination.js') }}"></script>
+  src="{{ url_for('static', filename='scripts/pagination.js') }}"></script>
 
 {% endblock dashboard_content %}
