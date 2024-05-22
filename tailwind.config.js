@@ -24,7 +24,7 @@ module.exports = {
     require("flowbite/plugin")({
       charts: true,
     }),
-    require("tailwindcss-animate"),
     require("tailwindcss-animated"),
+    require("@midudev/tailwind-animations"),
   ],
 }

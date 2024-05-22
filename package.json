@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev:app": "flask --app ./src/app/main.py:init_app run --debug -p 5001 --host 0.0.0.0",
+    "dev:app": "flask --app ./src/app/main.py:init_app run --debug -p 5002 --host 0.0.0.0",
     "dev:style": "tailwindcss -i ./src/ui/static/styles/global.css -o ./src/ui/static/build/styles/global.css --watch",
     "dev": "concurrently 'npm run dev:app' 'npm run dev:style'",
     "app": "gunicorn -c gunicorn.config.py 'src.app.wsgi:app'",
@@ -8,14 +8,14 @@
     "start": "npm run style && npm run app"
   },
   "dependencies": {
+    "@midudev/tailwind-animations": "^0.0.7",
     "flowbite": "^2.3.0",
     "tailwindcss-animated": "^1.0.1"
   },
   "devDependencies": {
     "@biomejs/biome": "1.6.4",
     "concurrently": "^8.2.2",
-    "tailwindcss": "^3.4.3",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss": "^3.4.3"
   },
   "name": "smart-farming",
   "description": "Smart Farming é um **dashboard web** que visa facilitar o trabalho de monitoramento da estufa inteligente de mesmo nome mantida dentro da [FATEC de São José dos Campos](https://fatecsjc-prd.azurewebsites.net/).",
