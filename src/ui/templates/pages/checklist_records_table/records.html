@@ -1,6 +1,20 @@
+{% from "components/toast.html" import toast %}
 {% from "components/loading.html" import loading %}
 
 {% if checklist_records | length > 0 %}
+
+{% if message %}
+
+{{
+toast(
+id="new-checklist-records-message",
+message="message",
+category="success",
+on_load="trigger click on #create-checklist-records-modal-trigger",
+)
+}}
+
+{% endif %}
 
 <div class="overflow-x-auto">
   <table
@@ -13,7 +27,6 @@
 
   <div
     _="on load add .hidden to #delete-checklist-record-button"
-    data-hyperscript="process"
     class="sr-only">
   </div>
 
