@@ -3,7 +3,7 @@ MYSQL = {
         "plants": """
         CREATE TABLE plants (
             id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
-            name VARCHAR(255) NOT NULL,
+            name VARCHAR(255) NOT NULL UNIQUE,
             hex_color VARCHAR(7) NOT NULL,
             created_at DATETIME DEFAULT (NOW()) NOT NULL
         );
