@@ -1,9 +1,19 @@
 class Colorpicker {
-  constructor(formId) {
-    const form = document.getElementById(formId)
+  constructor() {
+    const forms = document.querySelectorAll("[data-colorpicker='form']")
 
-    if (!form) return
+    if (!forms.length) return
 
+    const colorpickerEvent = new Event("colorpicker")
+    document.dispatchEvent(colorpickerEvent)
+
+    for (const form of forms) {
+      this.addEventListeners(form)
+      form.addEventListener("colorpicker", () => this.addEventListeners(form))
+    }
+  }
+
+  addEventListeners(form) {
     const control = form.querySelector("[data-colorpicker='control']")
     const label = form.querySelector("[data-colorpicker='label']")
     const textInput = form.querySelector("[data-colorpicker='text-input']")
@@ -36,3 +46,5 @@ class Colorpicker {
     textPreview.textContent = textInput.value
   }
 }
+
+window.addEventListener('load', () => new Colorpicker())

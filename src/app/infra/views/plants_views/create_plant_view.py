@@ -21,5 +21,5 @@ def create_plant_view():
 
         return render_template("pages/plants/plants_cards/index.html", plants=plants)
     except Error as error:
-        print(error.ui_message, flush=True)
+        print(plant_form.errors, flush=True)
         return "ERROR", error.status_code
