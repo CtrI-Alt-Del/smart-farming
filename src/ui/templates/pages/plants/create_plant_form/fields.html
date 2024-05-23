@@ -1,6 +1,8 @@
 {{ create_plant_form.csrf_token }}
 
-<div class="flex flex-col place-items-center">
+<div
+  _="on load trigger colorpicker on #create-plant-form"
+  class="flex flex-col place-items-center">
   <div class="mt-10 input-container">
 
     {{
@@ -37,7 +39,6 @@
 
       <i class="text-2xl ph ph-plant"></i>
       <p data-colorpicker="text-preview">Nome da planta</p>
-
     </label>
   </div>
 </div>

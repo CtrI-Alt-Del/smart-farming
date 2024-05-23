@@ -9,6 +9,7 @@
   hx-swap="innerHTML"
   enctype="multipart/form-data"
   data-query-param="hx-post"
+  data-colorpicker="form"
   class="grid place-content-center h-50">
 
   {% include "pages/plants/create_plant_form/fields.html" %}
@@ -17,7 +18,3 @@
     {{ modal_controls(modal_id="create-plant-modal") }}
   </div>
 </form>
-
-<script>
-  new Colorpicker("create-plant-form")  
-</script>
