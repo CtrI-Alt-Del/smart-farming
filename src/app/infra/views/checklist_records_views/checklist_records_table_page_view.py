@@ -30,8 +30,6 @@ def checklist_records_table_page_view():
         last_page_number = data["last_page_number"]
         current_page_number = data["current_page_number"]
 
-        print(start_date, flush=True)
-
         return render_template(
             "pages/checklist_records_table/index.html",
             create_checklist_record_form=create_checklist_record_form,

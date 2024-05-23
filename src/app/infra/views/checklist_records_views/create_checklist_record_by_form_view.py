@@ -13,9 +13,10 @@ from infra.forms import ChecklistRecordForm
 def create_checklist_record_by_form_view():
     checklist_record_form = ChecklistRecordForm(request.form)
 
+    start_date = request.args.get("start-date", None)
+    end_date = request.args.get("end-date", None)
+    plant_id = request.args.get("plant", "all")
     page_number = int(request.args.get("page", 1))
-
-    print(checklist_record_form.data, flush=True)
 
     try:
         if not checklist_record_form.validate_on_submit():
@@ -42,7 +43,13 @@ def create_checklist_record_by_form_view():
             }
         )
 
-        data = get_checklist_records_table_page_data.execute(page_number=page_number)
+        data = get_checklist_records_table_page_data.execute(
+            page_number=page_number,
+            start_date=start_date,
+            end_date=end_date,
+            plant_id=plant_id,
+            should_get_plants=False,
+        )
 
         updated_checklist_records = data["checklist_records"]
         last_page_number = data["last_page_number"]
@@ -50,6 +57,7 @@ def create_checklist_record_by_form_view():
 
         return render_template(
             "pages/checklist_records_table/records.html",
+            message="Registro check-list criado com sucesso",
             checklist_records=updated_checklist_records,
             last_page_number=last_page_number,
             current_page_number=current_page_number,
