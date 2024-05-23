@@ -4,8 +4,6 @@ class Table {
     const deleteButton = document.querySelector("[data-table='delete-button']")
     const filters = document.querySelectorAll("[data-table='filter']")
 
-    console.log({ filters })
-
     if (!container || !deleteButton || !filters.length) return
 
     this.rowsIds = []
@@ -71,8 +69,6 @@ class Table {
     } else {
       this.rowsIds = this.rowsIds.filter((id) => id !== rowId)
     }
-
-    console.log(this.rowsIds)
 
     if (this.rowsIds.length) {
       this.showDeleteButton()
