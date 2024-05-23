@@ -82,14 +82,23 @@
         hidden>
     </form>
 
-    {{ alert() }}
+    {{
+    alert(
+    id="delete-checklist-record",
+    description="Tem certeza que deseja excluir esse registro check-list?",
+    on_confirm="trigger submit on #delete-checklist-records-form"
+    )
+    }}
 
     {{
     button(
-    type="submit",
+    type="button",
     title="Deletar registro(s)",
-    attributes="id=delete-checklist-record-button data-table=delete-button form=delete-checklist-records-form",
-    class="bg-red-700 animate-pulse hidden",
+    attributes="
+    id=delete-checklist-record-button
+    data-table=delete-button",
+    on_click="trigger click on #alert-modal-delete-checklist-record-trigger",
+    class="bg-red-700 hidden animate-pulse animate-duration-1000",
     )
     }}
   </div>
