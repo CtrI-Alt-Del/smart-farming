@@ -16,11 +16,11 @@
 
   <a
     href="{{ url_for('checklist_records_views.checklist_records_dashboard_page_view') }}"
-    class="flex items-center gap-1 p-2 px-2 border border-gray-800 rounded-md w-max"><i
-      class="ph ph-presentation-chart"></i>
+    class="flex items-center gap-1 p-2 px-2 border border-gray-800 rounded-md w-max">
+    <i class="ph ph-presentation-chart"></i>
     Visualizar gráficos
   </a>
-  
+
   {{
   datepicker(
   attributes="data-table=filter",
@@ -54,7 +54,7 @@
 
 {% endcall %}
 
-<div class="relative shadow-md pb-6 sm:rounded-lg">
+<div class="relative pb-6 shadow-md sm:rounded-lg">
   <div class="flex items-end gap-3 p-6">
     <form
       id="filter-checklist-records-form"
@@ -89,7 +89,7 @@
     type="submit",
     title="Deletar registro(s)",
     attributes="id=delete-checklist-record-button data-table=delete-button form=delete-checklist-records-form",
-    class="bg-red-700 animate-pulse hidden",
+    class="hidden bg-red-700 animate-pulse",
     )
     }}
   </div>
