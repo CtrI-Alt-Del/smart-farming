@@ -1,3 +1,7 @@
+{% from "components/label.html" import label %}
+{%from "components/error_component.html" import error_messages%}
+
+
 {{ update_plant_form.csrf_token }}
 
 <div class="flex flex-col place-items-center">
@@ -18,7 +22,7 @@
     **{"data-colorpicker": "text-input"}
     )
     }}
-
+    {{error_messages(update_plant_form.name.errors[0])}}
   </div>
   <div class="flex flex-col gap-2 mt-6 input-container place-items-center">
 
@@ -40,3 +44,7 @@
     </label>
   </div>
 </div>
+
+<script>
+  new Colorpicker("update-plant-form")
+</script>

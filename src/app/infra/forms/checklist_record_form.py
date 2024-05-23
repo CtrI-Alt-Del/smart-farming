@@ -109,24 +109,46 @@ class ChecklistRecordForm(FlaskForm):
         validators=[DataRequired()],
     )
     soil_humidity = IntegerField(
-        "Umidade do solo (%)", validators=[NumberRange(min=0, max=100)]
+        "Umidade do solo (%)",
+        validators=[
+            NumberRange(min=0, max=100,message="O valor deve estar entre 0 e 100"),
+        ],
     )
     air_humidity = IntegerField(
-        "Umidade do ar (%)", validators=[NumberRange(min=0, max=100)]
+        "Umidade do ar (%)",
+        validators=[
+            NumberRange(min=0, max=100,message="O valor deve estar entre 0 e 100"),
+        ],
     )
-    soil_ph = IntegerField("PH do solo", validators=[NumberRange(min=0, max=7)])
+    soil_ph = IntegerField(
+        "PH do solo",
+        validators=[
+            NumberRange(min=0, max=14,message="O valor deve estar entre 0 e 14"),
+        ],
+    )
     lai = FloatField(
         "Índice de área foliar (m²/m²)",
-        validators=[NumberRange(min=0)],
+        validators=[
+            NumberRange(min=0.0, message="O valor deve ser maior ou igual a 0"),
+        ],
     )
     water_consumption = FloatField(
         "Consumo de água detectado (ml)",
-        validators=[NumberRange(min=0)],
+        validators=[
+            NumberRange(min=0,message="O valor deve ser maior ou igual a 0"),
+        ],
     )
     temperature = FloatField(
         "Temperatura ambiente (°C)",
-        validators=[DataRequired(), NumberRange(min=-273, max=60)],
+        validators=[
+            NumberRange(min=-273, max=60,message="O valor deve estar entre -273ºC e 60ºC"),
+        ],
     )
-    illuminance = FloatField("Luminosidade (Lux)", validators=[NumberRange(min=0)])
+    illuminance = FloatField(
+        "Luminosidade (Lux)",
+        validators=[
+            NumberRange(min=0,message="O valor deve ser maior ou igual a 0"),
+        ],
+    )
     report = TextAreaField("Algum desvio detectado?")
     plant_id = SelectField("Planta", validators=[DataRequired()])

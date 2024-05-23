@@ -2,6 +2,43 @@
 
 <header
   class="w-full h-[72px] bg-header-background flex items-center justify-between dashboard">
-  <h1 class="text-white text-[30px]">Bem vindo!</h1>
+  <div class="flex items-center justify-center gap-1">
+    <div class="text-center md:hidden">
+      <button
+        _="on click remove .hidden from #close-drawer-button"
+        class="text-sm font-medium text-white rounded-lg focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+        type="button" data-drawer-target="drawer-example"
+        data-drawer-show="drawer-example"
+        aria-controls="drawer-example">
+        <i class="ph ph-list text-[40px] text-white hover:text-zinc-300"></i>
+      </button>
+
+      <button
+        id="close-drawer-button"
+        _="on click add .hidden on me"
+        type="button"
+        data-drawer-hide="drawer-example"
+        aria-controls="drawer-example"
+        class="text-gray-00 rounded-lg text-sm fixed top-6 left-[300px] z-50 hidden">
+        <div class="grid w-8 h-8 place-content-center">
+          <i class="text-2xl animate-fade ph-bold ph-x"></i>
+
+        </div>
+        <span class="sr-only">Fechar barra lateral</span>
+      </button>
+
+    </div>
+
+    <!-- drawer component -->
+    <div id="drawer-example"
+      class="fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform -translate-x-full w-80 dark:bg-gray-800"
+      tabindex="-1" aria-labelledby="drawer-label">
+      {% include "layouts/dashboard/sidebar.html" %}
+
+    </div>
+
+    <h1 class="text-white text-[20px] text-center p-2 md:text-[30px]">Bem
+      vindo!</h1>
+  </div>
   {{ login_link() }}
 </header>

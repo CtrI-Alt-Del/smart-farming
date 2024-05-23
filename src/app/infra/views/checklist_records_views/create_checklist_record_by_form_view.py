@@ -8,6 +8,7 @@ from core.commons import Error
 from core.constants import PAGINATION
 
 from infra.forms import ChecklistRecordForm
+from infra.forms import CsvForm
 
 
 def create_checklist_record_by_form_view():
@@ -20,7 +21,7 @@ def create_checklist_record_by_form_view():
 
     try:
         if not checklist_record_form.validate_on_submit():
-            raise Error(status_code=400)
+            raise Error
 
         create_checklist_record_by_form.execute(
             {
@@ -71,6 +72,12 @@ def create_checklist_record_by_form_view():
         )
 
         return (
-            "ERROR",
+            render_template(
+                "pages/checklist_records_table/create_checklist_record_form/fields.html",
+                create_checklist_record_form=checklist_record_form,
+                csv_form=csv_form,
+                checklist_record=checklist_record_form,
+                error_message=error.ui_message,
+            ),
             error.status_code,
         )

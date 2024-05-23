@@ -26,4 +26,5 @@ def update_plant_view(id: str):
             plant=updated_plant,
         )
     except Error as error:
-        return "ERROR", error.status_code
+        print(plant_form.errors,flush=True)
+        return render_template("pages/plants/update_plant_form/fields.html",update_plant_form = plant_form), error.status_code
