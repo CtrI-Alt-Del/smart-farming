@@ -11,7 +11,12 @@ def delete_plant_view(id: str):
 
         plants = get_plants_page_data.execute()
 
-        return render_template("pages/plants/plants_cards/index.html", plants=plants)
+        return render_template(
+            "pages/plants/plants_cards/index.html",
+            plants=plants,
+            message="Planta deletada com sucesso",
+            action="delete",
+        )
     except Error as error:
         print(error.ui_message)
         return "ERROR", error.status_code

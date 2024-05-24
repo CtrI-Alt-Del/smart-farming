@@ -24,7 +24,14 @@ def update_plant_view(id: str):
         return render_template(
             "pages/plants/plants_cards/card.html",
             plant=updated_plant,
+            update_message="Planta atualizada com sucesso",
         )
     except Error as error:
-        print(plant_form.errors,flush=True)
-        return render_template("pages/plants/update_plant_form/fields.html",update_plant_form = plant_form), error.status_code
+        print(plant_form.errors, flush=True)
+        return (
+            render_template(
+                "pages/plants/update_plant_form/fields.html",
+                update_plant_form=plant_form,
+            ),
+            error.status_code,
+        )

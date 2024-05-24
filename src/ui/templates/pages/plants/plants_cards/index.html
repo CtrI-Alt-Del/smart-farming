@@ -7,12 +7,7 @@
 {% if action == "create" %}
 
 {% set message = "Planta criada com sucesso" %}
-{% set on_load = "trigger click on #create-plant-modal-trigger" %}
-
-{% elif action == "update" %}
-
-{% set message = "Planta atualizada com sucesso" %}
-{% set on_load = "trigger click on #update-plant-modal-trigger" %}
+{% set on_load = "trigger click on #create-plant-modal-trigger then " %}
 
 {% elif action == "delete" %}
 
@@ -25,7 +20,7 @@
 toast(
 id="plants_cards_toast",
 message=message,
-on_load=on_load ~ " then remove .form-error",
+on_load=on_load ~ "remove .form-error",
 category="success",
 )
 }}

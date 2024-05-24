@@ -5,19 +5,13 @@
 {% from "components/loading.html" import loading %}
 {% from "components/alert.html" import alert %}
 {% from "components/toast.html" import toast %}
+{% from "components/modal.html" import modal %}
+{% from "components/search.html" import search %}
 
 {% block dashboard_content %}
 
-{{
-toast(
-id="create-plant-error-message",
-message="error_message",
-category="success",
-)
-}}
-
-{% from "components/modal.html" import modal %}
-<div class="w-full pb-12 bg-white rounded-md">
+<div
+  class="w-full pb-12 bg-white rounded-md">
 
   {{ title("Plantas") }}
 
@@ -42,19 +36,27 @@ category="success",
   {% endcall %}
 
   <form
+    id="search-plants"
     hx-get="{{ url_for('plants_views.filter_plants_view') }}"
     hx-target="#plants-cards"
     hx-swap="innerHTML"
-    hx-trigger="submit, search from:#search"
+    hx-trigger="submit"
     data-query-param="hx-get"
     class="w-96">
-    {% include "components/search.html" %}
+    {{ search(on_change="trigger submit on #search-plants") }}
   </form>
+
+  <input type="hidden" id="delete-plant-id-input">
 
   {{
   alert(
   id="delete-plant",
   description="O registro selecionado será excluído. Confirmar Exclusão?",
+  on_confirm="
+  on click
+  set plantId to #delete-plant-id-input.value
+  then call htmx.find(`#delete-plant-${plantId}-trigger`)
+  then trigger click on it"
   )
   }}
 
@@ -67,6 +69,12 @@ category="success",
 </div>
 
 <script
+  src="{{ url_for('static', filename='scripts/query_param.js') }}"></script>
+
+<script
   src="{{ url_for('static', filename='scripts/colorpicker.js') }}"></script>
+
+<script
+  src="{{ url_for('static', filename='scripts/filters.js') }}"></script>
 
 {% endblock %}
