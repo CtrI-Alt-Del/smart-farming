@@ -6,7 +6,8 @@ from core.commons import Error
 
 
 def filter_plants_view():
-    plant_name = request.args.get("search")
+    plant_name = request.args.get("search", "")
+
     try:
         plants = filter_plants.execute(plant_name)
 

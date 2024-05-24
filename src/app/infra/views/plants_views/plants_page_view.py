@@ -1,11 +1,14 @@
-from flask import render_template
+from flask import request, render_template
 
-from infra.repositories import plants_repository
+from core.use_cases.plants import filter_plants
+
 from infra.forms import PlantForm
 
 
 def plants_page_view():
-    plants = plants_repository.get_plants()
+    plant_name = request.args.get("search", "")
+
+    plants = filter_plants.execute(plant_name)
 
     create_plant_form = PlantForm()
     update_plant_form = PlantForm()
