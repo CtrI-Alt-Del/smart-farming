@@ -41,9 +41,15 @@ category="success",
   </div>
   {% endcall %}
 
-  <div class="w-96">
+  <form
+    hx-get="{{ url_for('plants_views.filter_plants_view') }}"
+    hx-target="#plants-cards"
+    hx-swap="innerHTML"
+    hx-trigger="submit, search from:#search"
+    data-query-param="hx-get"
+    class="w-96">
     {% include "components/search.html" %}
-  </div>
+  </form>
 
   {{
   alert(
