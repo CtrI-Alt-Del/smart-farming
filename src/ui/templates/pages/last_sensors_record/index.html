@@ -34,7 +34,8 @@
 
 </div>
 
-<div class="flex justify-center items-center flex-wrap md:grid grid-cols-2 mt-6 gap-x-10 gap-y-8">
+<div
+  class="flex flex-wrap items-center justify-center grid-cols-2 mt-6 md:grid gap-x-10 gap-y-8">
   {% call card(
   title="temperatura",
   value="{:.1f}ºC".format(last_sensors_record.temperature),
@@ -79,6 +80,11 @@
     <i class="text-purple-600 ph-bold ph-waves"></i>
   </div>
   {% endcall %}
+
+  <p
+    class="fixed hidden text-white md:block bottom-10 right-10 dark:text-black">Thigszin
+    was
+    here!</p>
 
 </div>
 
