@@ -16,7 +16,8 @@ module.exports = {
         },
       },
       backgroundImage: {
-        'radial-gradient': 'radial-gradient(closest-side, rgba(255, 227, 185, 1), #fff)',
+        "radial-gradient":
+          "radial-gradient(closest-side, rgba(255, 227, 185, 1), #fff)",
       },
     },
   },
