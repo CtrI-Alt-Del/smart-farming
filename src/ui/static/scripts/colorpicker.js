@@ -1,15 +1,20 @@
 class Colorpicker {
   constructor() {
-    const forms = document.querySelectorAll("[data-colorpicker='form']")
-
-    if (!forms.length) return
+    this.init()
 
     const colorpickerEvent = new Event("colorpicker")
     document.dispatchEvent(colorpickerEvent)
 
+    document.addEventListener("colorpicker", () => this.init())
+  }
+
+  init() {
+    const forms = document.querySelectorAll("[data-colorpicker='form']")
+
+    if (!forms.length) return
+
     for (const form of forms) {
       this.addEventListeners(form)
-      form.addEventListener("colorpicker", () => this.addEventListeners(form))
     }
   }
 
