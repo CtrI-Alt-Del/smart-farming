@@ -5,6 +5,7 @@ mysql = MySQL()
 
 
 def init_database():
+    return
     tables_names = list(MYSQL["tables"].keys())
     tables_sql = list(MYSQL["tables"].values())
     inserts = MYSQL["inserts"]

@@ -7,9 +7,11 @@ from infra.forms import PlantForm
 
 
 def create_plant_view():
+    print(request.form, flush=True)
     plant_form = PlantForm(request.form)
 
     try:
+        print(plant_form.validate_on_submit())
         if not plant_form.validate_on_submit():
             raise Error("Formulário inválido")
 
@@ -19,14 +21,16 @@ def create_plant_view():
 
         plants = get_plants_page_data.execute()
 
-        return render_template("pages/plants/plants_cards/index.html", plants=plants)
+        return render_template(
+            "pages/plants/plants_cards/index.html", plants=plants, action="create"
+        )
     except Error as error:
-        print(plant_form.name.errors, flush=True)
         return (
             render_template(
                 "pages/plants/create_plant_form/fields.html",
                 plant_form=plant_form,
                 create_plant_form=plant_form,
+                error_message=error,
             ),
             error.status_code,
         )

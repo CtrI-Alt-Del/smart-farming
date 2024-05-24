@@ -1,0 +1,13 @@
+{% from "components/alert.html" import alert %}
+
+{{
+alert(
+id=plant_id,
+description="O registro selecionado será excluído. Confirmar Exclusão?",
+on_confirm="trigger click on #delete-plant-{}-plant-trigger".format(plant_id)
+)
+}}
+
+<div _="on load trigger click on #alert-modal-{{ plant_id }}-trigger">
+
+</div>

@@ -39,6 +39,18 @@ class PlantsRepository:
 
         return None
 
+    def get_plant_by_name(self, name: str):
+        row = mysql.query(
+            sql="SELECT * FROM plants WHERE name = %s",
+            params=[name],
+            is_single=True,
+        )
+
+        if row:
+            return self.__get_plant_entity(row)
+
+        return None
+
     def get_last_plant(self) -> Plant | None:
         row = mysql.query(
             sql="SELECT * FROM plants ORDER BY created_at DESC LIMIT 1",

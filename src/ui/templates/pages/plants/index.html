@@ -3,9 +3,18 @@
 {% from "components/title.html" import title %}
 {% from "components/button.html" import button %}
 {% from "components/loading.html" import loading %}
-{% from 'components/alert.html' import alert %}
+{% from "components/alert.html" import alert %}
+{% from "components/toast.html" import toast %}
 
 {% block dashboard_content %}
+
+{{
+toast(
+id="create-plant-error-message",
+message="error_message",
+category="success",
+)
+}}
 
 {% from "components/modal.html" import modal %}
 <div class="w-full pb-12 bg-white rounded-md">

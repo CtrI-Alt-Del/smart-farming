@@ -1,15 +1,19 @@
 class Hyperscript {
   constructor() {
     document.body.addEventListener("htmx:afterOnLoad", (event) => {
-      this.precessElement(event.detail.elt)
+      this.precessElements(event.detail.elt)
     })
   }
 
-  precessElement(element) {
-    const elementsToBeProcessed = element.querySelectorAll("[_]")
+  precessElements(element) {
+    const hyperscriptElements = element.querySelectorAll("[_]")
+    const htmxElements = element.querySelectorAll("[data-^=hx-]")
 
-    for (const element of elementsToBeProcessed) {
+    for (const element of hyperscriptElements) {
       _hyperscript.processNode(element)
+    }
+    for (const element of htmxElements) {
+      htmx.process(element)
     }
   }
 }

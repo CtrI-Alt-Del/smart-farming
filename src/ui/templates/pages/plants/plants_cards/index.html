@@ -1,5 +1,39 @@
+{% from "components/toast.html" import toast %}
 
 {% if plants | length > 0 %}
+
+{% if action %}
+
+{% if action == "create" %}
+
+{% set message = "Planta criada com sucesso" %}
+{% set on_load = "trigger click on #create-plant-modal-trigger" %}
+
+{% elif action == "update" %}
+
+{% set message = "Planta atualizada com sucesso" %}
+{% set on_load = "trigger click on #update-plant-modal-trigger" %}
+
+{% elif action == "delete" %}
+
+{% set message = "Planta deletada com sucesso" %}
+{% set on_load = "" %}
+
+{% endif %}
+
+{{
+toast(
+id="plants_cards_toast",
+message=message,
+on_load=on_load ~ " then remove .form-error",
+category="success",
+)
+}}
+
+{% endif %}
+
+<div
+  _="on load remove <p.form-error /> then call #create-plant-form.reset()"></div>
 
 <div
   class="grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-8 xl:grid-cols-4 xl:gap-3 w-full">

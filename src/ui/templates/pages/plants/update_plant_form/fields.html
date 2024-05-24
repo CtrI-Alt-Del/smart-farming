@@ -1,6 +1,18 @@
 {% from "components/label.html" import label %}
-{%from "components/error_component.html" import error_messages%}
+{% from "components/error_component.html" import error_messages %}
 
+{% if error_message %}
+
+{{
+toast(
+id="update-plant-error-message",
+message=error_message,
+category="success",
+class="top-2 left-[32%]"
+)
+}}
+
+{% endif %}
 
 {{ update_plant_form.csrf_token }}
 

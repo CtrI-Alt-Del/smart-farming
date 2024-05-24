@@ -26,13 +26,19 @@
       hx-delete="{{ url_for('plants_views.delete_plant_view', id=plant.id) }}"
       hx-target="#plants-cards"
       hx-swap="innerHTML"
-      hx-trigger="click"
-      class>
+      hx-trigger="click">
     </button>
 
     <button
       type="button"
-      _="on click set @_ to 'trigger click on #delete-plant-{{ plant.id }}-button'
+      _="on click 
+      add 
+        @_='
+        on click trigger click on #delete-plant-{{ plant.id }}-button
+        then remove @_ from me
+        ' 
+      to #alert-delete-plant-confirm-button
+      then call _hyperscript.processNode(#alert-delete-plant-confirm-button)
       then trigger click on #alert-modal-delete-plant-trigger"
       class="hidden bg-transparent rounded-full group-hover:block">
       <i
