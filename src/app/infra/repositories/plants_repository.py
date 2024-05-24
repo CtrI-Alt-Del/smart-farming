@@ -62,6 +62,21 @@ class PlantsRepository:
 
         return None
 
+    def filter_plants_by_name(self, plant_name: str):
+        rows = mysql.query(
+            sql=f"""
+            SELECT * FROM plants
+            WHERE name LIKE '%{plant_name.lower()}%'  
+            ORDER BY created_at DESC
+            """,
+            is_single=False,
+        )
+
+        if len(rows) == 0:
+            return []
+
+        return [self.__get_plant_entity(row) for row in rows]
+
     def update_plant_by_id(self, plant: Plant) -> None:
         mysql.mutate(
             """
