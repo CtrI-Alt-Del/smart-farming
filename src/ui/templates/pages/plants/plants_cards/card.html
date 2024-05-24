@@ -1,8 +1,22 @@
+{% from "components/toast.html" import toast %}
 {% from "components/alert.html" import alert %}
 
 {% set card_style =
 "style=background-color:{};".format(plant.hex_color)
 %}
+
+{% if update_message %}
+
+{{
+toast(
+id="update-plant-card-toast",
+message=update_message,
+on_load="trigger click on #update-plant-modal-trigger then remove .form-error",
+category="success",
+)
+}}
+
+{% endif %}
 
 <div
   id="plant-{{ plant.id }}"
@@ -15,14 +29,13 @@
       hx-swap="innerHTML"
       hx-trigger="click"
       _="on click trigger click on #update-plant-modal-trigger"
-      data-hyperscript="process"
       class="hidden bg-transparent rounded-full group-hover:block">
       <i
         class="text-[20px] text-zinc-400 hover:text-blue-500 ph-light ph-pencil"></i>
     </button>
 
     <button
-      id="delete-plant-{{ plant.id }}-button"
+      id="delete-plant-{{ plant.id }}-trigger"
       hx-delete="{{ url_for('plants_views.delete_plant_view', id=plant.id) }}"
       hx-target="#plants-cards"
       hx-swap="innerHTML"
@@ -32,14 +45,8 @@
     <button
       type="button"
       _="on click 
-      add 
-        @_='
-        on click trigger click on #delete-plant-{{ plant.id }}-button
-        then remove @_ from me
-        ' 
-      to #alert-delete-plant-confirm-button
-      then call _hyperscript.processNode(#alert-delete-plant-confirm-button)
-      then trigger click on #alert-modal-delete-plant-trigger"
+       set the value of #delete-plant-id-input to '{{ plant.id }}'
+       then trigger click on #alert-modal-delete-plant-trigger"
       class="hidden bg-transparent rounded-full group-hover:block">
       <i
         class="text-[20px] text-zinc-400 hover:text-red-500 ph-light ph-trash"></i>
