@@ -10,6 +10,15 @@
 
 {% block dashboard_content %}
 
+{{
+toast(
+id="plants_cards_toast",
+message="message",
+on_load=on_load ~ "remove .form-error",
+category="success",
+)
+}}
+
 <div
   class="w-full pb-12 bg-white rounded-md">
 
