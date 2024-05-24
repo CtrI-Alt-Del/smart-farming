@@ -16,6 +16,15 @@
   padding-right: 40px;
 }
 
+a,
+button {
+  @apply transition-opacity duration-500
+}
+
+a:hover, button:hover {
+  @apply opacity-75
+}
+
 @media (max-width: 768px) {
   .dashboard {
     padding: 20px;
