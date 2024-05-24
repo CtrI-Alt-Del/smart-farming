@@ -7,19 +7,17 @@
 {% from "components/loading.html" import loading %}
 {% from "components/title.html" import title %}
 {% from 'components/alert.html' import alert %}
+{% from 'components/see_charts_button.html' import see_charts_button %}
 
 {% block dashboard_content %}
 
 {{ title("Registro da Checklist") }}
 
-<div class="flex items-center justify-between mt-6">
+<div
+  class="flex items-center justify-between mt-6 max-[340px]:grid max-[340px]:grid-cols-2 max-[340px]:grid-rows-2">
 
-  <a
-    href="{{ url_for('checklist_records_views.checklist_records_dashboard_page_view') }}"
-    class="flex items-center gap-1 p-2 px-2 border border-gray-800 rounded-md w-max">
-    <i class="ph ph-presentation-chart"></i>
-    Visualizar gráficos
-  </a>
+  {{ see_charts_button("Visualizar gráficos",
+  url_for('checklist_records_views.checklist_records_dashboard_page_view')) }}
 
   {{
   datepicker(
@@ -98,7 +96,7 @@
     id=delete-checklist-record-button
     data-table=delete-button",
     on_click="trigger click on #alert-modal-delete-checklist-record-trigger",
-    class="bg-red-700 hidden animate-pulse animate-duration-1000",
+    class="hidden bg-red-700 animate-pulse animate-duration-1000",
     )
     }}
   </div>
