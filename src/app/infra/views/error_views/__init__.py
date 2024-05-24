@@ -1,15 +1,23 @@
-from flask import Blueprint
+from flask import Flask, render_template
 
-from .error_page_view import error_page_view
+from core.commons import Error
 
-error_views = Blueprint("error_page_view", __name__)
 
-route = error_views.add_url_rule
+def init_error_views(app: Flask):
 
-route(rule="/login", view_func=error_page_view, methods=["GET"])
+    @app.errorhandler(404)
+    def page_not_found_error_page_view(_):
+        return render_template(
+            "pages/error/index.html", status_code=404, message="Página não encontrada."
+        )
 
-route(
-    "/error_page_view/error",
-    view_func=error_page_view,
-    methods=["GET"],
-)
+    @app.errorhandler(Exception)
+    @app.errorhandler(Error)
+    @app.errorhandler(500)
+    def internal_server_error_page_view(error):
+        print(error, flush=True)
+        return render_template(
+            "pages/error/index.html",
+            status_code=500,
+            message="Erro interno no servidor.",
+        )
