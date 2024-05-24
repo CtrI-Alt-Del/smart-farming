@@ -2,7 +2,7 @@ from flask import render_template
 
 from core.use_cases.sensors_records import get_last_sensors_record_page_data
 from core.entities import SensorsRecord
-from core.commons.error import Error
+from core.commons import Error
 
 
 def last_sensors_record_page_view():

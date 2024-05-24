@@ -1,3 +1,5 @@
+{% from "components/toast.html" import toast %}
+
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -20,10 +22,30 @@
   </head>
 
   <body
-    hx-ext="loading-states,response-targets">
+    hx-ext="loading-states, response-targets">
 
-    {% block body %}
-    {% endblock body %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+
+    {% if messages %}
+
+    <ul class="absolute z-50 top-20 left-[45%] h-screen w-screen">
+      {% for category, message in messages %}
+      {{
+      toast(
+      id=message,
+      message=message,
+      category=category,
+      class="top-64 left-[32%]"
+      )
+      }}
+      {% endfor %}
+    </ul>
+
+    {% endif %}
+
+    {% endwith %}
+
+    {% block body %}{% endblock body %}
 
     <script
       src="{{ url_for('static', filename='scripts/hyperscript.js') }}"></script>
