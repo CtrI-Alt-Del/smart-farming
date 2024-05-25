@@ -31,6 +31,7 @@
       <hr class="bg-black w-[75%] h-[0.5px] mt-3">
 
       <form
+        id="create-checklist-records-form"
         hx-post="{{ url_for('checklist_records_views.create_checklist_record_by_form_view') }}"
         hx-target="#checklist-records"
         hx-target-error="#create-checklist-record-form-fields"

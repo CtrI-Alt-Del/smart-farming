@@ -5,6 +5,7 @@
   <div class="flex flex-col rounded-2xl">
     <div class="flex flex-col items-center justify-center">
       <form
+        id="update-checklist-records-form"
         hx-put="{{ 
           url_for(
             'checklist_records_views.update_checklist_record_view', 
@@ -16,8 +17,7 @@
         hx-swap="outerHTML">
 
         <div
-          id="update-checklist-record-form-fields"
-        >
+          id="update-checklist-record-form-fields">
           {% include
           "pages/checklist_records_table/update_checklist_record_form/fields.html"
           %}
