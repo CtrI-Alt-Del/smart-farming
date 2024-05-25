@@ -21,8 +21,6 @@ def checklist_records_dashboard_page_view():
             data["days_count_by_leaf_color_and_plant"], ensure_ascii=False
         )
 
-        print(leaf_appearences_chart_data, flush=True)
-
         plant_growth_chart_data = dumps(
             data["plant_growth_chart_data"], cls=JSONEncoder
         )

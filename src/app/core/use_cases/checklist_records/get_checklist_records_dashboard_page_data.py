@@ -53,7 +53,6 @@ class GetChecklistRecordsDashboardPageData:
                         record["leaf_appearance"] == leaf_appearance
                         and record["plant_id"] == plant.id
                     ):
-                        print(days_count_by_leaf_appearance_and_plant, flush=True)
                         days_count_by_leaf_appearance_and_plant[plant.id][
                             leaf_appearance
                         ] += 1
@@ -66,7 +65,6 @@ class GetChecklistRecordsDashboardPageData:
                     ):
                         days_count_by_leaf_color_and_plant[plant.id][leaf_color] += 1
 
-        print(days_count_by_leaf_appearance_and_plant, flush=True)
         return {
             "days_count_by_leaf_appearance_and_plant": days_count_by_leaf_appearance_and_plant,
             "days_count_by_leaf_color_and_plant": days_count_by_leaf_color_and_plant,

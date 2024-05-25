@@ -76,7 +76,6 @@ def create_checklist_record_by_form_view():
             render_template(
                 "pages/checklist_records_table/create_checklist_record_form/fields.html",
                 create_checklist_record_form=checklist_record_form,
-                checklist_record=checklist_record_form,
                 error_message=error.ui_message,
             ),
             error.status_code,
