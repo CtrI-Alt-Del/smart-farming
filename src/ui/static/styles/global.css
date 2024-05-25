@@ -25,6 +25,10 @@ a:hover, button:hover {
   @apply opacity-75
 }
 
+fieldset {
+  @apply border-none
+}
+
 @media (max-width: 768px) {
   .dashboard {
     padding: 20px;
