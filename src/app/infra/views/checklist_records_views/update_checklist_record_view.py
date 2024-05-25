@@ -38,7 +38,14 @@ def update_checklist_record_view(id: str):
         return render_template(
             "pages/checklist_records_table/row.html",
             checklist_record=updated_checklist_record,
+            update_message="Registro check-list atualizado com sucesso",
         )
     except Error as error:
         print(checklist_record_form.errors, flush=True)
-        return render_template("/pages/checklist_records_table/update_checklist_record_form/fields.html",update_checklist_record_form = checklist_record_form), error.status_code
+        return (
+            render_template(
+                "/pages/checklist_records_table/update_checklist_record_form/fields.html",
+                update_checklist_record_form=checklist_record_form,
+            ),
+            error.status_code,
+        )

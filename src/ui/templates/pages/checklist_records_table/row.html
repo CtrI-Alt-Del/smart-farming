@@ -1,3 +1,4 @@
+{% from "components/toast.html" import toast %}
 {% from "components/modal.html" import modal %}
 {% from "components/plant_badge.html" import plant_badge %}
 
@@ -7,6 +8,20 @@
   data-loading-class="hidden"
   class="group bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
   <td class="relative p-4">
+
+    {% if update_message %}
+    <div class="fixed">
+      {{
+      toast(
+      id="plants_cards_toast",
+      message=update_message,
+      on_load="trigger click on #update-checklist-record-modal-trigger then remove .form-error",
+      category="success",
+      )
+      }}
+    </div>
+    {% endif %}
+
     <div class="flex items-center gap-3 w-4">
       <input
         id="checkbox-{{ checklist_record.id }}"
