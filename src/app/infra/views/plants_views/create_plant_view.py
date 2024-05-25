@@ -11,7 +11,6 @@ def create_plant_view():
     plant_form = PlantForm(request.form)
 
     try:
-        print(plant_form.validate_on_submit())
         if not plant_form.validate_on_submit():
             raise Error("Formulário inválido")
 
@@ -30,7 +29,6 @@ def create_plant_view():
                 "pages/plants/create_plant_form/fields.html",
                 plant_form=plant_form,
                 create_plant_form=plant_form,
-                error_message=error,
             ),
             error.status_code,
         )
