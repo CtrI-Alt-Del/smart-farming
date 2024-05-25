@@ -1,0 +1,14 @@
+{% from "components/toast.html" import toast %}
+
+<div
+  _="on load wait 4s then remove me"
+  class="absolute w-full">
+  {{
+  toast(
+  id="csv-form-message",
+  message=message,
+  category="error",
+  on_load=on_load,
+  )
+  }}
+</div>
