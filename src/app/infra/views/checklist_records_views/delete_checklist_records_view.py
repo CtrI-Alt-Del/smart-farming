@@ -37,6 +37,7 @@ def delete_checklist_records_view():
             last_page_number=last_page_number,
             current_page_number=current_page_number,
             page_buttons_limit=PAGINATION["page_buttons_siblings_count"],
+            delete_message="Registro check-list deletado com sucesso",
         )
     except Error as error:
         return "ERROR", error.status_code
