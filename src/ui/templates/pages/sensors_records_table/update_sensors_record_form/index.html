@@ -5,6 +5,7 @@
   <div class="flex flex-col rounded-2xl">
     <div class="flex flex-col items-center justify-center">
       <form
+        id="update-sensors-records-form"
         hx-put="{{ 
           url_for(
             'sensors_records_views.update_sensors_record_view', 

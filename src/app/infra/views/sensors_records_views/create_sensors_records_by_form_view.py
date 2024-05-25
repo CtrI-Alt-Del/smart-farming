@@ -10,6 +10,7 @@ from core.constants import PAGINATION
 from infra.forms import SensorsRecordForm
 from infra.forms import CsvForm
 
+
 def create_sensors_record_by_form_view():
     sensors_record_form = SensorsRecordForm(request.form)
 
@@ -18,11 +19,10 @@ def create_sensors_record_by_form_view():
     plant_id = request.args.get("plant", "all")
     page_number = int(request.args.get("page", 1))
 
-    csv_form = CsvForm()
     try:
         if not sensors_record_form.validate_on_submit():
             raise Error
-    
+
         create_sensors_records_by_form.execute(
             {
                 "soil_humidity": sensors_record_form.soil_humidity.data,
@@ -52,9 +52,15 @@ def create_sensors_record_by_form_view():
             last_page_number=last_page_number,
             current_page_number=page_number,
             page_buttons_limit=PAGINATION["page_buttons_siblings_count"],
+            create_message="Registro dos sensores realizado com sucesso",
         )
 
     except Error as error:
         return (
-            render_template('pages/sensors_records_table/create_sensors_record_form/fields.html',create_sensors_record_form=sensors_record_form,csv_form=csv_form,sensors_records = sensors_record_form,error_message=error.ui_message),error.status_code)
-        
+            render_template(
+                "pages/sensors_records_table/create_sensors_record_form/fields.html",
+                create_sensors_record_form=sensors_record_form,
+                error_message=error.ui_message,
+            ),
+            error.status_code,
+        )

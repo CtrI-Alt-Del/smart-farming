@@ -47,6 +47,7 @@ def create_sensors_records_by_csv_file_view():
             last_page_number=last_page_number,
             current_page_number=page_number,
             page_buttons_limit=PAGINATION["page_buttons_siblings_count"],
+            create_by_csv_message="Registros dos sensores por arquivo csv realizado com sucesso",
         )
 
     except Error as error:

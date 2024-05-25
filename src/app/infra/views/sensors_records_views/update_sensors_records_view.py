@@ -4,7 +4,6 @@ from core.use_cases.sensors_records import update_sensors_records
 from core.commons import Error
 
 from infra.forms import SensorsRecordForm
-from infra.forms import CsvForm
 
 
 def update_sensors_record_view(id: str):
@@ -29,7 +28,14 @@ def update_sensors_record_view(id: str):
         return render_template(
             "pages/sensors_records_table/row.html",
             sensors_record=updated_sensors_record,
+            update_message="Registro atualizado com sucesso",
         )
     except Error as error:
         print(sensors_record_form.errors, flush=True)
-        return (render_template("pages/sensors_records_table/update_sensors_record_form/fields.html",update_sensors_record_form = sensors_record_form), error.status_code)
+        return (
+            render_template(
+                "pages/sensors_records_table/update_sensors_record_form/fields.html",
+                update_sensors_record_form=sensors_record_form,
+            ),
+            error.status_code,
+        )

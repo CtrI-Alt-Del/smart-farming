@@ -3,15 +3,16 @@
 
 {{ create_sensors_record_form.csrf_token }}
 
-
 <div class="input-container">
-  {{ label(
+  {{
+  label(
   id="create-sensors-record-date",
   title="Data",
   icon="calendar-blank"
   )
   }}
-  {{ create_sensors_record_form.date(
+  {{
+  create_sensors_record_form.date(
   id="create-sensors-record-date",
   class="input-field",
   placeholder="12/12/2024",
@@ -20,7 +21,8 @@
   }}
 </div>
 <div class="input-container">
-  {{ label(
+  {{
+  label(
   id="create-sensors-record-time",
   title="Hora",
   icon="calendar-blank")

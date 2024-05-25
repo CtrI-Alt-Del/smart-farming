@@ -1,6 +1,48 @@
+{% from "components/toast.html" import toast %}
 {% from "components/loading.html" import loading %}
 
 {% if sensors_records | length > 0 %}
+
+{% if create_by_csv_message %}
+
+{{
+toast(
+id="create-sensors-records-message",
+message=create_by_csv_message,
+category="success",
+on_load="remove .form-error",
+)
+}}
+
+{% endif %}
+
+{% if create_message %}
+
+{{
+toast(
+id="create-sensors-records-message",
+message=create_message,
+category="success",
+on_load="trigger click on #create-sensors-records-modal-trigger
+then remove .form-error
+then call #create-sensors-records-form.reset()",
+)
+}}
+
+{% endif %}
+
+{% if delete_message %}
+
+{{
+toast(
+id="delete-sensors-records-message",
+message=delete_message,
+category="success",
+on_load="remove .form-error",
+)
+}}
+
+{% endif %}
 
 <div class="overflow-x-auto">
   <table
