@@ -1,42 +1,54 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const startDateInput = document.getElementById("start-date");
-  const endDateInput = document.getElementById("end-date");
-  let previousEndDateValue = endDateInput.value;
+class Datepicker {
+  constructor() {
+    const startDateInput = document.querySelector("[data-datepicker='start-date']")
+    const endDateInput = document.querySelector("[data-datepicker='end-date']")
+    const form = document.querySelector("[data-datepicker='form']")
 
-  endDateInput.style.opacity = "0.5";
-  endDateInput.style.cursor = "not-allowed";
+    if (!startDateInput || !endDateInput || !form) return
 
-  endDateInput.disabled = true; 
+    this.startDateInput = startDateInput
+    this.endDateInput = endDateInput
+    this.previousEndDateValue = endDateInput.value
+    this.form = form
+    this.queryParam = new QueryParam()
 
-  function setEndDateToStartDate() {
-    if (!endDateInput.value) {
-      endDateInput.value = startDateInput.value;
+    endDateInput.addEventListener("input", () => this.handleEndInputChange())
+    startDateInput.addEventListener("change", (event) => this.handleStartInputChange(event))
+  }
+
+  setEndDateToStartDate() {
+    if (!this.endDateInput.value) {
+      this.endDateInput.value = this.startDateInput.value
+      this.queryParam.append("end-date", this.startDateInput.value)
     }
   }
 
-  startDateInput.addEventListener("blur", () => {
-    setEndDateToStartDate();
-  });
-
-  endDateInput.addEventListener("input", () => {
-    if (new Date(startDateInput.value) > new Date(endDateInput.value)) {
-      endDateInput.value = previousEndDateValue;
+  handleEndInputChange() {
+    if (new Date(this.startDateInput.value) > new Date(this.endDateInput.value)) {
+      this.endDateInput.value = this.previousEndDateValue
     } else {
-      previousEndDateValue = endDateInput.value;
+      this.previousEndDateValue = this.endDateInput.value
     }
-  });
 
-  startDateInput.addEventListener("change", (event) => {
-    const selectedDate = new Date(event.target.value);
+    if (this.startDateInput.value) this.submitForm()
+  }
+
+  handleStartInputChange(event) {
+    const selectedDate = new Date(event.target.value)
+
     if (selectedDate > new Date()) {
-      event.target.value = ""; 
-      alert("Datas futuras não são permitidas."); 
-      return; 
+      event.target.value = ""
+      alert("Datas futuras não são permitidas.")
+      return
     }
-    selectedDate.setDate(selectedDate.getDate() + 1); 
-    endDateInput.min = selectedDate.toISOString().split("T")[0];
-    endDateInput.disabled = false; 
-    endDateInput.style.opacity = "1"; 
-    endDateInput.style.cursor = "auto"; 
-  });
-});
+    selectedDate.setDate(selectedDate.getDate() + 1)
+    this.endDateInput.min = selectedDate.toISOString().split("T")[0]
+    this.endDateInput.disabled = false
+    this.endDateInput.style.opacity = "1"
+    this.endDateInput.style.cursor = "auto"
+
+    this.setEndDateToStartDate()
+  }
+}
+
+window.addEventListener("load", () => new Datepicker())
