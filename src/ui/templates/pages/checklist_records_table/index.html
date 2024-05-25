@@ -102,7 +102,17 @@
     id=delete-checklist-record-button
     data-table=delete-button",
     on_click="trigger click on #alert-modal-delete-checklist-record-trigger",
-    class="bg-red-700 hidden animate-pulse animate-duration-1000",
+    class="hidden bg-red-700 animate-pulse animate-duration-1000",
+    )
+    }}
+
+    {{
+    button(
+    type="button",
+    title="Remover todos os filtros",
+    attributes="
+    data-filters=remove-all-button",
+    class="hidden bg-gray-800",
     )
     }}
   </div>
