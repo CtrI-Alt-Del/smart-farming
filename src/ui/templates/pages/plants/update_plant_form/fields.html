@@ -1,19 +1,6 @@
 {% from "components/label.html" import label %}
 {% from "components/error_component.html" import error_messages %}
 
-{% if error_message %}
-
-{{
-toast(
-id="update-plant-error-message",
-message=error_message,
-category="success",
-class="top-2 left-[32%]"
-)
-}}
-
-{% endif %}
-
 {{ update_plant_form.csrf_token }}
 
 <div class="flex flex-col place-items-center">
@@ -34,7 +21,7 @@ class="top-2 left-[32%]"
     **{"data-colorpicker": "text-input"}
     )
     }}
-    {{error_messages(update_plant_form.name.errors[0])}}
+    {{ error_messages(update_plant_form.name.errors[0]) }}
   </div>
   <div class="flex flex-col gap-2 mt-6 input-container place-items-center">
 
@@ -47,12 +34,16 @@ class="top-2 left-[32%]"
       update_plant_form.hex_color(
       id="update-plant-form-hex-color",
       class="absolute invisible",
-      **{"data-colorpicker": "control"}
+      **{"data-colorpicker": "control", "default":
+      update_plant_form.hex_color.data}
       )
       }}
 
       <i class="text-2xl ph ph-plant"></i>
-      <p data-colorpicker="text-preview">Nome da planta</p>
+      <p
+        data-colorpicker="text-preview">
+        Nome da planta
+      </p>
     </label>
   </div>
 </div>

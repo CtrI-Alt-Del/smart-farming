@@ -27,7 +27,7 @@ def update_plant_view(id: str):
             update_message="Planta atualizada com sucesso",
         )
     except Error as error:
-        print(plant_form.errors, flush=True)
+        print(plant_form.hex_color.default, flush=True)
         return (
             render_template(
                 "pages/plants/update_plant_form/fields.html",

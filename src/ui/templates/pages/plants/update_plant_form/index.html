@@ -5,7 +5,7 @@
   id="update-plant-form"
   hx-put="{{ url_for('plants_views.update_plant_view', id=plant_id) }}"
   hx-target="#plant-{{ plant_id }}"
-  hx-target-error="#update-plant-form"
+  hx-target-error="#update-plant-form-fields"
   hx-swap="outerHTML"
   hx-trigger="submit"
   _="on load trigger colorpicker"
@@ -13,7 +13,7 @@
   data-query-param="hx-put"
   enctype="multipart/form-data"
   class="grid place-content-center h-50">
-  <div id="update-plant-form">
+  <div id="update-plant-form-fields">
     {% include "pages/plants/update_plant_form/fields.html" %}
   </div>
   <div class="mt-10">
