@@ -64,7 +64,7 @@ class GetLastSensorsRecordPageData:
         last_record_atribute_value = getattr(last_sensors_record, attribute)
         penultimate_record_value = getattr(penultimate_record, attribute)
 
-        if last_record_atribute_value == 0:
+        if last_record_atribute_value == 0 or penultimate_record_value == 0:
             return 0
 
         difference = last_record_atribute_value - penultimate_record_value
