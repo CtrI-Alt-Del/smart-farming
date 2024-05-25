@@ -1,25 +1,24 @@
 {% extends "layouts/dashboard/index.html" %}
 
 {% from "components/modal.html" import modal %}
+{% from "components/alert.html" import alert %}
 {% from "components/button.html" import button %}
 {% from "components/datepicker.html" import datepicker %}
 {% from "components/plant_select.html" import plant_select %}
 {% from "components/loading.html" import loading %}
 {% from "components/title.html" import title %}
 {% from 'components/alert.html' import alert %}
+{% from 'components/see_charts_button.html' import see_charts_button %}
 
 {% block dashboard_content %}
 
 {{ title("Registro da Checklist") }}
 
-<div class="flex items-center justify-between mt-6">
+<div
+  class="flex items-center justify-between mt-6 max-[340px]:grid max-[340px]:grid-cols-2 max-[340px]:grid-rows-2">
 
-  <a
-    href="{{ url_for('checklist_records_views.checklist_records_dashboard_page_view') }}"
-    class="flex items-center gap-1 p-2 px-2 border border-gray-800 rounded-md w-max">
-    <i class="ph ph-presentation-chart"></i>
-    Visualizar gráficos
-  </a>
+  {{ see_charts_button("Visualizar gráficos",
+  url_for('checklist_records_views.checklist_records_dashboard_page_view')) }}
 
   {{
   datepicker(
