@@ -23,3 +23,6 @@ class RecordsFilters:
 
         if self.end_date != "" and isinstance(self.end_date, str):
             self.end_date = Date(self.end_date).get_value()
+
+        if self.start_date and (self.end_date is None or self.end_date == ""):
+            self.end_date = self.start_date
