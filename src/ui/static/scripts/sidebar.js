@@ -1,12 +1,10 @@
 class Sidebar {
   constructor() {
-    this.links = document.querySelectorAll("[data-sidebar-link]")
+    const links = document.querySelectorAll("[data-sidebar-link]")
 
-    if (!this.links.length) return
+    const currentUrl = location.href
 
-    const currentUrl = window.location.href
-
-    for (const link of this.links) {
+    for (const link of links) {
       const slug = link.dataset.sidebarSlug
       if (currentUrl.includes(slug)) {
         link.style.backgroundColor = "#DCFCE7"

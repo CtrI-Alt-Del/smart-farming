@@ -38,8 +38,6 @@ class PlantGrowthChart {
 
       this.chart = chart
 
-      console.log({ plantSelect })
-
       plantSelect.addEventListener("change", (event) => {
         this.handlePlantSelectChange(event)
       })
