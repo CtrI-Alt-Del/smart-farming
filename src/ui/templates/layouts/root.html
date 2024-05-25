@@ -32,7 +32,7 @@
       {% for category, message in messages %}
       {{
       toast(
-      id=message,
+      id="toast-" ~ loop.index0,
       message=message,
       category=category,
       class="top-64 left-[32%]"
