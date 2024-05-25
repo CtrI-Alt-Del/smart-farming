@@ -5,7 +5,7 @@
 <main class="overflow-x-hidden">
 	<a
 		href="/"
-		class="absolute top-[10%] left-[10%] flex items-center gap-1 text-xl">
+		class="absolute top-16 left-[10%] flex items-center gap-1 text-xl">
 		<i class="ph ph-arrow-circle-left"></i>
 		Voltar
 	</a>
@@ -20,11 +20,15 @@
 	</div>
 
 	<div
-		class="flex justify-center mt-6 text-2xl font-medium z-10 animate-jump-in animate-duration-700">
+		class="flex flex-col items-center justify-center gap-2 mt-6 text-2xl font-medium z-10 animate-jump-in animate-duration-700">
 		<p>Ops... {{ message }}</p>
+
+		{% if internal_message %}
+		<strong class="block">{{ internal_message }}</strong>
+		{% endif %}
 	</div>
 
-	<div class="flex justify-center m-16 z-10 animate-fade-up">
+	<div class="flex justify-center m-12 z-10 animate-fade-up">
 		<img
 			src="{{ url_for('static', filename='images/withered.png') }}"
 			alt="Planta murcha"

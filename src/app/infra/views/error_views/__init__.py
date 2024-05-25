@@ -15,9 +15,10 @@ def init_error_views(app: Flask):
     @app.errorhandler(Error)
     @app.errorhandler(500)
     def internal_server_error_page_view(error):
-        print(error, flush=True)
+        print("error", error, flush=True)
         return render_template(
             "pages/error/index.html",
             status_code=500,
             message="Erro interno no servidor.",
+            internal_message=error,
         )
