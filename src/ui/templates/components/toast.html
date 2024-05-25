@@ -1,7 +1,7 @@
 {% macro toast(id, message, category, on_load = "", class = "") %}
 
 {% set animation_script =
-"wait 2s then remove .animate-fade-in-down from me
+"wait 3s then remove .animate-fade-in-down from me
 then add .animate-fade-out-down on me"
 %}
 
@@ -14,7 +14,7 @@ then add .animate-fade-out-down on me"
   {% else %}
   _="on load {{ animation_script }}"
   {% endif %}
-  class="fixed top-16 left-[45%] flex items-center w-full max-w-md p-4 mb-4 text-black bg-green-200 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 animate-fade-in-down {{ class }}"
+  class="fixed top-16 left-[45%] flex items-center w-full max-w-sm p-4 mb-4 text-black bg-green-200 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 animate-fade-in-down {{ class }}"
   role="alert">
   <div
     class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
@@ -28,10 +28,11 @@ then add .animate-fade-out-down on me"
   </div>
   <div class="ms-3 text-md font-semibold">{{ message }}</div>
   <button
-    type="button"
-    class="ms-auto -mx-1.5 -my-1.5 bg-green-100 text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-green-300 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+    _="on click add .animate-fade-out-down on #{{ id }}"
     data-dismiss-target="#{{ id }}"
-    aria-label="Close">
+    aria-label="Fechar mensagem"
+    type="button"
+    class="ms-auto -mx-1.5 -my-1.5 bg-green-100 text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-green-300 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">
     <span class="sr-only">Fechar mensagem</span>
     <svg class="w-3 h-3" aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -66,9 +67,11 @@ then add .animate-fade-out-down on me"
     <span class="sr-only">Error Icon</span>
   </div>
   <div class="ms-3 text-sm font-semibold">{{ message }}</div>
-  <button type="button"
-    class="ms-auto -mx-1.5 -my-1.5 bg-red-100 text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-red-300 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
-    data-dismiss-target="#{{ id }}" aria-label="Close">
+  <button
+    data-dismiss-target="#{{ id }}"
+    aria-label="Fechar mensagem"
+    type="button"
+    class="ms-auto -mx-1.5 -my-1.5 bg-red-100 text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-red-300 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">
     <span class="sr-only">Close</span>
     <svg class="w-3 h-3" aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">

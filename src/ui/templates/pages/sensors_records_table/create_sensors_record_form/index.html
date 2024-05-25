@@ -3,13 +3,18 @@
 {% from "components/label.html" import label %}
 {% from "components/modal.html" import modal_controls %}
 
+<div
+  id="csv-form-error"
+  class="relative w-1/2 mx-auto">
+</div>
+
 <div class="flex flex-col h-auto rounded-2xl">
   <div class="flex items-center justify-center gap-1 mt-3">
     <span>Manualmente</span> <span>ou</span>
     <form
       hx-post="{{ url_for('sensors_records_views.create_sensors_records_by_csv_file_view') }}"
       hx-target="#sensors-records"
-      hx-target-error="#create-sensors-records-form-fields"
+      hx-target-error="#csv-form-error"
       hx-swap="innerHTML"
       data-query-param="hx-post"
       enctype="multipart/form-data"

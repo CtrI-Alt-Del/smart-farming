@@ -26,7 +26,7 @@ def create_checklist_records_by_csv_file_view():
 
     try:
         if not csv_form.validate_on_submit():
-            raise Error(ui_message="Formulário de check-list inválido", status_code=400)
+            raise Error(ui_message="Arquivo CSV inválido", status_code=400)
 
         create_checklist_records_by_csv_file.execute(request.files["csv"])
 
@@ -53,6 +53,10 @@ def create_checklist_records_by_csv_file_view():
 
     except Error as error:
         return (
-            "ERROR",
+            render_template(
+                "components/csv_form_error.html",
+                message=error.ui_message,
+                on_load="trigger click on #create-checklist-records-modal-trigger",
+            ),
             error.status_code,
         )

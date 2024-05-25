@@ -1,5 +1,8 @@
-{% extends "layouts/root.html" %} {% block body %} {% include
-"/layouts/dashboard/header.html" %}
+{% extends "layouts/root.html" %}
+
+{% block body %}
+
+{% include "/layouts/dashboard/header.html" %}
 
 <div class="hidden md:flex">
   {% include "/layouts/dashboard/sidebar.html" %}
@@ -10,6 +13,6 @@
 </main>
 
 <script
-  src="{{url_for('static', filename='scripts/sidebar.js')}}"></script>
+  src="{{ url_for('static', filename='scripts/sidebar.js') }}"></script>
 
 {% endblock body %}
