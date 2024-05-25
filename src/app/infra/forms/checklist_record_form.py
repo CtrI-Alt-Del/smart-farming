@@ -37,6 +37,7 @@ class ChecklistRecordForm(FlaskForm):
             self.plantation_type.data = checklist_record.plantation_type
             self.leaf_color.data = checklist_record.leaf_color
             self.leaf_appearance.data = checklist_record.leaf_appearance
+            self.plant_id.data = checklist_record.plant.id
             self.fertilizer_expiration_date.data = (
                 checklist_record.fertilizer_expiration_date.get_value(is_date=True)
             )
@@ -111,19 +112,19 @@ class ChecklistRecordForm(FlaskForm):
     soil_humidity = IntegerField(
         "Umidade do solo (%)",
         validators=[
-            NumberRange(min=0, max=100,message="O valor deve estar entre 0 e 100"),
+            NumberRange(min=0, max=100, message="O valor deve estar entre 0 e 100"),
         ],
     )
     air_humidity = IntegerField(
         "Umidade do ar (%)",
         validators=[
-            NumberRange(min=0, max=100,message="O valor deve estar entre 0 e 100"),
+            NumberRange(min=0, max=100, message="O valor deve estar entre 0 e 100"),
         ],
     )
     soil_ph = IntegerField(
         "PH do solo",
         validators=[
-            NumberRange(min=0, max=14,message="O valor deve estar entre 0 e 14"),
+            NumberRange(min=0, max=14, message="O valor deve estar entre 0 e 14"),
         ],
     )
     lai = FloatField(
@@ -135,19 +136,21 @@ class ChecklistRecordForm(FlaskForm):
     water_consumption = FloatField(
         "Consumo de água detectado (ml)",
         validators=[
-            NumberRange(min=0,message="O valor deve ser maior ou igual a 0"),
+            NumberRange(min=0, message="O valor deve ser maior ou igual a 0"),
         ],
     )
     temperature = FloatField(
         "Temperatura ambiente (°C)",
         validators=[
-            NumberRange(min=-273, max=60,message="O valor deve estar entre -273ºC e 60ºC"),
+            NumberRange(
+                min=-273, max=60, message="O valor deve estar entre -273ºC e 60ºC"
+            ),
         ],
     )
     illuminance = FloatField(
         "Luminosidade (Lux)",
         validators=[
-            NumberRange(min=0,message="O valor deve ser maior ou igual a 0"),
+            NumberRange(min=0, message="O valor deve ser maior ou igual a 0"),
         ],
     )
     report = TextAreaField("Algum desvio detectado?")
