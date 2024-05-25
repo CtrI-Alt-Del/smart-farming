@@ -1,7 +1,9 @@
 class Filters {
   constructor() {
     const filters = document.querySelectorAll("[data-filters='filter']")
-    const removeAllButton = document.querySelector("[data-filters='remove-all-button']")
+    const removeAllButton = document.querySelector(
+      "[data-filters='remove-all-button']",
+    )
 
     if (!filters.length) return
 
@@ -16,10 +18,17 @@ class Filters {
 
     if (removeAllButton) {
       this.removeAllButton = removeAllButton
-      this.removeAllButton.addEventListener("click", () => this.handleRemoveAllButtonClick())
+      this.removeAllButton.addEventListener("click", () =>
+        this.handleRemoveAllButtonClick(),
+      )
 
       const currentParams = this.queryParam.getAll()
-      if (currentParams.length) this.showRemoveAllButton()
+      const filtersNames = Array.from(this.filters).map((filter) => filter.name)
+      const hasFilters = currentParams.some((param) =>
+        filtersNames.includes(param),
+      )
+
+      if (hasFilters) this.showRemoveAllButton()
     }
   }
 
@@ -48,7 +57,7 @@ class Filters {
       this.resetFilter(filter)
     }
 
-    const changeEvent = new Event('change', { bubbles: true })
+    const changeEvent = new Event("change", { bubbles: true })
     this.filters[0].dispatchEvent(changeEvent)
     this.hideRemoveAllButton()
   }
@@ -57,8 +66,7 @@ class Filters {
     const field = event.currentTarget
     this.queryParam.append(field.name, field.value)
 
-    if (this.removeAllButton)
-      this.showRemoveAllButton()
+    if (this.removeAllButton) this.showRemoveAllButton()
   }
 }
 
