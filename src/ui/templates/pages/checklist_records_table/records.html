@@ -3,14 +3,27 @@
 
 {% if checklist_records | length > 0 %}
 
-{% if message %}
+{% if create_message %}
 
 {{
 toast(
-id="new-checklist-records-message",
-message="message",
+id="create-checklist-records-message",
+message=create_message,
 category="success",
-on_load="trigger click on #create-checklist-records-modal-trigger",
+on_load="trigger click on #create-checklist-records-modal-trigger then remove .form-error",
+)
+}}
+
+{% endif %}
+
+{% if delete_message %}
+
+{{
+toast(
+id="delete-checklist-records-message",
+message=delete_message,
+category="success",
+on_load="remove .form-error",
 )
 }}
 

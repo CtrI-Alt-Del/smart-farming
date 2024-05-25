@@ -105,8 +105,6 @@ class ChecklistRecordsRepository:
     ) -> list[CheckListRecord]:
         where = self.__get_where_with_filters(plant_id, start_date, end_date)
 
-        print("where", where, flush=True)
-
         pagination_limit = PAGINATION["records_per_page"]
         offset = (page_number - 1) * pagination_limit
 

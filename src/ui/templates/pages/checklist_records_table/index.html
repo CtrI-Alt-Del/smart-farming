@@ -23,9 +23,10 @@
 
   {{
   datepicker(
-  attributes="data-table=filter",
+  attributes="data-filters=filter",
   selected_start_date=selected_start_date,
   selected_end_date=selected_end_date,
+  form_id="filter-checklist-records-form",
   )
   }}
 
@@ -37,9 +38,11 @@
 
   {% endcall %}
 
-  {{ button(
+  {{
+  button(
   title="Adicionar registro",
-  attributes="data-modal-target=create-checklist-records-modal data-modal-toggle=create-checklist-records-modal")
+  attributes="data-modal-target=create-checklist-records-modal data-modal-toggle=create-checklist-records-modal",
+  )
   }}
 
 </div>
@@ -62,7 +65,8 @@
       hx-target="#checklist-records"
       hx-swap="innerHTML"
       hx-include="#start-date, #end-date"
-      hx-trigger="submit, change from:#plant-select, change from:#end-date"
+      hx-trigger="submit, change from:#plant-select"
+      data-datepicker="form"
       data-pagination="form"
       data-query-param="hx-get">
       {{
@@ -70,7 +74,7 @@
       id="plant-select",
       plants=plants,
       can_include_all=True,
-      attributes="data-table=filter",
+      attributes="data-filters=filter",
       selected_plant_id=selected_plant_id
       )
       }}
@@ -129,5 +133,8 @@
 
 <script
   src="{{ url_for('static', filename='scripts/pagination.js') }}"></script>
+
+<script
+  src="{{ url_for('static', filename='scripts/filters.js') }}"></script>
 
 {% endblock dashboard_content %}

@@ -63,6 +63,7 @@ def create_checklist_record_by_form_view():
             last_page_number=last_page_number,
             current_page_number=current_page_number,
             page_buttons_limit=PAGINATION["page_buttons_siblings_count"],
+            create_message="Check-list realizado com sucesso",
         )
 
     except Error as error:
@@ -75,7 +76,6 @@ def create_checklist_record_by_form_view():
             render_template(
                 "pages/checklist_records_table/create_checklist_record_form/fields.html",
                 create_checklist_record_form=checklist_record_form,
-                csv_form=csv_form,
                 checklist_record=checklist_record_form,
                 error_message=error.ui_message,
             ),
