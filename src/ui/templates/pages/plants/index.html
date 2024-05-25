@@ -10,15 +10,6 @@
 
 {% block dashboard_content %}
 
-{{
-toast(
-id="plants_cards_toast",
-message="message",
-on_load=on_load ~ "remove .form-error",
-category="success",
-)
-}}
-
 <div
   class="w-full pb-12 bg-white rounded-md">
 
@@ -28,7 +19,8 @@ category="success",
     {{
     button(
     title="Adicionar planta",
-    attributes="data-modal-target=create-plant-modal data-modal-toggle=create-plant-modal")
+    attributes="data-modal-target=create-plant-modal data-modal-toggle=create-plant-modal"
+    )
     }}
 
     {% call modal(id="create-plant-modal", class="h-96") %}

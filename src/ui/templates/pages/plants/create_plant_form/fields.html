@@ -4,14 +4,16 @@
 
 {% if error_message %}
 
-{{
-toast(
-id="create-plant-error-message",
-message=error_message,
-category="success",
-class="top-2 left-[32%]"
-)
-}}
+<div class="w-full bg-blue-700">
+  {{
+  toast(
+  id="create-plant-error-message",
+  message=error_message,
+  category="success",
+  class="top-2 left-64"
+  )
+  }}
+</div>
 
 {% endif %}
 
