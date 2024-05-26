@@ -13,7 +13,7 @@
 
 .dashboard {
   padding-left: 370px;
-  padding-right: 40px;
+  padding-right: 24px;
 }
 
 a,
@@ -31,7 +31,7 @@ fieldset {
 
 @media (max-width: 768px) {
   .dashboard {
-    padding: 20px;
+    padding: 0 24px;
   }
 }
 
