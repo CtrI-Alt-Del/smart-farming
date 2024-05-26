@@ -24,7 +24,7 @@ id="create-sensors-records-message",
 message=create_message,
 category="success",
 on_load="trigger click on #create-sensors-records-modal-trigger
-then remove .form-error
+then remove <p.form-error />
 then call #create-sensors-records-form.reset()",
 )
 }}
@@ -38,7 +38,7 @@ toast(
 id="delete-sensors-records-message",
 message=delete_message,
 category="success",
-on_load="remove .form-error",
+on_load="remove <p.form-error />",
 )
 }}
 

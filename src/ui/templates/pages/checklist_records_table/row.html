@@ -13,7 +13,7 @@
     <div class="fixed">
       {{
       toast(
-      id="update-checklist-record-toast",
+      id="update-checklist-record-toast-" ~ checklist_record.id,
       message=update_message,
       on_load="trigger click on #update-checklist-record-modal-trigger",
       category="success",
