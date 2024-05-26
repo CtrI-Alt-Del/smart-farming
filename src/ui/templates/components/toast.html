@@ -1,5 +1,9 @@
 {% macro toast(id, message, category, on_load = "", class = "") %}
 
+{% set toast_class =
+"fixed top-16 left-[8%] md:left-[40%] flex items-center w-full max-w-xs md:max-w-sm p-4 mb-4 text-black bg-green-200 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 animate-fade-in-down {{ class }}"
+%}
+
 {% set animation_script =
 "wait 3s then remove .animate-fade-in-down from me
 then add .animate-fade-out-down on me"
@@ -14,7 +18,7 @@ then add .animate-fade-out-down on me"
   {% else %}
   _="on load {{ animation_script }}"
   {% endif %}
-  class="fixed top-16 left-[45%] flex items-center w-full max-w-smD p-4 mb-4 text-black bg-green-200 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 animate-fade-in-down {{ class }}"
+  class="{{ toast_class }} {{ class }}"
   role="alert">
   <div
     class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
@@ -28,7 +32,6 @@ then add .animate-fade-out-down on me"
   </div>
   <div class="ms-3 text-md font-semibold">{{ message }}</div>
   <button
-    _="on click add .animate-fade-out-down on #{{ id }}"
     data-dismiss-target="#{{ id }}"
     aria-label="Fechar mensagem"
     type="button"
@@ -54,7 +57,7 @@ then add .animate-fade-out-down on me"
   {% else %}
   _="on load {{ animation_script }}"
   {% endif %}
-  class="flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-red-200 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
+  class="{{ toast_class }} {{ class }}"
   role="alert">
   <div
     class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200">

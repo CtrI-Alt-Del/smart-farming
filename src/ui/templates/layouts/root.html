@@ -28,14 +28,13 @@
 
     {% if messages %}
 
-    <ul class="absolute z-50 top-20 left-[45%] h-screen w-screen">
+    <ul class="absolute z-50 top-20 left-[8%] md:left-[45%]">
       {% for category, message in messages %}
       {{
       toast(
       id="toast-" ~ loop.index0,
       message=message,
       category=category,
-      class="top-64 left-[32%]"
       )
       }}
       {% endfor %}
