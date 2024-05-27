@@ -1,12 +1,13 @@
 {% extends "layouts/dashboard/index.html" %}
 {% from "components/title.html" import title%}
+{% from "components/see_registers_button.html" import see_registers_button%}
 
 {% block dashboard_content %}
 
 {{ title("Registro dos Sensores") }}
-<a href="{{url_for('sensors_records_views.sensors_records_table_page_view')}}" class="mt-6 flex items-center gap-1 p-2 px-2 border border-gray-800 rounded-md w-max"><i class="ph ph-table"></i>
-  Visualizar registros
-</a>
+
+{{ see_registers_button("Visualizar registros", url_for('sensors_records_views.sensors_records_table_page_view')) }}
+
 <div class="flex flex-wrap justify-center items-center md:grid grid-cols-2 pt-5 pb-5 gap-9">
   {% include "/pages/sensors_records_dashboard/ambient_humidity_chart.html" %}
   {% include "/pages/sensors_records_dashboard/soil_humidity_chart.html" %}
