@@ -1,6 +1,23 @@
 
 ### Sprint - 4️⃣
 
+- [] **Usuário administrador**
+
+*História de usuário:*
+
+> Como mantenedor da estufa, quero que haja um usuário administrador para gerenciar o sistema para que nem todos os usuários que venham a acessar o site possam alterar os dados cadastrados.
+
+*Critérios de aceitação:*
+
+- Só pode haver um usuário administrador.
+- Um usuário administrador deve vir pré-cadastro no sistema.
+- O administrador deve possuir os seguintes dados:
+  - nome.
+  - email.
+  - senha.
+- Somente o administrador deve poder acessar e executar recursos desenvolvidos para o administrador e o sistema deve validar isso.
+- O administrador deve poder fazer tudo que um usuário comum faz.
+
 - [ ] **Login**
 
 *História de usuário*

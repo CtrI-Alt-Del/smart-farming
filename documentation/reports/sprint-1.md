@@ -83,15 +83,10 @@
 - Cada dado do registro deve ter seu destaque próprio na página.
 - Deve ser exibido a data e horário em que o registro foi coletado.
 
-## Burndown chart 📈
+## Gráfico Burndown 📈
 
 <img src="../images/sprint-1-burndown-chart.png" width="1000" height="500" alt="Grágico Burndown da primeira Sprint" />
 
-## Video 🎥
+## Slides para apresentação 🎞️
 
-[Click here to see the video](https://drive.google.com/file/d/1GZMoa42KLpK_B5ISBeGnKVZxhy86gHnh/view?usp=sharing)
-
-## Slides for presentation 🎞️
-
-**<a href="../ppt/sprint-1.pptx" _target="black" download="sprint-1-apresentacao">Click to download the ppt</a>**
-
+**<a href="../ppt/sprint-1-presentation.pptx" _target="black" download="sprint-1-apresentacao">Clique para baixar o ppt</a>**

@@ -1,6 +1,6 @@
 # Sprint - 3️⃣
 
-- [ ] **Cadastro automatizado dos dados coletados pelos sensores**
+- [x] **Cadastro automatizado dos dados coletados pelos sensores**
 
 *Contexto:*
 
@@ -18,26 +18,7 @@
 
 ---
 
-- [ ] **Usuário administrador**
-
-*História de usuário:*
-
-> Como mantenedor da estufa, quero que haja um usuário administrador para gerenciar o sistema para que nem todos os usuários que venham a acessar o site possam alterar os dados cadastrados.
-
-*Critérios de aceitação:*
-
-- Só pode haver um usuário administrador.
-- Um usuário administrador deve vir pré-cadastro no sistema.
-- O administrador deve possuir os seguintes dados:
-  - nome.
-  - email.
-  - senha.
-- Somente o administrador deve poder acessar e executar recursos desenvolvidos para o administrador e o sistema deve validar isso.
-- O administrador deve poder fazer tudo que um usuário comum faz.
-
----
-
-- [ ] **Filtragem de registros**
+- [x] **Filtragem de registros**
 
 *História de usuário:*
 
@@ -50,7 +31,7 @@
 
 ---
 
-- [ ] **Mensagens de alerta**
+- [x] **Mensagens de alerta**
 
 *História de usuário:*
 
@@ -63,7 +44,7 @@
 
 ---
 
-- [ ] **Mensagens de erro**
+- [x] **Mensagens de erro**
 
 *História de usuário:*
 
@@ -75,3 +56,9 @@
 - As mensagens devem estar bem destacadas do resto dos elementos da página.
 
 ## Gráfico Burndown 📈
+
+<img src="../images/sprint-3-burndown-chart.png" width="1000" height="500" alt="Grágico Burndown da primeira Sprint" />
+
+## Slides para apresentação 🎞️
+
+**<a href="../ppt/sprint-3-presentation.pptx" _target="black" download="sprint-3-apresentacao">Clique para baixar o ppt</a>**

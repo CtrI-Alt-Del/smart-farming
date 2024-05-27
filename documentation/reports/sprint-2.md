@@ -171,3 +171,9 @@
 - A nevegação deve exibir no máximo 5 botões, ou seja, a numeração dos botões deve ser dinâmica com base na quantidade.
 
 ## Gráfico Burndown 📈
+
+<img src="../images/sprint-2-burndown-chart.png" width="1000" height="500" alt="Grágico Burndown da primeira Sprint" />
+
+## Slides para apresentação 🎞️
+
+**<a href="../ppt/sprint-2-presentation.pptx" _target="black" download="sprint-1-apresentacao">Clique para baixar o ppt</a>**
