@@ -1,5 +1,105 @@
 {% extends "layouts/root.html" %}
+{% from "components/logo.html" import logo %}
 
 {% block body %}
-<h1>Login</h1>
+<body
+    class="flex items-center justify-center min-h-screen bg-green-200">
+    <div
+        class="max-w-sm p-5 m-5 bg-white rounded-lg shadow-lg sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl sm:p-10 md:m-10">
+        <div class="flex justify-center mb-6">
+            {{ logo() }}
+        </div>
+        <form>
+            <div class="mb-6">
+                <label for="email" class="block text-gray-700">E-mail</label>
+                <div
+                    class="flex items-center justify-center w-full gap-1 p-3 mt-1 border rounded-lg focus-within:ring-2 focus-within:ring-green-500">
+                    <i class="ph-bold ph-user"></i>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        class="w-full p-0 m-0 border-none outline-none focus:border-none focus:outline-none focus:ring-0"
+                        placeholder="admin@smart-farming.com">
+                </div>
+            </div>
+            <div class="mb-6">
+                <label for="password" class="block text-gray-700">Senha</label>
+                <div
+                    class="flex items-center justify-center w-full gap-1 p-3 mt-1 border rounded-lg focus-within:ring-2 focus-within:ring-green-500">
+                    <i class="ph-bold ph-lock"></i>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        class="w-full p-0 m-0 border-none outline-none focus:border-none focus:outline-none focus:ring-0"
+                        placeholder="****">
+                </div>
+            </div>
+            <div class="flex items-center mb-6">
+                <input type="checkbox" id="remember" name="remember"
+                    class="mr-2">
+                <label for="remember" class="text-gray-700">Lembre-se de
+                    mim</label>
+            </div>
+            <div class="flex justify-between mb-6">
+                <a href="#"
+                    class="text-sm text-green-500 hover:underline">Esqueceu a
+                    senha?</a>
+            </div>
+            <button type="submit"
+                class="w-full p-3 text-white bg-green-500 rounded-lg hover:bg-green-600">Login</button>
+        </form>
+    </div>
+
+    <div
+        class="max-w-sm p-10 m-5 bg-white rounded-lg shadow-lg sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl">
+        <div class="flex justify-center mb-6">
+            {{ logo() }}
+        </div>
+        <h2
+            class="mb-4 text-2xl font-semibold text-center text-gray-700">Redefinindo
+            sua senha</h2>
+        <p class="mb-6 text-center text-gray-600">Digite sua nova senha e
+            confirme ela.</p>
+        <form>
+            <div class="mb-6">
+                <label for="email" class="block text-gray-700">E-mail</label>
+                <div
+                    class="flex items-center justify-center w-full gap-1 p-3 mt-1 border rounded-lg focus-within:ring-2 focus-within:ring-green-500">
+                    <i class="ph-bold ph-user"></i>
+                    <input type="email" id="email" name="email"
+                        class="w-full p-0 m-0 border-none outline-none focus:border-none focus:outline-none focus:ring-0"
+                        placeholder="admin@smart-farming.com">
+                </div>
+            </div>
+            <div class="mb-6">
+                <label for="password" class="block text-gray-700">Confirme sua
+                    senha</label>
+                <div
+                    class="flex items-center justify-center w-full gap-1 p-3 mt-1 border rounded-lg focus-within:ring-2 focus-within:ring-green-500">
+                    <i class="ph-bold ph-lock"></i>
+                    <input type="password" id="password" name="password"
+                        class="w-full p-0 m-0 border-none outline-none focus:border-none focus:outline-none focus:ring-0"
+                        placeholder="******">
+                </div>
+            </div>
+            <button type="submit"
+                class="w-full p-3 text-white bg-green-500 rounded-lg hover:bg-green-600">Redefinir
+                senha</button>
+        </form>
+    </div>
+
+    <div
+        class="max-w-sm p-10 m-5 text-center bg-white rounded-lg shadow-lg sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl">
+        <div class="flex justify-center mb-6">
+            {{ logo() }}
+        </div>
+        <h2 class="mb-4 text-2xl font-semibold text-gray-700">Sua senha foi
+            redefinida com sucesso!</h2>
+        <a href="#" class="text-green-500 hover:underline">Voltar para fazer
+            login.</a>
+    </div>
+</body>
+
 {% endblock body %}
