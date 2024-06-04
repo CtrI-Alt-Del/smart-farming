@@ -1,19 +1,21 @@
 import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
+from core.commons import Error 
+import email.message
 
-class EmailSender:
-    def __init__(self,sender,receiver,template_path,password):
+class EmailProvider:
+    def __init__(self):
+        self.data = None
+
+
+
+    def send_email(sender,receiver,template,password):
         try:
-            with open(template_path, 'r') as file:
-                html_content = file.read()
-
-            email_body = template_path
-            msg = MIMEMultipart('alternative')
+            email_body = template
+            msg = email.message.Message()
             msg['Subject'] = 'Ctrl Alt Del team'
+            msg.add_header('Content-Type','text/html')
+            msg.set_payload(email_body)
             
-            part1 = MIMEText(html_content,"html")
-            msg.attach(part1)
 
             s = smtplib.SMTP('smtp.gmail.com:587')
 
@@ -22,14 +24,5 @@ class EmailSender:
             s.sendmail(sender,receiver,msg.as_string().encode('utf-8'))
         except smtplib.SMTPAuthenticationError as e:
             print(f"Failed to authenticate: {e}")
-        except Exception as error:
-            print(f"Toma o erro {error} ")
-
-
-    
-
-
-
-
-
-
+        except Error as e:  
+            raise Error(ui_message=e,internal_message="catapimas")
