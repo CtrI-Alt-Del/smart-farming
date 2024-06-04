@@ -1,36 +1,37 @@
-from typing import List, Dict
+from typing import Dict, List
 
-from pandas import DataFrame, read_csv, read_excel
+from werkzeug.datastructures import FileStorage
+
+from pandas import DataFrame, read_excel, read_csv
 
 
 class DataAnalyserProvider:
-    dataframe: DataFrame
+    data: DataFrame | None
 
     def __init__(self) -> None:
-        self.dataframe = None
+        self.data = None
 
     def analyse(self, data) -> None:
-        self.dataframe = data
+        self.data = DataFrame(data)
 
-    def read_csv(self) -> None:
+    def read_excel(self, file: FileStorage) -> None:
+        self.data = read_excel(file)
+
+    def read_csv(self, file: FileStorage) -> None:
+        self.data = read_csv(file)
+
+    def convert_to_excel(self, folder: str, filename: str) -> None:
         if self.__has_dataframe():
-            self.dataframe = read_csv(self.dataframe).dropna()
-
-    def read_excel(self) -> None:
-        if self.__has_dataframe():
-            self.dataframe = read_excel(self.dataframe).dropna()
-
-    def get_columns(self) -> List[str] | None:
-        if self.__has_dataframe():
-            return list(self.dataframe.columns)
-
-        return None
+            self.data.to_excel(f"{folder}/{filename}", index=False)
 
     def convert_to_list_of_records(self) -> List[Dict] | None:
         if self.__has_dataframe():
-            return self.dataframe.to_dict("records")
+            return self.data.to_dict("records")
 
         return None
 
+    def get_data(self):
+        return self.data
+
     def __has_dataframe(self) -> bool:
-        return self.dataframe is not None
+        return self.data is not None

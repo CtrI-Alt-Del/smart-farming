@@ -105,8 +105,11 @@ class ChecklistRecordsRepository:
     ) -> list[CheckListRecord]:
         where = self.__get_where_with_filters(plant_id, start_date, end_date)
 
-        pagination_limit = PAGINATION["records_per_page"]
-        offset = (page_number - 1) * pagination_limit
+        limit = ""
+        if page_number != "all":
+            pagination_limit = PAGINATION["records_per_page"]
+            offset = (page_number - 1) * pagination_limit
+            limit = f"LIMIT {pagination_limit} OFFSET {offset}"
 
         rows = mysql.query(
             sql=f"""
@@ -119,7 +122,7 @@ class ChecklistRecordsRepository:
             JOIN plants AS P ON P.id = CR.plant_id
             {where}
             ORDER BY CR.created_at DESC
-            LIMIT {pagination_limit} OFFSET {offset};    
+            {limit}
             """,
             is_single=False,
         )

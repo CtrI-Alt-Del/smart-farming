@@ -2,6 +2,7 @@ from flask import Blueprint
 
 from .checklist_records_dashboard_page_view import checklist_records_dashboard_page_view
 from .checklist_records_table_page_view import checklist_records_table_page_view
+from .checklist_records_csv_file_view import checklist_records_csv_file_view
 from .create_checklist_record_by_form_view import create_checklist_record_by_form_view
 from .create_checklist_records_by_csv_file_view import (
     create_checklist_records_by_csv_file_view,
@@ -30,6 +31,12 @@ route(
 route(
     "/checklist_records/filter",
     view_func=filter_checklist_records_view,
+    methods=["GET"],
+)
+
+route(
+    "/checklist_records/csv",
+    view_func=checklist_records_csv_file_view,
     methods=["GET"],
 )
 
