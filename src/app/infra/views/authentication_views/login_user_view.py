@@ -16,13 +16,16 @@ def login_user_view():
         response = make_response()
 
         response.headers["hx-redirect"] = url_for(
-            "authentication_views.reset_password_view"
+            "authentication_views.request_password_reset_page_view"
         )
 
         email = login_form.email.data
+        password = login_form.password.data
         remember_me = login_form.remember_me.data
 
-        login_user.execute(email=email, should_remember_user=remember_me)
+        login_user.execute(
+            email=email, password=password, should_remember_user=remember_me
+        )
 
         return response
 
