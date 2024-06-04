@@ -32,11 +32,6 @@ class QueryParam {
     this.updateHtmxUrl()
   }
 
-  dispatchEvent() {
-    const queryParamEvent = new Event("queryParam")
-    document.dispatchEvent(queryParamEvent)
-  }
-
   updateHtmxUrl() {
     const htmxElements = document.querySelectorAll('[data-query-param^="hx-"]')
 

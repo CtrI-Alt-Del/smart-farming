@@ -14,14 +14,12 @@ class CsvFile:
         self.data_analyser_provider = DataAnalyserProvider()
 
     def read(self):
-        self.data_analyser_provider.analyse(self.csv_file)
-
         extension = self.get_extension()
 
         if extension in ["csv", "txt"]:
-            self.data_analyser_provider.read_csv()
+            self.data_analyser_provider.read_csv(self.csv_file)
         elif extension == "xlsx":
-            self.data_analyser_provider.read_excel()
+            self.data_analyser_provider.read_excel(self.csv_file)
         else:
             raise Error("Arquivo CSV inválido")
 
