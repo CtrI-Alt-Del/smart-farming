@@ -7,7 +7,7 @@ from infra.repositories import users_repository
 
 
 class LoginUser:
-    def execute(self, email: str, should_remember_user: bool):
+    def execute(self, email: str, password: str, should_remember_user: bool):
         try:
             if email != SUPPORT_USER_EMAIL:
                 raise Error("E-mail ou senha incorretos", status_code=400)
@@ -17,7 +17,15 @@ class LoginUser:
             if not isinstance(user, User):
                 raise Error("Usuário não encontrado", status_code=500)
 
-            auth.login(user, should_remember_user)
+            is_password_correct = auth.check_password(user.password, password)
+
+            if not is_password_correct:
+                raise Error("E-mail ou senha incorretos", status_code=400)
+
+            is_login_success = auth.login(user, should_remember_user)
+
+            if not is_login_success:
+                raise Error("E-mail ou senha incorretos", status_code=400)
 
         except Error as error:
             raise error
