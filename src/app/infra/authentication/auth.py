@@ -34,12 +34,15 @@ class Auth:
     def logout(self):
         return logout_user()
 
-    def login_middleware(self, view: Callable) -> Callable:
+    def login_middleware(self, view: Callable):
         @wraps(view)
-        def verify_login(*args, **kwargs):
+        def check_login(*args, **kwargs):
             return login_required(view)(*args, **kwargs)
 
-        return verify_login
+        return check_login
 
-    def hash_password(self, password: str) -> bytes:
-        return self.bcrypt.generate_password_hash(password).decode("utf-8")
+    def check_password(self, password_hash: str, password: str):
+        return self.bcrypt.check_password_hash(password_hash, password)
+
+    def generate_hash(self, text: str):
+        return self.bcrypt.generate_password_hash(text).decode("utf-8")
