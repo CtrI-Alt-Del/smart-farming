@@ -52,6 +52,11 @@ class Filters {
     this.removeAllButton.classList.add("hidden")
   }
 
+  dispatchEvent() {
+    const queryParamEvent = new Event("addFilter")
+    document.dispatchEvent(queryParamEvent)
+  }
+
   handleRemoveAllButtonClick() {
     for (const filter of this.filters) {
       this.resetFilter(filter)
@@ -65,6 +70,7 @@ class Filters {
   handleFilterChange(event) {
     const field = event.currentTarget
     this.queryParam.append(field.name, field.value)
+    this.dispatchEvent()
 
     if (this.removeAllButton) this.showRemoveAllButton()
   }
