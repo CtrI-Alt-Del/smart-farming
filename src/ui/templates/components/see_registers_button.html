@@ -1,0 +1,13 @@
+{% macro see_registers_button(text, href) -%}
+<div class="mt-4 flex justify-start w-full">
+    <a
+        href="{{ href }}"
+        class="flex items-center justify-center gap-1 px-2 mr-4 rounded-md w-max">
+        <p class="block">
+            {{ text }}
+        </p>
+        <i class="text-xl text-black ph ph-arrow-right"></i>
+    </a>
+</div>
+
+{%- endmacro %}
