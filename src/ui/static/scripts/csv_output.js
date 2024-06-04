@@ -4,11 +4,28 @@ class CsvOutput {
 
     if (!output) return
 
-    document.addEventListener("queryParam", () => this.addQueryParam())
+    this.output = output
+    this.queryParam = new QueryParam()
+
+    document.addEventListener("addFilter", () => this.addQueryParam())
+
+    setTimeout(() => {
+      this.addQueryParam()
+    }, 2000)
   }
 
   addQueryParam() {
-    alert("EITA")
+    const currentHref = this.output.getAttribute("href").split("?")[0]
+
+    const params = this.queryParam.getAll().filter(([key]) => key !== "page")
+
+    const paramsString = params
+      .map((param) => `${param[0]}=${param[1]}`)
+      .join("&")
+
+    console.log(`${currentHref}?${paramsString}`)
+
+    this.output.setAttribute("href", `${currentHref}?${paramsString}`)
   }
 }
 
