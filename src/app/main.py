@@ -4,6 +4,7 @@ from flask import Flask
 
 from infra.views import init_views
 from infra.database import init_database
+from infra.authentication import init_authentication
 
 
 def init_app():
@@ -14,6 +15,7 @@ def init_app():
     app.config["SECRET_KEY"] = getenv("SECRET_KEY")
 
     init_database()
+    init_authentication(app)
     init_views(app)
 
     return app
