@@ -1,0 +1,79 @@
+{% from "components/toast.html" import toast %}
+{% from "components/error_component.html" import error_messages %}
+
+{% if error_message %}
+{{
+toast(
+id="login-error-message",
+message=error_message,
+category="error",
+class="top-2 md:left-[38%]"
+)
+}}
+{% endif %}
+
+{% set input_container_class =
+"flex items-center justify-center w-full gap-1 p-3 mt-1 border rounded-lg focus-within:ring-2 focus-within:ring-green-500"
+%}
+
+{% set input_class =
+"w-full p-0 m-0 border-none outline-none focus:border-none focus:outline-none focus:ring-0"
+%}
+
+{% set field_error_class =
+"p"
+%}
+
+{{ login_form.csrf_token }}
+
+<div class="mb-6">
+  {{
+  login_form.email.label(
+  class="block text-gray-700",
+  )
+  }}
+  <div
+    class="{{ input_container_class }}">
+    <i class="ph-bold ph-user"></i>
+    {{
+    login_form.email(
+    class=input_class,
+    placeholder="admin@smart-farming.com"
+    )
+    }}
+  </div>
+  {{ error_messages(login_form.email.errors[0]) }}
+</div>
+
+<div class="mb-6">
+  {{
+  login_form.password.label(
+  class="block text-gray-700",
+  )
+  }}
+  <div
+    class="{{ input_container_class }}">
+    <i class="ph-bold ph-lock"></i>
+    {{ login_form.password(class=input_class, placeholder="****") }}
+  </div>
+  {{ error_messages(login_form.password.errors[0]) }}
+</div>
+
+<div class="flex items-center gap-2 mb-6">
+  {{ login_form.remember_me(class="rounded-md border-gray-500") }}
+  {{ login_form.remember_me.label(class="text-gray-700") }}
+</div>
+
+<div class="flex justify-between mb-6">
+  <a
+    href="{{ url_for('authentication_views.request_password_reset_page_view') }}"
+    class="text-sm text-green-500 hover:underline">
+    Esqueceu a senha?
+  </a>
+</div>
+
+<button
+  type="submit"
+  class="w-full p-3 text-white bg-green-500 rounded-lg hover:bg-green-600">
+  Login
+</button>
