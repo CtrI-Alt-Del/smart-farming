@@ -8,6 +8,7 @@
 {% from "components/loading.html" import loading %}
 {% from "components/title.html" import title %}
 {% from 'components/alert.html' import alert %}
+{% from 'components/csv_output.html' import csv_output %}
 {% from 'components/see_charts_button.html' import see_charts_button %}
 
 {% block dashboard_content %}
@@ -28,7 +29,7 @@
   form_id="filter-checklist-records-form",
   )
   }}
-  
+
   {{
   button(
   title="Adicionar registro",
@@ -69,7 +70,6 @@
       data-pagination="form"
       data-query-param="hx-get">
 
-
       {{
       plant_select(
       id="plant-select",
@@ -107,7 +107,7 @@
       class="hidden bg-red-700 animate-pulse animate-duration-1000",
       )
       }}
-  
+
       {{
       button(
       type="button",
@@ -116,6 +116,12 @@
       data-filters=remove-all-button",
       class="hidden bg-gray-800",
       )
+      }}
+    </div>
+
+    <div class="ml-auto">
+      {{
+      csv_output(url_for("checklist_records_views.checklist_records_csv_file_view"))
       }}
     </div>
 
@@ -141,6 +147,9 @@
 
 <script
   src="{{ url_for('static', filename='scripts/query_param.js') }}"></script>
+
+<script
+  src="{{ url_for('static', filename='scripts/csv_output.js') }}"></script>
 
 <script
   src="{{ url_for('static', filename='scripts/table.js') }}"></script>
