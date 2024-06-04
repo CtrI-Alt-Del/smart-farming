@@ -1,16 +1,26 @@
 from pathlib import Path
-from typing import Union
+
+from core.commons import Error
 
 
 class File:
-    def __init__(self, folder, name) -> None:
-        self.path = Path(f"{folder}/{name}")
+    path: Path
 
-    def read_text(self) -> Union[str, None]:
-        if self.exists():
-            return self.path.read_text()
+    def __init__(self, folder, filename) -> None:
+        self.path = Path(f"{folder}/{filename}")
 
-        return None
+    def read_text(self) -> str:
+        try:
+            return self.path.read_text(encoding="utf-8")
+        except Exception as exception:
+            raise Error(
+                f"Failed to read {self.path.absolute()} file. Error: {exception}"
+            ) from exception
 
-    def exists(self) -> bool:
-        return self.path.exists()
+    def delete(self):
+        try:
+            self.path.unlink()
+        except Exception as exception:
+            raise Error(
+                f"Failed to delete {self.path.absolute()} file. Error: {exception}"
+            ) from exception
