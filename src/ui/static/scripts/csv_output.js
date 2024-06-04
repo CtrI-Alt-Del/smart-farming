@@ -11,7 +11,7 @@ class CsvOutput {
 
     setTimeout(() => {
       this.addQueryParam()
-    }, 2000)
+    }, 1000)
   }
 
   addQueryParam() {
@@ -22,8 +22,6 @@ class CsvOutput {
     const paramsString = params
       .map((param) => `${param[0]}=${param[1]}`)
       .join("&")
-
-    console.log(`${currentHref}?${paramsString}`)
 
     this.output.setAttribute("href", `${currentHref}?${paramsString}`)
   }
