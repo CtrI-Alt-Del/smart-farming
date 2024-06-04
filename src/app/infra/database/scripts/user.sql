@@ -1,12 +1,15 @@
--- Active: 1714828967728@@127.0.0.1@3306
+-- Active: 1717536900456@@127.0.0.1@3306
 DROP TABLE IF EXISTS user;
 
 CREATE TABLE IF NOT EXISTS user (
   id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
   email VARCHAR(255) NOT NULL,
-  password VARCHAR(255) NOT NULL
+  password TEXT NOT NULL
 );
 
 INSERT INTO user (email, password) 
-VALUES ('douglas.rodri@gmail.com', 'banana');
+VALUES ('ctrlaltdelsup@gmail.com', '$2b$12$HE.q2t64gRBcDDjW8JbiWOk6kIXMt1yW/UDT85D9ihKjJSQxoPX7q');
+
 SELECT * FROM user;
+
+DELETE FROM user;
