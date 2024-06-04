@@ -8,7 +8,6 @@ from core.commons import Error
 from core.constants import PAGINATION
 
 from infra.forms import ChecklistRecordForm
-from infra.forms import CsvForm
 
 
 def create_checklist_record_by_form_view():
