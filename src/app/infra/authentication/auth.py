@@ -2,7 +2,7 @@ from typing import Callable
 from dataclasses import asdict
 from functools import wraps
 
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 from flask_bcrypt import Bcrypt
 
 
@@ -15,6 +15,9 @@ from .auth_user import AuthUser
 class Auth:
     def __init__(self, bcrypt: Bcrypt) -> None:
         self.bcrypt = bcrypt
+
+    def get_user(self):
+        return current_user
 
     def load_user(self, user_id: str) -> AuthUser:
         id = user_id
