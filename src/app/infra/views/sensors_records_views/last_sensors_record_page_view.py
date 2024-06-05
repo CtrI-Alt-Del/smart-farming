@@ -4,9 +4,14 @@ from core.use_cases.sensors_records import get_last_sensors_record_page_data
 from core.entities import SensorsRecord
 from core.commons import Error
 
+from infra.authentication import auth
 
+
+@auth.login_middleware
 def last_sensors_record_page_view():
     try:
+        auth_user = auth.get_user()
+
         data = get_last_sensors_record_page_data.execute()
 
         variations = data["variations"]
@@ -25,4 +30,5 @@ def last_sensors_record_page_view():
         last_sensors_record=last_sensors_record,
         variations=variations,
         datetime=last_sensors_record.created_at,
+        auth_user=auth_user,
     )
