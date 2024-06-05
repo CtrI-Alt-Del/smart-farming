@@ -58,7 +58,7 @@ MYSQL = {
         CREATE TABLE user (
           id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
           email VARCHAR(320) NOT NULL,
-          password VARCHAR(40) NOT NULL
+          password TEXT NOT NULL
         );
         """,
     },
@@ -66,6 +66,10 @@ MYSQL = {
         """
         INSERT INTO plants (id, name, hex_color) 
         VALUES ('4544afe3-0661-11ef-9512-0242ac140002' ,'Alface','#3A7D44');
+        """,
+        """
+        INSERT INTO user (email, password) 
+        VALUES ('ctrlaltdelsup@gmail.com', '$2b$12$HE.q2t64gRBcDDjW8JbiWOk6kIXMt1yW/UDT85D9ihKjJSQxoPX7q');
         """,
     ],
 }
