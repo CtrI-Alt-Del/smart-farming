@@ -7,8 +7,11 @@ CREATE TABLE IF NOT EXISTS user (
   password TEXT NOT NULL
 );
 
-INSERT INTO user (email, password) 
-VALUES ('ctrlaltdelsup@gmail.com', '$2b$12$HE.q2t64gRBcDDjW8JbiWOk6kIXMt1yW/UDT85D9ihKjJSQxoPX7q');
+INSERT INTO user (email, password) VALUES 
+(
+  'ctrlaltdelsup@gmail.com', 
+  '$2b$12$wbgdsX1apeZ8NZ75kgLJsuRCZnjm34CXXMgk6mx4WoAzExtF6w22G' -- bananaSM77$
+);
 
 SELECT * FROM user;
 
