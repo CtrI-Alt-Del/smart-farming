@@ -5,9 +5,13 @@ from core.commons import Error
 from core.constants import PAGINATION
 
 from infra.forms import ChecklistRecordForm, CsvForm
+from infra.authentication import auth
 
 
+@auth.login_middleware
 def checklist_records_table_page_view():
+    auth_user = auth.get_user()
+
     start_date = request.args.get("start-date", None)
     end_date = request.args.get("end-date", None)
     plant_id = request.args.get("plant", "all")
@@ -42,6 +46,7 @@ def checklist_records_table_page_view():
             last_page_number=last_page_number,
             current_page_number=current_page_number,
             page_buttons_limit=PAGINATION["page_buttons_siblings_count"],
+            auth_user=auth_user,
         )
     except Error as error:
         print(error, flush=True)
