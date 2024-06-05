@@ -16,7 +16,7 @@
     </div>
 
     <form
-      hx-post="{{ url_for('authentication_views.login_user_view') }}"
+      hx-post="{{ url_for('authentication_views.login_user_view') ~ '?next=' ~ next_page_param }}"
       hx-trigger="submit"
       hx-target-error="#login-form-fields"
       hx-swap="innerHTML">
