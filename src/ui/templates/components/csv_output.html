@@ -1,8 +1,10 @@
-{% macro csv_output(href) %}
+{% macro csv_output(href, filename) %}
 
 <a
+  href="{{link}}"
   data-csv-output="output"
-  download="checklist-records.xlsx">
+  download="{{filename}}"
+  class="bg-green-500">
   Exportar CSV
 </a>
 
