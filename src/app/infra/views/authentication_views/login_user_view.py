@@ -15,9 +15,14 @@ def login_user_view():
 
         response = make_response()
 
-        response.headers["hx-redirect"] = url_for(
-            "authentication_views.request_password_reset_page_view"
-        )
+        next_page_param = request.args.get("next")
+
+        url = url_for("sensors_records_views.last_sensors_record_page_view")
+
+        if next_page_param:
+            url = next_page_param
+
+        response.headers["hx-redirect"] = url
 
         email = login_form.email.data
         password = login_form.password.data
