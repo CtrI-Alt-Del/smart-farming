@@ -37,10 +37,26 @@
       {% include "layouts/dashboard/sidebar.html" %}
     </div>
 
-    <h1 class="text-white text-[20px] text-center p-2 md:text-[30px]">
-      Bem
-      vindo!
-    </h1>
+    <strong class="text-white text-[20px] text-center p-2 md:text-[30px]">
+      Bem vindo!
+    </strong>
   </div>
-  {{ login_link() }}
+
+  {% if auth_user %}
+
+  <a
+    href="{{ url_for('authentication_views.logout_user_view') }}"
+    class="px-[40px] py-[4px] rounded-md text-black bg-green-default hover:opacity-75 transition-all cursor-pointer">
+    Logout
+  </a>
+
+  {% else %}
+
+  <a
+    href="{{ url_for('authentication_views.login_page_view') }}"
+    class="px-[40px] py-[4px] rounded-md text-black bg-green-default hover:opacity-75 transition-all cursor-pointer">
+    Login
+  </a>
+
+  {% endif %}
 </header>
