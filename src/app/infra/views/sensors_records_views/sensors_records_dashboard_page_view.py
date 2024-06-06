@@ -7,9 +7,14 @@ from core.commons import Error, DaysRange
 
 from infra.utils import JSONEncoder
 
+from infra.authentication import auth
 
+@auth.login_middleware
 def sensors_records_dashboard_page_view():
     try:
+        
+        auth_user = auth.get_user()
+        
         data = get_sensors_dashboard_page_data.execute()
 
         soil_humidity_chart_data = dumps(
@@ -34,6 +39,7 @@ def sensors_records_dashboard_page_view():
             water_volume_chart_data=water_volume_chart_data,
             plants=plants,
             days_ranges=daysRange.get_value(),
+            auth_user=auth_user
         )
     except Error as error:
         flash(error.ui_message, "error")

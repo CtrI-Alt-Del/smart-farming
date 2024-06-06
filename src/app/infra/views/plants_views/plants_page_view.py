@@ -4,8 +4,13 @@ from core.use_cases.plants import filter_plants
 
 from infra.forms import PlantForm
 
+from infra.authentication import auth
 
+@auth.login_middleware
 def plants_page_view():
+    
+    auth_user = auth.get_user()
+    
     plant_name = request.args.get("search", "")
 
     plants = filter_plants.execute(plant_name)
@@ -18,4 +23,5 @@ def plants_page_view():
         create_plant_form=create_plant_form,
         update_plant_form=update_plant_form,
         plants=plants,
+        auth_user=auth_user
     )

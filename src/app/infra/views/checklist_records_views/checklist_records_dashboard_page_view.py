@@ -8,9 +8,14 @@ from core.commons import DaysRange, Error
 from infra.constants import LEAF_COLORS_CHART_LEGEND_HEX_COLORS
 from infra.utils import JSONEncoder
 
+from infra.authentication import auth
 
+@auth.login_middleware
 def checklist_records_dashboard_page_view():
     try:
+        
+        auth_user = auth.get_user()
+        
         data = get_checklist_dashboard_page_data.execute()
 
         leaf_appearences_chart_data = dumps(
@@ -38,6 +43,7 @@ def checklist_records_dashboard_page_view():
             plant_growth_chart_data=plant_growth_chart_data,
             days_ranges=days_ranges.get_value(),
             plants=plants,
+            auth_user = auth_user
         )
     except Error as error:
         flash(error.ui_message, "error")

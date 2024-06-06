@@ -1,5 +1,8 @@
--- Active: 1717536900456@@127.0.0.1@3306
+-- Active: 1712147539997@@127.0.0.1@3306@smart-farming
 DROP TABLE IF EXISTS user;
+
+USE `smart-farming`;
+
 
 CREATE TABLE IF NOT EXISTS user (
   id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
@@ -14,5 +17,6 @@ INSERT INTO user (email, password) VALUES
 );
 
 SELECT * FROM user;
+
 
 DELETE FROM user;

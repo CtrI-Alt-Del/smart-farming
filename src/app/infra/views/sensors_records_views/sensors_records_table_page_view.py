@@ -7,8 +7,13 @@ from core.constants import PAGINATION
 from infra.forms import SensorsRecordForm
 from infra.forms import CsvForm
 
+from infra.authentication import auth
 
+@auth.login_middleware
 def sensors_records_table_page_view():
+    
+    auth_user = auth.get_user()
+    
     page_number = int(request.args.get("page", 1))
     start_date = request.args.get("start-date",None)
     end_date = request.args.get("end-date",None)
@@ -44,6 +49,7 @@ def sensors_records_table_page_view():
             last_page_number=last_page_number,
             current_page_number=current_page_number,
             page_buttons_limit=PAGINATION["page_buttons_siblings_count"],
+            auth_user=auth_user,
         )
         
     except Error as error:
