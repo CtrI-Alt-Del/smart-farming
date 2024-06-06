@@ -1,0 +1,39 @@
+{% extends "/pages/login/index.html" %} 
+
+{% block content %}
+<div
+  class="max-w-sm p-10 m-5 bg-white rounded-lg shadow-lg sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl"
+>
+  <div class="flex justify-center mb-6">{{ logo() }}</div>
+  <h2 class="mb-4 text-2xl font-semibold text-center text-gray-700">
+    Redefinindo sua senha
+  </h2>
+  <p class="mb-6 text-center text-gray-600">
+    Email para a recuperação de senha.
+  </p>
+  <form>
+    <div class="mb-6">
+      <label for="email" class="block text-gray-700">E-mail</label>
+      <div
+        class="flex items-center justify-center w-full gap-1 p-3 mt-1 border rounded-lg focus-within:ring-2 focus-within:ring-green-500"
+      >
+        <i class="ph-bold ph-user"></i>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="w-full p-0 m-0 border-none outline-none focus:border-none focus:outline-none focus:ring-0"
+          placeholder="admin@smart-farming.com"
+        />
+      </div>
+    </div>
+    <button
+      type="submit"
+      class="w-full p-3 text-white bg-green-500 rounded-lg hover:bg-green-600"
+    >
+      Redefinir senha
+    </button>
+  </form>
+</div>
+
+{% endblock %}
