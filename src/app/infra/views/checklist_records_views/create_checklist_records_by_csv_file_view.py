@@ -18,7 +18,6 @@ from infra.authentication import auth
 @auth.login_middleware
 def create_checklist_records_by_csv_file_view():
     
-    auth_user = auth.get_user()
     
     
     form_data = request.form.to_dict()
@@ -32,6 +31,9 @@ def create_checklist_records_by_csv_file_view():
     page_number = request.args.get("page", 1)
 
     try:
+        auth_user = auth.get_user()
+
+        
         if not csv_form.validate_on_submit():
             raise Error(ui_message="Arquivo CSV inválido", status_code=400)
 

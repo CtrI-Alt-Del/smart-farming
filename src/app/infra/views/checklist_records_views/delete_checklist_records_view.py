@@ -13,7 +13,6 @@ from infra.authentication import auth
 @auth.login_middleware
 def delete_checklist_records_view():
     
-    auth_user = auth.get_user()
     
     checklist_records_ids = request.form.getlist("checklist-records-ids[]")
 
@@ -23,6 +22,9 @@ def delete_checklist_records_view():
     page_number = int(request.args.get("page", 1))
 
     try:
+        auth_user = auth.get_user()
+
+
         delete_checklist_records.execute(checklist_records_ids)
 
         data = get_checklist_records_table_page_data.execute(

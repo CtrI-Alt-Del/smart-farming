@@ -14,7 +14,6 @@ from infra.authentication import auth
 @auth.login_middleware
 def create_checklist_record_by_form_view():
     
-    auth_user = auth.get_user()
     
     checklist_record_form = ChecklistRecordForm(request.form)
 
@@ -24,6 +23,8 @@ def create_checklist_record_by_form_view():
     page_number = int(request.args.get("page", 1))
 
     try:
+        auth_user = auth.get_user()
+
         if not checklist_record_form.validate_on_submit():
             raise Error
 

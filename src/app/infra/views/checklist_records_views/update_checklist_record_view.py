@@ -7,6 +7,7 @@ from infra.forms import ChecklistRecordForm
 
 from infra.authentication import auth
 
+@auth.login_middleware
 def update_checklist_record_view(id: str):
     checklist_record_form = ChecklistRecordForm(formdata=request.form)
 
