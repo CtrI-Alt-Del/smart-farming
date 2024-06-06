@@ -1,4 +1,4 @@
--- Active: 1712147539997@@127.0.0.1@3306@smart-farming
+-- Active: 1715783627262@@localhost@3307
 DROP TABLE IF EXISTS user;
 
 USE `smart-farming`;
