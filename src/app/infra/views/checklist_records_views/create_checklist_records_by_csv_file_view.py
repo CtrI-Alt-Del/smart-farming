@@ -12,8 +12,15 @@ from core.constants import PAGINATION
 
 from infra.forms import CsvForm
 
+from infra.authentication import auth
 
+
+@auth.login_middleware
 def create_checklist_records_by_csv_file_view():
+    
+    auth_user = auth.get_user()
+    
+    
     form_data = request.form.to_dict()
     form_data["csv"] = request.files["csv"]
 
@@ -49,6 +56,7 @@ def create_checklist_records_by_csv_file_view():
             current_page_number=current_page_number,
             page_buttons_limit=PAGINATION["page_buttons_siblings_count"],
             create_by_csv_message="Registros check-list por arquivo csv realizado com sucesso",
+            auth_user = auth_user
         )
 
     except Error as error:

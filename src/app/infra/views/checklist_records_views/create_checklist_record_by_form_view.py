@@ -9,8 +9,13 @@ from core.constants import PAGINATION
 
 from infra.forms import ChecklistRecordForm
 
+from infra.authentication import auth
 
+@auth.login_middleware
 def create_checklist_record_by_form_view():
+    
+    auth_user = auth.get_user()
+    
     checklist_record_form = ChecklistRecordForm(request.form)
 
     start_date = request.args.get("start-date", None)
@@ -63,6 +68,7 @@ def create_checklist_record_by_form_view():
             current_page_number=current_page_number,
             page_buttons_limit=PAGINATION["page_buttons_siblings_count"],
             create_message="Check-list realizado com sucesso",
+            auth_user=auth_user
         )
 
     except Error as error:
