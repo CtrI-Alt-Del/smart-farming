@@ -8,6 +8,7 @@
 {% from 'components/title.html' import title %}
 {% from 'components/datepicker.html' import datepicker %}
 {% from 'components/see_charts_button.html' import see_charts_button %}
+{% from 'components/csv_output.html' import csv_output %}
 
 {% block dashboard_content %}
 
@@ -116,6 +117,13 @@
         )
         }}
       </div>
+
+      <div class="ml-auto">
+        {{
+        csv_output(url_for("checklist_records_views.checklist_records_csv_file_view"))
+        }}
+      </div>
+  
 
     </div>
 
