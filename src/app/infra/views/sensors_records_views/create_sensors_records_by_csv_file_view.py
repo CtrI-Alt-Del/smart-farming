@@ -11,7 +11,9 @@ from core.constants import PAGINATION
 
 from infra.forms.csv_form import CsvForm
 
+from infra.authentication import auth
 
+@auth.login_middleware
 def create_sensors_records_by_csv_file_view():
     form_data = request.form.to_dict()
     form_data["csv"] = request.files["csv"]
@@ -26,6 +28,9 @@ def create_sensors_records_by_csv_file_view():
     page_number = int(request.args.get("page", 1))
 
     try:
+        
+        auth_user = auth.get_user()
+        
         if not csv_form.validate_on_submit():
             raise Error(ui_message="Arquivo CSV inválido", status_code=400)
 
@@ -48,6 +53,7 @@ def create_sensors_records_by_csv_file_view():
             current_page_number=page_number,
             page_buttons_limit=PAGINATION["page_buttons_siblings_count"],
             create_by_csv_message="Registros dos sensores por arquivo csv realizado com sucesso",
+            auth_user=auth_user
         )
 
     except Error as error:
@@ -56,6 +62,7 @@ def create_sensors_records_by_csv_file_view():
                 "components/csv_form_error.html",
                 message=error.ui_message,
                 on_load="trigger click on #create-sensors-records-modal-trigger",
+                auth_user=auth_user
             ),
             error.status_code,
         )

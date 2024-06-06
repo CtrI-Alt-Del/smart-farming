@@ -4,14 +4,21 @@ from core.use_cases.checklist_records import get_checklist_records_table_page_da
 from core.commons import Error
 from core.constants import PAGINATION
 
+from infra.authentication import auth
 
+
+@auth.login_middleware
 def filter_checklist_records_view():
+    
+    
     start_date = request.args.get("start-date", None)
     end_date = request.args.get("end-date", None)
     plant_id = request.args.get("plant", "all")
     page_number = int(request.args.get("page", 1))
 
     try:
+        auth_user = auth.get_user()
+
         data = get_checklist_records_table_page_data.execute(
             page_number=page_number,
             start_date=start_date,
@@ -30,6 +37,7 @@ def filter_checklist_records_view():
             last_page_number=last_page_number,
             current_page_number=current_page_number,
             page_buttons_limit=PAGINATION["page_buttons_siblings_count"],
+            auth_user=auth_user
         )
 
     except Error as error:

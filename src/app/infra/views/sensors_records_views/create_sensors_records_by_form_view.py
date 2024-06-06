@@ -10,7 +10,9 @@ from core.constants import PAGINATION
 from infra.forms import SensorsRecordForm
 from infra.forms import CsvForm
 
+from infra.authentication import auth
 
+@auth.login_middleware
 def create_sensors_record_by_form_view():
     sensors_record_form = SensorsRecordForm(request.form)
 
@@ -20,6 +22,7 @@ def create_sensors_record_by_form_view():
     page_number = int(request.args.get("page", 1))
 
     try:
+        auth_user = auth.get_user()
         if not sensors_record_form.validate_on_submit():
             raise Error
 
@@ -53,6 +56,7 @@ def create_sensors_record_by_form_view():
             current_page_number=page_number,
             page_buttons_limit=PAGINATION["page_buttons_siblings_count"],
             create_message="Registro dos sensores realizado com sucesso",
+            auth_user=auth_user
         )
 
     except Error as error:
@@ -61,6 +65,7 @@ def create_sensors_record_by_form_view():
                 "pages/sensors_records_table/create_sensors_record_form/fields.html",
                 create_sensors_record_form=sensors_record_form,
                 error_message=error.ui_message,
+                auth_user=auth_user
             ),
             error.status_code,
         )

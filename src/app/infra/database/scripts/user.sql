@@ -1,6 +1,9 @@
 -- Active: 1715783627262@@localhost@3307
 DROP TABLE IF EXISTS user;
 
+USE `smart-farming`;
+
+
 CREATE TABLE IF NOT EXISTS user (
   id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
   email VARCHAR(255) NOT NULL,
@@ -14,5 +17,6 @@ INSERT INTO user (email, password) VALUES
 );
 
 SELECT * FROM user;
+
 
 DELETE FROM user;
