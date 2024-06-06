@@ -7,7 +7,7 @@ from core.constants import PAGINATION
 from infra.authentication import auth
 
 
-@auth.login_middleware()
+@auth.login_middleware
 def filter_checklist_records_view():
     
     
