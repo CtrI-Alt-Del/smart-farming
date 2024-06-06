@@ -7,7 +7,9 @@ from core.use_cases.sensors_records import (
 from core.commons import Error
 from core.constants import PAGINATION
 
+from infra.authentication import auth
 
+@auth.login_middleware
 def delete_sensors_records_view():
     sensors_records_ids = request.form.getlist("sensors-records-ids[]")
 
@@ -17,6 +19,9 @@ def delete_sensors_records_view():
     page_number = int(request.args.get("page", 1))
 
     try:
+        
+        auth_user = auth.get_user()
+        
         delete_sensors_records.execute(sensors_records_ids)
         data = get_sensors_records_table_page_data.execute(
             start_date=start_date,
@@ -36,6 +41,7 @@ def delete_sensors_records_view():
             current_page_number=current_page_number,
             page_buttons_limit=PAGINATION["page_buttons_siblings_count"],
             delete_message="Registro(s) deletado(s) com sucesso",
+            auth_user=auth_user
         )
     except Error as error:
         return "ERROR", error.status_code
