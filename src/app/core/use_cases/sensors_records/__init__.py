@@ -8,6 +8,7 @@ from .update_sensors_records import UpdateSensorsRecord
 from .delete_sensors_records import DeleteSensorsRecord
 
 from .filter_sensors_records import FilterSensorsRecords
+from .get_sensors_records_csv_file import GetSensorsRecordsCsvFile
 
 create_sensors_records_by_csv_file = CreateSensorsRecordsByCsvFile()
 create_sensors_record_by_api = CreateSensorsRecordByApi()
@@ -18,3 +19,4 @@ get_sensors_records_table_page_data = GetSensorsRecordsTablePageData()
 update_sensors_records = UpdateSensorsRecord()
 delete_sensors_records = DeleteSensorsRecord()
 filter_sensors_records = FilterSensorsRecords()
+get_sensors_records_csv_file = GetSensorsRecordsCsvFile()
