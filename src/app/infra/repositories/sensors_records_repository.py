@@ -1,4 +1,5 @@
 from core.entities import SensorsRecord, Datetime, Plant
+from core.commons import Weekday
 from core.constants import PAGINATION
 
 from infra.database import mysql
@@ -9,7 +10,8 @@ from datetime import date
 class SensorRecordsRepository:
     def create_sensors_record(self, sensors_record: SensorsRecord) -> None:
         sql = """
-        INSERT INTO sensors_records (soil_humidity, ambient_humidity, temperature, water_volume, created_at, plant_id) 
+        INSERT INTO sensors_records 
+            (soil_humidity, ambient_humidity, temperature, water_volume, created_at, plant_id) 
         VALUES (%s, %s, %s, %s, %s , %s)
         """
 
@@ -23,6 +25,29 @@ class SensorRecordsRepository:
                 sensors_record.created_at.get_value(),
                 sensors_record.plant.id,
             ],
+        )
+
+    def create_many_sensors_records(self, sensors_records: list[SensorsRecord]):
+        params = []
+        for record in sensors_records:
+            params.append(
+                (
+                    record.soil_humidity,
+                    record.ambient_humidity,
+                    record.temperature,
+                    record.water_volume,
+                    record.created_at.get_value(),
+                    record.plant.id,
+                )
+            )
+
+        mysql.mutate_many(
+            sql="""
+             INSERT INTO sensors_records 
+                (soil_humidity, ambient_humidity, temperature, water_volume, created_at, plant_id) 
+            VALUES (%s, %s, %s, %s, %s , %s)
+            """,
+            params=params,
         )
 
     def get_sensor_records_grouped_by_date(self):
@@ -63,8 +88,6 @@ class SensorRecordsRepository:
             return []
 
         return [self.__get_sensors_record_entity(row) for row in rows]
-
-    
 
     def get_sensors_record_by_id(self, id: str) -> SensorsRecord | None:
         row = mysql.query(
@@ -121,12 +144,64 @@ class SensorRecordsRepository:
             params=[sensors_record_id],
         )
 
+    def get_filtered_sensors_records(
+        self, plant_id: str, start_date: date, end_date: date, page_number: int = 1
+    ) -> list[SensorsRecord]:
+        where = self.__get_where_with_filters(plant_id, start_date, end_date)
+
+        limit = ""
+        if page_number != "all":
+            pagination_limit = PAGINATION["records_per_page"]
+            offset = (page_number - 1) * pagination_limit
+            limit = f"LIMIT {pagination_limit} OFFSET {offset}"
+
+        rows = mysql.query(
+            sql=f"""
+            SELECT 
+                SR.*,
+                P.id AS plant_id, 
+                P.name AS plant_name, 
+                P.hex_color AS plant_color
+            FROM sensors_records AS SR
+            JOIN plants AS P ON P.id = SR.plant_id
+            {where}
+            ORDER BY SR.created_at DESC
+            {limit}
+            """,
+            is_single=False,
+        )
+
+        sensors_records = []
+
+        if len(rows) > 0:
+            sensors_records = [self.__get_sensors_record_entity(row) for row in rows]
+
+        return sensors_records
+
+    def __get_where_with_filters(self, plant_id: str, start_date: date, end_date: date):
+        filters = []
+
+        if plant_id:
+            filters.append(f"CR.plant_id = '{plant_id}'")
+
+        if start_date and end_date:
+            filters.append(
+                f"SR.created_at BETWEEN '{start_date} 00:00:00' AND '{end_date} 23:59:59'"
+            )
+
+        where = ""
+        if len(filters) > 0:
+            where = "WHERE " + " AND ".join(filters)
+
+        return where
+
     def __get_sensors_record_entity(self, row: dict) -> SensorsRecord:
         if row:
             created_at = Datetime(row["created_at"])
             plant = Plant(
                 id=row["plant_id"], name=row["plant_name"], hex_color=row["plant_color"]
             )
+            weekday = Weekday(created_at.get_value(is_datetime=True))
 
             return SensorsRecord(
                 id=row["id"],
@@ -135,45 +210,8 @@ class SensorRecordsRepository:
                 temperature=float(row["temperature"]),
                 water_volume=float(row["water_volume"]),
                 plant=plant,
+                weekday=weekday,
                 created_at=created_at,
             )
         else:
             return None
-    
-    def get_filtered_sensors_records(self, plant_id: str,start_date: date,end_date: date,page_number: int = 1) -> list[SensorsRecord]:
-        filters = []
-        
-        if plant_id:
-            filters.append(f"SR.plant_id = '{plant_id}'")
-            
-        if start_date and end_date:
-            filters.append(f"SR.created_at BETWEEN '{start_date} 00:00:00' AND '{end_date} 23:59:59'")
-        
-        where = ""
-        if len(filters) > 0:
-            where = "WHERE " + " AND ".join(filters)
-        pagination_limit = PAGINATION["records_per_page"]
-        offset = (page_number - 1) * pagination_limit
-        
-        rows = mysql.query(
-            sql = f"""
-            SELECT
-                SR.*,
-                P.id as plant_id,
-                P.name AS plant_name,
-                P.hex_color as plant_color
-            FROM sensors_records AS SR
-            JOIN plants AS P on P.id = SR.plant_id
-            {where}
-            ORDER BY SR.created_at DESC
-            LIMIT {pagination_limit} OFFSET {offset}
-            """,
-            is_single=False
-        )
-        
-        sensors_records = []
-        
-        if len(rows) > 0:
-            for row in rows:
-                sensors_records.append(self.__get_sensors_record_entity(row))
-        return sensors_records
