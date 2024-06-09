@@ -8,9 +8,7 @@ from infra.forms import ChecklistRecordForm, CsvForm
 from infra.authentication import auth
 
 
-@auth.login_middleware
 def checklist_records_table_page_view():
-
     start_date = request.args.get("start-date", None)
     end_date = request.args.get("end-date", None)
     plant_id = request.args.get("plant", "all")
@@ -21,7 +19,7 @@ def checklist_records_table_page_view():
 
     try:
         auth_user = auth.get_user()
-        
+
         data = get_checklist_records_table_page_data.execute(
             page_number=page_number,
             start_date=start_date,

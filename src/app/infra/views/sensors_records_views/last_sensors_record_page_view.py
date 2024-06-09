@@ -7,7 +7,6 @@ from core.commons import Error
 from infra.authentication import auth
 
 
-@auth.login_middleware
 def last_sensors_record_page_view():
     try:
         auth_user = auth.get_user()
