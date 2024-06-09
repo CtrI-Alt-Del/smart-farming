@@ -58,7 +58,7 @@ route(
 )
 
 route(
-    "/checklist_records/csv",
+    "/sensors_records/csv",
     view_func=sensors_records_csv_file_view,
     methods=["GET"],
 )
