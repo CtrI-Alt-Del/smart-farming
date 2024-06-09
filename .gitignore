@@ -332,4 +332,7 @@ pyrightconfig.json
 .ionide
 draft.*
 
+### Sensitive Data ###
+certificates/smart-farming-drive-service-account.json
+
 # End of https://www.toptal.com/developers/gitignore/api/python,visualstudiocode,node
