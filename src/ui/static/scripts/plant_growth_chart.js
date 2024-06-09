@@ -52,7 +52,7 @@ class PlantGrowthChart {
 
   renderAverageValue() {
     const averageValue = this.data[this.plantId][this.daysRange].average
-    this.average.textContent = `${averageValue.toFixed(2)}%`
+    this.average.textContent = `${averageValue.toFixed(2)} (m²/m²)`
   }
 
   handlePlantSelectChange(event) {
@@ -153,7 +153,7 @@ class PlantGrowthChart {
           show: true,
           offsetX: -12,
           formatter: (value) => {
-            return `${value}%`
+            return `${value} (m²/m²)`
           },
         },
       },
