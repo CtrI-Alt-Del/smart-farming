@@ -41,9 +41,22 @@ class MySQL:
                 internal_message=f"Failed to execute a query on the database. Error: {error}",
             ) from error
 
-    def mutate(self, sql: str, params) -> Dict:
+    def mutate(self, sql: str, params):
         try:
             self.__database.execute(sql, params)
+            self.__connection.commit()
+
+        except mysql.connector.Error as error:
+            self.__connection.rollback()
+            self.__close_connection()
+
+            raise Error(
+                internal_message=f"Failed to execute a mutation on the database. Error: {error}",
+            ) from error
+
+    def mutate_many(self, sql: str, params):
+        try:
+            self.__database.executemany(sql, params)
             self.__connection.commit()
 
         except mysql.connector.Error as error:
