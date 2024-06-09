@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 from core.entities.entity import Entity
-from core.commons.datetime import Datetime
+from core.commons import Datetime, Weekday
 from core.entities.plant import Plant
 
 
@@ -13,3 +13,4 @@ class SensorsRecord(Entity):
     temperature: float = None
     created_at: Datetime = None
     plant: Plant = None
+    weekday: Weekday = None
