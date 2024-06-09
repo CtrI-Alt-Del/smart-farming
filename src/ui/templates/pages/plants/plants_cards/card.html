@@ -22,6 +22,7 @@ category="success",
   id="plant-{{ plant.id }}"
   data-loading-class="animate-pulse animate-duration-500"
   class="relative flex items-center justify-start h-20 border rounded group bg-slate-100">
+  {% if auth_user.is_authenticated %}
   <div class="absolute bottom-0 right-0 flex items-center justify-center">
     <button
       hx-get="{{ url_for('plants_views.update_plant_form_view', id=plant.id) }}"
@@ -52,6 +53,7 @@ category="success",
         class="text-[20px] text-zinc-400 hover:text-red-500 ph-light ph-trash"></i>
     </button>
   </div>
+  {% endif %}
 
   <div
     {{ card_style }}

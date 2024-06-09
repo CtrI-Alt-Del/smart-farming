@@ -15,6 +15,7 @@
 
   {{ title("Plantas") }}
 
+  {% if auth_user.is_authenticated %}
   <div class="mt-5">
     {{
     button(
@@ -35,6 +36,7 @@
     </div>
   </div>
   {% endcall %}
+  {% endif %}
 
   <form
     id="search-plants"
@@ -43,11 +45,13 @@
     hx-swap="innerHTML"
     hx-trigger="submit"
     data-query-param="hx-get"
-    class="w-96">
+    class="w-96 mt-6">
     {{ search(on_change="trigger submit on #search-plants") }}
   </form>
 
+  {% if auth_user.is_authenticated %}
   <input type="hidden" id="delete-plant-id-input">
+  {% endif %}
 
   {{
   alert(
