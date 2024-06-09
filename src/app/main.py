@@ -2,9 +2,10 @@ from os import getenv
 
 from flask import Flask
 
-from infra.views import init_views
 from infra.database import init_database
+from infra.jobs import init_jobs
 from infra.authentication import init_authentication
+from infra.views import init_views
 
 
 def init_app():
@@ -15,6 +16,7 @@ def init_app():
     app.config["SECRET_KEY"] = getenv("SECRET_KEY")
 
     init_database()
+    init_jobs()
     init_authentication(app)
     init_views(app)
 
