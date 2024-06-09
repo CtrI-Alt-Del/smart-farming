@@ -17,8 +17,11 @@
 <div
   class="flex items-center justify-center sm:justify-between flex-col sm:flex-row gap-4 mt-6 max-[340px]:grid max-[340px]:grid-cols-2 max-[340px]:grid-rows-2">
 
-  {{ see_charts_button("Visualizar gráficos",
-  url_for('sensors_records_views.sensors_records_dashboard_page_view')) }}
+  {{
+  see_charts_button("Visualizar gráficos",
+  url_for('sensors_records_views.sensors_records_dashboard_page_view')
+  )
+  }}
 
   {{
   datepicker(
@@ -49,6 +52,7 @@
 </div>
 <div class="relative pb-6 shadow-md sm:rounded-lg">
 
+  {% if auth_user.is_authenticated %}
   {% call modal(id="update-sensors-record-modal") %}
 
   <div id="update-sensors-record-form" class="flex w-full">
@@ -58,6 +62,7 @@
   </div>
 
   {% endcall %}
+  {% endif %}
 
   <div class="relative sm:rounded-lg">
     <div class="flex flex-col sm:flex-row sm:items-end gap-3 p-6">
@@ -123,14 +128,16 @@
         }}
       </div>
 
+      {% if sensors_records | length > 0 %}
       <div class="ml-auto">
         {{
         csv_output(
         href=url_for("sensors_records_views.sensors_records_csv_file_view"),
-        filename="sensors-records.xlsx"
+        filename="registros-dos-sensores.xlsx"
         )
         }}
       </div>
+      {% endif %}
 
     </div>
 

@@ -6,6 +6,7 @@
   _="on load trigger updateRow"
   data-loading-class="hidden"
   class="group bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+  {% if auth_user.is_authenticated %}
   <td class="relative w-4 p-4">
     {% if update_message %}
     <div class="fixed">
@@ -20,7 +21,6 @@
     </div>
     {% endif %}
 
-    {% if auth_user.is_authenticated %}
     <div class="flex items-center gap-3 w-4">
       <input
         id="checkbox-{{ sensors_record.id }}"
@@ -52,8 +52,8 @@
         <i class="ph-bold ph-note-pencil text-lg"></i>
       </button>
     </div>
-    {% endif %}
   </td>
+  {% endif %}
   <td
     scope="row"
     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">

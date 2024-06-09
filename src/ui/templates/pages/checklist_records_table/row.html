@@ -7,6 +7,7 @@
   _="on load trigger updateRow"
   data-loading-class="hidden"
   class="group bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+  {% if auth_user.is_authenticated %}
   <td class="relative p-4">
 
     {% if update_message %}
@@ -54,6 +55,7 @@
       </button>
     </div>
   </td>
+  {% endif %}
 
   <th scope="row"
     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
