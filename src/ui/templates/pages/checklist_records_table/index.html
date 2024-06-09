@@ -23,14 +23,16 @@
   url_for('checklist_records_views.checklist_records_dashboard_page_view'))
   }}
 
-  {{
-  datepicker(
-  attributes="data-filters=filter",
-  selected_start_date=selected_start_date,
-  selected_end_date=selected_end_date,
-  form_id="filter-checklist-records-form",
-  )
-  }}
+  <div class="mx-auto">
+    {{
+    datepicker(
+    attributes="data-filters=filter",
+    selected_start_date=selected_start_date,
+    selected_end_date=selected_end_date,
+    form_id="filter-checklist-records-form",
+    )
+    }}
+  </div>
 
   {% if auth_user.is_authenticated %}
   {{

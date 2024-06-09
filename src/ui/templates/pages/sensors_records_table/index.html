@@ -15,7 +15,7 @@
 {{ title("Registro dos sensores") }}
 
 <div
-  class="flex items-center justify-center sm:justify-between flex-col sm:flex-row gap-4 mt-6 max-[340px]:grid max-[340px]:grid-cols-2 max-[340px]:grid-rows-2">
+  class="flex items-center sm:justify-between flex-col sm:flex-row gap-4 mt-6 max-[340px]:grid max-[340px]:grid-cols-2 max-[340px]:grid-rows-2">
 
   {{
   see_charts_button("Visualizar gráficos",
@@ -23,14 +23,16 @@
   )
   }}
 
-  {{
-  datepicker(
-  attributes="data-filters=filter",
-  selected_start_date=selected_start_date,
-  selected_end_date=selected_end_date,
-  form_id="filter-sensors-records-form",
-  )
-  }}
+  <div class="mx-auto">
+    {{
+    datepicker(
+    attributes="data-filters=filter",
+    selected_start_date=selected_start_date,
+    selected_end_date=selected_end_date,
+    form_id="filter-sensors-records-form",
+    )
+    }}
+  </div>
 
   {% if auth_user.is_authenticated %}
   {{
