@@ -1,3 +1,4 @@
+from os import getenv
 from typing import Literal
 
 from google.oauth2.service_account import Credentials
@@ -6,6 +7,10 @@ from googleapiclient.discovery import build, MediaFileUpload
 from core.commons import Error
 
 from infra.constants import FOLDERS
+
+GOOGLE_DRIVE_DATABASE_BACKUP_FOLDER_ID = getenv(
+    "GOOGLE_DRIVE_DATABASE_BACKUP_FOLDER_ID"
+)
 
 
 class CloundStorageProvider:
@@ -41,7 +46,7 @@ class CloundStorageProvider:
     def create_file(self, file_path: str, filename: str, mimetype: Literal["text/sql"]):
         file_metadata = {
             "name": filename,
-            "parents": ["1L2ZyNVv2gLpSoXcfZQ3Yuillfl-CbErR"],
+            "parents": [GOOGLE_DRIVE_DATABASE_BACKUP_FOLDER_ID],
         }
         media = MediaFileUpload(file_path, mimetype=mimetype)
 
