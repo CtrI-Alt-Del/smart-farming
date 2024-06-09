@@ -4,8 +4,10 @@ from core.commons import Error
 
 from infra.forms import SensorsRecordForm
 from infra.repositories import sensors_records_repository
+from infra.authentication import auth
 
 
+@auth.login_middleware
 def update_sensors_record_form_view(id: str):
     try:
         sensors_record = sensors_records_repository.get_sensors_record_by_id(id)

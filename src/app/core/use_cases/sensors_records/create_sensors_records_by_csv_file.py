@@ -11,7 +11,7 @@ from infra.repositories import sensors_records_repository, plants_repository
 
 
 class CreateSensorsRecordsByCsvFile:
-    def execute(self, file: FileStorage) -> None:
+    def execute(self, file: FileStorage):
         try:
             csv_file = CsvFile(file)
             csv_file.read()
@@ -22,8 +22,7 @@ class CreateSensorsRecordsByCsvFile:
 
             converted_records = self.__convert_csv_records_to_sensors_records(records)
 
-            for sensors_record in converted_records:
-                sensors_records_repository.create_sensors_record(sensors_record)
+            sensors_records_repository.create_many_sensors_records(converted_records)
 
         except Error as error:
             raise error
