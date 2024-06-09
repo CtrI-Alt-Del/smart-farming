@@ -1,18 +1,28 @@
 from os import getenv
 from typing import Union, Dict, List
+from datetime import datetime
+from subprocess import run as run_command
 
 import mysql.connector
 
 from core.commons import Error
 
+from infra.utils import File
+from infra.constants import FOLDERS
+
+MYSQL_DATABASE_USER = getenv("MYSQL_DATABASE_USER")
+MYSQL_DATABASE_PASSWORD = getenv("MYSQL_DATABASE_PASSWORD")
+MYSQL_DATABASE_NAME = getenv("MYSQL_DATABASE_NAME")
+MYSQL_DATABASE_HOST = getenv("MYSQL_DATABASE_HOST")
+
 
 class MySQL:
     def __init__(self) -> None:
         config = {
-            "user": getenv("MYSQL_DATABASE_USER"),
-            "password": getenv("MYSQL_DATABASE_PASSWORD"),
-            "database": getenv("MYSQL_DATABASE_NAME"),
-            "host": getenv("MYSQL_DATABASE_HOST"),
+            "user": MYSQL_DATABASE_USER,
+            "password": MYSQL_DATABASE_PASSWORD,
+            "database": MYSQL_DATABASE_NAME,
+            "host": MYSQL_DATABASE_HOST,
             "raise_on_warnings": True,
         }
 
@@ -66,6 +76,21 @@ class MySQL:
             raise Error(
                 internal_message=f"Failed to execute a mutation on the database. Error: {error}",
             ) from error
+
+    def create_backup(self):
+        try:
+            current_datetime = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+            filename = f"smart-farming-database-backup-{current_datetime}.sql"
+
+            backup_file = File(folder=FOLDERS["tmp"], filename=filename)
+
+            command = f"mysqldump -h {MYSQL_DATABASE_HOST} -u {MYSQL_DATABASE_USER} -p{MYSQL_DATABASE_PASSWORD} --no-tablespaces -e {MYSQL_DATABASE_NAME} > {backup_file.path.absolute()}"  # mysqldump -h 127.0.0.1 -u smart-farming -p'smart-farming' --no-tablespaces  -e smart-farming > backup.sql
+
+            run_command(command, shell=True, check=True)
+
+            return backup_file
+        except Exception as exception:
+            raise Error(exception)
 
     def __close_connection(self):
         self.__connection.close()
