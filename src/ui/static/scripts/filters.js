@@ -25,7 +25,7 @@ class Filters {
       const currentParams = this.queryParam.getAll()
       const filtersNames = Array.from(this.filters).map((filter) => filter.name)
       const hasFilters = currentParams.some((param) =>
-        filtersNames.includes(param),
+        filtersNames.includes(param[0]),
       )
 
       if (hasFilters) this.showRemoveAllButton()
