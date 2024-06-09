@@ -1,15 +1,15 @@
 from flask_apscheduler import APScheduler
 
-from .create_database_backup import create_database_backup
+from .create_database_backup_job import create_database_backup_job
 
 
 def init_jobs():
     scheduler = APScheduler()
 
     scheduler.add_job(
-        func=create_database_backup,
+        func=create_database_backup_job,
         trigger="interval",
-        seconds=5,
+        days=1,
         id="Create Database Backup Job",
     )
 
