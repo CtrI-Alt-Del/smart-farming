@@ -1,4 +1,3 @@
-from random import randint
 from datetime import date
 
 from core.commons import RecordsFilters, Error
@@ -18,7 +17,7 @@ class GetSensorsRecordsCsvFile:
 
             data = self.__get_data(filters)
 
-            csv_name = f"sensors-records.xlsx"
+            csv_name = "registros-dos-sensores.xlsx"
             tmp_folder = FOLDERS["tmp"]
 
             data_analyser_provider = DataAnalyserProvider()
@@ -58,6 +57,8 @@ class GetSensorsRecordsCsvFile:
                     case "created_at":
                         data["hora"].append(value.get_time().hour)
                         data["data"].append(value.format_value().get_value()[:10])
+                    case "weekday":
+                        data["dia da semana"].append(value.get_value())
                     case "soil_humidity":
                         data["umidade solo"].append(value)
                     case "ambient_humidity":

@@ -1,4 +1,3 @@
-from random import randint
 from datetime import date
 
 from core.commons import RecordsFilters, Error
@@ -18,7 +17,7 @@ class GetChecklistRecordsCsvFile:
 
             data = self.__get_data(filters)
 
-            csv_name = f"checklist-records.xlsx"
+            csv_name = "registros-checklist.xlsx"
             tmp_folder = FOLDERS["tmp"]
 
             data_analyser_provider = DataAnalyserProvider()
