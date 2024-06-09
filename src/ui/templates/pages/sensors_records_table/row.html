@@ -20,6 +20,7 @@
     </div>
     {% endif %}
 
+    {% if auth_user.is_authenticated %}
     <div class="flex items-center gap-3 w-4">
       <input
         id="checkbox-{{ sensors_record.id }}"
@@ -51,6 +52,7 @@
         <i class="ph-bold ph-note-pencil text-lg"></i>
       </button>
     </div>
+    {% endif %}
   </td>
   <td
     scope="row"
@@ -58,6 +60,7 @@
     <time>
       {{ sensors_record.created_at.format_value().get_value() }}
     </time>
+    <span>{{ sensors_record.weekday.get_value() }}</span>
   </td>
   <td class="py-4">
     {{ plant_badge(sensors_record.plant) }}

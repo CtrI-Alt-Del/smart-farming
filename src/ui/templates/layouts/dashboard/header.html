@@ -40,7 +40,7 @@
     </strong>
   </div>
 
-  {% if auth_user %}
+  {% if auth_user.is_authenticated %}
 
   <a
     href="{{ url_for('authentication_views.logout_user_view') }}"

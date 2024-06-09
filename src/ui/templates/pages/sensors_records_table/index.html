@@ -17,24 +17,25 @@
 <div
   class="flex items-center justify-center sm:justify-between flex-col sm:flex-row gap-4 mt-6 max-[340px]:grid max-[340px]:grid-cols-2 max-[340px]:grid-rows-2">
 
-      {{ see_charts_button("Visualizar gráficos",
-      url_for('sensors_records_views.sensors_records_dashboard_page_view')) }}
-    
-      {{
-      datepicker(
-      attributes="data-filters=filter",
-      selected_start_date=selected_start_date,
-      selected_end_date=selected_end_date,
-      form_id="filter-sensors-records-form",
-      )
-      }}
-    
-      {{
-      button(
-      type="button",
-      title="Adicionar registro",
-      attributes="data-modal-target=create-sensors-records-modal data-modal-toggle=create-sensors-records-modal")
-      }}
+  {{ see_charts_button("Visualizar gráficos",
+  url_for('sensors_records_views.sensors_records_dashboard_page_view')) }}
+
+  {{
+  datepicker(
+  attributes="data-filters=filter",
+  selected_start_date=selected_start_date,
+  selected_end_date=selected_end_date,
+  form_id="filter-sensors-records-form",
+  )
+  }}
+
+  {% if auth_user.is_authenticated %}
+  {{
+  button(
+  type="button",
+  title="Adicionar registro",
+  attributes="data-modal-target=create-sensors-records-modal data-modal-toggle=create-sensors-records-modal")
+  }}
 
   {% call modal(id="create-sensors-records-modal") %}
 
@@ -43,6 +44,7 @@
   %}
 
   {% endcall %}
+  {% endif %}
 
 </div>
 <div class="relative pb-6 shadow-md sm:rounded-lg">
@@ -70,7 +72,6 @@
         data-query-param="hx-get"
         id="filter-sensors-records-form">
 
-
         {{
         plant_select(
         id="plant-select",
@@ -87,6 +88,7 @@
           hidden>
       </form>
 
+      {% if auth_user.is_authenticated %}
       {{
       alert(
       id="delete-sensors-record",
@@ -94,8 +96,10 @@
       on_confirm="trigger submit on #delete-sensors-records-form"
       )
       }}
+      {% endif %}
 
       <div class="flex flex-col sm:flex-row gap-3">
+        {% if auth_user.is_authenticated %}
         {{
         button(
         type="button",
@@ -107,7 +111,8 @@
         class="hidden bg-red-700 animate-pulse animate-duration-1000",
         )
         }}
-  
+        {% endif %}
+
         {{
         button(
         type="button",
@@ -120,10 +125,12 @@
 
       <div class="ml-auto">
         {{
-        csv_output(url_for("sensors_records_views.sensors_records_csv_file_view"))
+        csv_output(
+        href=url_for("sensors_records_views.sensors_records_csv_file_view"),
+        filename="sensors-records.xlsx"
+        )
         }}
       </div>
-  
 
     </div>
 
@@ -148,6 +155,9 @@
 
 <script
   src="{{ url_for('static', filename='scripts/query_param.js') }}"></script>
+
+<script
+  src="{{ url_for('static', filename='scripts/csv_output.js') }}"></script>
 
 <script
   src="{{ url_for('static', filename='scripts/table.js') }}"></script>
