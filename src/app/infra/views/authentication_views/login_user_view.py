@@ -15,11 +15,11 @@ def login_user_view():
 
         response = make_response()
 
-        next_page_param = request.args.get("next")
+        next_page_param = request.args.get("next", None)
 
         url = url_for("sensors_records_views.last_sensors_record_page_view")
 
-        if next_page_param:
+        if isinstance(next_page_param, str) and next_page_param[0] == "/":
             url = next_page_param
 
         response.headers["hx-redirect"] = url
