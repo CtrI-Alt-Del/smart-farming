@@ -80,13 +80,15 @@ class MySQL:
     def create_backup(self):
         try:
             current_datetime = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-            filename = f"smart-farming-database-backup-{current_datetime}.sql"
+            filename = f"smart-farming-mysql-database-backup-{current_datetime}.sql"
 
             backup_file = File(folder=FOLDERS["tmp"], filename=filename)
 
-            command = f"mysqldump -h {MYSQL_DATABASE_HOST} -u {MYSQL_DATABASE_USER} -p{MYSQL_DATABASE_PASSWORD} --no-tablespaces -e {MYSQL_DATABASE_NAME} > {backup_file.path.absolute()}"  # mysqldump -h 127.0.0.1 -u smart-farming -p'smart-farming' --no-tablespaces  -e smart-farming > backup.sql
+            command = f"mysqldump -h {MYSQL_DATABASE_HOST} -u {MYSQL_DATABASE_USER} -p{MYSQL_DATABASE_PASSWORD} --no-tablespaces -e {MYSQL_DATABASE_NAME} > {backup_file.path.absolute()}"
 
             run_command(command, shell=True, check=True)
+
+            backup_file.compress()
 
             return backup_file
         except Exception as exception:
