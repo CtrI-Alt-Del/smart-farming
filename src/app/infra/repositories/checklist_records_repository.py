@@ -48,6 +48,52 @@ class ChecklistRecordsRepository:
 
         mysql.mutate(sql, params)
 
+    def create_many_checklist_records(self, checklist_records: list[CheckListRecord]):
+        params = []
+        for record in checklist_records:
+            params.append(
+                (
+                    record.soil_ph,
+                    record.soil_humidity,
+                    record.water_consumption,
+                    record.air_humidity,
+                    record.temperature,
+                    record.illuminance,
+                    record.lai,
+                    record.leaf_appearance,
+                    record.leaf_color,
+                    record.plantation_type,
+                    record.fertilizer_expiration_date.get_value(),
+                    record.created_at.get_value(),
+                    record.report if record.report else "Não",
+                    record.plant.id,
+                )
+            )
+
+        mysql.mutate_many(
+            sql="""
+             INSERT INTO checklist_records 
+                (
+                    soil_ph,
+                    soil_humidity,
+                    water_consumption,
+                    air_humidity,
+                    temperature,
+                    illuminance,
+                    lai,
+                    leaf_appearance,
+                    leaf_color,
+                    plantation_type,
+                    fertilizer_expiration_date,
+                    created_at,
+                    report,
+                    plant_id
+                )
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            """,
+            params=params,
+        )
+
     def update_checklist_record_by_id(self, checklist_record: CheckListRecord) -> None:
         mysql.mutate(
             """
@@ -127,13 +173,12 @@ class ChecklistRecordsRepository:
             is_single=False,
         )
 
-        checklist_records = []
+        sensors_records = []
 
         if len(rows) > 0:
-            for row in rows:
-                checklist_records.append(self.__get_checklist_record_entity(row))
+            sensors_records = [self.__get_checklist_record_entity(row) for row in rows]
 
-        return checklist_records
+        return sensors_records
 
     def get_leaf_appearances_and_leaf_colors_records(self):
         rows = mysql.query(
