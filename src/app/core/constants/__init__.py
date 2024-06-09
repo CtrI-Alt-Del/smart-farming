@@ -7,3 +7,4 @@ from .pagination import *
 from .leaf_appearances import *
 from .leaf_colors import *
 from .support_user_email import *
+from .weekdays import *
