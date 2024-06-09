@@ -114,7 +114,7 @@ class SensorRecordsRepository:
 
         return result["count"]
 
-    def update_sensors_record_by_id(self, sensors_record: SensorsRecord) -> None:
+    def update_sensors_record_by_id(self, sensors_record: SensorsRecord):
         mysql.mutate(
             """
             UPDATE sensors_records

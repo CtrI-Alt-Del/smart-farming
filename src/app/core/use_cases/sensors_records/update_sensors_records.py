@@ -1,7 +1,7 @@
 from datetime import datetime, date
 
 from core.entities import SensorsRecord
-from core.commons import Error, Datetime
+from core.commons import Error, Datetime, Weekday
 
 from infra.repositories import sensors_records_repository, plants_repository
 
@@ -38,6 +38,8 @@ class UpdateSensorsRecord:
                 )
             )
 
+            weekday = Weekday(created_at.get_value(is_datetime=True))
+
             plant = plants_repository.get_plant_by_id(request["plant_id"])
 
             if not plant:
@@ -50,6 +52,7 @@ class UpdateSensorsRecord:
                 temperature=request["temperature"],
                 water_volume=request["water_volume"],
                 plant=plant,
+                weekday=weekday,
                 created_at=created_at,
             )
 
