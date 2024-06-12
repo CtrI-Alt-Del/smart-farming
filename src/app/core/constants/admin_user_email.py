@@ -1,1 +1,1 @@
-ADMIN_EMAIL = ""
+ADMIN_EMAIL = "ctralaltdelsup@gmail.com"

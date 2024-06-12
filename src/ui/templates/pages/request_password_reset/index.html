@@ -11,7 +11,7 @@
   <p class="mb-6 text-center text-gray-600">
     Email para a recuperação de senha.
   </p>
-  <form>
+  <form hx-posts="/request_password_reset" hx-trigger="submit" hx-swap="outerHTML">
     <div class="mb-6">
       <label for="email" class="block text-gray-700">E-mail</label>
       <div

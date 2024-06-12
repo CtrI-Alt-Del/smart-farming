@@ -4,7 +4,7 @@ from email.message import Message
 
 
 class EmailProvider:
-    def send_email(sender, receiver, template, password):
+    def send_email(sender: str, receiver: str, template: str, password: str):
         try:
             email_body = template
             msg = Message()
@@ -18,4 +18,4 @@ class EmailProvider:
 
             smtp.sendmail(sender, receiver, msg.as_string().encode("utf-8"))
         except SMTPAuthenticationError as error:
-            raise Error(error)
+            raise Error(ui_message="app password errada", internal_message=error)
