@@ -7,60 +7,68 @@
 
     <style>
 body {
+    width: 100vw;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: aqua;
-    height: 100vh;
     margin: 0;
+    padding: 0;
+    background-color: blue;
 }
 
 .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    display: block;
+    margin: 0 auto;
     background-color: white;
-    padding: 1.5rem;
-    border-radius: 0.375rem;
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
     max-width: 21rem;
-    width: 100%;
+    border: 1px solid rgb(180, 180, 180);
+    border-radius: 0.375rem 0.375rem 0 0;
     position: relative;
-    padding-top: 4rem;
 }
 
 .header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 15%;
+    height: 70px;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     background-color: #107b29;
-    border-top-left-radius: 0.375rem;
-    border-top-right-radius: 0.375rem;
-    z-index: 99999;
+    border-radius: 0.375rem 0.375rem 0 0;
 }
 
 .header h1 {
-    position: absolute;
-    left: 30%;
-    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     color: white;
     font-weight: bold;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin: 0;
 }
 
 .content-title {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     font-size: 1.25rem;
     font-weight: 600;
     padding: 0.5rem;
 }
 
-hr {
+.hr {
     margin-bottom: 0.5rem;
+    background-color: rgb(180, 180, 180);
+    width: 100%; 
+    height: 1px; 
 }
 
 .message {
@@ -85,6 +93,7 @@ p span {
     margin-bottom: 1.5rem; 
     font-family: 'Roboto', sans-serif;
     text-decoration: none;
+    cursor: pointer;
 }
 
 
@@ -102,18 +111,20 @@ p span {
 
 </head>
 <body>
-    <div class="flex justify-center items-center h-screen">
-        <div class="container">
+    <div class="container">
+        <div class="card">
             <div class="header">
                 <h1>Smart Farming</h1>
             </div>
             <p class="content-title">Redefinição de Senha</p>
-            <hr>
-            <p class="message">Olá Administrador!</p>
-            <p class="message">Recebemos uma solicitação para <span>redefinir sua senha</span>. Se você não fez essa solicitação, por favor, redefina sua senha por questões de segurança.</p>
-            <a href="" class="link-button">Redefinir Senha</a>
-            <p class="footer-text"><br/>Equipe de Suporte <span class="font-semibold">Ctrl Alt Del®</span></p>
+            <div class="hr"></div>
+            <div style="padding: 10px;">
+                <p class="message">Olá Administrador!</p>
+                <p class="message">Recebemos uma solicitação para <span>redefinir sua senha</span>. Se você não fez essa solicitação, por favor, redefina sua senha por questões de segurança.</p>
+                <a href="http://localhost:5004/login/reset_password" class="link-button" style="color: white;">Redefinir Senha</a>
+                <p class="footer-text">Obrigado,<br/>Equipe de Suporte <span class="font-semibold">Ctrl Alt Del®</span></p>
+            </div>
         </div>
     </div>
-    </body>
+</body>
 </html>
