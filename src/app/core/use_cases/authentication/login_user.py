@@ -18,7 +18,7 @@ class LoginUser:
             if not isinstance(user, User):
                 raise Error("Usuário não encontrado", status_code=500)
 
-            is_password_correct = auth.check_password(user.password, password)
+            is_password_correct = auth.check_hash(user.password, password)
 
             if not is_password_correct:
                 raise Error("E-mail ou senha incorretos", status_code=400)

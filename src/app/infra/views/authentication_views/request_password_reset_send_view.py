@@ -5,14 +5,15 @@ from core.use_cases.authentication import request_password_reset
 from core.commons import Error
 
 from infra.authentication import auth
+import uuid
 
-from os import getenv
 
 
 def request_password_reset_send_view():
     try:
-        password_reset_token = getenv("PASSWORD_RESET_TOKEN")
-        token = auth.generate_hash(password_reset_token)
+        password_reset_token = uuid.uuid4()
+        uuid_bytes = password_reset_token.bytes
+        token = auth.generate_hash(uuid_bytes)
 
         user_email = request.form.get("email")
 
