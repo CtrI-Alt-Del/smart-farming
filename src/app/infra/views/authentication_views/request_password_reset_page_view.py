@@ -1,4 +1,4 @@
-from flask import render_template, make_responseq
+from flask import render_template, make_response
 
 from core.use_cases.request_password_reset import request_password_reset
 
