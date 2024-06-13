@@ -1,5 +1,6 @@
 {% extends "/pages/login/index.html" %} 
 
+
 {% block content %}
 <div
   class="max-w-sm p-10 m-5 bg-white rounded-lg shadow-lg sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl"
@@ -8,10 +9,8 @@
   <h2 class="mb-4 text-2xl font-semibold text-center text-gray-700">
     Redefinindo sua senha
   </h2>
-  <p class="mb-6 text-center text-gray-600">
-    Email para a recuperação de senha.
-  </p>
-  <form hx-posts="/request_password_reset" hx-trigger="submit" hx-swap="outerHTML">
+  
+  <form hx-post="{{url_for('authentication_views.request_password_reset_send_view')}}" hx-trigger="submit" hx-swap="innerHTML">
     <div class="mb-6">
       <label for="email" class="block text-gray-700">E-mail</label>
       <div
@@ -34,6 +33,7 @@
       Redefinir senha
     </button>
   </form>
+
 </div>
 
 {% endblock %}
