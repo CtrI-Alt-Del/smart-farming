@@ -24,26 +24,32 @@
   <body
     hx-ext="loading-states, response-targets">
 
-    {% with messages = get_flashed_messages(with_categories=true) %}
+    <div
+      id="toast-messages"
+      class="absolute top-6 left-1/2 -translate-x-1/2 translate-y-1/2 w-full grid place-content-center z-50">
 
-    {% if messages %}
+      {% with messages = get_flashed_messages(with_categories=true) %}
 
-    <ul class="absolute z-50 top-20 left-[8%] md:left-[45%]">
-      {% for category, message in messages %}
-      {{
-      toast(
-      id="toast-" ~ loop.index0,
-      message=message,
-      category=category,
-      class="top-2 md:left-[37.5%]"
-      )
-      }}
-      {% endfor %}
-    </ul>
+      {% if messages %}
 
-    {% endif %}
+      <ul>
+        {% for category, message in messages %}
+        {{
+        toast(
+        id="toast-" ~ loop.index0,
+        message=message,
+        category=category,
+        class="top-2 md:left-[37.5%]"
+        )
+        }}
+        {% endfor %}
+      </ul>
 
-    {% endwith %}
+      {% endif %}
+
+      {% endwith %}
+
+    </div>
 
     {% block body %}{% endblock body %}
 

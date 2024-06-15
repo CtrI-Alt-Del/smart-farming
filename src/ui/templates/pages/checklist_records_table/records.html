@@ -10,7 +10,7 @@ toast(
 id="create-by-csv-message",
 message=create_by_csv_message,
 category="success",
-on_load="remove .form-error",
+on_load="remove <p.form-error />",
 )
 }}
 
@@ -24,7 +24,7 @@ id="create-message",
 message=create_message,
 category="success",
 on_load="trigger click on #create-checklist-records-modal-trigger
-then remove .form-error
+then remove <p.form-error />
 then call #create-checklist-records-form.reset()",
 )
 }}
@@ -38,7 +38,7 @@ toast(
 id="delete-message",
 message=delete_message,
 category="success",
-on_load="remove .form-error",
+on_load="remove <p.form-error />",
 )
 }}
 

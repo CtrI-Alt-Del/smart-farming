@@ -1,7 +1,7 @@
 {% macro toast(id, message, category, on_load = "", class = "") %}
 
 {% set toast_class =
-"fixed top-16 left-[8%] md:left-[37.5%] flex items-center w-full max-w-xs md:max-w-sm p-4 mb-4 text-black rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 animate-fade-in-down {{ class }}"
+"flex items-center gap-3 w-full max-w-xs md:max-w-sm p-4 text-black rounded-lg shadow animate-fade-in-down {{ class }}"
 %}
 
 {% set animation_script =
@@ -14,9 +14,9 @@ then add .animate-fade-out-down on me"
 <div
   id="{{ id }}"
   {% if on_load %}
-  _="on load {{ on_load }} then {{ animation_script }}"
+  _="on load put me into #toast-messages then {{ on_load }} then {{ animation_script }}"
   {% else %}
-  _="on load {{ animation_script }}"
+  _="on load put me into #toast-messages then {{ animation_script }}"
   {% endif %}
   class="bg-green-200 {{ toast_class }} {{ class }}"
   role="alert">
@@ -53,14 +53,14 @@ then add .animate-fade-out-down on me"
 <div
   id="{{ id }}"
   {% if on_load %}
-  _="on load {{ on_load }} then {{ animation_script }}"
+  _="on load put me into #toast-messages then {{ on_load }} then {{ animation_script }}"
   {% else %}
-  _="on load {{ animation_script }}"
+  _="on load put me into #toast-messages then {{ animation_script }}"
   {% endif %}
   class="bg-red-200 {{ toast_class }} {{ class }}"
   role="alert">
   <div
-    class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200">
+    class="flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200">
     <svg class="w-5 h-5" aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg" fill="currentColor"
       viewBox="0 0 20 20">
@@ -69,7 +69,7 @@ then add .animate-fade-out-down on me"
     </svg>
     <span class="sr-only">Error Icon</span>
   </div>
-  <div class="ms-3 text-sm font-semibold">{{ message }}</div>
+  <div class="text-sm font-semibold">{{ message }}</div>
   <button
     data-dismiss-target="#{{ id }}"
     aria-label="Fechar mensagem"
