@@ -1,0 +1,42 @@
+{% from "components/toast.html" import toast %}
+{% from "components/error_component.html" import error_messages %}
+
+{% if error_message %}
+
+{{
+toast(
+id="error-message",
+message=error_message,
+category="error",
+on_load="remove <p.form-error /> then call #form.reset()",
+)
+}}
+
+{% endif %}
+
+{% if success_message %}
+
+{{
+toast(
+id="success-message",
+message=success_message,
+category="success",
+on_load="remove <p.form-error /> then call #form.reset()",
+)
+}}
+
+{% endif %}
+
+{{ form.csrf_token }}
+
+{{ form.email.label(class="block text-gray-700") }}
+<div
+  class="flex items-center justify-center w-full gap-1 p-3 mt-1 border rounded-lg focus-within:ring-2 focus-within:ring-green-500">
+  <i class="ph-bold ph-user"></i>
+  {{
+  form.email(class="w-full p-0 m-0 border-none outline-none focus:border-none focus:outline-none focus:ring-0",
+  placeholder="admin@smart-farming.com")
+  }}
+</div>
+
+{{ error_messages(form.email.errors[0]) }}
