@@ -15,6 +15,17 @@ class UsersRepository:
 
         return None
 
+    def update_password(self, user_id: str, new_password: str) -> User | None:
+        print(user_id,flush=True)
+        print(new_password,flush=True)
+        mysql.mutate(
+            """
+        UPDATE user SET password = %s WHERE id = %s
+        """,
+            params=[new_password, user_id],
+        )
+        
+
     def get_user_by_email(self, email: str) -> User | None:
         row = mysql.query(
             sql="SELECT * FROM user WHERE email = %s",
