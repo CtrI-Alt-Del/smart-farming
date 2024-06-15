@@ -44,8 +44,11 @@ class Auth:
 
         return check_login
 
-    def check_hash(self, password_hash: str, password: str):
-        return self.bcrypt.check_hash_hash(password_hash, password)
+    def check_hash(self, hash: str, text: str):
+        return self.bcrypt.check_password_hash(
+            hash,
+            text,
+        )
 
     def generate_hash(self, text: str):
         return self.bcrypt.generate_password_hash(text).decode("utf-8")
