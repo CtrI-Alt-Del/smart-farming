@@ -78,6 +78,18 @@ A aplicação permite fazer o gerenciamento (adição, edição e deleção) dos
       </a>
       <span>Docker</span>
     </td>
+    <td align="center" width="96">
+      <a target="_blank" href="https://htmx.org/">
+        <img src="documentation/images/htmx.png" width="48" height="48" alt="HTMX"/>
+      </a>
+      <span>HTMX</span>
+    </td>
+    <td align="center" width="96">
+      <a target="_blank" href="https://hyperscript.org/">
+        <img src="documentation/images/hyperscript.png" width="48" height="48" alt="HyperScript"/>
+      </a>
+      <span>HyperScript</span>
+    </td>
   </tr>
 </table>
 </div>
