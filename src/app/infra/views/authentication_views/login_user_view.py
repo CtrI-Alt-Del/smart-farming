@@ -31,7 +31,6 @@ def login_user_view():
         login_user.execute(
             email=email, password=password, should_remember_user=remember_me
         )
-
         return response
 
     except Error as error:

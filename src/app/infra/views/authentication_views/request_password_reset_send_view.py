@@ -8,12 +8,10 @@ from infra.authentication import auth
 import uuid
 
 
-
 def request_password_reset_send_view():
     try:
         password_reset_token = uuid.uuid4()
-        uuid_bytes = password_reset_token.bytes
-        token = auth.generate_hash(uuid_bytes)
+        token = auth.generate_hash(str(password_reset_token))
 
         user_email = request.form.get("email")
 
@@ -21,10 +19,11 @@ def request_password_reset_send_view():
 
         response = make_response(render_template("components/email_sucess.html"))
 
-        response.set_cookie("Petros", token, max_age=900, secure=True, httponly=True)
+        response.set_cookie(
+            "Petros", str(password_reset_token), max_age=900,domain='127.0.0.1'
+        )
 
         request_password_reset.execute(user_email, email_template)
-
         return response
-    except Error as error:
-        raise error
+    except Error:
+        raise Error(internal_message="Wrong email given",ui_message= "Email fornecido não é o do admnistrador!")

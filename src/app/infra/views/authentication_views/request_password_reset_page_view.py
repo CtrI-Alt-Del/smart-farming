@@ -1,10 +1,9 @@
-from flask import render_template, request
+from flask import render_template
 
 from core.commons import Error
 
 
 def request_password_reset_page_view():
-    print(request.cookies.get("Petros"), flush=True)
 
     try:
         return render_template(
