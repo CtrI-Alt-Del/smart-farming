@@ -1,4 +1,4 @@
--- Active: 1715783627262@@localhost@3307
+-- Active: 1717536900456@@127.0.0.1@3306@smart-farming
 DROP TABLE IF EXISTS user;
 
 USE `smart-farming`;
@@ -12,11 +12,10 @@ CREATE TABLE IF NOT EXISTS user (
 
 INSERT INTO user (email, password) VALUES 
 (
-  'ctrlaltdelsup@gmail.com', 
+  'supsmartfarm@gmail.com', 
   '$2b$12$wbgdsX1apeZ8NZ75kgLJsuRCZnjm34CXXMgk6mx4WoAzExtF6w22G' -- bananaSM77$
 );
 
 SELECT * FROM user;
-
 
 DELETE FROM user;
