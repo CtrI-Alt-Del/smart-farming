@@ -1,0 +1,39 @@
+{% from "components/error_component.html" import error_messages %}
+
+{% set label_class =
+"block text-gray-700"
+%}
+{% set input_container_class =
+"flex items-center justify-center w-full gap-1 p-3 mt-1 border rounded-lg focus-within:ring-2 focus-within:ring-green-500"
+%}
+{% set input_class =
+"w-full p-0 m-0 border-none outline-none focus:border-none focus:outline-none focus:ring-0"
+%}
+
+{{ form.csrf_token }}
+
+<div class="mb-6">
+  {{ form.password.label(class=label_class) }}
+
+  <div
+    class="{{ input_container_class }}">
+    <i class="ph-bold ph-lock"></i>
+
+    {{ form.password(class=input_class, placeholder="****") }}
+  </div>
+
+  {{ error_messages(form.password.errors[0]) }}
+</div>
+
+<div class="mb-6">
+  {{ form.confirm_password.label(class=label_class, placeholder="****") }}
+
+  <div
+    class="{{ input_container_class }}">
+    <i class="ph-bold ph-lock"></i>
+
+    {{ form.confirm_password(class=input_class, placeholder="****") }}
+  </div>
+
+  {{ error_messages(form.confirm_password.errors[0]) }}
+</div>

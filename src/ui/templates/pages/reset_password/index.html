@@ -1,51 +1,44 @@
-{% extends "/pages/login/index.html" %} {% block content %}
+{% extends "/pages/login/index.html" %}
+
+{% from "components/loading.html" import loading %}
+
+{% block content %}
+
 <div
-  class="max-w-sm p-10 m-5 bg-white rounded-lg shadow-lg sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl"
->
+  class="max-w-sm p-10 m-5 bg-white rounded-lg shadow-lg sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl">
   <div class="flex justify-center mb-6">{{ logo() }}</div>
-  <form hx-post="{{url_for('authentication_views.reset_password_send_view')}}" hx-trigger="submit" hx-swap="outerHTML">
-  <h2 class="mb-4 text-2xl font-semibold text-center text-gray-700">
-    Redefinindo sua senha
-  </h2>
-  <p class="mb-6 text-center text-gray-600">
-    Digite sua nova senha e confirme ela.
-  </p>
-    <div class="mb-6">
-      <label for="password" class="block text-gray-700">Senha</label>
-      <div
-        class="flex items-center justify-center w-full gap-1 p-3 mt-1 border rounded-lg focus-within:ring-2 focus-within:ring-green-500"
-      >
-        <i class="ph-bold ph-lock"></i>
-        <input
-          id="password"
-          name="password"
-          class="w-full p-0 m-0 border-none outline-none focus:border-none focus:outline-none focus:ring-0"
-          placeholder="****"
-        />
-      </div>
+
+  <form
+    hx-post="{{ url_for('authentication_views.reset_password_view')}}"
+    hx-trigger="submit"
+    hx-target-error="#fields"
+    hx-swap="innerHTML">
+
+    <h2 class="mb-4 text-2xl font-semibold text-center text-gray-700">
+      Redefinindo sua senha
+    </h2>
+
+    <p class="mb-6 text-center text-gray-600">
+      Digite sua nova senha e confirme ela.
+    </p>
+
+    <div id="fields">
+      {% include "pages/reset_password/fields.html" %}
     </div>
-    <div class="mb-6">
-      <label for="password" class="block text-gray-700">Confirmar senha</label>
-      <div
-        class="flex items-center justify-center w-full gap-1 p-3 mt-1 border rounded-lg focus-within:ring-2 focus-within:ring-green-500"
-      >
-        <i class="ph-bold ph-lock"></i>
-        <input
-          id="confirmPassword"
-          name="confirmPassword"
-          class="w-full p-0 m-0 border-none outline-none focus:border-none focus:outline-none focus:ring-0"
-          placeholder="****"
-        />
-      </div>
-    </div>
+
     <button
+      data-loading-disable
       type="submit"
-      class="w-full p-3 text-white bg-green-500 rounded-lg hover:bg-green-600"
-    >
-      Redefinir senha
+      class="grid place-content-center w-full p-3 text-white bg-green-500 rounded-lg hover:bg-green-600">
+      <span data-loading-class="hidden">
+        Redefinir senha
+      </span>
+      <div data-loading-class-remove="hidden">
+        {{ loading("size-6 fill-green-600") }}
+      </div>
     </button>
   </form>
-</div>
 
+</div>
 
 {% endblock %}
