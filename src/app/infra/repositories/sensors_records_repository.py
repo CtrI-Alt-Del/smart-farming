@@ -182,7 +182,7 @@ class SensorRecordsRepository:
         filters = []
 
         if plant_id:
-            filters.append(f"CR.plant_id = '{plant_id}'")
+            filters.append(f"SR.plant_id = '{plant_id}'")
 
         if start_date and end_date:
             filters.append(

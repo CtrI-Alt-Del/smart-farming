@@ -17,15 +17,24 @@ from infra.repositories import plants_repository
 
 
 class ChecklistRecordForm(FlaskForm):
-    def __init__(self, formdata=None, checklist_record=None, **kwargs):
+    def __init__(
+        self,
+        formdata=None,
+        checklist_record: CheckListRecord = None,
+        active_plant_id: str = None,
+        **kwargs
+    ):
         super().__init__(formdata, **kwargs)
 
         plants = plants_repository.get_plants()
         self.plant_id.choices = [(plant.id, plant.name) for plant in plants]
 
+        if isinstance(active_plant_id, str):
+            self.plant_id.data = active_plant_id
+
         if isinstance(checklist_record, CheckListRecord):
             self.date.data = checklist_record.created_at.get_value(is_datetime=True)
-            self.time.data = checklist_record.created_at.get_time()
+            self.hour.data = checklist_record.created_at.get_time().hour
             self.air_humidity.data = checklist_record.air_humidity
             self.illuminance.data = checklist_record.illuminance
             self.lai.data = checklist_record.lai
@@ -105,7 +114,7 @@ class ChecklistRecordForm(FlaskForm):
         "Validade de adubação",
         render_kw={"max": datetime.now().strftime("%Y-%m-%d")},
     )
-    time = TimeField(
+    hour = IntegerField(
         "Hora de coleta",
         validators=[DataRequired()],
     )

@@ -16,10 +16,20 @@ from infra.repositories import plants_repository
 
 
 class SensorsRecordForm(FlaskForm):
-    def __init__(self, formdata=None, sensors_record=None, **kwargs):
+    def __init__(
+        self,
+        formdata=None,
+        sensors_record: SensorsRecord = None,
+        active_plant_id: str = None,
+        **kwargs
+    ):
         super().__init__(formdata, **kwargs)
+
         plants = plants_repository.get_plants()
         self.plant_id.choices = [(plant.id, plant.name) for plant in plants]
+
+        if isinstance(active_plant_id, str):
+            self.plant_id.data = active_plant_id
 
         if isinstance(sensors_record, SensorsRecord):
             self.date.data = sensors_record.created_at.get_value(is_datetime=True)
