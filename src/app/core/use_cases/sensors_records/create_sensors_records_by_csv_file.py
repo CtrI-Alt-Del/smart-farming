@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, date
 
 from typing import List, Dict, Generator
 from werkzeug.datastructures import FileStorage
@@ -33,8 +33,28 @@ class CreateSensorsRecordsByCsvFile:
         plants = plants_repository.get_plants()
 
         for record in records:
-            record_date = record["data"].date()
-            record_time = record["hora"]
+            try:
+                if not isinstance(record["data"], date):
+                    print(type(record["data"]), flush=True)
+                    record_date = datetime.strptime(
+                        str(record["data"]), "%d/%m/%Y"
+                    ).date()
+                else:
+                    record_date = record["data"].date()
+
+                if not isinstance(record["hora"], datetime):
+                    print(not isinstance(record["hora"], datetime), flush=True)
+                    record_time = datetime.strptime(str(record["hora"]), "%H:%M:%S")
+                else:
+                    record_time = record["hora"]
+
+            except Exception as exception:
+                raise Error(
+                    internal_message=exception,
+                    ui_message="Valor de data ou hora mal formatado",
+                    status_code=400,
+                )
+
             record_plant_name = record["planta"]
 
             created_at = Datetime(

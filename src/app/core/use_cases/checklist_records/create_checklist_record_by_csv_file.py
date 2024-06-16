@@ -1,5 +1,5 @@
 from typing import Generator
-from datetime import datetime
+from datetime import datetime, date
 from werkzeug.datastructures import FileStorage
 
 from core.commons import CsvFile, Error, Datetime
@@ -33,9 +33,30 @@ class CreateChecklistRecordsByCsvFile:
         plants = plants_repository.get_plants()
 
         for record in records:
-            record_date = record["data da coleta"].date()
+            try:
+                if not isinstance(record["data da coleta"], date):
+                    record_date = datetime.strptime(
+                        record["data da coleta"], "%d/%m/%Y"
+                    ).date()
+                else:
+                    record_date = record["data da coleta"].date()
+
+                if not isinstance(record["validade da adubação?"], date):
+                    record_fertilizer_expiration_date = datetime.strptime(
+                        record["validade da adubação?"], "%d/%m/%Y"
+                    ).date()
+                else:
+                    record_fertilizer_expiration_date = record[
+                        "validade da adubação?"
+                    ].date()
+            except Exception as exception:
+                raise Error(
+                    internal_message=exception,
+                    ui_message="Valor de data mal formatado",
+                    status_code=400,
+                )
+
             record_hour = record["hora da coleta (inserir valor de 0 a 23)"]
-            record_fertilizer_expiration_date = record["validade da adubação?"].date()
             record_plant_name = record["planta"]
 
             created_at = Datetime(

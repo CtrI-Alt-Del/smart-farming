@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime
 
 from core.commons import RecordsFilters, Error
 from core.constants import CSV_FILE_COLUMNS
@@ -55,8 +55,12 @@ class GetSensorsRecordsCsvFile:
                     case "plant":
                         data["planta"].append(value.name)
                     case "created_at":
-                        data["hora"].append(value.get_time().hour)
-                        data["data"].append(value.format_value().get_value()[:10])
+                        data["hora"].append(value.get_time())
+                        data["data"].append(
+                            datetime.strptime(
+                                value.format_value().get_value()[:10], "%d/%m/%Y"
+                            ).date()
+                        )
                     case "weekday":
                         data["dia da semana"].append(value.get_value())
                     case "soil_humidity":

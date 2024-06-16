@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime
 
 from core.commons import RecordsFilters, Error
 from core.constants import CSV_FILE_COLUMNS
@@ -56,14 +56,18 @@ class GetChecklistRecordsCsvFile:
                         data["planta"].append(value.name)
                     case "created_at":
                         data["hora da coleta (inserir valor de 0 a 23)"].append(
-                            value.get_time().hour
+                            value.get_time(is_datetime=True)
                         )
                         data["data da coleta"].append(
-                            value.format_value().get_value()[:10]
+                            datetime.strptime(
+                                value.format_value().get_value()[:10], "%d/%m/%Y"
+                            ).date()
                         )
                     case "fertilizer_expiration_date":
                         data["validade da adubação?"].append(
-                            value.format_value().get_value()
+                            datetime.strptime(
+                                value.format_value().get_value()[:10], "%d/%m/%Y"
+                            ).date()
                         )
                     case "soil_ph":
                         data["ph do solo?"].append(value)

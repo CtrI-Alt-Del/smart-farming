@@ -1,7 +1,5 @@
 from typing import Dict, List
 from werkzeug.datastructures import FileStorage
-from math import isnan
-
 
 from core.commons import Error
 
