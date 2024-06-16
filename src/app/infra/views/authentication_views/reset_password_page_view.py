@@ -14,8 +14,6 @@ def reset_password_page_view():
         cookie = request.cookies.get(COOKIES["keys"]["password_reset_token"])
         form = ResetPasswordForm()
 
-        print(cookie, flush=True)
-
         if not cookie:
             raise Error(
                 internal_message="Client token has expired",
@@ -23,9 +21,6 @@ def reset_password_page_view():
                 status_code=401,
             )
 
-        print("COOKIE", cookie, flush=True)
-        print("HASH", auth.generate_hash(cookie), flush=True)
-        print("URL", email_token, flush=True)
         is_token_valid = auth.check_hash(email_token, cookie)
 
         if is_token_valid:
