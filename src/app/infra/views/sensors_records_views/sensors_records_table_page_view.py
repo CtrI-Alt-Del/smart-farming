@@ -12,16 +12,20 @@ from infra.authentication import auth
 
 def sensors_records_table_page_view():
     auth_user = auth.get_user()
+    active_plant_id = (
+        auth_user.active_plant_id if hasattr(auth_user, "active_plant_id") else None
+    )
 
     page_number = int(request.args.get("page", 1))
     start_date = request.args.get("start-date", None)
     end_date = request.args.get("end-date", None)
     plant_id = request.args.get("plant", "all")
 
-    create_sensors_record_form = SensorsRecordForm()
-    update_sensors_record_form = SensorsRecordForm()
+    create_sensors_record_form = SensorsRecordForm(active_plant_id=active_plant_id)
+    update_sensors_record_form = SensorsRecordForm(active_plant_id=active_plant_id)
 
     csv_form = CsvForm()
+
     try:
         data = get_sensors_records_table_page_data.execute(
             page_number=page_number,
