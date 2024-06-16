@@ -1,10 +1,10 @@
 {% from "components/label.html" import label %}
 
 {% macro plant_select(id, plants, attributes, selected_plant_id,
-can_include_all = False) %}
+can_include_all = False, label_text = "Planta") %}
 
 <div>
-  {{ label(id=id, icon="plant", title="Planta") }}
+  {{ label(id=id, icon="plant", title=label_text) }}
 
   <select
     {{ attributes }}
@@ -16,6 +16,8 @@ can_include_all = False) %}
     {% endif %}
 
     {% for plant in plants %}
+
+    <strong>{{ loop.index0 }}</strong>
 
     {% set selected = "selected" if selected_plant_id == plant.id else "" %}
 
