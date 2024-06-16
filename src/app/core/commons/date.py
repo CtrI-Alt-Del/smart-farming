@@ -13,7 +13,7 @@ class Date:
                 return
 
             self.value = value
-        except:
+        except Exception:
             raise Error("Valor de data inválido")
 
     def format_value(self):

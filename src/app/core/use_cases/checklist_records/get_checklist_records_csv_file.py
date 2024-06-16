@@ -56,18 +56,15 @@ class GetChecklistRecordsCsvFile:
                         data["planta"].append(value.name)
                     case "created_at":
                         data["hora da coleta (inserir valor de 0 a 23)"].append(
-                            value.get_time(is_datetime=True)
+                            value.get_time().hour
                         )
                         data["data da coleta"].append(
-                            datetime.strptime(
-                                value.format_value().get_value()[:10], "%d/%m/%Y"
-                            ).date()
+                            value.format_value().get_value()[:10]
                         )
+
                     case "fertilizer_expiration_date":
                         data["validade da adubação?"].append(
-                            datetime.strptime(
-                                value.format_value().get_value()[:10], "%d/%m/%Y"
-                            ).date()
+                            value.format_value().get_value()[:10]
                         )
                     case "soil_ph":
                         data["ph do solo?"].append(value)
