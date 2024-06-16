@@ -42,6 +42,7 @@ class GetChecklistRecordsDashboardPageData:
                 **leaf_charts_data,
                 "plant_growth_chart_data": plant_growth_chart.get_data(ordered_plants),
                 "plants": plants,
+                "active_plant_id": active_plant_id,
             }
         except Error as error:
             raise error

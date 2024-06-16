@@ -12,7 +12,6 @@ from infra.authentication import auth
 
 def sensors_records_dashboard_page_view():
     try:
-
         auth_user = auth.get_user()
 
         data = get_sensors_dashboard_page_data.execute()
@@ -29,6 +28,7 @@ def sensors_records_dashboard_page_view():
         )
 
         plants = data["plants"]
+        active_plant_id = data["active_plant_id"]
         daysRange = DaysRange()
 
         return render_template(
@@ -38,6 +38,7 @@ def sensors_records_dashboard_page_view():
             temperature_chart_data=temperature_chart_data,
             water_volume_chart_data=water_volume_chart_data,
             plants=plants,
+            active_plant_id=active_plant_id,
             days_ranges=daysRange.get_value(),
             auth_user=auth_user,
         )

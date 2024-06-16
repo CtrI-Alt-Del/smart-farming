@@ -30,7 +30,7 @@ def checklist_records_dashboard_page_view():
         )
 
         plants = data["plants"]
-
+        active_plant_id = data["active_plant_id"]
         days_ranges = DaysRange()
 
         return render_template(
@@ -42,6 +42,7 @@ def checklist_records_dashboard_page_view():
             plant_growth_chart_data=plant_growth_chart_data,
             days_ranges=days_ranges.get_value(),
             plants=plants,
+            active_plant_id=active_plant_id,
             auth_user=auth_user,
         )
     except Error as error:
