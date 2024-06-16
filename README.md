@@ -378,8 +378,8 @@ $ code .
 $ docker compose up
 
 ```
-> Provavelmente a aplicação estará sendo executada em http://127.0.0.1:5000
-> Provavelmente a aplicação estará sendo executada em http://127.0.0.1:5000
+> Provavelmente a aplicação estará sendo executada em http://127.0.0.1:5000<br>
+
 
 ---
 
