@@ -4,7 +4,6 @@ from core.use_cases.plants import update_active_plant
 from core.commons import Error
 
 from infra.authentication import auth
-from infra.repositories import plants_repository
 
 
 @auth.login_middleware

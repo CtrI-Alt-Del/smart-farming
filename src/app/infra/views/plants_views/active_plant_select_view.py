@@ -3,10 +3,14 @@ from flask import render_template
 from core.constants import ADMIN_USER_EMAIL
 from infra.repositories import plants_repository, users_repository
 
+from infra.authentication import auth
+
 
 def active_plant_select_view():
+    if not auth.get_user():
+        return " "
+
     try:
-        print("EITAAAA", flush=True)
         plants = plants_repository.get_plants()
         active_plant_id = users_repository.get_user_active_plant_id(
             email=ADMIN_USER_EMAIL

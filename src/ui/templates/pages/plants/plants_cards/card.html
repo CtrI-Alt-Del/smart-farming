@@ -12,7 +12,8 @@ toast(
 id="update-plant-card-toast",
 message=update_message,
 on_load="trigger click on #update-plant-modal-trigger
-then remove <p.form-error />",
+then remove <p.form-error />
+then call htmx.trigger('#active-plant', 'reset')",
 category="success",
 )
 }}

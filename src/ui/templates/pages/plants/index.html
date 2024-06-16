@@ -17,7 +17,7 @@
   {{ title("Plantas") }}
 
   {% if auth_user.is_authenticated %}
-  <div class="flex items-center gap-3 mt-6">
+  <div class="flex items-center gap-3 mt-12 h-6">
     {{
     button(
     title="Adicionar planta",
@@ -33,7 +33,7 @@
     <div
       id="active-plant"
       hx-get="{{ url_for('plants_views.active_plant_select_view') }}"
-      hx-trigger="load, submit"
+      hx-trigger="load, reset"
       hx-swap="innerHTML"
       class="active-plant-select">
     </div>
