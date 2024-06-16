@@ -129,8 +129,9 @@
       }}
     </div>
 
-    {% if checklist_records | length > 0 %}
-    <div class="ml-auto">
+    <div
+      id="csv-output"
+      class="ml-auto {{ 'hidden' if not checklist_records | length > 0 else '' }}">
       {{
       csv_output(
       href=url_for("checklist_records_views.checklist_records_csv_file_view"),
@@ -138,7 +139,6 @@
       )
       }}
     </div>
-    {% endif %}
 
   </div>
 

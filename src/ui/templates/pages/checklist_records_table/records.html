@@ -10,7 +10,7 @@ toast(
 id="create-by-csv-message",
 message=create_by_csv_message,
 category="success",
-on_load="remove <p.form-error />",
+on_load="remove <p.form-error /> then remove .hidden from #csv-output",
 )
 }}
 

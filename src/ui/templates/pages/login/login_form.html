@@ -1,13 +1,13 @@
 {% from "components/toast.html" import toast %}
 {% from "components/error_component.html" import error_messages %}
+{% from "components/loading.html" import loading %}
 
 {% if error_message %}
 {{
 toast(
 id="login-error-message",
 message=error_message,
-category="error",
-class="top-2 md:left-[38%]"
+category="error"
 )
 }}
 {% endif %}
@@ -74,6 +74,11 @@ class="top-2 md:left-[38%]"
 
 <button
   type="submit"
-  class="w-full p-3 text-white bg-green-500 rounded-lg hover:bg-green-600">
-  Login
+  class="grid place-content-center w-full p-3 text-white bg-green-500 rounded-lg hover:bg-green-600">
+  <span data-loading-class="hidden">
+    Login
+  </span>
+  <div data-loading-class-remove="hidden">
+    {{ loading("size-6 fill-green-600") }}
+  </div>
 </button>

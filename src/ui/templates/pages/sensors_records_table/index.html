@@ -130,8 +130,9 @@
         }}
       </div>
 
-      {% if sensors_records | length > 0 %}
-      <div class="ml-auto">
+      <div
+        id="csv-output"
+        class="ml-auto {{ 'hidden' if not sensors_records | length > 0 else '' }}">
         {{
         csv_output(
         href=url_for("sensors_records_views.sensors_records_csv_file_view"),
@@ -139,7 +140,6 @@
         )
         }}
       </div>
-      {% endif %}
 
     </div>
 

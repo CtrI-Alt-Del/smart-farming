@@ -1,4 +1,5 @@
-{% macro toast(id, message, category, on_load = "", class = "") %}
+{% macro toast(id, message, category, on_load = "", class = "", is_root = False)
+%}
 
 {% set toast_class =
 "flex items-center gap-3 w-full max-w-xs md:max-w-sm p-4 text-black rounded-lg shadow animate-fade-in-down {{ class }}"
@@ -14,9 +15,10 @@ then add .animate-fade-out-down on me"
 <div
   id="{{ id }}"
   {% if on_load %}
-  _="on load put me into #toast-messages then {{ on_load }} then {{ animation_script }}"
+  _="on load {{ 'put me into #toast-messages then' if not is_root else '' }} 
+  {{ on_load }} then {{ animation_script }}"
   {% else %}
-  _="on load put me into #toast-messages then {{ animation_script }}"
+  _="on load {{ 'put me into #toast-messages then' if not is_root else '' }} {{ animation_script }}"
   {% endif %}
   class="bg-green-200 {{ toast_class }} {{ class }}"
   role="alert">
@@ -53,9 +55,10 @@ then add .animate-fade-out-down on me"
 <div
   id="{{ id }}"
   {% if on_load %}
-  _="on load put me into #toast-messages then {{ on_load }} then {{ animation_script }}"
+  _="on load {{ 'put me into #toast-messages then' if not is_root else '' }} 
+  {{ on_load }} then {{ animation_script }}"
   {% else %}
-  _="on load put me into #toast-messages then {{ animation_script }}"
+  _="on load {{ 'put me into #toast-messages then' if not is_root else '' }} {{ animation_script }}"
   {% endif %}
   class="bg-red-200 {{ toast_class }} {{ class }}"
   role="alert">

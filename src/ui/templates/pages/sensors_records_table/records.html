@@ -10,8 +10,7 @@ toast(
 id="create-sensors-records-message",
 message=create_by_csv_message,
 category="success",
-on_load="remove <p.form-error />",
-class="left-[0px]"
+on_load="remove <p.form-error /> then remove .hidden from #csv-output",
 )
 }}
 
@@ -27,7 +26,6 @@ category="success",
 on_load="trigger click on #create-sensors-records-modal-trigger
 then remove <p.form-error />
 then call #create-sensors-records-form.reset()",
-class="left-[0px]"
 )
 }}
 
@@ -56,7 +54,7 @@ on_load="remove <p.form-error />",
   {% else %}
 
   <div
-    _="on load add .hidden to #delete-sensors-record-button"
+    _="on load if  #delete-sensors-record-button is not null add .hidden to #delete-sensors-record-button"
     data-hyperscript="process"
     class="sr-only">
   </div>

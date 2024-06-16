@@ -26,7 +26,8 @@
 
     <div
       id="toast-messages"
-      class="absolute top-6 left-1/2 -translate-x-1/2 translate-y-1/2 w-full grid place-content-center z-50">
+      _
+      class="fixed top-16 left-1/2 -translate-x-1/2 translate-y-1/2 w-full grid place-content-center h-0 z-[500]">
 
       {% with messages = get_flashed_messages(with_categories=true) %}
 
@@ -39,7 +40,7 @@
         id="toast-" ~ loop.index0,
         message=message,
         category=category,
-        class="top-2 md:left-[37.5%]"
+        is_root=True
         )
         }}
         {% endfor %}
