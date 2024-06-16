@@ -1,11 +1,12 @@
 from datetime import timedelta
 
 from core.commons.error import Error
+from core.entities import Plant
 from core.constants import DAYS_RANGES
 
 
 class LineChart:
-    def __init__(self, records: list[dict], attribute):
+    def __init__(self, records: list[dict], attribute: str):
         self.records = []
 
         for record in records:
@@ -21,7 +22,7 @@ class LineChart:
                 }
             )
 
-    def filter_records_by_range_of_days(self, days_range):
+    def filter_records_by_range_of_days(self, days_range: int):
         last_record = self.records[-1]
         last_date = last_record["date"]
         data = []
@@ -40,7 +41,7 @@ class LineChart:
 
         return data
 
-    def get_data(self, plants):
+    def get_data(self, plants: list[Plant]):
         chart_data = {
             plant.id: {
                 f"{days_range} days": {"values": [], "dates": [], "average": 0}

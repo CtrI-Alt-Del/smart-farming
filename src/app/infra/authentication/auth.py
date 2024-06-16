@@ -16,7 +16,7 @@ class Auth:
     def __init__(self, bcrypt: Bcrypt) -> None:
         self.bcrypt = bcrypt
 
-    def get_user(self):
+    def get_user(self) -> AuthUser:
         return current_user
 
     def load_user(self, user_id: str) -> AuthUser:
