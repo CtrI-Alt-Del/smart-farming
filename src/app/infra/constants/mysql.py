@@ -70,8 +70,8 @@ MYSQL = {
         """
         INSERT INTO user (email, password) VALUES 
         (
-          'ctrlaltdelsup@gmail.com', 
-          '$2b$12$wbgdsX1apeZ8NZ75kgLJsuRCZnjm34CXXMgk6mx4WoAzExtF6w22G' -- bananaSM77$
+          'supsmartfarm@gmail.com', 
+          '$2b$12$GwF4gb7U99hSSEDs6OJr3OenabAd4MEYzGpK4ptavZ14fGwKBVEYy'
         );
         """,
     ],

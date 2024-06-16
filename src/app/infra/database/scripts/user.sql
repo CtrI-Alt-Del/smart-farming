@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS user (
 INSERT INTO user (email, password) VALUES 
 (
   'supsmartfarm@gmail.com', 
-  '$2b$12$wbgdsX1apeZ8NZ75kgLJsuRCZnjm34CXXMgk6mx4WoAzExtF6w22G' -- bananaSM77$
+  '$2b$12$lI9th4bnxp1XVsyqqSkRCOiScc0u99Gf6HUBXDtLqAtGevT4r06hC'
 );
 
 SELECT * FROM user;
