@@ -1,3 +1,4 @@
+from os import getenv
 from uuid import uuid4
 
 from flask import render_template, make_response, request
@@ -9,6 +10,8 @@ from core.commons import Error
 from infra.authentication import auth
 from infra.constants import COOKIES
 from infra.forms import RequestPasswordResetForm
+
+URL = getenv("URL")
 
 
 def request_password_reset_view():
@@ -24,7 +27,7 @@ def request_password_reset_view():
         user_email = request.form.get("email")
 
         email_template = render_template(
-            "components/password_reset_email.html", token=token
+            "components/password_reset_email.html", url=URL, token=token
         )
 
         response = make_response(
