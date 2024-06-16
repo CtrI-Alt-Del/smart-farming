@@ -37,7 +37,6 @@ class Datepicker {
     const selectedDate = new Date(event.target.value)
 
     if (selectedDate > new Date()) {
-      event.target.value = ""
       alert("Datas futuras não são permitidas.")
       return
     }

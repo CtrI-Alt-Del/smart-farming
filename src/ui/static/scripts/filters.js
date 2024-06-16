@@ -64,6 +64,7 @@ class Filters {
 
     const changeEvent = new Event("change", { bubbles: true })
     this.filters[0].dispatchEvent(changeEvent)
+    this.dispatchEvent()
     this.hideRemoveAllButton()
   }
 
