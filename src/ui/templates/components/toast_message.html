@@ -1,0 +1,25 @@
+{% from "components/toast.html" import toast %}
+
+{% if success_message %}
+
+{{
+toast(
+id=id,
+message=success_message,
+category="success"
+)
+}}
+
+{% endif %}
+
+{% if error_message %}
+
+{{
+toast(
+id=id,
+message=error_message,
+category="error"
+)
+}}
+
+{% endif %}
