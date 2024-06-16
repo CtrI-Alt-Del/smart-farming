@@ -14,11 +14,16 @@ def checklist_records_table_page_view():
     plant_id = request.args.get("plant", "all")
     page_number = int(request.args.get("page", 1))
 
-    create_checklist_record_form = ChecklistRecordForm()
-    csv_form = CsvForm()
-
     try:
         auth_user = auth.get_user()
+        active_plant_id = (
+            auth_user.active_plant_id if hasattr(auth_user, "active_plant_id") else None
+        )
+
+        create_checklist_record_form = ChecklistRecordForm(
+            active_plant_id=active_plant_id
+        )
+        csv_form = CsvForm()
 
         data = get_checklist_records_table_page_data.execute(
             page_number=page_number,

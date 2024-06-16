@@ -18,12 +18,12 @@
 
 <div class="input-container">
   {{ label(
-  id="create-checklist-record-date-time",
-  title=create_checklist_record_form.time.label,
+  id="create-checklist-record-date-hour",
+  title=create_checklist_record_form.hour.label,
   icon="calendar-blank"
   )
   }}
-  {{ create_checklist_record_form.time(
+  {{ create_checklist_record_form.hour(
   placeholder="10",
   class="input-field",
   required=True,
@@ -234,7 +234,8 @@
   }}
   {{ create_checklist_record_form.plant_id(
   class="input-field",
-  placeholder="Reporte", required=True
+  placeholder="Reporte",
+  required=True
   )
   }}
 </div>

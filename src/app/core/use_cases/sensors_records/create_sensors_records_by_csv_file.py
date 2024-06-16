@@ -35,7 +35,6 @@ class CreateSensorsRecordsByCsvFile:
         for record in records:
             try:
                 if not isinstance(record["data"], date):
-                    print(type(record["data"]), flush=True)
                     record_date = datetime.strptime(
                         str(record["data"]), "%d/%m/%Y"
                     ).date()
@@ -43,7 +42,6 @@ class CreateSensorsRecordsByCsvFile:
                     record_date = record["data"].date()
 
                 if not isinstance(record["hora"], datetime):
-                    print(not isinstance(record["hora"], datetime), flush=True)
                     record_time = datetime.strptime(str(record["hora"]), "%H:%M:%S")
                 else:
                     record_time = record["hora"]

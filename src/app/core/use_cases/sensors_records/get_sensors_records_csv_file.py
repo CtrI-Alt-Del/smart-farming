@@ -56,11 +56,7 @@ class GetSensorsRecordsCsvFile:
                         data["planta"].append(value.name)
                     case "created_at":
                         data["hora"].append(value.get_time())
-                        data["data"].append(
-                            datetime.strptime(
-                                value.format_value().get_value()[:10], "%d/%m/%Y"
-                            ).date()
-                        )
+                        data["data"].append(value.format_value().get_value()[:10])
                     case "weekday":
                         data["dia da semana"].append(value.get_value())
                     case "soil_humidity":

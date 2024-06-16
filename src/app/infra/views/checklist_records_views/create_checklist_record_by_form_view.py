@@ -11,10 +11,9 @@ from infra.forms import ChecklistRecordForm
 
 from infra.authentication import auth
 
+
 @auth.login_middleware
 def create_checklist_record_by_form_view():
-    
-    
     checklist_record_form = ChecklistRecordForm(request.form)
 
     start_date = request.args.get("start-date", None)
@@ -33,7 +32,7 @@ def create_checklist_record_by_form_view():
                 "fertilizer_expiration_date": checklist_record_form.fertilizer_expiration_date.data,
                 "illuminance": checklist_record_form.illuminance.data,
                 "plantation_type": checklist_record_form.plantation_type.data,
-                "time": checklist_record_form.time.data,
+                "hour": checklist_record_form.hour.data,
                 "leaf_appearance": checklist_record_form.leaf_appearance.data,
                 "leaf_color": checklist_record_form.leaf_color.data,
                 "air_humidity": checklist_record_form.air_humidity.data,
@@ -69,7 +68,7 @@ def create_checklist_record_by_form_view():
             current_page_number=current_page_number,
             page_buttons_limit=PAGINATION["page_buttons_siblings_count"],
             create_message="Check-list realizado com sucesso",
-            auth_user=auth_user
+            auth_user=auth_user,
         )
 
     except Error as error:
