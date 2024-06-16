@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from core.entities.entity import Entity
-from core.entities.plant import Plant
+from .entity import Entity
+from .plant import Plant
 from core.commons.datetime import Datetime
 from core.commons.date import Date
 

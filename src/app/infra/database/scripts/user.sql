@@ -3,11 +3,12 @@ DROP TABLE IF EXISTS user;
 
 USE `smart-farming`;
 
-
 CREATE TABLE IF NOT EXISTS user (
   id CHAR(36) DEFAULT (UUID()) PRIMARY KEY NOT NULL,
   email VARCHAR(255) NOT NULL,
-  password TEXT NOT NULL
+  password TEXT NOT NULL,
+  active_plant_id CHAR(36) DEFAULT '4544afe3-0661-11ef-9512-0242ac140002'
+  FOREIGN KEY (active_plant_id) REFERENCES plants(id) ON DELETE SET NULL
 );
 
 INSERT INTO user (email, password) VALUES 

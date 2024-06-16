@@ -1,8 +1,9 @@
 from dataclasses import dataclass
 
-from core.entities.entity import Entity
-from core.commons import Datetime, Weekday
-from core.entities.plant import Plant
+from .entity import Entity
+from .plant import Plant
+from core.commons.datetime import Datetime
+from core.commons.weekday import Weekday
 
 
 @dataclass
