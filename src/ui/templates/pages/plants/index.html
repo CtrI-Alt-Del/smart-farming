@@ -29,23 +29,15 @@
     {% include "pages/plants/create_plant_form/index.html" %}
     {% endcall %}
 
-    <form
-      id="active-plant-form"
-      hx-put="{{ url_for('plants_views.update_active_plant_view') }}"
-      hx-trigger="submit"
-      hx-target="#toast-message"
-      hx-target-error="#toast-message"
-      _="on input from #active-plant-select call htmx.trigger('#active-plant-form', 'submit')"
-      class="-translate-y-4">
-      {{
-      plant_select(
-      id="active-plant-select",
-      plants=all_plants,
-      label_text="Planta ativa",
-      selected_plant_id=auth_user.active_plant_id
-      )
-      }}
-    </form>
+    {% if plants | length > 0 %}
+    <div
+      id="active-plant"
+      hx-get="{{ url_for('plants_views.active_plant_select_view') }}"
+      hx-trigger="load, submit"
+      hx-swap="innerHTML"
+      class="active-plant-select">
+    </div>
+    {% endif %}
 
   </div>
 

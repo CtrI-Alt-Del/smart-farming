@@ -24,7 +24,8 @@ on_load=on_load ~ "
 remove <p.form-error />
 then call
 #create-plant-form.reset()
-then put 'Nome da planta' into #plant-name-preview",
+then put 'Nome da planta' into #plant-name-preview
+then call htmx.trigger('#active-plant', 'submit')",
 category="success",
 )
 }}
@@ -42,6 +43,9 @@ category="success",
 </div>
 
 {% else %}
+
+<span _="on load wait 1s set #active-plant.innerHTML to ''"></span>
+
 <p class="text-center text-xl tracking-wide text-gray-900 font-semibold">
   Nenhuma planta encontrada 😢.
 </p>
