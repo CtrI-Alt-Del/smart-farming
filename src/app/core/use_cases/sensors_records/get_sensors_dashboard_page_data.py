@@ -1,6 +1,11 @@
-from core.commons import LineChart, Error
+from core.commons import LineChart, Error, OrderedPlants
+from core.constants import ADMIN_USER_EMAIL
 
-from infra.repositories import sensors_records_repository, plants_repository
+from infra.repositories import (
+    sensors_records_repository,
+    plants_repository,
+    users_repository,
+)
 
 
 class GetSensorDashboardPageData:
@@ -9,6 +14,10 @@ class GetSensorDashboardPageData:
 
         if len(plants) == 0:
             raise Error("Nenhuma planta encontrada", status_code=404)
+
+        active_plant_id = users_repository.get_user_active_plant_id(ADMIN_USER_EMAIL)
+
+        ordered_plants = OrderedPlants(plants, active_plant_id)
 
         sensors_records = (
             sensors_records_repository.get_sensor_records_grouped_by_date()
@@ -23,9 +32,18 @@ class GetSensorDashboardPageData:
         water_volume_chart = LineChart(sensors_records, "water_volume")
 
         return {
-            "soil_humidity_chart_data": soil_humidity_chart.get_data(plants),
-            "ambient_humidity_chart_data": ambient_humidity_chart.get_data(plants),
-            "temperature_chart_data": temperature_chart.get_data(plants),
-            "water_volume_chart_data": water_volume_chart.get_data(plants),
+            "soil_humidity_chart_data": soil_humidity_chart.get_data(
+                ordered_plants.get_value()
+            ),
+            "ambient_humidity_chart_data": ambient_humidity_chart.get_data(
+                ordered_plants.get_value()
+            ),
+            "temperature_chart_data": temperature_chart.get_data(
+                ordered_plants.get_value()
+            ),
+            "water_volume_chart_data": water_volume_chart.get_data(
+                ordered_plants.get_value()
+            ),
             "plants": plants,
+            "active_plant_id": active_plant_id,
         }

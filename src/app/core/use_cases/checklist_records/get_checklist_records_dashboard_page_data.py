@@ -1,7 +1,11 @@
-from core.constants import LEAF_APPEARANCES, LEAF_COLORS
-from core.commons import Error, LineChart
+from core.constants import LEAF_APPEARANCES, LEAF_COLORS, ADMIN_USER_EMAIL
+from core.commons import Error, LineChart, OrderedPlants
 
-from infra.repositories import checklist_records_repository, plants_repository
+from infra.repositories import (
+    checklist_records_repository,
+    plants_repository,
+    users_repository,
+)
 
 
 class GetChecklistRecordsDashboardPageData:
@@ -12,6 +16,12 @@ class GetChecklistRecordsDashboardPageData:
             if len(plants) == 0:
                 raise Error("Nenhuma planta encontrada", status_code=404)
 
+            active_plant_id = users_repository.get_user_active_plant_id(
+                ADMIN_USER_EMAIL
+            )
+
+            ordered_plants = OrderedPlants(plants, active_plant_id)
+
             leaf_records = (
                 checklist_records_repository.get_leaf_appearances_and_leaf_colors_records()
             )
@@ -19,7 +29,7 @@ class GetChecklistRecordsDashboardPageData:
             if len(leaf_records) == 0:
                 raise Error("Nenhum registro de check-list encontrado", status_code=404)
 
-            leaf_charts_data = self.__get_leaf_charts_data(leaf_records, plants)
+            leaf_charts_data = self.__get_leaf_charts_data(leaf_records, ordered_plants)
 
             lai_records = checklist_records_repository.get_lai_records()
 
@@ -30,7 +40,7 @@ class GetChecklistRecordsDashboardPageData:
 
             return {
                 **leaf_charts_data,
-                "plant_growth_chart_data": plant_growth_chart.get_data(plants),
+                "plant_growth_chart_data": plant_growth_chart.get_data(ordered_plants),
                 "plants": plants,
             }
         except Error as error:

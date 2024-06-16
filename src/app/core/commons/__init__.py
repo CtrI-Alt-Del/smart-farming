@@ -5,5 +5,6 @@ from .csv_file import *
 from .days_ranges import *
 from .date import *
 from .pagination import *
+from .ordered_plants import *
 from .records_filters import *
 from .weekday import *

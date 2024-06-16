@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from core.entities.entity import Entity
+from .entity import Entity
 
 
 @dataclass
