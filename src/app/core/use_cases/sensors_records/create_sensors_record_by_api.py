@@ -1,9 +1,10 @@
 from datetime import datetime
 
-from core.entities.sensors_record import SensorsRecord
+from core.entities import SensorsRecord, Plant
 from core.commons import Error, Datetime
+from core.constants import ADMIN_USER_EMAIL
 
-from infra.repositories import sensors_records_repository, plants_repository
+from infra.repositories import sensors_records_repository, users_repository
 
 
 class CreateSensorsRecordByApi:
@@ -14,9 +15,11 @@ class CreateSensorsRecordByApi:
 
             created_at = Datetime(datetime.now())
 
-            plant = plants_repository.get_last_plant()
+            active_plant_id = users_repository.get_user_active_plant_id(
+                ADMIN_USER_EMAIL
+            )
 
-            if not plant:
+            if not active_plant_id:
                 raise Error("Nenhuma planta cadastrada no sistema", 500)
 
             sensors_record = SensorsRecord(
@@ -25,7 +28,7 @@ class CreateSensorsRecordByApi:
                 temperature=request["temperature"],
                 water_volume=request["water_volume"],
                 created_at=created_at,
-                plant=plant,
+                plant=Plant(id=active_plant_id),
             )
 
             sensors_records_repository.create_sensors_record(sensors_record)
