@@ -8,10 +8,15 @@ class OrderedPlants:
         self.value = self.__order(plants, active_plant_id)
 
     def __order(self, plants: list[Plant], active_plant_id: str):
+        if len(plants) == 1:
+            return plants
+
         filtered_plants_by_id = filter(
             lambda plant: plant.id == active_plant_id, plants
         )
 
+        print(plants, flush=True)
+        print(active_plant_id, flush=True)
         active_plant = list(filtered_plants_by_id)[0]
 
         ordered_plants = [active_plant]

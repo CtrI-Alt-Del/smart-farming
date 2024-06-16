@@ -30,12 +30,12 @@ class DeletePlant:
                     status_code=404,
                 )
 
+            plants_repository.delete_plant_by_id(plant_id)
+
             if user.active_plant_id == plant_id:
                 last_plant = plants_repository.get_last_plant()
                 if last_plant:
                     users_repository.update_active_plant(user.id, last_plant.id)
-
-            plants_repository.delete_plant_by_id(plant_id)
 
         except Error as error:
             raise error
