@@ -10,11 +10,8 @@ from infra.authentication import auth
 
 @auth.login_middleware
 def create_plant_view():
-
     plant_form = PlantForm(request.form)
-
     try:
-        
         auth_user = auth.get_user()
 
         if not plant_form.validate_on_submit():
@@ -30,7 +27,7 @@ def create_plant_view():
             "pages/plants/plants_cards/index.html",
             plants=plants,
             action="create",
-            auth_user=auth_user
+            auth_user=auth_user,
         )
     except Error as error:
         return (
