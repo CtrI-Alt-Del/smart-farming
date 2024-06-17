@@ -176,4 +176,4 @@
 
 ## Slides para apresentação 🎞️
 
-**<a href="../ppt/sprint-2-presentation.pptx" _target="black" download="sprint-1-apresentacao">Clique para baixar o ppt</a>**
+**<a href="../ppt/sprint-2-presentation.pptx" _target="blank" download="sprint-1-apresentacao">Clique para baixar o ppt</a>**

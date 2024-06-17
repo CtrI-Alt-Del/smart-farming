@@ -1,7 +1,7 @@
 
 ### Sprint - 4️⃣
 
-- [] **Usuário administrador**
+- [x] **Usuário administrador**
 
 *História de usuário:*
 
@@ -18,7 +18,7 @@
 - Somente o administrador deve poder acessar e executar recursos desenvolvidos para o administrador e o sistema deve validar isso.
 - O administrador deve poder fazer tudo que um usuário comum faz.
 
-- [ ] **Login**
+- [x] **Login**
 
 *História de usuário*
 
@@ -36,7 +36,7 @@
 
 --- 
 
-- [ ] **Redefinição de senha**
+- [x] **Redefinição de senha**
 
 *História de usuário:*
 
@@ -53,7 +53,7 @@
 
 ---
 
-- [ ] **Deleção de planta**
+- [x] **Deleção de planta**
 
 *História de usuário:*
 
@@ -65,7 +65,7 @@
 
 ---
 
-- [ ] **Persistência de sessão de login**
+- [x] **Persistência de sessão de login**
 
 *História de usuário:*
 
@@ -78,7 +78,7 @@
 
 ---
 
-- [ ] **Responsividade**
+- [x] **Responsividade**
 
 *História de usuário:*
 
@@ -90,7 +90,7 @@
 
 ---
 
-- [ ] **Exportação de dados dos registros para arquivo CSV**
+- [x] **Exportação de dados dos registros para arquivo CSV**
 
 *História de usuário:*
 
@@ -104,7 +104,7 @@
 
 ---
 
-- [ ] **Backup dos dados de registros**
+- [x] **Backup dos dados de registros**
 
 *História de usuário:*
 
@@ -118,3 +118,9 @@
 ---
 
 ## Gráfico Burndown 📈
+
+<img src="../images/sprint-4-burndown-chart.jpeg" width="1000" height="500" alt="Grágico Burndown da primeira Sprint" />
+
+## Slides para apresentação 🎞️
+
+**<a href="../ppt/sprint-4-presentation.pptx" _target="blank" download="sprint-3-apresentacao">Clique para baixar o ppt</a>**

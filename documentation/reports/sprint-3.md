@@ -61,4 +61,4 @@
 
 ## Slides para apresentação 🎞️
 
-**<a href="../ppt/sprint-3-presentation.pptx" _target="black" download="sprint-3-apresentacao">Clique para baixar o ppt</a>**
+**<a href="../ppt/sprint-3-presentation.pptx" _target="blank" download="sprint-3-apresentacao">Clique para baixar o ppt</a>**

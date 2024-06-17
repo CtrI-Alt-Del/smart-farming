@@ -364,21 +364,14 @@ $ git clone https://github.com/CtrI-Alt-Del/smart-farming.git.
 ```bash
 # Abra a pasta do arquivo
 $ cd /smart-farming
-
-# Abra o arquivo com o VSCode
-$ code .
 ```
 
-- Abra a aba de extensões no VSCode
-- Baixe a extensão [Database Client](https://marketplace.visualstudio.com/items?itemName=cweijan.vscode-database-client2) do Vscode 
-- Abra a extensao Database Client no VSCode e insira os dados da sua rede
-- Abra o terminal
 ```bash
 # Execute o container
 $ docker compose up
 
 ```
-> Provavelmente a aplicação estará sendo executada em http://127.0.0.1:5000<br>
+> Provavelmente a aplicação estará sendo executada em http://localhost:8000
 
 
 ---
