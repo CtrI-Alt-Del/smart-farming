@@ -348,26 +348,25 @@ os dados de checklist exibidos pelos gráficos para determinados períodos de di
 
 - [Docker](https://www.docker.com/products/docker-desktop/) a incrivel tecnologia de gerenciar [containers](https://www.docker.com/resources/what-container/).
 - [Git](https://git-scm.com/book/pt-br/v2/Come%C3%A7ando-Instalando-o-Git) Para você conseguir clonar nosso repositório.
-- [VSCode](https://code.visualstudio.com/) Pois as extensões dele são vitais
-
 
 > Também é crucial definir as variáveis de ambiente no arquivo .env antes de executar a aplicação. Veja o arquivo [.env.example](https://github.com/CtrI-Alt-Del/smart-farming/blob/main/.env.example) para saber quais variáveis devem ser definidas
 
 ### Usando a aplicação 📟
-- Abra o Git Bash previamente instaldo
+- Abra o terminal
 ```bash
-
 # Clone esse repositório
 $ git clone https://github.com/CtrI-Alt-Del/smart-farming.git.
 ```
+
 - Abra o terminal no diretorio no qual você clonou o repositório
 ```bash
 # Abra a pasta do arquivo
 $ cd /smart-farming
 ```
 
+- Finalmente, execute a aplicação
 ```bash
-# Execute o container
+# Suba o docker container
 $ docker compose up
 
 ```
