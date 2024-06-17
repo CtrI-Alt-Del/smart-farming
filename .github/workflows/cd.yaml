@@ -1,0 +1,34 @@
+name: Continous Delivery
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  CD:
+    runs_on: ubuntu-latest
+
+    steps:
+      - name: Checkout app
+        uses: actions/checkout@v4
+
+      - name: Deploy app
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SERVER_KEY }}
+          source: "."
+          target: "/smart-farming"
+
+      - name: Run app
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SERVER_KEY }}
+          script: |
+            cd /smart-farming
+            docker compose up -d
+      
