@@ -355,7 +355,7 @@ os dados de checklist exibidos pelos gráficos para determinados períodos de di
 - Abra o terminal
 ```bash
 # Clone esse repositório
-$ git clone https://github.com/CtrI-Alt-Del/smart-farming.git.
+$ git clone https://github.com/CtrI-Alt-Del/smart-farming.git
 ```
 
 - Abra o terminal no diretorio no qual você clonou o repositório
