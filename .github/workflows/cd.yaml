@@ -1,4 +1,4 @@
-name: Continous Delivery
+name: Continuous Delivery
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   CD:
-    runs_on: ubuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout app
@@ -31,4 +31,3 @@ jobs:
           script: |
             cd /smart-farming
             docker compose up -d
-      
