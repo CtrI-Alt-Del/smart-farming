@@ -1,8 +1,8 @@
 from pathlib import Path
 
-path = Path()
+path = Path(__file__).parent.parent
 
 FOLDERS = {
-    "tmp": path.absolute() / "src" / "app" / "infra" / "tmp",
+    "tmp": path.absolute() / "tmp",
     "certificates": path.absolute() / "certificates",
 }
