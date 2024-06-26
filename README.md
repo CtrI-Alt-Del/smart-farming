@@ -342,7 +342,7 @@ os dados de checklist exibidos pelos gráficos para determinados períodos de di
 
 - Sprint 4: [Acessar](https://github.com/CtrI-Alt-Del/smart-farming/blob/main/documentation/reports/sprint-4.md)
 
-## Como usar a aplicação? 🚀
+## Como usar a aplicação localmente? 🚀
 
 ### 🔧 Pré requisitos
 
