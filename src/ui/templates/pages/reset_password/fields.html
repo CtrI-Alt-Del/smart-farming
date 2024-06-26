@@ -20,20 +20,40 @@
     <i class="ph-bold ph-lock"></i>
 
     {{ form.password(class=input_class, placeholder="****") }}
+        <i class="ph-bold ph-eye-closed" id="eyeicon"></i>
+        
   </div>
 
   {{ error_messages(form.password.errors[0]) }}
 </div>
 
 <div class="mb-6">
-  {{ form.confirm_password.label(class=label_class, placeholder="****") }}
+  {{ form.confirm_password.label(class=label_class, placeholder="****",id = "password") }}
 
   <div
     class="{{ input_container_class }}">
     <i class="ph-bold ph-lock"></i>
 
-    {{ form.confirm_password(class=input_class, placeholder="****") }}
+    {{ form.confirm_password(class=input_class, placeholder="****",id = "confirmPassword") }}
+        <i class="ph-bold ph-eye-closed" id="confirmEyeicon"></i>
   </div>
 
   {{ error_messages(form.confirm_password.errors[0]) }}
 </div>
+<script src="{{ url_for('static', filename='scripts/reveal_password.js') }}"></script>
+<script>
+    window.onload = function () {
+    console.log(document.getElementById("password"))
+    RevealPassword("password", "eyeicon");
+    RevealPassword("confirmPassword", "confirmEyeicon");
+  }
+
+        document.querySelectorAll('[hx-trigger]').forEach(function(element) {
+            element.addEventListener('htmx:afterSwap', function(event) {
+               RevealPassword("password","eyeicon") 
+               RevealPassword("confirmPassword", "confirmEyeicon");
+            });
+        });
+
+</script>
+
