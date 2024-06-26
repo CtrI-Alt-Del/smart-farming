@@ -20,7 +20,7 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_KEY }}
           source: "."
-          target: "/smart-farming"
+          target: "/smart-farming-scp"
 
       - name: Run app
         uses: appleboy/ssh-action@v1.0.3
