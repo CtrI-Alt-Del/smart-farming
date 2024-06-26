@@ -22,9 +22,8 @@ class LineChart:
                 }
             )
 
-    def filter_records_by_range_of_days(self, days_range: int):
-        last_record = self.records[-1]
-        last_date = last_record["date"]
+    def filter_records_by_range_of_days(self, days_range: int, plant_id: str):
+        last_date = self.__get_last_record_date_by_plant(plant_id)
         data = []
 
         for day in range(days_range - 1, -1, -1):
@@ -52,7 +51,9 @@ class LineChart:
 
         for days_range in DAYS_RANGES:
             for plant in plants:
-                days_range_records = self.filter_records_by_range_of_days(days_range)
+                days_range_records = self.filter_records_by_range_of_days(
+                    days_range, plant.id
+                )
 
                 values = []
                 dates = []
@@ -73,3 +74,10 @@ class LineChart:
                 chart_data[plant.id][days_range_key]["dates"] = dates
 
         return chart_data
+
+    def __get_last_record_date_by_plant(self, plant_id: str):
+        for index in range(1, len(self.records) + 1):
+            record = self.records[-index]
+
+            if record["plant_id"] == plant_id:
+                return record["date"]

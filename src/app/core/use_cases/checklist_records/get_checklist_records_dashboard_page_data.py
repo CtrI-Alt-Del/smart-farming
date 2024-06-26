@@ -40,11 +40,13 @@ class GetChecklistRecordsDashboardPageData:
 
             plant_growth_chart = LineChart(lai_records, "lai")
 
+            plant_growth_chart_data = plant_growth_chart.get_data(
+                ordered_plants.get_value()
+            )
+
             return {
                 **leaf_charts_data,
-                "plant_growth_chart_data": plant_growth_chart.get_data(
-                    ordered_plants.get_value()
-                ),
+                "plant_growth_chart_data": plant_growth_chart_data,
                 "plants": plants,
                 "active_plant_id": active_plant_id,
             }
