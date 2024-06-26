@@ -7,10 +7,7 @@ from core.constants import PAGINATION
 from infra.authentication import auth
 
 
-@auth.login_middleware
 def filter_checklist_records_view():
-    
-    
     start_date = request.args.get("start-date", None)
     end_date = request.args.get("end-date", None)
     plant_id = request.args.get("plant", "all")
@@ -37,7 +34,7 @@ def filter_checklist_records_view():
             last_page_number=last_page_number,
             current_page_number=current_page_number,
             page_buttons_limit=PAGINATION["page_buttons_siblings_count"],
-            auth_user=auth_user
+            auth_user=auth_user,
         )
 
     except Error as error:
