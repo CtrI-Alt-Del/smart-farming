@@ -13,7 +13,8 @@ category="error"
 {% endif %}
 
 {% set input_container_class =
-"flex items-center justify-center w-full gap-1 p-3 mt-1 border rounded-lg focus-within:ring-2 focus-within:ring-green-500"
+"flex items-center justify-center w-full gap-1 p-3 mt-1 border rounded-lg focus-within:ring-2
+focus-within:ring-green-500"
 %}
 
 {% set input_class =
@@ -32,8 +33,7 @@ category="error"
   class="block text-gray-700",
   )
   }}
-  <div
-    class="{{ input_container_class }}">
+  <div class="{{ input_container_class }}">
     <i class="ph-bold ph-user"></i>
     {{
     login_form.email(
@@ -51,10 +51,11 @@ category="error"
   class="block text-gray-700",
   )
   }}
-  <div
-    class="{{ input_container_class }}">
+  <div class="{{ input_container_class }}">
     <i class="ph-bold ph-lock"></i>
-    {{ login_form.password(class=input_class, placeholder="****") }}
+    {{ login_form.password(class=input_class, placeholder="****",id ="password") }}
+
+    <i class="ph-bold ph-eye-closed" id="eyeicon"></i>
   </div>
   {{ error_messages(login_form.password.errors[0]) }}
 </div>
@@ -65,15 +66,13 @@ category="error"
 </div>
 
 <div class="flex justify-between mb-6">
-  <a
-    href="{{ url_for('authentication_views.request_password_reset_page_view') }}"
+  <a href="{{ url_for('authentication_views.request_password_reset_page_view') }}"
     class="text-sm text-green-500 hover:underline">
     Esqueceu a senha?
   </a>
 </div>
 
-<button
-  type="submit"
+<button type="submit"
   class="grid place-content-center w-full p-3 text-white bg-green-500 rounded-lg hover:bg-green-600">
   <span data-loading-class="hidden">
     Login
@@ -82,3 +81,17 @@ category="error"
     {{ loading("size-6 fill-green-600") }}
   </div>
 </button>
+<script src="{{ url_for('static', filename='scripts/reveal_password.js') }}"></script>
+<script>
+    window.onload = function () {
+    RevealPassword("password", "eyeicon");
+  }
+
+    
+        document.querySelectorAll('[hx-trigger]').forEach(function(element) {
+            element.addEventListener('htmx:afterSwap', function(event) {
+               RevealPassword("password","eyeicon") 
+            });
+        });
+
+</script>
