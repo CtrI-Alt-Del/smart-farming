@@ -30,6 +30,6 @@ jobs:
           key: ${{ secrets.SERVER_KEY }}
           script: |
             cd ~/smart-farming-scp
-            env_file_string=$(echo secrets.ENV_FILE)
+            env_file_string=$(echo ${{ secrets.ENV_FILE }})
             echo $env_file_string | tr ' ' '\n' | sed 's/\([^=]\+\)=\([^ ]\+\)/\1=\2/' > ~/smart-farming-scp/.env
             docker compose up -d
