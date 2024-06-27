@@ -119,8 +119,6 @@ class LeafColorsChart {
       return defaultValues
     }
 
-    console.log({ plantId })
-    console.log(this.data)
 
     return this.data[plantId]
   }
