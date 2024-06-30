@@ -1,4 +1,4 @@
-from core.entities import Plant
+from core.entities.plant import Plant
 
 
 class OrderedPlants:

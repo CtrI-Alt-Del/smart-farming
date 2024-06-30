@@ -1,7 +1,7 @@
 from datetime import timedelta
 
 from core.commons.error import Error
-from core.entities import Plant
+from core.entities.plant import Plant
 from core.constants import DAYS_RANGES
 
 

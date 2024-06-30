@@ -1,10 +1,10 @@
 from flask import request, render_template
 
-from core.use_cases.plants import create_plant_by_form, get_plants_page_data
+from core.use_cases.plants import get_plants_page_data
 from core.commons import Error
 
 from infra.forms import PlantForm
-
+from infra.factories.use_cases import create_plant_by_form
 from infra.authentication import auth
 
 

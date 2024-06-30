@@ -1,8 +1,10 @@
 from core.entities import User
+from core.interfaces.repositories import UsersRepositoryInterface
+
 from infra.database import mysql
 
 
-class UsersRepository:
+class UsersRepository(UsersRepositoryInterface):
     def get_user_by_id(
         self, id: str, should_include_password: bool = False
     ) -> User | None:

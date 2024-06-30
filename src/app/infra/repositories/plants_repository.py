@@ -1,9 +1,11 @@
 from core.entities.plant import Plant
+from core.interfaces.repositories import PlantsRepositoryInterface
+
 from infra.database import mysql
 
 
-class PlantsRepository:
-    def create_plant_record(self, plants_record: Plant):
+class PlantsRepository(PlantsRepositoryInterface):
+    def create_plant(self, plants_record: Plant):
         sql = """
         INSERT INTO plants
         (name, hex_color)
@@ -62,7 +64,7 @@ class PlantsRepository:
 
         return None
 
-    def filter_plants_by_name(self, plant_name: str):
+    def filter_plants_by_name(self, plant_name: str) -> list[Plant]:
         rows = mysql.query(
             sql=f"""
             SELECT * FROM plants
