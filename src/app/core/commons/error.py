@@ -12,5 +12,7 @@ class Error(Exception):
         self.internal_message = internal_message
         self.status_code = status_code
 
+        super().__init__(ui_message)
+
         cow_say(ui_message)
         cow_say(internal_message)
