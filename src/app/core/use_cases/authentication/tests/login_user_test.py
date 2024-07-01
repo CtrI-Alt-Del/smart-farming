@@ -1,12 +1,11 @@
 from pytest import fixture, raises
 
-
 from core.use_cases.authentication import LoginUser
 from core.use_cases.tests.mocks.repositories import UsersRepositoryMock
 from core.use_cases.tests.mocks.authentication import AuthMock
 from core.entities.tests.fakers import UsersFaker
+from core.errors.authentication import CredentialsNotValidError, UserNotFoundError
 from core.constants import ADMIN_USER_EMAIL
-from core.commons import Error
 
 
 def describe_login_user_use_case():
@@ -29,28 +28,24 @@ def describe_login_user_use_case():
     ):
         fake_user = UsersFaker.fake()
 
-        with raises(Error) as error:
+        with raises(CredentialsNotValidError):
             use_case.execute(
                 email=fake_user.email,
                 password=fake_user.password,
                 should_remember_user=False,
             )
-
-        assert str(error.value) == "E-mail ou senha incorretos"
 
     def it_should_throw_an_error_if_no_user_is_found(
         use_case: LoginUser,
     ):
         fake_user = UsersFaker.fake(email=ADMIN_USER_EMAIL)
 
-        with raises(Error) as error:
+        with raises(UserNotFoundError):
             use_case.execute(
                 email=fake_user.email,
                 password=fake_user.password,
                 should_remember_user=False,
             )
-
-        assert str(error.value) == "Usuário não encontrado"
 
     def it_should_throw_an_error_if_password_is_incorrect(
         repository: UsersRepositoryMock,
@@ -62,14 +57,12 @@ def describe_login_user_use_case():
 
         auth.check_hash = lambda user, should_remember_user: False
 
-        with raises(Error) as error:
+        with raises(CredentialsNotValidError):
             use_case.execute(
                 email=fake_user.email,
                 password=fake_user.password,
                 should_remember_user=False,
             )
-
-        assert str(error.value) == "E-mail ou senha incorretos"
 
     def it_should_throw_an_error_if_it_was_impossible_to_login_for_any_reason(
         repository: UsersRepositoryMock,
@@ -81,14 +74,12 @@ def describe_login_user_use_case():
 
         auth.login = lambda user, should_remember_user: False
 
-        with raises(Error) as error:
+        with raises(CredentialsNotValidError):
             use_case.execute(
                 email=fake_user.email,
                 password=fake_user.password,
                 should_remember_user=False,
             )
-
-        assert str(error.value) == "E-mail ou senha incorretos"
 
     def it_should_set_should_remember_me(
         repository: UsersRepositoryMock,

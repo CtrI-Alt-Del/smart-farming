@@ -1,10 +1,10 @@
 from pytest import fixture, raises
 
 from core.use_cases.plants import FilterPlants
-from core.commons import Error
 from core.use_cases.tests.mocks.repositories import (
     PlantsRepositoryMock,
 )
+from core.errors.plants import PlantNameNotValidError
 from core.entities.tests.fakers import PlantsFaker
 
 
@@ -19,13 +19,11 @@ def describe_filter_plants_use_case():
 
         return FilterPlants(repository)
 
-    def it_should_throw_an_error_if_plant_name_is_not_string(
+    def it_should_throw_an_error_if_plant_name_is_not_valid(
         use_case: FilterPlants,
     ):
-        with raises(Error) as error:
+        with raises(PlantNameNotValidError):
             use_case.execute(plant_name=42)
-
-        assert str(error.value) == "Nome de planta inválida"
 
     def it_should_not_filter_plants_if_provided_name_is_empty(
         use_case: FilterPlants,

@@ -3,7 +3,8 @@ from dataclasses import asdict
 from pytest import fixture, raises
 
 from core.use_cases.plants.create_plant_by_form import CreatePlantByForm
-from core.commons.error import Error
+from core.errors.plants import PlantNameAlreadyInUseError
+
 
 from core.use_cases.tests.mocks.repositories import (
     PlantsRepositoryMock,
@@ -32,10 +33,8 @@ def describe_create_plant_by_form_use_case():
 
         repository.create_plant(fake_plant)
 
-        with raises(Error) as error:
+        with raises(PlantNameAlreadyInUseError):
             use_case.execute(request=asdict(fake_plant))
-
-        assert str(error.value) == "Nome de planta já utilizada"
 
     def it_should_create_a_plant(
         repository: PlantsRepositoryMock,

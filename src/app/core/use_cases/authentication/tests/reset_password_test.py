@@ -4,8 +4,8 @@ from core.use_cases.authentication import ResetPassword
 from core.use_cases.tests.mocks.repositories import UsersRepositoryMock
 from core.use_cases.tests.mocks.authentication import AuthMock
 from core.entities.tests.fakers import UsersFaker
+from core.errors.authentication import NewPasswordNotValidError
 from core.constants import ADMIN_USER_EMAIL
-from core.commons import Error
 
 
 def describe_reset_password_use_case():
@@ -24,12 +24,10 @@ def describe_reset_password_use_case():
     def it_should_throw_an_error_if_new_password_is_not_string(
         use_case: ResetPassword,
     ):
-        with raises(Error) as error:
+        with raises(NewPasswordNotValidError):
             use_case.execute(
                 new_password=42,
             )
-
-        assert str(error.value) == "Nova senha não fornecida"
 
     def it_should_reset_password(
         repository: UsersRepositoryMock,

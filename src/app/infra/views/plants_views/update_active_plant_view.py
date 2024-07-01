@@ -1,6 +1,6 @@
 from flask import request, render_template
 
-from core.use_cases.plants import update_active_plant
+from infra.factories.use_cases.plants import update_active_plant
 from core.commons import Error
 
 from infra.authentication import auth

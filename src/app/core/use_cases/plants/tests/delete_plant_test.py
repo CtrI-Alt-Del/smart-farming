@@ -1,8 +1,8 @@
 from pytest import fixture, raises
 
-from core.commons.error import Error
 from core.use_cases.plants import DeletePlant
-
+from core.errors.plants import PlantIdNotValidError, PlantNotFoundError
+from core.errors.authentication import UserNotValidError
 from core.use_cases.tests.mocks.repositories import (
     PlantsRepositoryMock,
     UsersRepositoryMock,
@@ -31,34 +31,28 @@ def describe_delete_plant_use_case():
             plants_repository=plants_repository, users_repository=users_repository
         )
 
-    def it_should_throw_an_error_if_any_plant_id_is_not_provided(
+    def it_should_throw_an_error_if_any_plant_id_is_not_valid(
         use_case: DeletePlant,
     ):
-        with raises(Error) as error:
+        with raises(PlantIdNotValidError):
             use_case.execute(plant_id=None, user=None)
 
-        assert str(error.value) == "Id de planta não fornecida"
-
-    def it_should_throw_an_error_if_any_user_is_not_provided(
+    def it_should_throw_an_error_if_user_is_not_valid(
         use_case: DeletePlant,
     ):
         fake_plant = PlantsFaker.fake()
 
-        with raises(Error) as error:
+        with raises(UserNotValidError):
             use_case.execute(plant_id=fake_plant.id, user=None)
 
-        assert str(error.value) == "Usuário não fornecido"
-
-    def it_should_throw_an_error_if_any_plant_is_found(
+    def it_should_throw_an_error_if_no_plant_is_found(
         use_case: DeletePlant,
     ):
         fake_plant = PlantsFaker.fake()
         fake_user = UsersFaker.fake()
 
-        with raises(Error) as error:
+        with raises(PlantNotFoundError):
             use_case.execute(plant_id=fake_plant.id, user=fake_user)
-
-        assert str(error.value) == "Planta não encontrada"
 
     def it_should_delete_plant(
         plants_repository: PlantsRepositoryMock,

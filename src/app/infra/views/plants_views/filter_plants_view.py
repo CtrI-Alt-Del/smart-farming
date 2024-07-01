@@ -1,6 +1,6 @@
 from flask import request, render_template
 
-from core.use_cases.plants import filter_plants
+from infra.factories.use_cases.plants import filter_plants
 
 from core.commons import Error
 

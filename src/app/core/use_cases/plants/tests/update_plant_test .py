@@ -1,10 +1,11 @@
 from pytest import fixture, raises
 
 from core.use_cases.plants import UpdatePlant
-from core.commons import Error
 from core.use_cases.tests.mocks.repositories import (
     PlantsRepositoryMock,
 )
+from core.errors.plants import PlantIdNotValidError, PlantNotFoundError
+
 from core.entities.tests.fakers import PlantsFaker
 
 
@@ -20,20 +21,16 @@ def describe_update_plant_use_case():
     def it_should_throw_an_error_if_id_is_not_string(
         use_case: UpdatePlant,
     ):
-        with raises(Error) as error:
+        with raises(PlantIdNotValidError):
             use_case.execute(id=42, request=None)
-
-        assert str(error.value) == "Planta inválida"
 
     def it_should_throw_an_error_if_plant_does_not_exist(
         use_case: UpdatePlant,
     ):
         fake_plant = PlantsFaker.fake()
 
-        with raises(Error) as error:
+        with raises(PlantNotFoundError):
             use_case.execute(id=fake_plant.id, request=None)
-
-        assert str(error.value) == "Planta não encontrada"
 
     def it_should_update_plant(
         repository: PlantsRepositoryMock,

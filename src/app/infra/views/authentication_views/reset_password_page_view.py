@@ -1,7 +1,7 @@
 from flask import render_template, flash, request, make_response, redirect
 
 
-from core.commons import Error
+from core.errors.authentication import ExpiredCookieError, InvalidTokenError
 
 from infra.authentication import auth
 from infra.constants import COOKIES
@@ -15,11 +15,7 @@ def reset_password_page_view():
         form = ResetPasswordForm()
 
         if not cookie:
-            raise Error(
-                internal_message="Client token has expired",
-                ui_message="Seu token Expirou!, reenvie novamente para o email!",
-                status_code=401,
-            )
+            raise ExpiredCookieError()
 
         is_token_valid = auth.check_hash(email_token, cookie)
 
@@ -31,13 +27,9 @@ def reset_password_page_view():
 
             return response
         else:
-            raise Error(
-                internal_message="Token authentication error",
-                ui_message="Token de autenticação inválido",
-                status_code=401,
-            )
+            raise InvalidTokenError()
 
-    except Error as error:
+    except Exception as error:
         flash(error.ui_message, "error")
 
         return redirect("/login")

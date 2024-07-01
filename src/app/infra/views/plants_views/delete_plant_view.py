@@ -1,8 +1,8 @@
 from flask import render_template
 
-from core.use_cases.plants import delete_plant, get_plants_page_data
-
 from core.commons import Error
+
+from infra.factories.use_cases.plants import delete_plant, get_plants_page_data
 
 from infra.authentication import auth
 

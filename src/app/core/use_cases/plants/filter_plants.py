@@ -1,7 +1,7 @@
 from core.interfaces.repositories import (
     PlantsRepositoryInterface,
 )
-from core.commons import Error
+from core.errors.plants import PlantNameNotValidError
 
 
 class FilterPlants:
@@ -13,11 +13,7 @@ class FilterPlants:
 
     def execute(self, plant_name: str | None):
         if not isinstance(plant_name, str):
-            raise Error(
-                ui_message="Nome de planta inválida",
-                internal_message="Plant name should be string",
-                status_code=400,
-            )
+            raise PlantNameNotValidError()
 
         plant_name = plant_name.strip()
 
