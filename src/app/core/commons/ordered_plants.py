@@ -2,13 +2,14 @@ from core.entities.plant import Plant
 
 
 class OrderedPlants:
-    value: list[Plant]
+    value: list[Plant] = []
 
-    def __init__(self, plants: list[Plant], active_plant_id: str) -> None:
+    def __init__(self, plants: list[Plant], active_plant_id: str):
         self.value = self.__order(plants, active_plant_id)
 
     def __order(self, plants: list[Plant], active_plant_id: str):
-        if len(plants) == 1:
+        plants_count = len(plants)
+        if plants_count == 0 or plants_count == 1:
             return plants
 
         filtered_plants_by_id = filter(
