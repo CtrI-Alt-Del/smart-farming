@@ -12,6 +12,7 @@ from infra.constants import COOKIES
 from infra.forms import RequestPasswordResetForm
 
 URL = getenv("URL")
+SENDER_PASSWORD = getenv("SUPPORT_EMAIL_APP_PASSWORD")
 
 
 def request_password_reset_view():
@@ -44,7 +45,11 @@ def request_password_reset_view():
             max_age=900,  # 15 minutes
         )
 
-        request_password_reset.execute(user_email, email_template)
+        request_password_reset.execute(
+            user_email=user_email,
+            email_template=email_template,
+            sender_password=SENDER_PASSWORD,
+        )
 
         return response
     except Error as error:
