@@ -1,6 +1,6 @@
 from datetime import date, datetime
 
-from core.commons import Error
+from core.errors.validation import DateNotValidError
 
 
 class Date:
@@ -14,7 +14,7 @@ class Date:
 
             self.value = value
         except Exception:
-            raise Error("Valor de data inválido")
+            raise DateNotValidError
 
     def format_value(self):
         self.value = self.value.strftime("%d/%m/%Y")
