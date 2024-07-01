@@ -43,6 +43,9 @@ class UsersRepositoryMock(UsersRepositoryInterface):
     def create_user(self, user: User):
         self._users.append(user)
 
+    def clear_users(self):
+        self._users = []
+
     def __update_user(self, user):
         self._users = [
             current_user if current_user.id != user.id else user
