@@ -4,8 +4,10 @@ from werkzeug.datastructures import FileStorage
 
 from pandas import DataFrame, read_csv, read_excel
 
+from core.interfaces.providers import DataAnalyserProviderInterface
 
-class DataAnalyserProvider:
+
+class DataAnalyserProvider(DataAnalyserProviderInterface):
     dataframe: DataFrame
 
     def __init__(self) -> None:
