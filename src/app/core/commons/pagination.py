@@ -4,7 +4,7 @@ from core.constants import PAGINATION
 
 
 class Pagination:
-    def __init__(self, page_number: int, records_count: int) -> None:
+    def __init__(self, page_number: int, records_count: int):
         self.page_number = page_number
         self.records_count = records_count
 

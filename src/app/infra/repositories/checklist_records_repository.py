@@ -1,6 +1,6 @@
 from datetime import date
 
-from core.entities.checklist_record import CheckListRecord, Plant
+from core.entities import CheckListRecord, Plant, LineChartRecord
 from core.commons import Datetime, Date
 from core.constants import PAGINATION
 
@@ -203,6 +203,7 @@ class ChecklistRecordsRepository:
         rows = mysql.query(
             sql="""
             SELECT 
+                id,
                 DATE(created_at) AS date,
                 ROUND(AVG(lai), 1) AS lai,
                 plant_id
@@ -215,6 +216,16 @@ class ChecklistRecordsRepository:
 
         if len(rows) == 0:
             return []
+
+        return [
+            LineChartRecord(
+                id=row["id"],
+                date=row["date"],
+                value=row["lai"],
+                plant_id=row["plant_id"],
+            )
+            for row in rows
+        ]
 
         return rows
 

@@ -1,44 +1,14 @@
 from datetime import timedelta
+from dataclasses import asdict
 
-from core.commons.error import Error
 from core.entities.plant import Plant
+from core.entities.line_chart_record import LineChartRecord
 from core.constants import DAYS_RANGES
 
 
 class LineChart:
-    def __init__(self, records: list[dict], attribute: str):
-        self.records = []
-
-        for record in records:
-            for required_attribute in ["date", "plant_id", attribute]:
-                if required_attribute not in record:
-                    raise Error("Required attribute not found in record")
-
-            self.records.append(
-                {
-                    "date": record["date"],
-                    "plant_id": record["plant_id"],
-                    "value": record[attribute],
-                }
-            )
-
-    def filter_records_by_range_of_days(self, days_range: int, plant_id: str):
-        last_date = self.__get_last_record_date_by_plant(plant_id)
-        data = []
-
-        for day in range(days_range - 1, -1, -1):
-            current_date = last_date - timedelta(days=day)
-
-            for record in self.records:
-                if record["date"] == current_date:
-                    data.append(
-                        {
-                            **record,
-                            "date": record["date"].strftime("%d/%m/%Y"),
-                        }
-                    )
-
-        return data
+    def __init__(self, records: list[LineChartRecord]):
+        self.records = [asdict(record) for record in records]
 
     def get_data(self, plants: list[Plant]):
         chart_data = {
@@ -51,9 +21,12 @@ class LineChart:
 
         for days_range in DAYS_RANGES:
             for plant in plants:
-                days_range_records = self.filter_records_by_range_of_days(
+                days_range_records = self.__filter_records_by_range_of_days(
                     days_range, plant.id
                 )
+
+                if not len(days_range_records):
+                    continue
 
                 values = []
                 dates = []
@@ -74,6 +47,28 @@ class LineChart:
                 chart_data[plant.id][days_range_key]["dates"] = dates
 
         return chart_data
+
+    def __filter_records_by_range_of_days(self, days_range: int, plant_id: str):
+        last_date = self.__get_last_record_date_by_plant(plant_id)
+
+        if last_date is None:
+            return []
+
+        data = []
+
+        for day in range(days_range - 1, -1, -1):
+            current_date = last_date - timedelta(days=day)
+
+            for record in self.records:
+                if record["date"] == current_date:
+                    data.append(
+                        {
+                            **record,
+                            "date": record["date"].strftime("%d/%m/%Y"),
+                        }
+                    )
+
+        return data
 
     def __get_last_record_date_by_plant(self, plant_id: str):
         for index in range(1, len(self.records) + 1):
