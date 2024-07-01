@@ -16,5 +16,6 @@ class UsersFaker(BaseFaker):
         return User(
             id=cls._fake_attribute("id", faker.uuid4()),
             email=cls._fake_attribute("email", faker.email()),
+            password=cls._fake_attribute("password", faker.password()),
             active_plant_id=cls._fake_attribute("active_plant_id", faker.uuid4()),
         )

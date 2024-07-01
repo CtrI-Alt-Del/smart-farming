@@ -1,16 +1,30 @@
 from core.commons import Error
+from core.interfaces.repositories import UsersRepositoryInterface
+from core.interfaces.authentication import AuthInterface
 from core.constants import ADMIN_USER_EMAIL
-
-from infra.repositories import users_repository
-from infra.authentication import auth
 
 
 class ResetPassword:
+    def __init__(
+        self,
+        repository: UsersRepositoryInterface,
+        auth: AuthInterface,
+    ):
+        self._repository = repository
+        self._auth = auth
+
     def execute(self, new_password: str):
         try:
-            password_hash = auth.generate_hash(new_password)
+            if not isinstance(new_password, str):
+                raise Error(
+                    "Nova senha não fornecida",
+                    internal_message="New password is not provided",
+                    status_code=400,
+                )
 
-            users_repository.update_password(
+            password_hash = self._auth.generate_hash(new_password)
+
+            self._repository.update_password(
                 email=ADMIN_USER_EMAIL, new_password=password_hash
             )
 
