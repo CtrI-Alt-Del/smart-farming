@@ -1,28 +1,34 @@
 from typing import Dict, List
 from werkzeug.datastructures import FileStorage
 
-from core.commons import Error
-
-from infra.providers.data_analyser_provider import DataAnalyserProvider
+from core.interfaces.providers import DataAnalyserProviderInterface
+from core.errors.validation import CSVFileNotValidError, CSVColumnsNotValidError
 
 
 class CsvFile:
-    def __init__(self, csv_file: FileStorage) -> None:
-        self.csv_file = csv_file
-        self.data_analyser_provider = DataAnalyserProvider()
+    def __init__(
+        self,
+        file: FileStorage,
+        data_analyser_provider: DataAnalyserProviderInterface,
+    ) -> None:
+        if not isinstance(file, FileStorage):
+            raise CSVFileNotValidError()
+
+        self._file = file
+        self._data_analyser_provider = data_analyser_provider
 
     def read(self):
-        extension = self.get_extension()
+        extension = self.__get_extension()
 
         if extension in ["csv", "txt"]:
-            self.data_analyser_provider.read_csv(self.csv_file)
+            self._data_analyser_provider.read_csv(self._file)
         elif extension == "xlsx":
-            self.data_analyser_provider.read_excel(self.csv_file)
+            self._data_analyser_provider.read_excel(self._file)
         else:
-            raise Error("Arquivo CSV inválido")
+            raise CSVFileNotValidError()
 
     def get_records(self) -> List[Dict]:
-        records = self.data_analyser_provider.convert_to_list_of_records()
+        records = self._data_analyser_provider.convert_to_list_of_records()
 
         records_list = []
         for record in records:
@@ -30,15 +36,15 @@ class CsvFile:
 
         return records_list
 
-    def validate_columns(self, columns: List[str]) -> bool:
-        csv_columns = self.data_analyser_provider.get_columns()
+    def validate_columns(self, columns: List[str]):
+        csv_columns = self._data_analyser_provider.get_columns()
 
         has_valid_columns = set(map(lambda x: x.lower(), csv_columns)) == set(
             map(lambda x: x.lower(), columns)
         )
 
         if not has_valid_columns:
-            raise Error("As colunas do arquivo CSV não estão corretas")
+            raise CSVColumnsNotValidError()
 
-    def get_extension(self) -> str:
-        return self.csv_file.filename.split(".")[1]
+    def __get_extension(self) -> str:
+        return self._file.filename.split(".")[1]
