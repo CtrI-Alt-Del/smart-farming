@@ -50,7 +50,6 @@ class CreateChecklistRecordsByCsvFile:
                         "validade da adubação?"
                     ].date()
             except Exception as exception:
-                print(exception)
                 raise Error(
                     internal_message=exception,
                     ui_message="Valor de data mal formatado",
@@ -63,7 +62,6 @@ class CreateChecklistRecordsByCsvFile:
                 if not isinstance(record_hour, int):
                     record_hour = int(record_hour)
             except Exception as exception:
-                print(exception)
                 raise Error(
                     internal_message=exception,
                     ui_message="Hora da coleta precisa ser um inteiro",
