@@ -1,10 +1,14 @@
 from math import ceil
 
 from core.constants import PAGINATION
+from core.errors.validation import PageNumberNotValidError
 
 
 class Pagination:
     def __init__(self, page_number: int, records_count: int):
+        if not isinstance(page_number, int) or not isinstance(records_count, int):
+            raise PageNumberNotValidError()
+
         self.page_number = page_number
         self.records_count = records_count
 
