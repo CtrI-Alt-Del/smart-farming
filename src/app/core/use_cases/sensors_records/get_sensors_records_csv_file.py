@@ -1,38 +1,37 @@
-from datetime import date, datetime
+from datetime import date
 
-from core.commons import RecordsFilters, Error
+from core.commons import RecordsFilters
 from core.constants import CSV_FILE_COLUMNS
 
-from infra.repositories import sensors_records_repository
-from infra.constants import FOLDERS
-from infra.providers.data_analyser_provider import DataAnalyserProvider
+from core.interfaces.repositories import SensorRecordsRepositoryInterface
+from core.interfaces.providers import DataAnalyserProviderInterface
 
 
 class GetSensorsRecordsCsvFile:
-    def execute(self, plant_id: str, start_date: date, end_date: date):
-        try:
-            filters = RecordsFilters(
-                plant_id=plant_id, start_date=start_date, end_date=end_date
-            )
+    def __init__(
+        self,
+        sensors_records_repository: SensorRecordsRepositoryInterface,
+        data_analyser_provider: DataAnalyserProviderInterface,
+    ):
+        self._data_analyser_provider = data_analyser_provider
+        self._sensors_records_repository = sensors_records_repository
 
-            data = self.__get_data(filters)
+    def execute(self, plant_id: str, start_date: date, end_date: date, folder: str):
+        filters = RecordsFilters(
+            plant_id=plant_id, start_date=start_date, end_date=end_date
+        )
 
-            csv_name = "registros-dos-sensores.xlsx"
-            tmp_folder = FOLDERS["tmp"]
+        data = self.__get_data(filters)
 
-            data_analyser_provider = DataAnalyserProvider()
-            data_analyser_provider.analyse(data)
-            data_analyser_provider.convert_to_excel(tmp_folder, csv_name)
+        csv_filename = "registros-dos-sensores.xlsx"
 
-            return {
-                "folder": tmp_folder,
-                "filename": csv_name,
-            }
-        except Error as error:
-            raise error
+        self._data_analyser_provider.analyse(data)
+        self._data_analyser_provider.convert_to_excel(folder, csv_filename)
+
+        return csv_filename
 
     def __get_data(self, filters: RecordsFilters):
-        sensors_records = sensors_records_repository.get_filtered_sensors_records(
+        sensors_records = self._sensors_records_repository.get_filtered_sensors_records(
             page_number="all",
             plant_id=filters.plant_id,
             start_date=filters.start_date,
