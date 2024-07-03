@@ -2,11 +2,19 @@ from datetime import datetime, date
 
 from core.entities import SensorsRecord
 from core.commons import Error, Datetime, Weekday
-
-from infra.repositories import sensors_records_repository, plants_repository
+from core.interfaces.repositories import SensorRecordsRepositoryInterface
+from core.interfaces.providers import DataAnalyserProviderInterface
 
 
 class UpdateSensorsRecord:
+    def __init__(
+        self,
+        sensors_records_repository: SensorRecordsRepositoryInterface,
+        data_analyser_provider: DataAnalyserProviderInterface,
+    ):
+        self._data_analyser_provider = data_analyser_provider
+        self._sensors_records_repository = sensors_records_repository
+
     def execute(self, request: dict) -> None:
         try:
             sensors_records_id = request["sensors_record_id"]
@@ -17,7 +25,9 @@ class UpdateSensorsRecord:
                     internal_message="Sensors record in not found",
                 )
             has_sensors_record = bool(
-                sensors_records_repository.get_sensors_record_by_id(sensors_records_id)
+                self._sensors_records_repository.get_sensors_record_by_id(
+                    sensors_records_id
+                )
             )
 
             if not has_sensors_record:
@@ -40,7 +50,7 @@ class UpdateSensorsRecord:
 
             weekday = Weekday(created_at.get_value(is_datetime=True))
 
-            plant = plants_repository.get_plant_by_id(request["plant_id"])
+            plant = self._plants_repository.get_plant_by_id(request["plant_id"])
 
             if not plant:
                 raise Error(ui_message="Planta não encontrada para esse registro")
@@ -56,7 +66,7 @@ class UpdateSensorsRecord:
                 created_at=created_at,
             )
 
-            sensors_records_repository.update_sensors_record_by_id(sensors_record)
+            self._sensors_records_repository.update_sensors_record_by_id(sensors_record)
 
             return sensors_record
 
