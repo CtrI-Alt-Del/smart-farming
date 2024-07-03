@@ -6,13 +6,14 @@ from cowsay import func as cow_say
 
 @dataclass
 class BaseError(Exception, ABC):
-    ui_message = "Pultz, algo deu errado"
-    internal_message = "Internal Server Error"
-    status_code = 500
+    ui_message: str = "Pultz, algo deu errado"
+    internal_message: str = "Internal Server Error"
+    status_code: int = 500
 
     def __post_init__(
         self,
     ):
+        super().__init__(self.ui_message)
         self.print_error()
 
     @abstractmethod
