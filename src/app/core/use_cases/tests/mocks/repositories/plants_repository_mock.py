@@ -9,7 +9,6 @@ class PlantsRepositoryMock(PlantsRepositoryInterface):
         self._plants.append(plant)
 
     def get_plants(self) -> list[Plant]:
-        print(self._plants)
         return self._plants
 
     def get_plant_by_id(self, id: str) -> Plant | None:
