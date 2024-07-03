@@ -1,6 +1,6 @@
 from datetime import datetime, time
 
-from core.errors.validation import DatetimeValueNotValidError
+from core.errors.validation import DatetimeNotValidError
 
 
 class Datetime:
@@ -8,15 +8,20 @@ class Datetime:
 
     def __init__(self, value: datetime):
         if not isinstance(value, datetime):
-            raise DatetimeValueNotValidError()
-        
+            raise DatetimeNotValidError()
+
         self.value = value
 
     def format_value(self):
-        self.value = self.value.strftime("%d/%m/%Y %H:%M")
+        if isinstance(self.value, datetime):
+            self.value = self.value.strftime("%d/%m/%Y %H:%M")
+
         return self
 
     def get_time(self):
+        if isinstance(self.value, str):
+            return datetime.strptime(self.value, "%d/%m/%Y %H:%M").time()
+
         return time(
             hour=self.value.hour,
             minute=self.value.minute,
