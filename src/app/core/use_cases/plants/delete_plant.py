@@ -17,7 +17,6 @@ class DeletePlant:
         self.users_repository = users_repository
 
     def execute(self, user: User, plant_id: str):
-        print(plant_id)
         if not isinstance(plant_id, str):
             raise PlantIdNotValidError()
 
