@@ -32,7 +32,6 @@ def update_plant_view(id: str):
             auth_user=auth_user,
         )
     except Error as error:
-        print(plant_form.hex_color.default, flush=True)
         return (
             render_template(
                 "pages/plants/update_plant_form/fields.html",

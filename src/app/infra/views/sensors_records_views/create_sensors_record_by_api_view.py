@@ -7,10 +7,9 @@ from core.commons import Error
 def create_sensors_record_by_api_view():
     try:
         data = request.get_json()
-        print(data,flush=True)
+        print(data, flush=True)
         create_sensors_record_by_api.execute(data)
-        
-        return "Chupa Sky Fly", 200 ##scary!!
+
+        return "Chupa Sky Fly", 200  ##scary!!
     except Error as error:
-        print(error.ui_message, flush=True)
         return error.ui_message, error.status_code

@@ -15,5 +15,4 @@ def filter_plants_view():
             "pages/plants/plants_cards/index.html", plants=plants, auth_user=None
         )
     except Error as error:
-        print(error)
         return "ERROR", error.status_code

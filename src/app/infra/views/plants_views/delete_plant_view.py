@@ -23,5 +23,4 @@ def delete_plant_view(id: str):
             auth_user=auth_user,
         )
     except Error as error:
-        print(error.ui_message)
         return "ERROR", error.status_code

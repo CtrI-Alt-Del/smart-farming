@@ -7,13 +7,14 @@ from infra.forms import SensorsRecordForm
 
 from infra.authentication import auth
 
+
 @auth.login_middleware
 def update_sensors_record_view(id: str):
     sensors_record_form = SensorsRecordForm(request.form)
     try:
-        
+
         auth_user = auth.get_user()
-        
+
         if not sensors_record_form.validate_on_submit():
             raise Error("Formulário inválido")
 
@@ -34,15 +35,14 @@ def update_sensors_record_view(id: str):
             "pages/sensors_records_table/row.html",
             sensors_record=updated_sensors_record,
             update_message="Registro atualizado com sucesso",
-            auth_user=auth_user
+            auth_user=auth_user,
         )
     except Error as error:
-        print(sensors_record_form.errors, flush=True)
         return (
             render_template(
                 "pages/sensors_records_table/update_sensors_record_form/fields.html",
                 update_sensors_record_form=sensors_record_form,
-                auth_user=auth_user
+                auth_user=auth_user,
             ),
             error.status_code,
         )
