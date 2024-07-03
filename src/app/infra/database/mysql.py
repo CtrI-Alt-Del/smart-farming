@@ -20,8 +20,8 @@ ENVIRONMENT = getenv("ENVIRONMENT")
 
 class MySQL:
     def __init__(self) -> None:
-        # if ENVIRONMENT == "test":
-        #     return
+        if ENVIRONMENT == "test":
+            return
 
         config = {
             "user": MYSQL_DATABASE_USER,
