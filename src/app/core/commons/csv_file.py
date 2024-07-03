@@ -10,7 +10,7 @@ class CsvFile:
         self,
         file: FileStorage,
         data_analyser_provider: DataAnalyserProviderInterface,
-    ) -> None:
+    ):
         if not isinstance(file, FileStorage):
             raise CSVFileNotValidError()
 

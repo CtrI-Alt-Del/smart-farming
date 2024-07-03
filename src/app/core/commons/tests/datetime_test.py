@@ -4,13 +4,13 @@ from pytest import raises
 
 
 from core.commons.datetime import Datetime
-from core.errors.validation import DatetimeValueNotValidError
+from core.errors.validation import DatetimeNotValidError
 
 
 def describe_datetime_common():
 
     def it_should_throw_error_if_value_is_not_valid():
-        with raises(DatetimeValueNotValidError):
+        with raises(DatetimeNotValidError):
             Datetime("data")
 
     def it_should_get_value_as_datetime():

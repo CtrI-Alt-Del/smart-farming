@@ -21,10 +21,10 @@ class RecordsFilters:
 
         try:
             if self.start_date != "" and isinstance(self.start_date, str):
-                self.start_date = Date(self.start_date).get_value()
+                self.start_date = Date(self.start_date).get_value(is_date=True)
 
             if self.end_date != "" and isinstance(self.end_date, str):
-                self.end_date = Date(self.end_date).get_value()
+                self.end_date = Date(self.end_date).get_value(is_date=True)
         except Exception:
             raise DateNotValidError()
 
