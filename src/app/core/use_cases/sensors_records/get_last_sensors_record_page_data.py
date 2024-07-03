@@ -1,10 +1,13 @@
 from core.entities.sensors_record import SensorsRecord
-
-from core.commons import Error
-from infra.repositories import sensors_records_repository
+from core.interfaces.repositories import SensorRecordsRepositoryInterface
 
 
 class GetLastSensorsRecordPageData:
+    def __init__(
+        self,
+        sensors_records_repository: SensorRecordsRepositoryInterface,
+    ):
+        self._sensors_records_repository = sensors_records_repository
 
     def execute(self):
         variations = {
@@ -13,13 +16,12 @@ class GetLastSensorsRecordPageData:
             "water_volume": 0,
             "temperature": 0,
         }
-
         try:
-            last_sensors_records = sensors_records_repository.get_last_sensors_records(
-                count=2
+            last_sensors_records = (
+                self._sensors_records_repository.get_last_sensors_records(count=2)
             )
 
-            if not len(last_sensors_records) >= 2:
+            if len(last_sensors_records) < 2:
                 return {
                     "last_sensors_record": (
                         last_sensors_records[0]
@@ -49,7 +51,7 @@ class GetLastSensorsRecordPageData:
                 "variations": variations,
             }
 
-        except Error:
+        except Exception:
             return {
                 "last_sensors_record": self.__get_empty_sensors_record(),
                 "variations": variations,
@@ -65,7 +67,7 @@ class GetLastSensorsRecordPageData:
         penultimate_record_value = getattr(penultimate_record, attribute)
 
         if last_record_atribute_value == 0 or penultimate_record_value == 0:
-            return 0
+            return 0.0
 
         difference = last_record_atribute_value - penultimate_record_value
 
