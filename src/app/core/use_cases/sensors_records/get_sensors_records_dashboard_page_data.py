@@ -9,7 +9,7 @@ from core.interfaces.repositories import (
 from core.constants import ADMIN_USER_EMAIL
 
 
-class GetSensorDashboardPageData:
+class GetSensorsRecordsDashboardPageData:
     def __init__(
         self,
         plants_repository: PlantsRepositoryInterface,
@@ -32,7 +32,7 @@ class GetSensorDashboardPageData:
 
         ordered_plants = OrderedPlants(plants, active_plant_id)
 
-        records = self._sensors_records_repository.get_line_charts_sensor_records()
+        records = self._sensors_records_repository.get_sensor_records_for_line_charts()
 
         if len(records) == 0:
             raise SensorsRecordNotFoundError(

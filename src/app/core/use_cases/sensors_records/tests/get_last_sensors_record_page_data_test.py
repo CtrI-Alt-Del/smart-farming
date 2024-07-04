@@ -16,6 +16,7 @@ def describe_get_last_sensors_record_page_data_use_case():
     def use_case(
         sensors_records_repository: SensorRecordsRepositoryMock,
     ):
+        sensors_records_repository.clear_records()
         return GetLastSensorsRecordPageData(
             sensors_records_repository=sensors_records_repository,
         )

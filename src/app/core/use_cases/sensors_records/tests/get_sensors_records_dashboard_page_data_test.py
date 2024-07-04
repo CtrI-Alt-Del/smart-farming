@@ -12,7 +12,7 @@ from core.errors.sensors_records import SensorsRecordNotFoundError
 from core.errors.plants import PlantNotFoundError
 from core.constants import ADMIN_USER_EMAIL
 
-from ..get_sensors_dashboard_page_data import GetSensorDashboardPageData
+from ..get_sensors_records_dashboard_page_data import GetSensorsRecordsDashboardPageData
 
 
 def describe_get_sensors_records_dashboard_page_data_use_case():
@@ -36,7 +36,7 @@ def describe_get_sensors_records_dashboard_page_data_use_case():
     ):
         plants_repository.clear_plants()
         users_repository.clear_users()
-        return GetSensorDashboardPageData(
+        return GetSensorsRecordsDashboardPageData(
             sensors_records_repository=sensors_records_repository,
             plants_repository=plants_repository,
             users_repository=users_repository,
@@ -53,7 +53,7 @@ def describe_get_sensors_records_dashboard_page_data_use_case():
         return fake_user
 
     def it_should_throw_error_if_there_is_no_plant_in_repository(
-        use_case: GetSensorDashboardPageData,
+        use_case: GetSensorsRecordsDashboardPageData,
     ):
         with raises(PlantNotFoundError) as error:
             use_case.execute()
@@ -66,12 +66,12 @@ def describe_get_sensors_records_dashboard_page_data_use_case():
         sensors_records_repository: SensorRecordsRepositoryMock,
         fake_user: User,
         fake_plant: Plant,
-        use_case: GetSensorDashboardPageData,
+        use_case: GetSensorsRecordsDashboardPageData,
     ):
         users_repository.create_user(fake_user)
         plants_repository.create_plant(fake_plant)
 
-        sensors_records_repository.get_line_charts_sensor_records = lambda: []
+        sensors_records_repository.get_sensor_records_for_line_charts = lambda: []
 
         with raises(SensorsRecordNotFoundError) as error:
             use_case.execute()
@@ -83,7 +83,7 @@ def describe_get_sensors_records_dashboard_page_data_use_case():
         users_repository: UsersRepositoryMock,
         fake_user: User,
         fake_plant: Plant,
-        use_case: GetSensorDashboardPageData,
+        use_case: GetSensorsRecordsDashboardPageData,
     ):
         users_repository.create_user(fake_user)
         plants_repository.create_plant(fake_plant)
@@ -100,7 +100,7 @@ def describe_get_sensors_records_dashboard_page_data_use_case():
         users_repository: UsersRepositoryMock,
         fake_user: User,
         fake_plant: Plant,
-        use_case: GetSensorDashboardPageData,
+        use_case: GetSensorsRecordsDashboardPageData,
     ):
         users_repository.create_user(fake_user)
 
@@ -122,7 +122,7 @@ def describe_get_sensors_records_dashboard_page_data_use_case():
         users_repository: UsersRepositoryMock,
         fake_user: User,
         fake_plant: Plant,
-        use_case: GetSensorDashboardPageData,
+        use_case: GetSensorsRecordsDashboardPageData,
     ):
         users_repository.create_user(fake_user)
 

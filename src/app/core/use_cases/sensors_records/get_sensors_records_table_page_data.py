@@ -32,9 +32,9 @@ class GetSensorsRecordsTablePageData:
                 plant_id=plant_id, start_date=start_date, end_date=end_date
             )
 
-            sensors_count = self._sensors_records_repository.get_sensors_records_count()
+            records_count = self._sensors_records_repository.get_sensors_records_count()
 
-            pagination = Pagination(page_number, sensors_count)
+            pagination = Pagination(page_number, records_count)
 
             current_page_number, last_page_number = (
                 pagination.get_current_and_last_page_numbers()

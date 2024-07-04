@@ -48,6 +48,7 @@ def describe_create_sensors_records_by_csv_file_use_case():
         plants_repository: PlantsRepositoryMock,
         data_analyser_provider: DataAnalyserProviderMock,
     ):
+        sensors_records_repository.clear_records()
         return CreateSensorsRecordsByCsvFile(
             sensors_records_repository=sensors_records_repository,
             plants_repository=plants_repository,

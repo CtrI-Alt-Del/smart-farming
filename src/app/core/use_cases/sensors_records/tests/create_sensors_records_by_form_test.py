@@ -40,6 +40,7 @@ def describe_create_sensors_record_by_api_use_case():
         sensors_records_repository: SensorRecordsRepositoryMock,
         plants_repository: PlantsRepositoryMock,
     ):
+        sensors_records_repository.clear_records()
         return CreateSensorsRecordByForm(
             sensors_records_repository=sensors_records_repository,
             plants_repository=plants_repository,
