@@ -1,6 +1,7 @@
 from faker import Faker
 
 from core.entities import SensorsRecord
+from core.commons import Datetime, Weekday
 
 from .base_faker import BaseFaker
 from .plants_faker import PlantsFaker
@@ -28,6 +29,7 @@ class SensorsRecordsFaker(BaseFaker):
             temperature=cls._fake_attribute(
                 "temperature", faker.pyfloat(min_value=-273)
             ),
-            created_at=cls._fake_attribute("created_at", faker.date_this_year()),
+            created_at=cls._fake_attribute("created_at", Datetime(faker.date_time())),
+            weekday=cls._fake_attribute("weekday", Weekday(faker.date_this_year())),
             plant=cls._fake_attribute("plant", PlantsFaker.fake()),
         )

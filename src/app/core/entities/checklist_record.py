@@ -18,7 +18,7 @@ class CheckListRecord(Entity):
     leaf_appearance: str = None
     leaf_color: str = None
     plantation_type: str = None
-    fertilizer_expiration_date: Date = None
     report: str = None
+    fertilizer_expiration_date: Date = None
     created_at: Datetime = None
     plant: Plant = None
