@@ -1,4 +1,4 @@
-from datetime import datetime, date
+from datetime import time, date
 
 from pytest import fixture, raises
 
@@ -7,7 +7,11 @@ from core.use_cases.tests.mocks.repositories import (
     SensorRecordsRepositoryMock,
 )
 from core.entities.tests.fakers import SensorsRecordsFaker, PlantsFaker
-from core.errors.validation import SensorsRecordNotValidError, DatetimeNotValidError
+from core.errors.validation import (
+    SensorsRecordNotValidError,
+    DatetimeNotValidError,
+    DateNotValidError,
+)
 from core.errors.sensors_records import SensorsRecordNotFoundError
 from core.errors.plants import PlantNotFoundError
 
@@ -16,7 +20,7 @@ from ..update_sensors_record import UpdateSensorsRecord
 
 def fake_request(base_fake_request: dict):
     return {
-        "time": datetime(year=2024, month=12, day=12, hour=12, minute=52),
+        "time": time(hour=12, minute=52),
         "date": date(year=2024, month=12, day=12),
         "soil_humidity": 32,
         "ambient_humidity": 55,
@@ -64,6 +68,19 @@ def describe_update_sensors_record_use_case():
                 request=fake_request({"sensors_record_id": fake_record.id})
             )
 
+    def it_should_throw_error_if_time_from_request_is_not_valid(
+        sensors_records_repository: SensorRecordsRepositoryMock,
+        use_case: UpdateSensorsRecord,
+    ):
+        fake_record = SensorsRecordsFaker.fake()
+        sensors_records_repository.create_sensors_record(fake_record)
+        request = fake_request(
+            {"time": "not valid time", "sensors_record_id": fake_record.id}
+        )
+
+        with raises(DatetimeNotValidError):
+            use_case.execute(request)
+
     def it_should_throw_error_if_date_from_request_is_not_valid(
         sensors_records_repository: SensorRecordsRepositoryMock,
         use_case: UpdateSensorsRecord,
@@ -71,7 +88,7 @@ def describe_update_sensors_record_use_case():
         fake_record = SensorsRecordsFaker.fake()
         sensors_records_repository.create_sensors_record(fake_record)
 
-        with raises(DatetimeNotValidError):
+        with raises(DateNotValidError):
             use_case.execute(
                 request=fake_request(
                     {"sensors_record_id": fake_record.id, "date": None}

@@ -40,7 +40,9 @@ class SensorRecordsRepositoryMock(SensorRecordsRepositoryInterface):
 
         return None
 
-    def get_sensors_records_count(self) -> int:
+    def get_sensors_records_count(
+        self, plant_id: str, start_date: date, end_date: date, page_number: int = 1
+    ) -> int:
         return len(self._sensors_records)
 
     def update_sensors_record_by_id(self, sensors_record: SensorsRecord):

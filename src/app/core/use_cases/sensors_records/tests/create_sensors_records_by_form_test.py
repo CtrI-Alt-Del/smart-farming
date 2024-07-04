@@ -1,4 +1,4 @@
-from datetime import datetime, date
+from datetime import date, time
 
 from pytest import fixture, raises
 
@@ -16,7 +16,7 @@ from ..create_sensors_records_by_form import CreateSensorsRecordByForm
 
 def fake_request(base_fake_request: dict):
     return {
-        "time": datetime(year=2024, month=12, day=12, hour=12, minute=52),
+        "time": time(hour=12, minute=52),
         "date": date(year=2024, month=12, day=12),
         "soil_humidity": 32,
         "ambient_humidity": 55,

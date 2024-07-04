@@ -1,4 +1,4 @@
-from datetime import datetime, date
+from datetime import date
 
 from pytest import fixture, raises
 
@@ -16,9 +16,7 @@ from ..create_checklist_record_by_form import CreateChecklistRecordByForm
 
 def fake_request(base_fake_request: dict):
     return {
-        "fertilizer_expiration_date": datetime(
-            year=2024, month=3, day=16, hour=12, minute=0
-        ),
+        "fertilizer_expiration_date": date(year=2024, month=3, day=16),
         "date": date(year=2024, month=12, day=12),
         "hour": 12,
         "illuminance": 12,
