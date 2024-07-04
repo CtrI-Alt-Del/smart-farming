@@ -1,7 +1,5 @@
 from flask import Flask, render_template
 
-from core.commons import Error
-
 
 def init_error_views(app: Flask):
 
@@ -12,10 +10,8 @@ def init_error_views(app: Flask):
         )
 
     @app.errorhandler(Exception)
-    @app.errorhandler(Error)
     @app.errorhandler(500)
     def internal_server_error_page_view(error):
-        print("error", error, flush=True)
         return render_template(
             "pages/error/index.html",
             status_code=500,

@@ -1,6 +1,6 @@
 from flask import render_template
 
-from core.use_cases.plants import get_plant_by_id
+from infra.factories.use_cases.plants import get_plant_by_id
 from core.commons import Error
 
 from infra.forms import PlantForm

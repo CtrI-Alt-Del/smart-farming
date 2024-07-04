@@ -2,35 +2,47 @@ from typing import Generator
 from datetime import datetime, date
 from werkzeug.datastructures import FileStorage
 
-from core.commons import CsvFile, Error, Datetime
+from core.commons import CsvFile, Datetime
 from core.entities import CheckListRecord
+from core.interfaces.repositories import (
+    ChecklistRecordsRepositoryInterface,
+    PlantsRepositoryInterface,
+)
+from core.errors.validation import DatetimeNotValidError, HourNotValidError
+from core.errors.plants import PlantNotFoundError
+from core.interfaces.providers import DataAnalyserProviderInterface
 from core.constants import CSV_FILE_COLUMNS
-
-from infra.repositories import checklist_records_repository, plants_repository
 
 
 class CreateChecklistRecordsByCsvFile:
+    def __init__(
+        self,
+        checklist_records_repository: ChecklistRecordsRepositoryInterface,
+        plants_repository: PlantsRepositoryInterface,
+        data_analyser_provider: DataAnalyserProviderInterface,
+    ):
+        self._checklist_records_repository = checklist_records_repository
+        self._plants_repository = plants_repository
+        self._data_analyser_provider = data_analyser_provider
+
     def execute(self, file: FileStorage) -> None:
-        try:
-            csv_file = CsvFile(file)
-            csv_file.read()
+        csv_file = CsvFile(file, self._data_analyser_provider)
+        csv_file.read()
 
-            csv_file.validate_columns(CSV_FILE_COLUMNS["checklist_records"])
+        csv_file.validate_columns(CSV_FILE_COLUMNS["checklist_records"])
 
-            records = csv_file.get_records()
+        records = csv_file.get_records()
 
-            converted_records = self.__convert_csv_records_to_checklist_records(records)
+        converted_records = self.__convert_csv_records_to_checklist_records(records)
 
-            for checklist_record in converted_records:
-                checklist_records_repository.create_checklist_record(checklist_record)
-
-        except Error as error:
-            raise error
+        self._checklist_records_repository.create_many_checklist_records(
+            converted_records
+        )
 
     def __convert_csv_records_to_checklist_records(
         self, records: list[dict]
     ) -> Generator:
-        plants = plants_repository.get_plants()
+        plants = self._plants_repository.get_plants()
 
         for record in records:
             try:
@@ -49,25 +61,26 @@ class CreateChecklistRecordsByCsvFile:
                     record_fertilizer_expiration_date = record[
                         "validade da adubação?"
                     ].date()
-            except Exception as exception:
-                print(exception)
-                raise Error(
-                    internal_message=exception,
-                    ui_message="Valor de data mal formatado",
-                    status_code=400,
-                )
+            except Exception:
+                raise DatetimeNotValidError()
 
             record_hour = record["hora da coleta (inserir valor de 0 a 23)"]
 
             try:
-                if not isinstance(record_hour, int):
+                if (
+                    not isinstance(record_hour, int)
+                    or record_hour < 0
+                    or record_hour > 23
+                ):
                     record_hour = int(record_hour)
-            except Exception as exception:
-                print(exception)
-                raise Error(
-                    internal_message=exception,
-                    ui_message="Hora da coleta precisa ser um inteiro",
-                    status_code=400,
+            except Exception:
+                raise HourNotValidError(
+                    ui_message="Valor da hora precisa ser um número entre 0 e 23"
+                )
+
+            if record_hour < 0 or record_hour > 23:
+                raise HourNotValidError(
+                    ui_message="Valor da hora precisa ser um número entre 0 e 23"
                 )
 
             record_plant_name = record["planta"]
@@ -95,6 +108,11 @@ class CreateChecklistRecordsByCsvFile:
                 if current_plant.name.lower() == record_plant_name.lower():
                     plant = current_plant
                     break
+
+            if plant is None:
+                raise PlantNotFoundError(
+                    f"Planta não encontrada para o registro da data {created_at.format_value().get_value()}"
+                )
 
             yield CheckListRecord(
                 soil_ph=record["ph do solo?"],

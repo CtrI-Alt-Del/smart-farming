@@ -1,10 +1,9 @@
 from flask import request, render_template
 
-from core.use_cases.checklist_records import update_checklist_record
-from core.commons import Error
+from core.errors.validation import ChecklistRecordNotValidError
 
 from infra.forms import ChecklistRecordForm
-
+from infra.factories.use_cases.checklist_records import update_checklist_record
 from infra.authentication import auth
 
 
@@ -17,7 +16,7 @@ def update_checklist_record_view(id: str):
         auth_user = auth.get_user()
 
         if not checklist_record_form.validate_on_submit():
-            raise Error("Formulário inválido")
+            raise ChecklistRecordNotValidError()
 
         updated_checklist_record = update_checklist_record.execute(
             {
@@ -47,7 +46,7 @@ def update_checklist_record_view(id: str):
             update_message="Registro check-list atualizado com sucesso",
             auth_user=auth_user,
         )
-    except Error as error:
+    except Exception as error:
         print(checklist_record_form.errors, flush=True)
         return (
             render_template(

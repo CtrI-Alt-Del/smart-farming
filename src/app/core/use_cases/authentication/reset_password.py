@@ -1,18 +1,24 @@
-from core.commons import Error
+from core.errors.authentication import NewPasswordNotValidError
+from core.interfaces.repositories import UsersRepositoryInterface
+from core.interfaces.authentication import AuthInterface
 from core.constants import ADMIN_USER_EMAIL
-
-from infra.repositories import users_repository
-from infra.authentication import auth
 
 
 class ResetPassword:
+    def __init__(
+        self,
+        repository: UsersRepositoryInterface,
+        auth: AuthInterface,
+    ):
+        self._repository = repository
+        self._auth = auth
+
     def execute(self, new_password: str):
-        try:
-            password_hash = auth.generate_hash(new_password)
+        if not isinstance(new_password, str):
+            raise NewPasswordNotValidError()
 
-            users_repository.update_password(
-                email=ADMIN_USER_EMAIL, new_password=password_hash
-            )
+        password_hash = self._auth.generate_hash(new_password)
 
-        except Error as error:
-            raise error
+        self._repository.update_password(
+            email=ADMIN_USER_EMAIL, new_password=password_hash
+        )

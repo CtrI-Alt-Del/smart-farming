@@ -1,5 +1,6 @@
-from core.entities import SensorsRecord, Datetime, Plant
+from core.entities import SensorsRecord, LineChartRecord, Datetime, Plant
 from core.commons import Weekday
+from core.interfaces.repositories import SensorRecordsRepositoryInterface
 from core.constants import PAGINATION
 
 from infra.database import mysql
@@ -7,7 +8,7 @@ from infra.database import mysql
 from datetime import date
 
 
-class SensorRecordsRepository:
+class SensorRecordsRepository(SensorRecordsRepositoryInterface):
     def create_sensors_record(self, sensors_record: SensorsRecord) -> None:
         sql = """
         INSERT INTO sensors_records 
@@ -50,7 +51,7 @@ class SensorRecordsRepository:
             params=params,
         )
 
-    def get_sensor_records_grouped_by_date(self):
+    def get_sensor_records_for_line_charts(self):
         sql = """
         SELECT 
             DATE(created_at) AS date, 
@@ -62,11 +63,29 @@ class SensorRecordsRepository:
         FROM sensors_records
         GROUP BY date, plant_id
         ORDER BY date ASC
-        LIMIT 500;
+        LIMIT 20000;
         """
         rows = mysql.query(sql=sql, is_single=False)
 
-        return rows
+        if not len(rows):
+            return []
+
+        return {
+            "ambient_humidity_line_chart_records": [
+                self.__get_line_chart_record_entity(row, "ambient_humidity")
+                for row in rows
+            ],
+            "soil_humidity_line_chart_records": [
+                self.__get_line_chart_record_entity(row, "soil_humidity")
+                for row in rows
+            ],
+            "temperature_line_chart_records": [
+                self.__get_line_chart_record_entity(row, "temperature") for row in rows
+            ],
+            "water_volume_line_chart_records": [
+                self.__get_line_chart_record_entity(row, "water_volume") for row in rows
+            ],
+        }
 
     def get_last_sensors_records(self, count) -> list[SensorsRecord]:
         rows = mysql.query(
@@ -106,43 +125,22 @@ class SensorRecordsRepository:
 
         return None
 
-    def get_sensors_records_count(self) -> int:
+    def get_sensors_records_count(
+        self, plant_id: str, start_date: date, end_date: date
+    ) -> int:
+        where = self.__get_where_with_filters(
+            plant_id=plant_id, start_date=start_date, end_date=end_date
+        )
+
         result = mysql.query(
-            sql="SELECT COUNT(*) AS count FROM sensors_records",
+            sql=f"""
+            SELECT COUNT(id) AS count FROM sensors_records AS SR
+            {where}
+            """,
             is_single=True,
         )
 
         return result["count"]
-
-    def update_sensors_record_by_id(self, sensors_record: SensorsRecord):
-        mysql.mutate(
-            """
-            UPDATE sensors_records
-            SET
-                soil_humidity = %s,
-                ambient_humidity = %s,
-                temperature = %s,
-                water_volume = %s,
-                created_at = %s,
-                plant_id = %s
-            WHERE id = %s
-            """,
-            params=[
-                sensors_record.soil_humidity,
-                sensors_record.ambient_humidity,
-                sensors_record.temperature,
-                sensors_record.water_volume,
-                sensors_record.created_at.get_value(),
-                sensors_record.plant.id,
-                sensors_record.id,
-            ],
-        )
-
-    def delete_sensors_record_by_id(self, sensors_record_id: str):
-        mysql.mutate(
-            "DELETE FROM sensors_records WHERE id = %s",
-            params=[sensors_record_id],
-        )
 
     def get_filtered_sensors_records(
         self, plant_id: str, start_date: date, end_date: date, page_number: int = 1
@@ -177,6 +175,42 @@ class SensorRecordsRepository:
             sensors_records = [self.__get_sensors_record_entity(row) for row in rows]
 
         return sensors_records
+
+    def update_sensors_record_by_id(self, sensors_record: SensorsRecord):
+        mysql.mutate(
+            """
+            UPDATE sensors_records
+            SET
+                soil_humidity = %s,
+                ambient_humidity = %s,
+                temperature = %s,
+                water_volume = %s,
+                created_at = %s,
+                plant_id = %s
+            WHERE id = %s
+            """,
+            params=[
+                sensors_record.soil_humidity,
+                sensors_record.ambient_humidity,
+                sensors_record.temperature,
+                sensors_record.water_volume,
+                sensors_record.created_at.get_value(),
+                sensors_record.plant.id,
+                sensors_record.id,
+            ],
+        )
+
+    def delete_sensors_record_by_id(self, sensors_record_id: str):
+        mysql.mutate(
+            "DELETE FROM sensors_records WHERE id = %s",
+            params=[sensors_record_id],
+        )
+
+    def delete_many_sensors_records_by_id(self, sensors_record_ids: list[str]):
+        mysql.mutate_many(
+            sql="DELETE FROM sensors_records WHERE id = %s",
+            params=[(id,) for id in sensors_record_ids],
+        )
 
     def __get_where_with_filters(self, plant_id: str, start_date: date, end_date: date):
         filters = []
@@ -215,3 +249,12 @@ class SensorRecordsRepository:
             )
         else:
             return None
+
+    def __get_line_chart_record_entity(
+        self, row: dict, attribute: str
+    ) -> LineChartRecord:
+        return LineChartRecord(
+            date=row["date"],
+            value=row[attribute],
+            plant_id=row["plant_id"],
+        )

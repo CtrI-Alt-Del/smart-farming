@@ -2,3 +2,8 @@
 ignore = [
     "F403" # undefined-names,
 ]
+
+[tool.pytest.ini_options]
+env = [
+    "ENVIRONMENT=test"
+]

@@ -1,15 +1,18 @@
-from core.commons import Error
-from infra.repositories import plants_repository
+from core.interfaces.repositories import (
+    PlantsRepositoryInterface,
+)
+from core.errors.plants import PlantIdNotValidError
 
 
 class GetPlantById:
-    def execute(self, id: str) -> None:
-        try:
-            if not isinstance(id, str):
-                raise Error("Planta não econtrada", status_code=404)
+    def __init__(
+        self,
+        repository: PlantsRepositoryInterface,
+    ):
+        self.repository = repository
 
-            plant = plants_repository.get_plant_by_id(id)
-            return plant
+    def execute(self, id: str):
+        if not isinstance(id, str):
+            raise PlantIdNotValidError()
 
-        except Error as error:
-            raise error
+        return self.repository.get_plant_by_id(id)

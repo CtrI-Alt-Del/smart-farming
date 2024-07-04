@@ -1,8 +1,8 @@
 from flask import request, render_template, url_for, make_response
 
-from core.use_cases.authentication import login_user
-from core.commons import Error
+from core.errors.forms import InvalidFormDataError
 
+from infra.factories.use_cases.authentication import login_user
 from infra.forms import LoginForm
 
 
@@ -11,7 +11,7 @@ def login_user_view():
 
     try:
         if not login_form.validate_on_submit():
-            raise Error("Formulário inválido", status_code=400)
+            raise InvalidFormDataError()
 
         response = make_response()
 
@@ -33,7 +33,7 @@ def login_user_view():
         )
         return response
 
-    except Error as error:
+    except Exception as error:
         return (
             render_template(
                 "pages/login/login_form.html",

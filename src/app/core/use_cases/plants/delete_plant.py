@@ -1,41 +1,36 @@
-from core.commons import Error
 from core.entities import User
-
-from infra.repositories import plants_repository, users_repository
+from core.errors.plants import PlantIdNotValidError, PlantNotFoundError
+from core.errors.authentication import UserNotValidError
+from core.interfaces.repositories import (
+    PlantsRepositoryInterface,
+    UsersRepositoryInterface,
+)
 
 
 class DeletePlant:
-    def execute(self, user: User, plant_id: str) -> None:
-        try:
-            if not isinstance(plant_id, str):
-                raise Error(
-                    ui_message="Planta não encontrada",
-                    internal_message="Plant id is not provided",
-                    status_code=404,
-                )
+    def __init__(
+        self,
+        plants_repository: PlantsRepositoryInterface,
+        users_repository: UsersRepositoryInterface,
+    ):
+        self.plants_repository = plants_repository
+        self.users_repository = users_repository
 
-            if not isinstance(user, User):
-                raise Error(
-                    ui_message="Usuário não encontrada",
-                    internal_message="User is not provided",
-                    status_code=404,
-                )
+    def execute(self, user: User, plant_id: str):
+        if not isinstance(plant_id, str):
+            raise PlantIdNotValidError()
 
-            has_plant = bool(plants_repository.get_plant_by_id(plant_id))
+        if not isinstance(user, User):
+            raise UserNotValidError()
 
-            if not has_plant:
-                raise Error(
-                    ui_message="Planta não encontrado",
-                    internal_message="Plant not found",
-                    status_code=404,
-                )
+        has_plant = bool(self.plants_repository.get_plant_by_id(plant_id))
 
-            plants_repository.delete_plant_by_id(plant_id)
+        if not has_plant:
+            raise PlantNotFoundError()
 
-            if user.active_plant_id == plant_id:
-                last_plant = plants_repository.get_last_plant()
-                if last_plant:
-                    users_repository.update_active_plant(user.id, last_plant.id)
+        self.plants_repository.delete_plant_by_id(plant_id)
 
-        except Error as error:
-            raise error
+        if user.active_plant_id == plant_id:
+            last_plant = self.plants_repository.get_last_plant()
+            if last_plant:
+                self.users_repository.update_active_plant(user.id, last_plant.id)

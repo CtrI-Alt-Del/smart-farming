@@ -2,19 +2,20 @@ from json import dumps
 
 from flask import render_template, redirect, url_for, flash
 
-from core.use_cases.sensors_records import get_sensors_dashboard_page_data
-from core.commons import Error, DaysRange
-
-from infra.utils import JSONEncoder
+from core.commons import DaysRange
 
 from infra.authentication import auth
+from infra.factories.use_cases.sensors_records import (
+    get_sensors_records_dashboard_page_data,
+)
+from infra.utils import JSONEncoder
 
 
 def sensors_records_dashboard_page_view():
     try:
         auth_user = auth.get_user()
 
-        data = get_sensors_dashboard_page_data.execute()
+        data = get_sensors_records_dashboard_page_data.execute()
 
         soil_humidity_chart_data = dumps(
             data["soil_humidity_chart_data"], cls=JSONEncoder
@@ -42,7 +43,7 @@ def sensors_records_dashboard_page_view():
             days_ranges=daysRange.get_value(),
             auth_user=auth_user,
         )
-    except Error as error:
+    except Exception as error:
         flash(error.ui_message, "error")
         return redirect(
             url_for(

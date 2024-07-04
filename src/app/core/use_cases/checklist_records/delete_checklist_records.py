@@ -1,24 +1,26 @@
-from core.commons import Error
-
-from infra.repositories import checklist_records_repository
+from core.interfaces.repositories import ChecklistRecordsRepositoryInterface
+from core.entities import CheckListRecord
+from core.errors.validation import ChecklistRecordNotValidError
+from core.errors.checklist_records import ChecklistRecordNotFoundError
 
 
 class DeleteChecklistRecords:
-    def execute(self, checklist_records_ids: list[str]) -> None:
-        try:
-            for id in checklist_records_ids:
-                if id and isinstance(id, str):
-                    has_checklist_record = bool(
-                        checklist_records_repository.get_checklist_record_by_id(id)
-                    )
+    def __init__(
+        self,
+        checklist_records_repository: ChecklistRecordsRepositoryInterface,
+    ):
+        self._checklist_records_repository = checklist_records_repository
 
-                    if not has_checklist_record:
-                        raise Error(
-                            ui_message="Registro check-list não encontrado",
-                            internal_message="Checklist record not found",
-                        )
+    def execute(self, checklist_records_ids: list[str]):
+        for id in checklist_records_ids:
+            if not isinstance(id, str):
+                raise ChecklistRecordNotValidError()
 
-                    checklist_records_repository.delete_checklist_record_by_id(id)
+            record = self._checklist_records_repository.get_checklist_record_by_id(id)
 
-        except Error as error:
-            raise error
+            if not isinstance(record, CheckListRecord):
+                raise ChecklistRecordNotFoundError()
+
+        self._checklist_records_repository.delete_many_checklist_records_by_id(
+            checklist_records_ids
+        )

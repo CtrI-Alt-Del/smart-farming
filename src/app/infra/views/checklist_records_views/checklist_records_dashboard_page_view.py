@@ -1,13 +1,14 @@
 from json import dumps
 from flask import render_template, flash, redirect, url_for
 
-from core.use_cases.checklist_records import get_checklist_dashboard_page_data
 from core.constants import LEAF_COLORS
-from core.commons import DaysRange, Error
+from core.commons import DaysRange
 
+from infra.factories.use_cases.checklist_records import (
+    get_checklist_records_dashboard_page_data,
+)
 from infra.constants import LEAF_COLORS_CHART_LEGEND_HEX_COLORS
 from infra.utils import JSONEncoder
-
 from infra.authentication import auth
 
 
@@ -15,7 +16,7 @@ def checklist_records_dashboard_page_view():
     try:
         auth_user = auth.get_user()
 
-        data = get_checklist_dashboard_page_data.execute()
+        data = get_checklist_records_dashboard_page_data.execute()
 
         leaf_appearences_chart_data = dumps(
             data["days_count_by_leaf_appearance_and_plant"], ensure_ascii=False
@@ -45,7 +46,7 @@ def checklist_records_dashboard_page_view():
             active_plant_id=active_plant_id,
             auth_user=auth_user,
         )
-    except Error as error:
+    except Exception as error:
         flash(error.ui_message, "error")
         return redirect(
             url_for(

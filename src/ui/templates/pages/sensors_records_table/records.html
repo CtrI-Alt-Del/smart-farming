@@ -7,7 +7,7 @@
 
 {{
 toast(
-id="create-sensors-records-message",
+id="create-by-csv-message",
 message=create_by_csv_message,
 category="success",
 on_load="remove <p.form-error /> then remove .hidden from #csv-output",
@@ -20,7 +20,7 @@ on_load="remove <p.form-error /> then remove .hidden from #csv-output",
 
 {{
 toast(
-id="create-sensors-records-message",
+id="create-message",
 message=create_message,
 category="success",
 on_load="trigger click on #create-sensors-records-modal-trigger
@@ -35,7 +35,7 @@ then call #create-sensors-records-form.reset()",
 
 {{
 toast(
-id="delete-sensors-records-message",
+id="delete-message",
 message=delete_message,
 category="success",
 on_load="remove <p.form-error />",
@@ -46,7 +46,7 @@ on_load="remove <p.form-error />",
 
 <div class="overflow-x-auto">
   <table
-    class="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
+    class="text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
     {% include "pages/sensors_records_table/head.html"%}
     {% include "pages/sensors_records_table/body.html"%}
   </table>
@@ -54,14 +54,13 @@ on_load="remove <p.form-error />",
   {% else %}
 
   <div
-    _="on load if  #delete-sensors-record-button is not null add .hidden to #delete-sensors-record-button"
-    data-hyperscript="process"
+    _="on load add .hidden to #delete-sensors-record-button"
     class="sr-only">
   </div>
 
   <div
     data-loading-class-remove="absolute"
-    class="absolute grid w-full h-full place-content-center">
+    class="absolute grid place-content-center w-full h-full">
     {{ loading("w-24 h-24") }}
   </div>
 

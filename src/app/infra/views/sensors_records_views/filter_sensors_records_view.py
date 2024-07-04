@@ -1,9 +1,10 @@
 from flask import render_template, request
 
-from core.use_cases.sensors_records import get_sensors_records_table_page_data
-from core.commons import Error
 from core.constants import PAGINATION
 
+from infra.factories.use_cases.sensors_records import (
+    get_sensors_records_table_page_data,
+)
 from infra.authentication import auth
 
 
@@ -14,7 +15,6 @@ def filter_sensors_records_view():
     page_number = int(request.args.get("page", 1))
 
     try:
-
         auth_user = auth.get_user()
 
         data = get_sensors_records_table_page_data.execute(
@@ -38,5 +38,5 @@ def filter_sensors_records_view():
             auth_user=auth_user,
         )
 
-    except Error as error:
+    except Exception as error:
         return "ERROR", error.status_code  ##sla pq é assim mas o petros fez assim

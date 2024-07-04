@@ -1,8 +1,16 @@
-from infra.repositories import plants_repository
+from core.interfaces.repositories import (
+    PlantsRepositoryInterface,
+)
 
 
 class GetPlantsPageData:
+    def __init__(
+        self,
+        repository: PlantsRepositoryInterface,
+    ):
+        self.repository = repository
+
     def execute(self):
-        plants = plants_repository.get_plants()
+        plants = self.repository.get_plants()
 
         return plants

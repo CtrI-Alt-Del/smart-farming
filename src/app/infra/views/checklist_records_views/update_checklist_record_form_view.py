@@ -1,7 +1,5 @@
 from flask import render_template
 
-from core.commons import Error
-
 from infra.forms import ChecklistRecordForm
 from infra.repositories import checklist_records_repository
 
@@ -19,5 +17,5 @@ def update_checklist_record_form_view(id: str):
             checklist_record_id=checklist_record.id,
             update_checklist_record_form=update_checklist_record_form,
         )
-    except Error as error:
+    except Exception as error:
         return "Registro não encontrado 😢", error.status_code

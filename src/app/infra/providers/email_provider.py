@@ -1,10 +1,13 @@
 from smtplib import SMTP, SMTPAuthenticationError
+
+
+from core.interfaces.providers import EmailProvideInterface
 from core.commons import Error
 from email.message import Message
 
 
-class EmailProvider:
-    def send_email(sender: str, receiver: str, template: str, password: str):
+class EmailProvider(EmailProvideInterface):
+    def send_email(self, sender: str, receiver: str, template: str, password: str):
         try:
             email_body = template
             msg = Message()
@@ -18,4 +21,6 @@ class EmailProvider:
 
             smtp.sendmail(sender, receiver, msg.as_string().encode("utf-8"))
         except SMTPAuthenticationError as error:
-            raise Error(ui_message="app password errada", internal_message=error)
+            raise Error(
+                ui_message="Erro ao tentar enviar e-mail", internal_message=error
+            )

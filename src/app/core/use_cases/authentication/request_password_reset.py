@@ -1,21 +1,33 @@
-from os import getenv
-
-from infra.providers import EmailProvider
-from core.commons import Error
+from core.interfaces.providers import EmailProvideInterface
 from core.constants import ADMIN_USER_EMAIL, SUPPORT_USER_EMAIL
+from core.errors.authentication import (
+    UserEmailNotValidError,
+    EmailTemplateNotValidError,
+    SenderPasswordNotValidError,
+    AdminUserEmailNotMatchedError,
+)
 
 
 class RequestPasswordReset:
-    def execute(self, user_email: str, template_email_string: str):
-        try:
-            if user_email != ADMIN_USER_EMAIL:
-                raise Error("E-mail fornecido não é o e-mail do administrador")
-            EmailSender = EmailProvider
-            app_password = getenv("SUPPORT_EMAIL_APP_PASSWORD")
-            support_email = SUPPORT_USER_EMAIL
-            EmailSender.send_email(
-                support_email, user_email, template_email_string, app_password
-            )
+    def __init__(self, email_provider: EmailProvideInterface):
+        self._email_provider = email_provider
 
-        except Error as error:
-            raise error
+    def execute(self, user_email: str, email_template: str, sender_password: str):
+        if not isinstance(user_email, str):
+            raise UserEmailNotValidError()
+
+        if not isinstance(email_template, str):
+            raise EmailTemplateNotValidError()
+
+        if not isinstance(sender_password, str):
+            raise SenderPasswordNotValidError()
+
+        if user_email != ADMIN_USER_EMAIL:
+            raise AdminUserEmailNotMatchedError()
+
+        self._email_provider.send_email(
+            sender=SUPPORT_USER_EMAIL,
+            receiver=user_email,
+            template=email_template,
+            password=sender_password,
+        )

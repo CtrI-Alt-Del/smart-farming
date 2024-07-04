@@ -1,39 +1,53 @@
-from datetime import datetime, date
+from datetime import datetime, date, time
 
 from core.entities.sensors_record import SensorsRecord, Plant
-from core.commons import Error, Datetime
-
-from infra.repositories import sensors_records_repository
+from core.interfaces.repositories import (
+    SensorRecordsRepositoryInterface,
+    PlantsRepositoryInterface,
+)
+from core.errors.validation import DatetimeNotValidError, DateNotValidError
+from core.errors.plants import PlantNotFoundError
+from core.commons import Datetime
 
 
 class CreateSensorsRecordByForm:
-    def execute(self, request: dict) -> None:
-        if not isinstance(request["date"], date):
-            raise Error(ui_message="Data de registro não informado")
+    def __init__(
+        self,
+        sensors_records_repository: SensorRecordsRepositoryInterface,
+        plants_repository: PlantsRepositoryInterface,
+    ):
+        self._sensors_records_repository = sensors_records_repository
+        self._plants_repository = plants_repository
 
-        try:
-            created_at = Datetime(
-                datetime(
-                    hour=request["time"].hour,
-                    minute=request["time"].minute,
-                    year=request["date"].year,
-                    month=request["date"].month,
-                    day=request["date"].day,
-                )
+    def execute(self, request: dict):
+        if "time" not in request or not isinstance(request["time"], time):
+            raise DatetimeNotValidError()
+
+        if "date" not in request or not isinstance(request["date"], date):
+            raise DateNotValidError()
+
+        created_at = Datetime(
+            datetime(
+                hour=request["time"].hour,
+                minute=request["time"].minute,
+                year=request["date"].year,
+                month=request["date"].month,
+                day=request["date"].day,
             )
+        )
 
-            plant = Plant(id=request["plant_id"])
+        plant = self._plants_repository.get_plant_by_id(request["plant_id"])
 
-            sensors_records = SensorsRecord(
-                soil_humidity=request["soil_humidity"],
-                ambient_humidity=request["ambient_humidity"],
-                temperature=request["temperature"],
-                water_volume=request["water_volume"],
-                created_at=created_at,
-                plant=plant,
-            )
+        if not isinstance(plant, Plant):
+            raise PlantNotFoundError()
 
-            sensors_records_repository.create_sensors_record(sensors_records)
+        sensors_records = SensorsRecord(
+            soil_humidity=request["soil_humidity"],
+            ambient_humidity=request["ambient_humidity"],
+            temperature=request["temperature"],
+            water_volume=request["water_volume"],
+            created_at=created_at,
+            plant=plant,
+        )
 
-        except Error as error:
-            raise error
+        self._sensors_records_repository.create_sensors_record(sensors_records)

@@ -1,13 +1,14 @@
 from datetime import date
 
-from core.entities.checklist_record import CheckListRecord, Plant
+from core.interfaces.repositories import ChecklistRecordsRepositoryInterface
+from core.entities import CheckListRecord, Plant, LineChartRecord
 from core.commons import Datetime, Date
 from core.constants import PAGINATION
 
 from infra.database import mysql
 
 
-class ChecklistRecordsRepository:
+class ChecklistRecordsRepository(ChecklistRecordsRepositoryInterface):
     def create_checklist_record(self, checklist_record: CheckListRecord) -> None:
         sql = """
         INSERT INTO checklist_records
@@ -146,6 +147,74 @@ class ChecklistRecordsRepository:
             ],
         )
 
+    def delete_many_checklist_records_by_id(self, checklist_record_ids: list[str]):
+        mysql.mutate_many(
+            sql="DELETE FROM checklist_records WHERE id = %s",
+            params=[(id,) for id in checklist_record_ids],
+        )
+
+    def get_leaf_appearances_and_leaf_colors_records(self):
+        rows = mysql.query(
+            sql="""
+            SELECT leaf_appearance, leaf_color, created_at, plant_id
+            FROM checklist_records
+            ORDER BY created_at ASC
+            """,
+            is_single=False,
+        )
+
+        if len(rows) == 0:
+            return []
+
+        for row in rows:
+            row["date"] = row["created_at"].date()
+            del row["created_at"]
+
+        return rows
+
+    def get_lai_records_for_line_charts(self):
+        rows = mysql.query(
+            sql="""
+            SELECT 
+                DATE(created_at) AS date,
+                ROUND(AVG(lai), 1) AS lai,
+                plant_id
+            FROM checklist_records
+            GROUP BY DATE(created_at), plant_id
+            ORDER BY date ASC;
+            """,
+            is_single=False,
+        )
+
+        if len(rows) == 0:
+            return []
+
+        return [
+            LineChartRecord(
+                date=row["date"],
+                value=row["lai"],
+                plant_id=row["plant_id"],
+            )
+            for row in rows
+        ]
+
+    def get_checklist_records_count(
+        self, plant_id: str, start_date: date, end_date: date
+    ) -> int:
+        where = self.__get_where_with_filters(
+            plant_id=plant_id, start_date=start_date, end_date=end_date
+        )
+
+        result = mysql.query(
+            sql=f"""
+            SELECT COUNT(id) AS count FROM checklist_records AS CR
+            {where}
+            """,
+            is_single=True,
+        )
+
+        return result["count"]
+
     def get_filtered_checklist_records(
         self, plant_id: str, start_date: date, end_date: date, page_number: int = 1
     ) -> list[CheckListRecord]:
@@ -179,76 +248,6 @@ class ChecklistRecordsRepository:
             sensors_records = [self.__get_checklist_record_entity(row) for row in rows]
 
         return sensors_records
-
-    def get_leaf_appearances_and_leaf_colors_records(self):
-        rows = mysql.query(
-            sql="""
-            SELECT leaf_appearance, leaf_color, created_at, plant_id
-            FROM checklist_records
-            ORDER BY created_at ASC
-            """,
-            is_single=False,
-        )
-
-        if len(rows) == 0:
-            return []
-
-        for row in rows:
-            row["date"] = row["created_at"].date()
-            del row["created_at"]
-
-        return rows
-
-    def get_lai_records(self):
-        rows = mysql.query(
-            sql="""
-            SELECT 
-                DATE(created_at) AS date,
-                ROUND(AVG(lai), 1) AS lai,
-                plant_id
-            FROM checklist_records
-            GROUP BY DATE(created_at), plant_id
-            ORDER BY date ASC;
-            """,
-            is_single=False,
-        )
-
-        if len(rows) == 0:
-            return []
-
-        return rows
-
-    def get_checklist_records_count(
-        self, plant_id: str, start_date: date, end_date: date
-    ) -> int:
-        where = self.__get_where_with_filters(
-            plant_id=plant_id, start_date=start_date, end_date=end_date
-        )
-
-        result = mysql.query(
-            sql=f"""
-            SELECT COUNT(id) AS count FROM checklist_records AS CR
-            {where}
-            """,
-            is_single=True,
-        )
-
-        return result["count"]
-
-    def get_ordered_by_date_leaf_appearance_and_leaf_color_records(self):
-        rows = mysql.query(
-            sql="SELECT leaf_appearance, leaf_color, created_at FROM checklist_records",
-            is_single=False,
-        )
-
-        if len(rows) == 0:
-            return []
-
-        for row in rows:
-            row["date"] = row["created_at"].date()
-            del row["created_at"]
-
-        return rows
 
     def get_checklist_record_by_id(self, id: str) -> CheckListRecord | None:
         row = mysql.query(

@@ -1,11 +1,20 @@
-from core.commons import Pagination, Date, Error
-
+from core.commons import Pagination, RecordsFilters
+from core.interfaces.repositories import (
+    PlantsRepositoryInterface,
+    SensorRecordsRepositoryInterface,
+)
 from core.entities import SensorsRecord, Plant
-
-from infra.repositories import plants_repository, sensors_records_repository
 
 
 class GetSensorsRecordsTablePageData:
+    def __init__(
+        self,
+        plants_repository: PlantsRepositoryInterface,
+        sensors_records_repository: SensorRecordsRepositoryInterface,
+    ):
+        self._plants_repository = plants_repository
+        self._sensors_records_repository = sensors_records_repository
+
     def execute(
         self,
         start_date: str,
@@ -14,45 +23,38 @@ class GetSensorsRecordsTablePageData:
         page_number: int = 1,
         should_get_plants: bool = False,
     ) -> tuple[list[SensorsRecord], int, list[Plant]]:
-        try:
-            plants = []
-            if should_get_plants:
-                plants = plants_repository.get_plants()
-            filters = self.__handle_filters(
-                plant_id=plant_id, start_date=start_date, end_date=end_date
-            )
+        plants = []
+        if should_get_plants:
+            plants = self._plants_repository.get_plants()
 
-            sensors_count = sensors_records_repository.get_sensors_records_count()
+        filters = RecordsFilters(
+            plant_id=plant_id, start_date=start_date, end_date=end_date
+        )
 
-            pagination = Pagination(page_number, sensors_count)
+        records_count = self._sensors_records_repository.get_sensors_records_count(
+            plant_id=filters.plant_id,
+            start_date=filters.start_date,
+            end_date=filters.end_date,
+        )
 
-            current_page_number, last_page_number = (
-                pagination.get_current_and_last_page_numbers()
-            )
+        pagination = Pagination(page_number, records_count)
 
-            sensors_records = sensors_records_repository.get_filtered_sensors_records(
-                page_number=current_page_number,
-                plant_id=filters["plant_id"],
-                start_date=filters["start_date"],
-                end_date=filters["end_date"],
-            )
+        current_page_number, last_page_number = (
+            pagination.get_current_and_last_page_numbers()
+        )
 
-            return {
-                "sensors_records": sensors_records,
-                "plants": plants,
-                "last_page_number": last_page_number,
-                "current_page_number": current_page_number,
-            }
+        print(current_page_number, flush=True)
 
-        except Error as error:
-            return error
+        sensors_records = self._sensors_records_repository.get_filtered_sensors_records(
+            page_number=current_page_number,
+            plant_id=filters.plant_id,
+            start_date=filters.start_date,
+            end_date=filters.end_date,
+        )
 
-    def __handle_filters(self, start_date: str, end_date: str, plant_id: str):
-        if plant_id == "all":
-            plant_id = None
-        if start_date != "" and isinstance(start_date, str):
-            start_date = Date(start_date).get_value()
-        if end_date != "" and isinstance(end_date, str):
-            end_date = Date(end_date).get_value()
-
-        return {"plant_id": plant_id, "start_date": start_date, "end_date": end_date}
+        return {
+            "sensors_records": sensors_records,
+            "plants": plants,
+            "last_page_number": last_page_number,
+            "current_page_number": current_page_number,
+        }

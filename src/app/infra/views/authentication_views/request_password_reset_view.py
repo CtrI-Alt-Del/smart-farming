@@ -3,15 +3,15 @@ from uuid import uuid4
 
 from flask import render_template, make_response, request
 
-from core.use_cases.authentication import request_password_reset
+from core.errors.forms import InvalidFormDataError
 
-from core.commons import Error
-
+from infra.factories.use_cases.authentication import request_password_reset
 from infra.authentication import auth
-from infra.constants import COOKIES
 from infra.forms import RequestPasswordResetForm
+from infra.constants import COOKIES
 
 URL = getenv("URL")
+SENDER_PASSWORD = getenv("SUPPORT_EMAIL_APP_PASSWORD")
 
 
 def request_password_reset_view():
@@ -19,7 +19,7 @@ def request_password_reset_view():
 
     try:
         if not form.validate_on_submit():
-            raise Error(ui_message="Formulário inválido", status_code=400)
+            raise InvalidFormDataError()
 
         password_reset_token = uuid4()
         token = auth.generate_hash(str(password_reset_token))
@@ -44,10 +44,14 @@ def request_password_reset_view():
             max_age=900,  # 15 minutes
         )
 
-        request_password_reset.execute(user_email, email_template)
+        request_password_reset.execute(
+            user_email=user_email,
+            email_template=email_template,
+            sender_password=SENDER_PASSWORD,
+        )
 
         return response
-    except Error as error:
+    except Exception as error:
         return (
             render_template(
                 "pages/request_password_reset/email_field.html",

@@ -1,22 +1,9 @@
-from .create_sensors_records_by_csv_file import CreateSensorsRecordsByCsvFile
-from .create_sensors_record_by_api import CreateSensorsRecordByApi
-from .create_sensors_records_by_form import CreateSensorsRecordByForm
-from .get_sensors_dashboard_page_data import GetSensorDashboardPageData
-from .get_last_sensors_record_page_data import GetLastSensorsRecordPageData
-from .get_sensors_records_table_page_data import GetSensorsRecordsTablePageData
-from .update_sensors_records import UpdateSensorsRecord
-from .delete_sensors_records import DeleteSensorsRecord
-
-from .filter_sensors_records import FilterSensorsRecords
-from .get_sensors_records_csv_file import GetSensorsRecordsCsvFile
-
-create_sensors_records_by_csv_file = CreateSensorsRecordsByCsvFile()
-create_sensors_record_by_api = CreateSensorsRecordByApi()
-create_sensors_records_by_form = CreateSensorsRecordByForm()
-get_sensors_dashboard_page_data = GetSensorDashboardPageData()
-get_last_sensors_record_page_data = GetLastSensorsRecordPageData()
-get_sensors_records_table_page_data = GetSensorsRecordsTablePageData()
-update_sensors_records = UpdateSensorsRecord()
-delete_sensors_records = DeleteSensorsRecord()
-filter_sensors_records = FilterSensorsRecords()
-get_sensors_records_csv_file = GetSensorsRecordsCsvFile()
+from .create_sensors_records_by_csv_file import *
+from .create_sensors_record_by_api import *
+from .create_sensors_records_by_form import *
+from .get_sensors_records_dashboard_page_data import *
+from .get_last_sensors_record_page_data import *
+from .get_sensors_records_table_page_data import *
+from .get_sensors_records_csv_file import *
+from .update_sensors_record import *
+from .delete_sensors_records import *

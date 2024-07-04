@@ -15,9 +15,14 @@ MYSQL_DATABASE_PASSWORD = getenv("MYSQL_DATABASE_PASSWORD")
 MYSQL_DATABASE_NAME = getenv("MYSQL_DATABASE_NAME")
 MYSQL_DATABASE_HOST = getenv("MYSQL_DATABASE_HOST")
 
+ENVIRONMENT = getenv("ENVIRONMENT")
+
 
 class MySQL:
     def __init__(self) -> None:
+        if ENVIRONMENT == "test":
+            return
+
         config = {
             "user": MYSQL_DATABASE_USER,
             "password": MYSQL_DATABASE_PASSWORD,
