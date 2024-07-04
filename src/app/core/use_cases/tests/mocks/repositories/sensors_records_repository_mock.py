@@ -17,7 +17,7 @@ class SensorRecordsRepositoryMock(SensorRecordsRepositoryInterface):
         for record in sensors_records:
             self._sensors_records.append(record)
 
-    def get_line_charts_sensor_records(self):
+    def get_sensor_records_for_line_charts(self):
         return {
             "soil_humidity_line_chart_records": LineChartRecordsFaker.fake_many(),
             "ambient_humidity_line_chart_records": LineChartRecordsFaker.fake_many(),
@@ -53,6 +53,13 @@ class SensorRecordsRepositoryMock(SensorRecordsRepositoryInterface):
             for current_sensors_record in self._sensors_records
         ]
 
+    def delete_sensors_record_by_id(self, id: str):
+        self._sensors_records = [
+            sensors_record
+            for sensors_record in self._sensors_records
+            if sensors_record.id != id
+        ]
+
     def delete_many_sensors_records_by_id(self, ids: str):
         self._sensors_records = [
             sensors_record
@@ -63,15 +70,7 @@ class SensorRecordsRepositoryMock(SensorRecordsRepositoryInterface):
     def get_filtered_sensors_records(
         self, plant_id: str, start_date: date, end_date: date, page_number: int = 1
     ) -> list[SensorsRecord]:
-        if page_number != "all":
-            records_per_page = PAGINATION["records_per_page"]
-
-            slice_start = page_number - 1 * records_per_page
-            records = self._sensors_records[
-                slice_start : slice_start + records_per_page
-            ]
-        else:
-            records = self._sensors_records
+        records = self._sensors_records
 
         if plant_id:
             records = [record for record in records if record.plant.id == plant_id]
@@ -83,6 +82,14 @@ class SensorRecordsRepositoryMock(SensorRecordsRepositoryInterface):
                 if record.created_at.get_value(is_datetime=True).date() >= start_date
                 and record.created_at.get_value(is_datetime=True).date() <= end_date
             ]
+
+        if page_number != "all":
+            records_per_page = PAGINATION["records_per_page"]
+
+            slice_start = (page_number - 1) * records_per_page
+            records = records[slice_start : slice_start + records_per_page]
+        else:
+            records = records
 
         return records
 
