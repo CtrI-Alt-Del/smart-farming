@@ -4,11 +4,14 @@ from typing import List, Dict, Generator
 from werkzeug.datastructures import FileStorage
 
 from core.commons import CsvFile, Error, Datetime
+from core.errors.validation import DatetimeNotValidError
+from core.errors.plants import PlantNotFoundError
+from core.entities.sensors_record import SensorsRecord
 from core.interfaces.repositories import (
     SensorRecordsRepositoryInterface,
     PlantsRepositoryInterface,
 )
-from core.entities.sensors_record import SensorsRecord
+from core.interfaces.providers import DataAnalyserProviderInterface
 from core.constants import CSV_FILE_COLUMNS
 
 
@@ -17,13 +20,15 @@ class CreateSensorsRecordsByCsvFile:
         self,
         sensors_records_repository: SensorRecordsRepositoryInterface,
         plants_repository: PlantsRepositoryInterface,
+        data_analyser_provider: DataAnalyserProviderInterface,
     ):
         self._sensors_records_repository = sensors_records_repository
         self._plants_repository = plants_repository
+        self._data_analyser_provider = data_analyser_provider
 
     def execute(self, file: FileStorage):
         try:
-            csv_file = CsvFile(file)
+            csv_file = CsvFile(file, self._data_analyser_provider)
             csv_file.read()
 
             csv_file.validate_columns(CSV_FILE_COLUMNS["sensors_records"])
@@ -58,12 +63,8 @@ class CreateSensorsRecordsByCsvFile:
                 else:
                     record_time = record["hora"]
 
-            except Exception as exception:
-                raise Error(
-                    internal_message=exception,
-                    ui_message="Valor de data ou hora mal formatado",
-                    status_code=400,
-                )
+            except Exception:
+                raise DatetimeNotValidError()
 
             record_plant_name = record["planta"]
 
@@ -83,6 +84,11 @@ class CreateSensorsRecordsByCsvFile:
                 if current_plant.name.lower() == record_plant_name.lower():
                     plant = current_plant
                     break
+
+            if plant is None:
+                raise PlantNotFoundError(
+                    f"Planta não encontrada para o registro da data {created_at.format_value().get_value()}"
+                )
 
             yield SensorsRecord(
                 ambient_humidity=record["umidade ambiente"],
