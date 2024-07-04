@@ -1,6 +1,6 @@
 from pytest import raises
 
-from core.commons.records_filters import RecordsFilters
+from core.commons import RecordsFilters, Date
 from core.errors.validation import DateNotValidError
 
 
@@ -24,4 +24,4 @@ def describe_records_filter_common():
 
         filters = RecordsFilters(plant_id=None, start_date=start_date, end_date=None)
 
-        assert filters.end_date == start_date
+        assert filters.end_date == Date(start_date).get_value(is_date=True)
