@@ -206,17 +206,10 @@ class SensorRecordsRepository(SensorRecordsRepositoryInterface):
             params=[sensors_record_id],
         )
 
-    def delete_many_sensors_records_by_id(self, sensors_record_ids: str):
-        params = []
-
-        for _ in sensors_record_ids:
-            params.append("%s")
-
-        params = ",".join(params)
-
-        mysql.mutate(
-            f"DELETE FROM sensors_records WHERE id = ({params})",
-            params=[sensors_record_ids],
+    def delete_many_sensors_records_by_id(self, sensors_record_ids: list[str]):
+        mysql.mutate_many(
+            sql="DELETE FROM sensors_records WHERE id = %s",
+            params=[(id,) for id in sensors_record_ids],
         )
 
     def __get_where_with_filters(self, plant_id: str, start_date: date, end_date: date):

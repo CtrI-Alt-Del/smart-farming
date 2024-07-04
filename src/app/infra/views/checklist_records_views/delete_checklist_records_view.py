@@ -1,19 +1,16 @@
 from flask import request, render_template
 
-from core.use_cases.checklist_records import (
+from core.constants import PAGINATION
+
+from infra.factories.use_cases.checklist_records import (
     delete_checklist_records,
     get_checklist_records_table_page_data,
 )
-from core.commons import Error
-from core.constants import PAGINATION
-
 from infra.authentication import auth
 
 
 @auth.login_middleware
 def delete_checklist_records_view():
-    
-    
     checklist_records_ids = request.form.getlist("checklist-records-ids[]")
 
     start_date = request.args.get("start-date", None)
@@ -23,7 +20,6 @@ def delete_checklist_records_view():
 
     try:
         auth_user = auth.get_user()
-
 
         delete_checklist_records.execute(checklist_records_ids)
 
@@ -46,7 +42,7 @@ def delete_checklist_records_view():
             current_page_number=current_page_number,
             page_buttons_limit=PAGINATION["page_buttons_siblings_count"],
             delete_message="Registro(s) check-list deletado(s) com sucesso",
-            auth_user=auth_user
+            auth_user=auth_user,
         )
-    except Error as error:
+    except Exception as error:
         return "ERROR", error.status_code
