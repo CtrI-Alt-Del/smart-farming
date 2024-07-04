@@ -1,0 +1,26 @@
+name: Continuous Integration
+
+on: [push, pull_request]
+
+jobs:
+  CI:
+    name: Run core tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Init job
+        uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.10.12
+          cache: 'pip'
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run core tests
+        run: python -m pytest src/app/core
+
+  
