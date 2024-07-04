@@ -7,7 +7,7 @@ from core.entities.tests.fakers import LineChartRecordsFaker, PlantsFaker
 
 
 def fake_record(plant_id: str, value: int, days_range: date):
-    current_date = date.today()
+    current_date = date(year=2024, month=7, day=1)
 
     return LineChartRecordsFaker.fake(
         plant_id=plant_id, value=value, date=current_date - timedelta(days=days_range)
