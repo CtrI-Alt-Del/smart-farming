@@ -1,5 +1,6 @@
 from datetime import date
 
+from core.interfaces.repositories import ChecklistRecordsRepositoryInterface
 from core.entities import CheckListRecord, Plant, LineChartRecord
 from core.commons import Datetime, Date
 from core.constants import PAGINATION
@@ -7,7 +8,7 @@ from core.constants import PAGINATION
 from infra.database import mysql
 
 
-class ChecklistRecordsRepository:
+class ChecklistRecordsRepository(ChecklistRecordsRepositoryInterface):
     def create_checklist_record(self, checklist_record: CheckListRecord) -> None:
         sql = """
         INSERT INTO checklist_records
@@ -146,6 +147,19 @@ class ChecklistRecordsRepository:
             ],
         )
 
+    def delete_many_checklist_records(self, checklist_record_id: str):
+        params = []
+
+        for _ in checklist_record_id:
+            params.append("%s")
+
+        params = ",".join(params)
+
+        mysql.mutate(
+            f"DELETE FROM checklist_records WHERE id = ({params})",
+            params=[checklist_record_id],
+        )
+
     def get_filtered_checklist_records(
         self, plant_id: str, start_date: date, end_date: date, page_number: int = 1
     ) -> list[CheckListRecord]:
@@ -199,7 +213,7 @@ class ChecklistRecordsRepository:
 
         return rows
 
-    def get_lai_records(self):
+    def get_lai_records_for_line_charts(self):
         rows = mysql.query(
             sql="""
             SELECT 
@@ -227,8 +241,6 @@ class ChecklistRecordsRepository:
             for row in rows
         ]
 
-        return rows
-
     def get_checklist_records_count(
         self, plant_id: str, start_date: date, end_date: date
     ) -> int:
@@ -245,21 +257,6 @@ class ChecklistRecordsRepository:
         )
 
         return result["count"]
-
-    def get_ordered_by_date_leaf_appearance_and_leaf_color_records(self):
-        rows = mysql.query(
-            sql="SELECT leaf_appearance, leaf_color, created_at FROM checklist_records",
-            is_single=False,
-        )
-
-        if len(rows) == 0:
-            return []
-
-        for row in rows:
-            row["date"] = row["created_at"].date()
-            del row["created_at"]
-
-        return rows
 
     def get_checklist_record_by_id(self, id: str) -> CheckListRecord | None:
         row = mysql.query(
