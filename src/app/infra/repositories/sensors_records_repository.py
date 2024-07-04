@@ -125,13 +125,56 @@ class SensorRecordsRepository(SensorRecordsRepositoryInterface):
 
         return None
 
-    def get_sensors_records_count(self) -> int:
+    def get_sensors_records_count(
+        self, plant_id: str, start_date: date, end_date: date
+    ) -> int:
+        where = self.__get_where_with_filters(
+            plant_id=plant_id, start_date=start_date, end_date=end_date
+        )
+
         result = mysql.query(
-            sql="SELECT COUNT(*) AS count FROM sensors_records",
+            sql=f"""
+            SELECT COUNT(id) AS count FROM sensors_records AS SR
+            {where}
+            """,
             is_single=True,
         )
 
         return result["count"]
+
+    def get_filtered_sensors_records(
+        self, plant_id: str, start_date: date, end_date: date, page_number: int = 1
+    ) -> list[SensorsRecord]:
+        where = self.__get_where_with_filters(plant_id, start_date, end_date)
+
+        limit = ""
+        if page_number != "all":
+            pagination_limit = PAGINATION["records_per_page"]
+            offset = (page_number - 1) * pagination_limit
+            limit = f"LIMIT {pagination_limit} OFFSET {offset}"
+
+        rows = mysql.query(
+            sql=f"""
+            SELECT 
+                SR.*,
+                P.id AS plant_id, 
+                P.name AS plant_name, 
+                P.hex_color AS plant_color
+            FROM sensors_records AS SR
+            JOIN plants AS P ON P.id = SR.plant_id
+            {where}
+            ORDER BY SR.created_at DESC
+            {limit}
+            """,
+            is_single=False,
+        )
+
+        sensors_records = []
+
+        if len(rows) > 0:
+            sensors_records = [self.__get_sensors_record_entity(row) for row in rows]
+
+        return sensors_records
 
     def update_sensors_record_by_id(self, sensors_record: SensorsRecord):
         mysql.mutate(
@@ -176,40 +219,6 @@ class SensorRecordsRepository(SensorRecordsRepositoryInterface):
             params=[sensors_record_ids],
         )
 
-    def get_filtered_sensors_records(
-        self, plant_id: str, start_date: date, end_date: date, page_number: int = 1
-    ) -> list[SensorsRecord]:
-        where = self.__get_where_with_filters(plant_id, start_date, end_date)
-
-        limit = ""
-        if page_number != "all":
-            pagination_limit = PAGINATION["records_per_page"]
-            offset = (page_number - 1) * pagination_limit
-            limit = f"LIMIT {pagination_limit} OFFSET {offset}"
-
-        rows = mysql.query(
-            sql=f"""
-            SELECT 
-                SR.*,
-                P.id AS plant_id, 
-                P.name AS plant_name, 
-                P.hex_color AS plant_color
-            FROM sensors_records AS SR
-            JOIN plants AS P ON P.id = SR.plant_id
-            {where}
-            ORDER BY SR.created_at DESC
-            {limit}
-            """,
-            is_single=False,
-        )
-
-        sensors_records = []
-
-        if len(rows) > 0:
-            sensors_records = [self.__get_sensors_record_entity(row) for row in rows]
-
-        return sensors_records
-
     def __get_where_with_filters(self, plant_id: str, start_date: date, end_date: date):
         filters = []
 
@@ -252,7 +261,6 @@ class SensorRecordsRepository(SensorRecordsRepositoryInterface):
         self, row: dict, attribute: str
     ) -> LineChartRecord:
         return LineChartRecord(
-            id=row["id"],
             date=row["date"],
             value=row[attribute],
             plant_id=row["plant_id"],

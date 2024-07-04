@@ -1,12 +1,12 @@
 from flask import render_template, request
 
-from core.use_cases.sensors_records import get_sensors_records_table_page_data
-from core.commons import Error
 from core.constants import PAGINATION
 
+from infra.factories.use_cases.sensors_records import (
+    get_sensors_records_table_page_data,
+)
 from infra.forms import SensorsRecordForm
 from infra.forms import CsvForm
-
 from infra.authentication import auth
 
 
@@ -55,5 +55,5 @@ def sensors_records_table_page_view():
             auth_user=auth_user,
         )
 
-    except Error as error:
+    except Exception as error:
         return error, 500
