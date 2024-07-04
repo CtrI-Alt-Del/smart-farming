@@ -1,10 +1,10 @@
 from flask import render_template, request
 
-from core.use_cases.checklist_records import (
+from infra.factories.use_cases.checklist_records import (
     create_checklist_record_by_form,
     get_checklist_records_table_page_data,
 )
-from core.commons import Error
+from core.errors.validation import ChecklistRecordNotValidError
 from core.constants import PAGINATION
 
 from infra.forms import ChecklistRecordForm
@@ -25,7 +25,7 @@ def create_checklist_record_by_form_view():
         auth_user = auth.get_user()
 
         if not checklist_record_form.validate_on_submit():
-            raise Error
+            raise ChecklistRecordNotValidError()
 
         create_checklist_record_by_form.execute(
             {
@@ -71,7 +71,7 @@ def create_checklist_record_by_form_view():
             auth_user=auth_user,
         )
 
-    except Error as error:
+    except Exception as error:
         render_template(
             "pages/checklist_records_table/create_checklist_record_form/fields.html",
             checklist_record_form=checklist_record_form,

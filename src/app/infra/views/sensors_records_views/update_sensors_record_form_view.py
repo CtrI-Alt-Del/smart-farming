@@ -1,7 +1,5 @@
 from flask import render_template
 
-from core.commons import Error
-
 from infra.forms import SensorsRecordForm
 from infra.repositories import sensors_records_repository
 from infra.authentication import auth
@@ -19,5 +17,5 @@ def update_sensors_record_form_view(id: str):
             sensors_record_id=sensors_record.id,
             update_sensors_record_form=update_sensors_record_form,
         )
-    except Error as error:
+    except Exception as error:
         return "Registro não encontrado 😢", error.status_code

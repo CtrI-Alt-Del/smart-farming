@@ -12,7 +12,6 @@ from .sensors_records_table_page_view import sensors_records_table_page_view
 from .create_sensors_records_by_form_view import create_sensors_record_by_form_view
 from .create_sensors_record_by_api_view import create_sensors_record_by_api_view
 from .filter_sensors_records_view import filter_sensors_records_view
-from .create_sensors_records_by_csv_file_view import create_sensors_records_by_csv_file_view
 from .sensors_records_csv_file_view import sensors_records_csv_file_view
 
 sensors_records_views = Blueprint("sensors_records_views", __name__)

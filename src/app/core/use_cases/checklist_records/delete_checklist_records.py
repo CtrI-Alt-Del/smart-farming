@@ -11,7 +11,7 @@ class DeleteChecklistRecords:
     ):
         self._checklist_records_repository = checklist_records_repository
 
-    def execute(self, checklist_records_ids: list[str]) -> None:
+    def execute(self, checklist_records_ids: list[str]):
         for id in checklist_records_ids:
             if not isinstance(id, str):
                 raise ChecklistRecordNotValidError()

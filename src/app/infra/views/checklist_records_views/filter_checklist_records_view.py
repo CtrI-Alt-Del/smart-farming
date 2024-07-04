@@ -1,9 +1,10 @@
 from flask import render_template, request
 
-from core.use_cases.checklist_records import get_checklist_records_table_page_data
-from core.commons import Error
 from core.constants import PAGINATION
 
+from infra.factories.use_cases.checklist_records import (
+    get_checklist_records_table_page_data,
+)
 from infra.authentication import auth
 
 
@@ -37,5 +38,5 @@ def filter_checklist_records_view():
             auth_user=auth_user,
         )
 
-    except Error as error:
+    except Exception as error:
         return "ERROR", error.status_code

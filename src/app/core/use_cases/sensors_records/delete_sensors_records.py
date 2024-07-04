@@ -13,7 +13,6 @@ class DeleteSensorsRecord:
 
     def execute(self, sensors_records_ids: list[str]) -> None:
         for id in sensors_records_ids:
-            print(isinstance(id, str))
             if not isinstance(id, str):
                 raise SensorsRecordNotValidError()
 

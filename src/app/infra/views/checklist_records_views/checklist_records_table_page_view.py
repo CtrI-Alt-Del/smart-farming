@@ -1,7 +1,8 @@
 from flask import render_template, request
 
-from core.use_cases.checklist_records import get_checklist_records_table_page_data
-from core.commons import Error
+from infra.factories.use_cases.checklist_records import (
+    get_checklist_records_table_page_data,
+)
 from core.constants import PAGINATION
 
 from infra.forms import ChecklistRecordForm, CsvForm
@@ -52,6 +53,5 @@ def checklist_records_table_page_view():
             page_buttons_limit=PAGINATION["page_buttons_siblings_count"],
             auth_user=auth_user,
         )
-    except Error as error:
-        print(error, flush=True)
-        return "500 ERROR PAGE"
+    except Exception as error:
+        return error.ui_message, error.status_code

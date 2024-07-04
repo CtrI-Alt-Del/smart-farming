@@ -17,18 +17,21 @@ class GetSensorsRecordsCsvFile:
         self._sensors_records_repository = sensors_records_repository
 
     def execute(self, plant_id: str, start_date: date, end_date: date, folder: str):
-        filters = RecordsFilters(
-            plant_id=plant_id, start_date=start_date, end_date=end_date
-        )
+        try:
+            filters = RecordsFilters(
+                plant_id=plant_id, start_date=start_date, end_date=end_date
+            )
 
-        data = self.__get_data(filters)
+            data = self.__get_data(filters)
 
-        csv_filename = "registros-dos-sensores.xlsx"
+            csv_filename = "registros-dos-sensores.xlsx"
 
-        self._data_analyser_provider.analyse(data)
-        self._data_analyser_provider.convert_to_excel(folder, csv_filename)
+            self._data_analyser_provider.analyse(data)
+            self._data_analyser_provider.convert_to_excel(folder, csv_filename)
 
-        return csv_filename
+            return csv_filename
+        except Exception as error:
+            print(error, flush=True)
 
     def __get_data(self, filters: RecordsFilters):
         sensors_records = self._sensors_records_repository.get_filtered_sensors_records(
@@ -40,6 +43,8 @@ class GetSensorsRecordsCsvFile:
 
         columns = CSV_FILE_COLUMNS["sensors_records"]
         data = {column: [] for column in columns}
+
+        print(sensors_records, flush=True)
 
         if len(sensors_records) == 0:
             return data

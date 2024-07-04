@@ -1,14 +1,13 @@
 from flask import render_template, request
 
-from core.use_cases.sensors_records import (
+from infra.factories.use_cases.sensors_records import (
     create_sensors_records_by_form,
     get_sensors_records_table_page_data,
 )
-from core.commons import Error
+from core.errors.validation import SensorsRecordNotValidError
 from core.constants import PAGINATION
 
 from infra.forms import SensorsRecordForm
-
 from infra.authentication import auth
 
 
@@ -24,7 +23,21 @@ def create_sensors_record_by_form_view():
     try:
         auth_user = auth.get_user()
         if not sensors_record_form.validate_on_submit():
-            raise Error
+            raise SensorsRecordNotValidError()
+
+        print(
+            {
+                "soil_humidity": sensors_record_form.soil_humidity.data,
+                "ambient_humidity": sensors_record_form.ambient_humidity.data,
+                "temperature": sensors_record_form.temperature.data,
+                "water_volume": sensors_record_form.water_volume.data,
+                "plant_id": sensors_record_form.plant_id.data,
+                "created_at": sensors_record_form.date.data,
+                "date": sensors_record_form.date.data,
+                "time": sensors_record_form.time.data,
+            },
+            flush=True,
+        )
 
         create_sensors_records_by_form.execute(
             {
@@ -59,7 +72,8 @@ def create_sensors_record_by_form_view():
             auth_user=auth_user,
         )
 
-    except Error as error:
+    except Exception as error:
+        print(error, flush=True)
         return (
             render_template(
                 "pages/sensors_records_table/create_sensors_record_form/fields.html",

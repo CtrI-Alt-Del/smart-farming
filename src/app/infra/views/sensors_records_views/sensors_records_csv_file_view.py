@@ -1,8 +1,10 @@
 from flask import send_file, after_this_request, request
 
-from core.use_cases.sensors_records import get_sensors_records_csv_file
-
+from infra.factories.use_cases.sensors_records import (
+    get_sensors_records_csv_file,
+)
 from infra.utils.file import File
+from infra.constants import FOLDERS
 
 
 def sensors_records_csv_file_view():
@@ -10,16 +12,19 @@ def sensors_records_csv_file_view():
     end_date = request.args.get("end-date", None)
     plant_id = request.args.get("plant", "all")
 
-    csv_file = get_sensors_records_csv_file.execute(
-        start_date=start_date, end_date=end_date, plant_id=plant_id
+    csv_folder = FOLDERS["tmp"]
+
+    csv_filename = get_sensors_records_csv_file.execute(
+        start_date=start_date,
+        end_date=end_date,
+        plant_id=plant_id,
+        folder=csv_folder,
     )
-    csv_folder = csv_file["folder"]
-    csv_filename = csv_file["filename"]
     csv_path = f"{csv_folder}/{csv_filename}"
 
     @after_this_request
     def _(response):
-        File(csv_file["folder"], csv_file["filename"]).delete()
+        File(csv_folder, csv_filename).delete()
 
         return response
 

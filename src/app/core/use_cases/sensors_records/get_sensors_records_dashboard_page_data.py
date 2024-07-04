@@ -24,7 +24,7 @@ class GetSensorsRecordsDashboardPageData:
         plants = self._plants_repository.get_plants()
 
         if len(plants) == 0:
-            raise PlantNotFoundError(ui_message="Nenhuma planta encontrada")
+            raise PlantNotFoundError("Nenhuma planta encontrada")
 
         active_plant_id = self._users_repository.get_user_active_plant_id(
             ADMIN_USER_EMAIL

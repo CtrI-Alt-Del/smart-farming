@@ -1,8 +1,12 @@
-from datetime import datetime, date
+from datetime import datetime, date, time
 
 from core.entities import SensorsRecord
 from core.commons import Datetime, Weekday
-from core.errors.validation import SensorsRecordNotValidError, DatetimeNotValidError
+from core.errors.validation import (
+    SensorsRecordNotValidError,
+    DatetimeNotValidError,
+    DateNotValidError,
+)
 from core.errors.sensors_records import SensorsRecordNotFoundError
 from core.errors.plants import PlantNotFoundError
 from core.interfaces.repositories import (
@@ -35,8 +39,11 @@ class UpdateSensorsRecord:
         if not has_sensors_record:
             raise SensorsRecordNotFoundError()
 
-        if not isinstance(request["date"], date):
+        if "time" not in request or not isinstance(request["time"], time):
             raise DatetimeNotValidError()
+
+        if "date" not in request or not isinstance(request["date"], date):
+            raise DateNotValidError()
 
         created_at = Datetime(
             datetime(

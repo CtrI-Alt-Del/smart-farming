@@ -1,4 +1,4 @@
-from datetime import datetime, date
+from datetime import datetime, date, time
 
 from core.entities.sensors_record import SensorsRecord, Plant
 from core.interfaces.repositories import (
@@ -20,7 +20,7 @@ class CreateSensorsRecordByForm:
         self._plants_repository = plants_repository
 
     def execute(self, request: dict):
-        if "time" not in request or not isinstance(request["time"], datetime):
+        if "time" not in request or not isinstance(request["time"], time):
             raise DatetimeNotValidError()
 
         if "date" not in request or not isinstance(request["date"], date):

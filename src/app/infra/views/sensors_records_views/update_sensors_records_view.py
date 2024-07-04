@@ -1,10 +1,9 @@
 from flask import render_template, request
 
-from core.use_cases.sensors_records import update_sensors_records
-from core.commons import Error
+from core.errors.validation import SensorsRecordNotValidError
 
 from infra.forms import SensorsRecordForm
-
+from infra.factories.use_cases.sensors_records import update_sensors_record
 from infra.authentication import auth
 
 
@@ -16,9 +15,9 @@ def update_sensors_record_view(id: str):
         auth_user = auth.get_user()
 
         if not sensors_record_form.validate_on_submit():
-            raise Error("Formulário inválido")
+            raise SensorsRecordNotValidError()
 
-        updated_sensors_record = update_sensors_records.execute(
+        updated_sensors_record = update_sensors_record.execute(
             {
                 "soil_humidity": sensors_record_form.soil_humidity.data,
                 "ambient_humidity": sensors_record_form.ambient_humidity.data,
@@ -37,7 +36,7 @@ def update_sensors_record_view(id: str):
             update_message="Registro atualizado com sucesso",
             auth_user=auth_user,
         )
-    except Error as error:
+    except Exception as error:
         return (
             render_template(
                 "pages/sensors_records_table/update_sensors_record_form/fields.html",

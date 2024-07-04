@@ -2,15 +2,14 @@ from flask import request, render_template
 
 from werkzeug.datastructures import ImmutableMultiDict
 
-from core.use_cases.sensors_records import (
+from core.errors.validation import CSVFileNotValidError
+from core.constants import PAGINATION
+
+from infra.factories.use_cases.sensors_records import (
     create_sensors_records_by_csv_file,
     get_sensors_records_table_page_data,
 )
-from core.commons import Error
-from core.constants import PAGINATION
-
 from infra.forms.csv_form import CsvForm
-
 from infra.authentication import auth
 
 
@@ -33,7 +32,7 @@ def create_sensors_records_by_csv_file_view():
         auth_user = auth.get_user()
 
         if not csv_form.validate_on_submit():
-            raise Error(ui_message="Arquivo CSV inválido", status_code=400)
+            raise CSVFileNotValidError()
 
         create_sensors_records_by_csv_file.execute(request.files["csv"])
 
@@ -57,7 +56,7 @@ def create_sensors_records_by_csv_file_view():
             auth_user=auth_user,
         )
 
-    except Error as error:
+    except Exception as error:
         return (
             render_template(
                 "components/csv_form_error.html",

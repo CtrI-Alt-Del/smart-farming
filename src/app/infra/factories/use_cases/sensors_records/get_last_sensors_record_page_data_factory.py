@@ -1,17 +1,11 @@
-from core.use_cases.sensors_records import CreateSensorsRecordByApi
+from core.use_cases.sensors_records import GetLastSensorsRecordPageData
 
-from infra.repositories import (
-    plants_repository,
-    users_repository,
-    sensors_records_repository,
-)
+from infra.repositories import sensors_records_repository
 
 
-class CreateSensorsRecordByApiFactory:
+class GetLastSensorsRecordPageDataFactory:
     @staticmethod
     def produce():
-        return CreateSensorsRecordByApi(
-            plants_repository=plants_repository,
-            users_repository=users_repository,
+        return GetLastSensorsRecordPageData(
             sensors_records_repository=sensors_records_repository,
         )

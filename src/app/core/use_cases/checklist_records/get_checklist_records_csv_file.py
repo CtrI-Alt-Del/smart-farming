@@ -1,6 +1,6 @@
 from datetime import date
 
-from core.commons import RecordsFilters, Error
+from core.commons import RecordsFilters
 from core.interfaces.repositories import SensorRecordsRepositoryInterface
 from core.interfaces.providers import DataAnalyserProviderInterface
 from core.constants import CSV_FILE_COLUMNS
@@ -16,21 +16,18 @@ class GetChecklistRecordsCsvFile:
         self._checklist_records_repository = checklist_records_repository
 
     def execute(self, plant_id: str, start_date: date, end_date: date, folder: str):
-        try:
-            filters = RecordsFilters(
-                plant_id=plant_id, start_date=start_date, end_date=end_date
-            )
+        filters = RecordsFilters(
+            plant_id=plant_id, start_date=start_date, end_date=end_date
+        )
 
-            data = self.__get_data(filters)
+        data = self.__get_data(filters)
 
-            csv_filename = "registros-checklist.xlsx"
+        csv_filename = "registros-checklist.xlsx"
 
-            self._data_analyser_provider.analyse(data)
-            self._data_analyser_provider.convert_to_excel(folder, csv_filename)
+        self._data_analyser_provider.analyse(data)
+        self._data_analyser_provider.convert_to_excel(folder, csv_filename)
 
-            return csv_filename
-        except Error as error:
-            raise error
+        return csv_filename
 
     def __get_data(self, filters: RecordsFilters):
         checklist_records = (

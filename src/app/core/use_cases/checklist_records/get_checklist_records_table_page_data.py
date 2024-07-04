@@ -45,6 +45,8 @@ class GetChecklistRecordsTablePageData:
             pagination.get_current_and_last_page_numbers()
         )
 
+        print(checklist_records_count, flush=True)
+
         checklist_records = (
             self._checklist_records_repository.get_filtered_checklist_records(
                 page_number=current_page_number,

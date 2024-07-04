@@ -1,4 +1,4 @@
-from core.commons import Pagination, Error, RecordsFilters
+from core.commons import Pagination, RecordsFilters
 from core.interfaces.repositories import (
     PlantsRepositoryInterface,
     SensorRecordsRepositoryInterface,
@@ -23,38 +23,38 @@ class GetSensorsRecordsTablePageData:
         page_number: int = 1,
         should_get_plants: bool = False,
     ) -> tuple[list[SensorsRecord], int, list[Plant]]:
-        try:
-            plants = []
-            if should_get_plants:
-                plants = self._plants_repository.get_plants()
+        plants = []
+        if should_get_plants:
+            plants = self._plants_repository.get_plants()
 
-            filters = RecordsFilters(
-                plant_id=plant_id, start_date=start_date, end_date=end_date
-            )
+        filters = RecordsFilters(
+            plant_id=plant_id, start_date=start_date, end_date=end_date
+        )
 
-            records_count = self._sensors_records_repository.get_sensors_records_count()
+        records_count = self._sensors_records_repository.get_sensors_records_count(
+            plant_id=filters.plant_id,
+            start_date=filters.start_date,
+            end_date=filters.end_date,
+        )
 
-            pagination = Pagination(page_number, records_count)
+        pagination = Pagination(page_number, records_count)
 
-            current_page_number, last_page_number = (
-                pagination.get_current_and_last_page_numbers()
-            )
+        current_page_number, last_page_number = (
+            pagination.get_current_and_last_page_numbers()
+        )
 
-            sensors_records = (
-                self._sensors_records_repository.get_filtered_sensors_records(
-                    page_number=current_page_number,
-                    plant_id=filters.plant_id,
-                    start_date=filters.start_date,
-                    end_date=filters.end_date,
-                )
-            )
+        print(current_page_number, flush=True)
 
-            return {
-                "sensors_records": sensors_records,
-                "plants": plants,
-                "last_page_number": last_page_number,
-                "current_page_number": current_page_number,
-            }
+        sensors_records = self._sensors_records_repository.get_filtered_sensors_records(
+            page_number=current_page_number,
+            plant_id=filters.plant_id,
+            start_date=filters.start_date,
+            end_date=filters.end_date,
+        )
 
-        except Error as error:
-            return error
+        return {
+            "sensors_records": sensors_records,
+            "plants": plants,
+            "last_page_number": last_page_number,
+            "current_page_number": current_page_number,
+        }

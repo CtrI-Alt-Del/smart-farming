@@ -1,10 +1,10 @@
 from flask import render_template, request, make_response
 
 
-from core.use_cases.authentication import reset_password
 from core.errors.forms import InvalidFormDataError
 
 from infra.forms import ResetPasswordForm
+from infra.factories.use_cases.authentication import reset_password
 from infra.constants import COOKIES
 
 

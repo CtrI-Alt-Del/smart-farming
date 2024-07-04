@@ -1,7 +1,6 @@
 from flask import request
 
-from core.use_cases.sensors_records import create_sensors_record_by_api
-from core.commons import Error
+from infra.factories.use_cases.sensors_records import create_sensors_record_by_api
 
 
 def create_sensors_record_by_api_view():
@@ -11,5 +10,5 @@ def create_sensors_record_by_api_view():
         create_sensors_record_by_api.execute(data)
 
         return "Chupa Sky Fly", 200  ##scary!!
-    except Error as error:
+    except Exception as error:
         return error.ui_message, error.status_code
