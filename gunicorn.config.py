@@ -24,6 +24,5 @@ worker_class = "gevent"
 worker_connections = 1000
 
 daemon = False
-
 timeout = 300
 keepalive = 2
