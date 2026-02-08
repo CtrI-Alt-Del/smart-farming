@@ -1,35 +1,53 @@
 name: Continuous Delivery
 
 on:
-  push:
+  pull_request:
     branches:
       - main
 
 jobs:
-  CD:
+  cd:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout app
         uses: actions/checkout@v4
 
-      - name: Deploy app
+      - name: Copy app to VPS
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.SERVER_KEY }}
-          source: "."
-          target: "~/smart-farming-scp"
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: |
+            Dockerfile
+            docker-compose.yml
+            requirements.txt
+            nginx
+            src
+            app.py
+            main.py
+            .env.example
+          target: /opt/smart-farming
 
-      - name: Run app
+      - name: Deploy (docker compose)
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.SERVER_KEY }}
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
           script: |
-            cd ~/smart-farming-scp
-            env_file_string=$(echo "${{ secrets.ENV_FILE }}")
-            echo $env_file_string | tr ' ' '\n' | sed 's/\([^=]\+\)=\([^ ]\+\)/\1=\2/' > ~/smart-farming-scp/.env
-            docker compose up -d
+            set -e
+
+            sudo mkdir -p /opt/smart-farming
+            sudo chown -R $USER:$USER /opt/smart-farming
+
+            cd /opt/smart-farming
+
+            # Escreve o .env exatamente como está no secret (multilinha)
+            cat > .env << 'EOF'
+            ${{ secrets.ENV_FILE }}
+            EOF
+
+            docker compose up -d --build
+            docker image prune -f
