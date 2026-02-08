@@ -43,8 +43,6 @@ class GetSensorsRecordsTablePageData:
             pagination.get_current_and_last_page_numbers()
         )
 
-        print(current_page_number, flush=True)
-
         sensors_records = self._sensors_records_repository.get_filtered_sensors_records(
             page_number=current_page_number,
             plant_id=filters.plant_id,

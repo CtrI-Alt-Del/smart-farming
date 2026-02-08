@@ -140,7 +140,7 @@ class SensorRecordsRepository(SensorRecordsRepositoryInterface):
             is_single=True,
         )
 
-        return result["count"]
+        return result["count"] if result else 0
 
     def get_filtered_sensors_records(
         self, plant_id: str, start_date: date, end_date: date, page_number: int = 1
@@ -153,8 +153,7 @@ class SensorRecordsRepository(SensorRecordsRepositoryInterface):
             offset = (page_number - 1) * pagination_limit
             limit = f"LIMIT {pagination_limit} OFFSET {offset}"
 
-        rows = mysql.query(
-            sql=f"""
+        sql_query = f"""
             SELECT 
                 SR.*,
                 P.id AS plant_id, 
@@ -165,13 +164,13 @@ class SensorRecordsRepository(SensorRecordsRepositoryInterface):
             {where}
             ORDER BY SR.created_at DESC
             {limit}
-            """,
-            is_single=False,
-        )
+            """
+        
+        rows = mysql.query(sql=sql_query, is_single=False)
 
         sensors_records = []
 
-        if len(rows) > 0:
+        if rows and len(rows) > 0:
             sensors_records = [self.__get_sensors_record_entity(row) for row in rows]
 
         return sensors_records
