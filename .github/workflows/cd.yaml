@@ -1,9 +1,10 @@
 name: Continuous Delivery
 
 on:
-  pull_request:
+  push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   cd:
@@ -19,15 +20,7 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
-          source: |
-            Dockerfile
-            docker-compose.yml
-            requirements.txt
-            nginx
-            src
-            app.py
-            main.py
-            .env.example
+          source: "."
           target: /opt/smart-farming
 
       - name: Deploy (docker compose)
@@ -37,7 +30,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
-            set -e
+            set -euo pipefail
 
             sudo mkdir -p /opt/smart-farming
             sudo chown -R $USER:$USER /opt/smart-farming
@@ -49,5 +42,5 @@ jobs:
             ${{ secrets.ENV_FILE }}
             EOF
 
-            docker compose up -d --build
+            docker compose up -d --build --remove-orphans
             docker image prune -f
