@@ -336,3 +336,13 @@ draft.*
 certificates/smart-farming-drive-service-account.json
 
 # End of https://www.toptal.com/developers/gitignore/api/python,visualstudiocode,node
+
+opencode.jsonc
+CLAUDE.md
+CONVENTIONS.md
+GEMINI.md
+.agent
+.codex
+.claude
+.cursor
+.cursorrules

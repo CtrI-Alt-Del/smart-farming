@@ -1,0 +1,14 @@
+{
+  "active": [
+    {
+      "slug": "flask-migrations-alembic-sqlalchemy",
+      "path": "plans/flask-migrations-alembic-sqlalchemy.md",
+      "title": "Adicionar migrations com Flask-Migrate (Alembic) e SQLAlchemy",
+      "summary": "Definir e implementar um fluxo de migrations versionadas no backend Flask com SQLAlchemy e Alembic, cobrindo configuracao, criacao de migracoes iniciais, integracao com ambiente local/CI e documentacao operacional.",
+      "linkedAt": "2026-02-08T18:36:54.368Z",
+      "status": "active"
+    }
+  ],
+  "completed": [],
+  "primary": "flask-migrations-alembic-sqlalchemy"
+}
