@@ -1,10 +1,7 @@
 {% from "components/toast.html" import toast %}
 {% from "components/plant_badge.html" import plant_badge %}
 
-<tr
-  id="sensors-record-{{ sensors_record.id }}"
-  _="on load trigger updateRow"
-  data-loading-class="hidden"
+<tr id="sensors-record-{{ sensors_record.id }}" _="on load trigger updateRow" data-loading-class="hidden"
   class="group bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
   <td class="relative w-4 p-4">
     {% if auth_user.is_authenticated %}
@@ -22,41 +19,26 @@
     {% endif %}
 
     <div class="flex items-center gap-3 w-4">
-      <input
-        id="checkbox-{{ sensors_record.id }}"
-        data-table="checkbox-row"
-        type="checkbox"
-        name="sensors-records-ids[]"
-        value="{{ sensors_record.id }}"
-        class="checkbox">
-      <label
-        for="checkbox-{{ sensors_record.id }}"
-        class="sr-only">
+      <input id="checkbox-{{ sensors_record.id }}" data-table="checkbox-row" type="checkbox"
+        name="sensors-records-ids[]" value="{{ sensors_record.id }}" class="checkbox">
+      <label for="checkbox-{{ sensors_record.id }}" class="sr-only">
         Selecionar registro
       </label>
 
-      <button
-        hx-get="{{ 
+      <button hx-get="{{ 
         url_for(
           'sensors_records_views.update_sensors_record_form_view',
           id=sensors_record.id
         )
-       }}"
-        hx-target="#update-sensors-record-form"
-        hx-swap="innerHTML"
-        hx-trigger="click"
-        data-hyperscript="process"
-        _="on click trigger click on #update-sensors-record-modal-trigger"
-        type="button"
+       }}" hx-target="#update-sensors-record-form" hx-swap="innerHTML" hx-trigger="click" data-hyperscript="process"
+        _="on click trigger click on #update-sensors-record-modal-trigger" type="button"
         class="hidden group-hover:block absolute border-gray-700 mt-1 left-[44px]">
         <i class="ph-bold ph-note-pencil text-lg"></i>
       </button>
     </div>
     {% endif %}
   </td>
-  <td
-    scope="row"
-    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+  <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
     <time>
       {{ sensors_record.created_at.format_value().get_value() }}
     </time>

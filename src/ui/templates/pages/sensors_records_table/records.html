@@ -44,23 +44,31 @@ on_load="remove <p.form-error />",
 
 {% endif %}
 
+{% if update_message %}
+
+{{
+toast(
+id="update-message",
+message=update_message,
+category="success",
+on_load="trigger click on #update-sensors-record-modal-trigger",
+)
+}}
+
+{% endif %}
+
 <div class="overflow-x-auto">
-  <table
-    class="text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
+  <table class="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
     {% include "pages/sensors_records_table/head.html"%}
     {% include "pages/sensors_records_table/body.html"%}
   </table>
 
   {% else %}
 
-  <div
-    _="on load add .hidden to #delete-sensors-record-button"
-    class="sr-only">
+  <div _="on load add .hidden to #delete-sensors-record-button" class="sr-only">
   </div>
 
-  <div
-    data-loading-class-remove="absolute"
-    class="absolute grid place-content-center w-full h-full">
+  <div data-loading-class-remove="absolute" class="absolute grid place-content-center w-full h-full">
     {{ loading("w-24 h-24") }}
   </div>
 
