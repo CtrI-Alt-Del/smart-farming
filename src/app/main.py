@@ -15,7 +15,7 @@ def init_app():
 
     app.config["SECRET_KEY"] = getenv("SECRET_KEY")
 
-    init_database()
+    init_database(app)
     init_jobs()
     init_authentication(app)
     init_views(app)

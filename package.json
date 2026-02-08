@@ -5,6 +5,14 @@
     "dev": "concurrently 'npm run dev:app' 'npm run dev:style'",
     "app": "gunicorn -c gunicorn.config.py 'src.app.wsgi:app'",
     "style": "tailwindcss -i ./src/ui/static/styles/global.css -o ./src/ui/static/build/styles/global.css",
+    "build": "npm run style",
+    "test": "python3 -m pytest",
+    "db:current": "flask --app ./src/app/main.py:init_app db current",
+    "db:migrate": "flask --app ./src/app/main.py:init_app db migrate",
+    "db:upgrade": "flask --app ./src/app/main.py:init_app db upgrade",
+    "db:downgrade": "flask --app ./src/app/main.py:init_app db downgrade -- -1",
+    "db:stamp": "flask --app ./src/app/main.py:init_app db stamp head",
+    "db:seed-defaults": "flask --app ./src/app/main.py:init_app db-seed-defaults",
     "start": "npm run style && npm run app"
   },
   "dependencies": {
