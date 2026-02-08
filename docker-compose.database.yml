@@ -1,9 +1,9 @@
-version: '3'
+version: "3"
 
 services:
   database:
-    image: 'bitnami/mysql:latest'
-    container_name: 'smart-farming-database'
+    image: mysql:8
+    container_name: "smart-farming-database"
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_DATABASE_PASSWORD}
       MYSQL_PASSWORD: ${MYSQL_DATABASE_PASSWORD}
@@ -12,7 +12,7 @@ services:
     networks:
       - app-network
     volumes:
-      - mysql_data:/bitnami/mysql/data
+      - mysql_data:/var/lib/mysql
     ports:
       - 3306:3306
 
@@ -23,5 +23,4 @@ networks:
 volumes:
   mysql_data:
     driver: local
-
 # docker compose -f docker-compose.database.yml up

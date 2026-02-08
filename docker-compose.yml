@@ -1,18 +1,44 @@
-version: '3'
+version: "3"
 
 services:
- app:
+  database:
+    image: mysql:8
+    container_name: smart-farming-database
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_DATABASE_PASSWORD}
+      MYSQL_PASSWORD: ${MYSQL_DATABASE_PASSWORD}
+      MYSQL_USER: ${MYSQL_DATABASE_USER}
+      MYSQL_DATABASE: ${MYSQL_DATABASE_NAME}
+    networks:
+      - app-network
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306"
+
+  app:
     build: .
-    container_name: 'smart-farming-app'
+    container_name: smart-farming-app
     environment:
       SECRET_KEY: ${SECRET_KEY}
       URL: ${URL}
-      MYSQL_DATABASE_HOST: ${MYSQL_DATABASE_HOST}
+      MYSQL_DATABASE_HOST: database
       MYSQL_DATABASE_USER: ${MYSQL_DATABASE_USER}
       MYSQL_DATABASE_NAME: ${MYSQL_DATABASE_NAME}
       MYSQL_DATABASE_PASSWORD: ${MYSQL_DATABASE_PASSWORD}
       GOOGLE_DRIVE_DATABASE_BACKUP_FOLDER_ID: ${GOOGLE_DRIVE_DATABASE_BACKUP_FOLDER_ID}
       SUPPORT_EMAIL_APP_PASSWORD: ${SUPPORT_EMAIL_APP_PASSWORD}
     ports:
-      - 8000:8000
+      - "8000:8000"
+    depends_on:
+      - database
+    networks:
+      - app-network
 
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
+    driver: local
