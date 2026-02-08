@@ -11,10 +11,8 @@ echo "Applying database migrations before app startup..."
 ATTEMPT=1
 while [ "$ATTEMPT" -le "$MAX_RETRIES" ]; do
   if flask --app ./src/app/main.py:init_app db upgrade; then
-    if [ "$RUN_DB_SEED_DEFAULTS_ON_START" = "true" ]; then
-      echo "RUN_DB_SEED_DEFAULTS_ON_START=true: applying default seed data..."
-      flask --app ./src/app/main.py:init_app db-seed-defaults
-    fi
+    echo "RUN_DB_SEED_DEFAULTS_ON_START=true: applying default seed data..."
+    flask --app ./src/app/main.py:init_app db-seed-defaults
 
     echo "Migrations applied successfully. Starting application..."
     exec npm start
