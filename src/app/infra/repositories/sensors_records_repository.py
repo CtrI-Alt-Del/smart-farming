@@ -1,3 +1,5 @@
+from pprint import pprint
+
 from core.entities import SensorsRecord, LineChartRecord, Datetime, Plant
 from core.commons import Weekday
 from core.interfaces.repositories import SensorRecordsRepositoryInterface
@@ -165,8 +167,12 @@ class SensorRecordsRepository(SensorRecordsRepositoryInterface):
             ORDER BY SR.created_at DESC
             {limit}
             """
-        
+
+        print(f"DEBUG [Repository] - SQL Query: {sql_query}", flush=True)
+
         rows = mysql.query(sql=sql_query, is_single=False)
+
+        print(f"DEBUG [Repository] - Rows: {rows}", flush=True)
 
         sensors_records = []
 

@@ -1,3 +1,5 @@
+from pprint import pprint
+
 from core.commons import Pagination, RecordsFilters
 from core.interfaces.repositories import (
     PlantsRepositoryInterface,
@@ -49,6 +51,8 @@ class GetSensorsRecordsTablePageData:
             start_date=filters.start_date,
             end_date=filters.end_date,
         )
+
+        print(f"DEBUG [Use Case] - Sensors records: {sensors_records}", flush=True)
 
         return {
             "sensors_records": sensors_records,
