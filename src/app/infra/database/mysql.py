@@ -42,6 +42,7 @@ class MySQL:
 
     def query(self, sql: str, params: List = None, is_single=True) -> Union[Dict, None]:
         try:
+            self.__connection.commit()
             self.__database.execute(sql, params=params if params is not None else [])
 
             if is_single:
