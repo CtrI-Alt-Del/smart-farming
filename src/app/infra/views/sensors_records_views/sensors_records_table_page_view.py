@@ -39,6 +39,8 @@ def sensors_records_table_page_view():
         last_page_number = data["last_page_number"]
         current_page_number = data["current_page_number"]
 
+        print(f"DEBUG - Sensors records: {sensors_records}", flush=True)
+
         return render_template(
             "pages/sensors_records_table/index.html",
             csv_form=csv_form,
