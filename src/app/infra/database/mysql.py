@@ -4,6 +4,7 @@ from datetime import datetime
 from subprocess import run as run_command
 
 import mysql.connector
+from mysql.connector.pooling import MySQLConnectionPool
 
 from core.commons import Error
 
@@ -17,6 +18,8 @@ MYSQL_DATABASE_HOST = getenv("MYSQL_DATABASE_HOST")
 
 ENVIRONMENT = getenv("ENVIRONMENT")
 
+POOL_SIZE = 5
+
 
 class MySQL:
     def __init__(self) -> None:
@@ -24,64 +27,86 @@ class MySQL:
             return
 
         config = {
+            "pool_name": "smart_farming_pool",
+            "pool_size": POOL_SIZE,
+            "pool_reset_session": True,
             "user": MYSQL_DATABASE_USER,
             "password": MYSQL_DATABASE_PASSWORD,
             "database": MYSQL_DATABASE_NAME,
             "host": MYSQL_DATABASE_HOST,
             "raise_on_warnings": True,
+            "autocommit": False,
         }
 
         try:
-            self.__connection = mysql.connector.connect(**config)
-            self.__database = self.__connection.cursor(dictionary=True)
+            self.__pool = MySQLConnectionPool(**config)
 
         except mysql.connector.Error as error:
             raise Error(
-                internal_message=f"Failed to create a database connection. Error: {error}",
+                internal_message=f"Failed to create a database connection pool. Error: {error}",
             ) from error
 
     def query(self, sql: str, params: List = None, is_single=True) -> Union[Dict, None]:
+        connection = self.__get_connection()
+
         try:
-            self.__connection.commit()
-            self.__database.execute(sql, params=params if params is not None else [])
+            cursor = connection.cursor(dictionary=True)
+            cursor.execute(sql, params=params if params is not None else [])
 
             if is_single:
-                return self.__database.fetchone()
+                result = cursor.fetchone()
+            else:
+                result = cursor.fetchall()
 
-            return self.__database.fetchall()
+            cursor.close()
+
+            return result
 
         except mysql.connector.Error as error:
-            self.__close_connection()
-
             raise Error(
                 internal_message=f"Failed to execute a query on the database. Error: {error}",
             ) from error
 
+        finally:
+            connection.close()
+
     def mutate(self, sql: str, params):
+        connection = self.__get_connection()
+
         try:
-            self.__database.execute(sql, params)
-            self.__connection.commit()
+            cursor = connection.cursor(dictionary=True)
+            cursor.execute(sql, params)
+            connection.commit()
+            cursor.close()
 
         except mysql.connector.Error as error:
-            self.__connection.rollback()
-            self.__close_connection()
+            connection.rollback()
 
             raise Error(
                 internal_message=f"Failed to execute a mutation on the database. Error: {error}",
             ) from error
+
+        finally:
+            connection.close()
 
     def mutate_many(self, sql: str, params):
+        connection = self.__get_connection()
+
         try:
-            self.__database.executemany(sql, params)
-            self.__connection.commit()
+            cursor = connection.cursor(dictionary=True)
+            cursor.executemany(sql, params)
+            connection.commit()
+            cursor.close()
 
         except mysql.connector.Error as error:
-            self.__connection.rollback()
-            self.__close_connection()
+            connection.rollback()
 
             raise Error(
                 internal_message=f"Failed to execute a mutation on the database. Error: {error}",
             ) from error
+
+        finally:
+            connection.close()
 
     def create_backup(self):
         try:
@@ -100,6 +125,10 @@ class MySQL:
         except Exception as exception:
             raise Error(exception)
 
-    def __close_connection(self):
-        self.__connection.close()
-        self.__database.close()
+    def __get_connection(self):
+        try:
+            return self.__pool.get_connection()
+        except mysql.connector.Error as error:
+            raise Error(
+                internal_message=f"Failed to get a connection from the pool. Error: {error}",
+            ) from error
