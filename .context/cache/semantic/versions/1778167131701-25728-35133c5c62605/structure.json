@@ -1,0 +1,78 @@
+{
+  "totalFiles": 674,
+  "rootPath": ".",
+  "topDirectories": [
+    {
+      "name": "__pycache__",
+      "fileCount": 1,
+      "description": "Module directory"
+    },
+    {
+      "name": "certificates",
+      "fileCount": 0,
+      "description": "Certificate definitions"
+    },
+    {
+      "name": "docker",
+      "fileCount": 1,
+      "description": "Module directory"
+    },
+    {
+      "name": "documentation",
+      "fileCount": 54,
+      "description": "Module directory"
+    },
+    {
+      "name": "migrations",
+      "fileCount": 11,
+      "description": "Migration definitions"
+    },
+    {
+      "name": "src",
+      "fileCount": 593,
+      "description": "Source code root"
+    }
+  ],
+  "languageDistribution": [
+    {
+      "extension": ".py",
+      "count": 279
+    },
+    {
+      "extension": ".pyc",
+      "count": 220
+    },
+    {
+      "extension": ".html",
+      "count": 77
+    },
+    {
+      "extension": ".png",
+      "count": 30
+    },
+    {
+      "extension": ".js",
+      "count": 19
+    },
+    {
+      "extension": ".md",
+      "count": 9
+    },
+    {
+      "extension": ".svg",
+      "count": 8
+    },
+    {
+      "extension": ".sql",
+      "count": 5
+    },
+    {
+      "extension": ".json",
+      "count": 4
+    },
+    {
+      "extension": ".pptx",
+      "count": 4
+    }
+  ]
+}

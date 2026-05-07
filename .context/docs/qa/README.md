@@ -2,7 +2,7 @@
 
 Project type: **library**
 
-Generated: 2026-02-08T17:59:49.497Z
+Generated: 2026-05-07T15:18:53.346Z
 
 ## Getting-started
 
@@ -16,10 +16,8 @@ Generated: 2026-02-08T17:59:49.497Z
 
 - [How does authentication work?](./authentication.md)
 - [How is data stored and accessed?](./database.md)
-- [What API endpoints are available?](./api-endpoints.md)
 
 ## Operations
 
 - [How are errors handled?](./error-handling.md)
-- [How do background jobs work?](./background-jobs.md)
 - [How do I deploy this project?](./deployment.md)

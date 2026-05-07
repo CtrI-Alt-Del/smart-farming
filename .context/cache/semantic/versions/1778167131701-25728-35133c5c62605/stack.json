@@ -1,0 +1,21 @@
+{
+  "primaryLanguage": "javascript",
+  "languages": [
+    "javascript",
+    "python"
+  ],
+  "frameworks": [],
+  "buildTools": [
+    "docker",
+    "docker-compose"
+  ],
+  "testFrameworks": [],
+  "packageManager": "npm",
+  "isMonorepo": false,
+  "hasDocker": true,
+  "hasCI": true,
+  "runtimeEnvironment": "node",
+  "hasBinField": false,
+  "hasMainExport": true,
+  "hasTypesField": false
+}

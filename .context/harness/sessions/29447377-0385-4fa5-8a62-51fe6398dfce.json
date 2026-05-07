@@ -1,0 +1,18 @@
+{
+  "id": "29447377-0385-4fa5-8a62-51fe6398dfce",
+  "name": "mcp-activity",
+  "status": "active",
+  "repoPath": "/home/petros/projects/smart-farming",
+  "createdAt": "2026-05-07T15:18:25.070Z",
+  "updatedAt": "2026-05-07T15:18:53.347Z",
+  "startedAt": "2026-05-07T15:18:25.070Z",
+  "traceCount": 6,
+  "artifactCount": 0,
+  "checkpointCount": 0,
+  "checkpoints": [],
+  "metadata": {
+    "transport": "mcp",
+    "purpose": "tool-audit"
+  },
+  "lastTraceAt": "2026-05-07T15:18:53.347Z"
+}

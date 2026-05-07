@@ -1,13 +1,12 @@
 ---
 slug: error-handling
 category: operations
-generatedAt: 2026-02-08T17:59:49.415Z
+generatedAt: 2026-05-07T15:18:52.815Z
 relevantFiles:
-  - ../../src/app/core/errors/authentication/admin_user_email_not_matched_error.py
-  - ../../src/app/core/errors/base_error.py
-  - ../../src/app/core/errors/checklist_records/checklist_record_not_found_error.py
-  - ../../src/app/core/errors/validation/checklist_record_not_valid_error.py
-  - ../../src/app/core/errors/authentication/cookie_expired_error.py
+  - src/app/core/commons/error.py
+  - src/app/infra/views/error_views/error_page_view.py
+  - src/app/core/errors/base_error.py
+  - src/app/core/errors/validation/sensors_record_not_valid_error.py
 ---
 
 # How are errors handled?
@@ -16,8 +15,8 @@ relevantFiles:
 
 ### Implementation Details
 
-- Error handling symbol: AdminUserEmailNotMatchedError
-- Error handling symbol: BaseError
-- Error handling symbol: ChecklistRecordNotFoundError
-- Error handling symbol: ChecklistRecordNotValidError
-- Error handling symbol: CookieExpiredError
+- Error handling symbol: Error
+- Error handling symbol: error_page_view
+- Error handling file path
+- Error handling file path
+- Error handling file path

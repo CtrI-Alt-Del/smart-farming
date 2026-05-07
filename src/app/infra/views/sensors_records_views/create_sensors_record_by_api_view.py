@@ -9,6 +9,6 @@ def create_sensors_record_by_api_view():
         print(data, flush=True)
         create_sensors_record_by_api.execute(data)
 
-        return "Chupa Sky Fly", 200  ##scary!!
+        return "Chupa Sky Fly", 200
     except Exception as error:
         return error.ui_message, error.status_code

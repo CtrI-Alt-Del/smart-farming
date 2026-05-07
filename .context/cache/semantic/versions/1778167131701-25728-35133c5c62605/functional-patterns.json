@@ -1,0 +1,299 @@
+{
+  "hasAuthPattern": true,
+  "hasDatabasePattern": true,
+  "hasApiPattern": false,
+  "hasCachePattern": false,
+  "hasQueuePattern": false,
+  "hasWebSocketPattern": false,
+  "hasLoggingPattern": true,
+  "hasValidationPattern": true,
+  "hasErrorHandlingPattern": true,
+  "hasTestingPattern": false,
+  "patterns": [
+    {
+      "type": "auth",
+      "confidence": 1,
+      "indicators": [
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/infra/forms/login_form.py",
+          "symbol": "LoginForm",
+          "line": 7,
+          "reason": "Auth-related symbol: LoginForm"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/infra/authentication/auth_user.py",
+          "symbol": "AuthUser",
+          "line": 7,
+          "reason": "Auth-related symbol: AuthUser"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/infra/authentication/auth.py",
+          "symbol": "Auth",
+          "line": 15,
+          "reason": "Auth-related symbol: Auth"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/infra/views/authentication_views/logout_user_view.py",
+          "symbol": "logout_user_view",
+          "line": 7,
+          "reason": "Auth-related symbol: logout_user_view"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/infra/views/authentication_views/login_user_view.py",
+          "symbol": "login_user_view",
+          "line": 9,
+          "reason": "Auth-related symbol: login_user_view"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/infra/views/authentication_views/login_page_view.py",
+          "symbol": "login_page_view",
+          "line": 6,
+          "reason": "Auth-related symbol: login_page_view"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/infra/forms/fields/password_field.py",
+          "symbol": "PasswordField_",
+          "line": 7,
+          "reason": "Auth-related symbol: PasswordField_"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/core/use_cases/authentication/login_user.py",
+          "symbol": "LoginUser",
+          "line": 8,
+          "reason": "Auth-related symbol: LoginUser"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/core/interfaces/authentication/auth_user_interface.py",
+          "symbol": "AuthUserInterface",
+          "line": 6,
+          "reason": "Auth-related symbol: AuthUserInterface"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/core/interfaces/authentication/auth_interface.py",
+          "symbol": "AuthInterface",
+          "line": 8,
+          "reason": "Auth-related symbol: AuthInterface"
+        }
+      ],
+      "description": "Authentication and authorization functionality"
+    },
+    {
+      "type": "database",
+      "confidence": 1,
+      "indicators": [
+        {
+          "file": "/home/petros/projects/smart-farming/src/ui/static/scripts/query_param.js",
+          "symbol": "QueryParam",
+          "line": 1,
+          "reason": "Database-related symbol: QueryParam"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/core/entities/entity.py",
+          "symbol": "Entity",
+          "line": 6,
+          "reason": "Database-related symbol: Entity"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/infra/database/mysql.py",
+          "reason": "Database library import: mysql.connector"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/infra/database/mysql.py",
+          "reason": "Database library import: mysql.connector.pooling"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/migrations/env.py",
+          "reason": "Database-related file path"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/migrations/versions/6f4f74f63f4f_baseline_schema.py",
+          "reason": "Database-related file path"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/migrations/versions/4536d65ca6ab_.py",
+          "reason": "Database-related file path"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/migrations/versions/1f446952b9f2_.py",
+          "reason": "Database-related file path"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/infra/repositories/users_repository.py",
+          "reason": "Database-related file path"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/infra/repositories/sensors_records_repository.py",
+          "reason": "Database-related file path"
+        }
+      ],
+      "description": "Database access and ORM functionality"
+    },
+    {
+      "type": "logging",
+      "confidence": 1,
+      "indicators": [
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/infra/forms/login_form.py",
+          "symbol": "LoginForm",
+          "line": 7,
+          "reason": "Logging-related symbol: LoginForm"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/infra/views/authentication_views/logout_user_view.py",
+          "symbol": "logout_user_view",
+          "line": 7,
+          "reason": "Logging-related symbol: logout_user_view"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/infra/views/authentication_views/login_user_view.py",
+          "symbol": "login_user_view",
+          "line": 9,
+          "reason": "Logging-related symbol: login_user_view"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/infra/views/authentication_views/login_page_view.py",
+          "symbol": "login_page_view",
+          "line": 6,
+          "reason": "Logging-related symbol: login_page_view"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/core/use_cases/authentication/login_user.py",
+          "symbol": "LoginUser",
+          "line": 8,
+          "reason": "Logging-related symbol: LoginUser"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/core/errors/authentication/logout_failed_error.py",
+          "symbol": "LogoutFailedError",
+          "line": 7,
+          "reason": "Logging-related symbol: LogoutFailedError"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/infra/factories/use_cases/authentication/login_user_factory.py",
+          "symbol": "LoginUserFactory",
+          "line": 7,
+          "reason": "Logging-related symbol: LoginUserFactory"
+        }
+      ],
+      "description": "Logging and observability"
+    },
+    {
+      "type": "validation",
+      "confidence": 1,
+      "indicators": [
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/infra/repositories/checklist_records_repository.py",
+          "symbol": "ChecklistRecordsRepository",
+          "line": 11,
+          "reason": "Validation-related symbol: ChecklistRecordsRepository"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/infra/forms/checklist_record_form.py",
+          "symbol": "ChecklistRecordForm",
+          "line": 19,
+          "reason": "Validation-related symbol: ChecklistRecordForm"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/infra/database/models.py",
+          "symbol": "ChecklistRecordModel",
+          "line": 81,
+          "reason": "Validation-related symbol: ChecklistRecordModel"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/core/entities/checklist_record.py",
+          "symbol": "CheckListRecord",
+          "line": 10,
+          "reason": "Validation-related symbol: CheckListRecord"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/infra/views/checklist_records_views/checklist_records_table_page_view.py",
+          "symbol": "checklist_records_table_page_view",
+          "line": 12,
+          "reason": "Validation-related symbol: checklist_records_table_page_view"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/infra/views/checklist_records_views/checklist_records_dashboard_page_view.py",
+          "symbol": "checklist_records_dashboard_page_view",
+          "line": 15,
+          "reason": "Validation-related symbol: checklist_records_dashboard_page_view"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/infra/views/checklist_records_views/checklist_records_csv_file_view.py",
+          "symbol": "checklist_records_csv_file_view",
+          "line": 8,
+          "reason": "Validation-related symbol: checklist_records_csv_file_view"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/core/interfaces/repositories/checklist_record_repository_interface.py",
+          "symbol": "ChecklistRecordsRepositoryInterface",
+          "line": 7,
+          "reason": "Validation-related symbol: ChecklistRecordsRepositoryInterface"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/core/errors/validation/checklist_record_not_valid_error.py",
+          "symbol": "ChecklistRecordNotValidError",
+          "line": 7,
+          "reason": "Validation-related symbol: ChecklistRecordNotValidError"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/core/errors/checklist_records/checklist_record_not_found_error.py",
+          "symbol": "ChecklistRecordNotFoundError",
+          "line": 7,
+          "reason": "Validation-related symbol: ChecklistRecordNotFoundError"
+        }
+      ],
+      "description": "Input validation and schema enforcement"
+    },
+    {
+      "type": "error-handling",
+      "confidence": 1,
+      "indicators": [
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/core/commons/error.py",
+          "symbol": "Error",
+          "line": 4,
+          "reason": "Error handling symbol: Error"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/infra/views/error_views/error_page_view.py",
+          "symbol": "error_page_view",
+          "line": 3,
+          "reason": "Error handling symbol: error_page_view"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/core/errors/base_error.py",
+          "reason": "Error handling file path"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/core/commons/error.py",
+          "reason": "Error handling file path"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/core/errors/validation/sensors_record_not_valid_error.py",
+          "reason": "Error handling file path"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/core/errors/validation/page_number_not_valid_error.py",
+          "reason": "Error handling file path"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/core/errors/validation/hour_not_valid_error.py",
+          "reason": "Error handling file path"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/core/errors/validation/datetime_not_valid_error.py",
+          "reason": "Error handling file path"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/core/errors/validation/date_not_valid_error.py",
+          "reason": "Error handling file path"
+        },
+        {
+          "file": "/home/petros/projects/smart-farming/src/app/core/errors/validation/csv_file_not_valid_error.py",
+          "reason": "Error handling file path"
+        }
+      ],
+      "description": "Error handling and exception management"
+    }
+  ]
+}

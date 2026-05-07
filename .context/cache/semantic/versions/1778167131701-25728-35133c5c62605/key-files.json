@@ -1,0 +1,12 @@
+[
+  {
+    "path": "package.json",
+    "description": "Package manifest",
+    "category": "config"
+  },
+  {
+    "path": "tailwind.config.js",
+    "description": "Tool configuration",
+    "category": "config"
+  }
+]

@@ -1,0 +1,110 @@
+{
+  "layers": [
+    {
+      "name": "Models",
+      "description": "Data structures and domain objects",
+      "directories": [
+        "migrations/versions",
+        "src/app/infra/database",
+        "src/app/core/entities",
+        "src/app/core/entities/tests/fakers"
+      ],
+      "symbolCount": 18,
+      "dependsOn": []
+    },
+    {
+      "name": "Components",
+      "description": "UI components and views",
+      "directories": [
+        "src/app/infra/views",
+        "src/app/infra/views/sensors_records_views",
+        "src/app/infra/views/plants_views",
+        "src/app/infra/views/error_views",
+        "src/app/infra/views/checklist_records_views",
+        "src/app/infra/views/authentication_views",
+        "src/app/core/errors/validation"
+      ],
+      "symbolCount": 39,
+      "dependsOn": []
+    },
+    {
+      "name": "Utils",
+      "description": "Shared utilities and helpers",
+      "directories": [
+        "src/app/infra/utils",
+        "src/app/core/commons",
+        "src/app/core/commons/tests"
+      ],
+      "symbolCount": 22,
+      "dependsOn": []
+    },
+    {
+      "name": "Repositories",
+      "description": "Data access and persistence",
+      "directories": [
+        "src/app/infra/repositories",
+        "src/app/infra/providers",
+        "src/app/infra/jobs",
+        "src/app/infra/database",
+        "src/app/infra/database/tests",
+        "src/app/core/use_cases/sensors_records",
+        "src/app/core/use_cases/plants",
+        "src/app/core/use_cases/checklist_records",
+        "src/app/core/interfaces/repositories",
+        "src/app/core/interfaces/providers",
+        "src/app/core/errors/forms",
+        "src/app/infra/factories/use_cases/sensors_records",
+        "src/app/infra/factories/use_cases/plants",
+        "src/app/infra/factories/use_cases/checklist_records",
+        "src/app/core/use_cases/sensors_records/tests",
+        "src/app/core/use_cases/plants/tests",
+        "src/app/core/use_cases/checklist_records/tests",
+        "src/app/core/use_cases/tests/mocks/repositories",
+        "src/app/core/use_cases/tests/mocks/providers"
+      ],
+      "symbolCount": 43,
+      "dependsOn": []
+    },
+    {
+      "name": "Controllers",
+      "description": "Request handling and routing",
+      "directories": [
+        "src/app/infra/views/sensors_records_views",
+        "src/app/core/use_cases/sensors_records",
+        "src/app/infra/factories/use_cases/sensors_records",
+        "src/app/core/use_cases/sensors_records/tests"
+      ],
+      "symbolCount": 4,
+      "dependsOn": []
+    },
+    {
+      "name": "Generators",
+      "description": "Content and object generation",
+      "directories": [
+        "src/app/infra/factories/use_cases/sensors_records",
+        "src/app/infra/factories/use_cases/plants",
+        "src/app/infra/factories/use_cases/checklist_records",
+        "src/app/infra/factories/use_cases/authentication"
+      ],
+      "symbolCount": 19,
+      "dependsOn": []
+    }
+  ],
+  "patterns": [
+    {
+      "name": "Factory",
+      "confidence": 0.9,
+      "description": "Creates instances of related objects without specifying concrete classes",
+      "occurrences": 26
+    },
+    {
+      "name": "Repository",
+      "confidence": 0.9,
+      "description": "Abstracts data access logic",
+      "occurrences": 4
+    }
+  ],
+  "entryPoints": [],
+  "mainEntryPoints": [],
+  "moduleExports": []
+}

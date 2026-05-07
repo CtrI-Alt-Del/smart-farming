@@ -1,7 +1,7 @@
 ---
 slug: deployment
 category: operations
-generatedAt: 2026-02-08T17:59:49.493Z
+generatedAt: 2026-05-07T15:18:53.341Z
 relevantFiles:
   - Dockerfile
   - docker-compose.database.yml

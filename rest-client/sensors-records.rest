@@ -1,0 +1,11 @@
+
+
+POST http://192.168.1.64:5004/sensors_records/api
+Content-Type: application/json
+
+{
+  "soil_humidity": 101,
+  "ambient_humidity": 101,
+  "temperature": 101,
+  "water_volume": 101
+}

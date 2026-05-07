@@ -1,13 +1,13 @@
 ---
 slug: authentication
 category: features
-generatedAt: 2026-02-08T17:59:49.415Z
+generatedAt: 2026-05-07T15:18:52.815Z
 relevantFiles:
-  - ../../src/app/infra/authentication/auth.py
-  - ../../src/app/core/interfaces/authentication/auth_interface.py
-  - ../../src/app/core/use_cases/tests/mocks/authentication/auth_mock.py
-  - ../../src/app/infra/authentication/auth_user.py
-  - ../../src/app/core/interfaces/authentication/auth_user_interface.py
+  - src/app/infra/forms/login_form.py
+  - src/app/infra/authentication/auth_user.py
+  - src/app/infra/authentication/auth.py
+  - src/app/infra/views/authentication_views/logout_user_view.py
+  - src/app/infra/views/authentication_views/login_user_view.py
 ---
 
 # How does authentication work?
@@ -16,8 +16,8 @@ relevantFiles:
 
 ### Implementation Details
 
-- Auth-related symbol: Auth
-- Auth-related symbol: AuthInterface
-- Auth-related symbol: AuthMock
+- Auth-related symbol: LoginForm
 - Auth-related symbol: AuthUser
-- Auth-related symbol: AuthUserInterface
+- Auth-related symbol: Auth
+- Auth-related symbol: logout_user_view
+- Auth-related symbol: login_user_view

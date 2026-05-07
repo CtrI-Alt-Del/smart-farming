@@ -1,12 +1,12 @@
 ---
 slug: database
 category: features
-generatedAt: 2026-02-08T17:59:49.415Z
+generatedAt: 2026-05-07T15:18:52.815Z
 relevantFiles:
-  - ../../src/app/infra/repositories/checklist_records_repository.py
-  - ../../src/app/core/entities/tests/fakers/base_faker.py
-  - ../../src/app/core/entities/checklist_record.py
-  - ../../src/app/core/entities/tests/fakers/checklist_records_faker.py
+  - src/ui/static/scripts/query_param.js
+  - src/app/core/entities/entity.py
+  - src/app/infra/database/mysql.py
+  - migrations/env.py
 ---
 
 # How is data stored and accessed?
@@ -15,8 +15,8 @@ relevantFiles:
 
 ### Implementation Details
 
-- Database-related symbol: ChecklistRecordsRepository
-- Database-related file path
-- Database-related file path
-- Database-related file path
+- Database-related symbol: QueryParam
+- Database-related symbol: Entity
+- Database library import: mysql.connector
+- Database library import: mysql.connector.pooling
 - Database-related file path
