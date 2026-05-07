@@ -1,5 +1,5 @@
 services:
-  database:
+  mysql:
     image: mysql:8
     container_name: smart-farming-database
     environment:
@@ -17,7 +17,8 @@ services:
       test:
         [
           "CMD-SHELL",
-          "mysqladmin ping -h 127.0.0.1 -uroot -p$${MYSQL_ROOT_PASSWORD} --silent",
+          "mysqladmin ping -h 127.0.0.1 -uroot -p$${MYSQL_ROOT_PASSWORD}
+            --silent",
         ]
       interval: 5s
       timeout: 3s

@@ -337,7 +337,7 @@ certificates/smart-farming-drive-service-account.json
 
 # End of https://www.toptal.com/developers/gitignore/api/python,visualstudiocode,node
 
-opencode.jsonc
+# Agents
 CLAUDE.md
 CONVENTIONS.md
 GEMINI.md
@@ -346,3 +346,4 @@ GEMINI.md
 .claude
 .cursor
 .cursorrules
+.opencode.json

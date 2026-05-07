@@ -1,5 +1,5 @@
 services:
-  database:
+  mysql:
     image: mysql:8
     container_name: "smart-farming-database"
     environment:
@@ -21,4 +21,5 @@ networks:
 volumes:
   mysql_data:
     driver: local
+
 # docker compose -f docker-compose.database.yml up
